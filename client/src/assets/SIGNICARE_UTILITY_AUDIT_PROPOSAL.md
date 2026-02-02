@@ -20,7 +20,7 @@ This proposal is submitted following the extensive discussions between yourself 
 
 ## 2. THE SERVICE: FORENSIC UTILITY AUDIT
 
-We will utilize the **Orb AI Commercial Engine** engine to process your utility data. This is not a standard broker comparison; it is a forensic financial investigation.
+We will utilize the **Foxlite Consulting's proprietary platform** engine to process your utility data. This is not a standard broker comparison; it is a forensic financial investigation.
 
 ### Scope of Work
 1.  **Historical Audit (6 Years):** We will audit all electricity and gas bills going back 6 years to identify:
@@ -28,14 +28,14 @@ We will utilize the **Orb AI Commercial Engine** engine to process your utility 
     *   VAT Overpayments (Nursing homes are often eligible for reduced rates).
     *   Climate Change Levy (CCL) Exemptions.
     *   Meter Faults and Estimated Billing Errors.
-2.  **Contract Optimization:** We will benchmark your current rates against the wholesale market using our live "Orb AI Commercial" tariff engine to secure the lowest possible forward rates.
+2.  **Contract Optimization:** We will benchmark your current rates against the wholesale market using our live wholesale market tariff engine to secure the lowest possible forward rates.
 3.  **Rebate Recovery:** We will manage the entire claims process with suppliers to recover any overpaid sums directly to your account.
 
 ---
 
 ## 3. THE STRUCTURE & PARTNERSHIP
 
-**Foxlite Consulting** currently holds exclusive access to the Orb AI platform services. We are delivering this project as a precursor to the full launch of **Playbook Corporation**.
+**Foxlite Consulting** is a specialized utility auditing firm. We are delivering this project as a precursor to the full launch of **Playbook Corporation**.
 
 *   **Daryl Kavanagh:** Interim CEO, Playbook Corporation.
 *   **David Clarke:** Group Managing Director, Foxlite Consulting.
