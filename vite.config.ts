@@ -184,5 +184,7 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+    // FIX: Disable file watching to prevent EMFILE errors in sandbox
+    watch: null
   },
 });
