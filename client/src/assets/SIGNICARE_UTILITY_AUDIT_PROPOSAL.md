@@ -45,7 +45,7 @@ As the Group Managing Director, I (David Clarke) will personally oversee the del
 
 ---
 
-## 3. PROJECTED OUTCOMES & SAVINGS\n\nBased on our forensic auditing of similar healthcare groups, we anticipate the following financial outcomes:\n\n*   **Forward Cost Reduction:** 15% - 22% annual savings on electricity and gas contracts through wholesale market benchmarking.\n*   **Retrospective Rebates:** Recovery of historic overcharges (up to 6 years), typically averaging **€15,000 - €40,000** per site depending on consumption volume.\n*   **Tax & Levy Exemptions:** Permanent removal of incorrect CCL and VAT charges, resulting in immediate cash flow improvement.\n\n---\n\n## 4. PROCESS & NEXT STEPS
+## 3. PROJECTED OUTCOMES & SAVINGS\n\nBased on our forensic auditing of similar healthcare groups, we anticipate the following financial outcomes:\n\n*   **Forward Cost Reduction:** 15% - 22% annual savings on electricity and gas contracts through wholesale market benchmarking.\n*   **Retrospective Rebates:** Recovery of historic overcharges (up to 6 years), typically averaging **€15,000 - €40,000** per site depending on consumption volume.\n*   **Tax & Levy Exemptions:** Permanent removal of incorrect CCL and VAT charges, resulting in immediate cash flow improvement.\n\n---\n\n## 4. REBATE TIMELINES & REGULATION\n\nUnder current **Commission for Regulation of Utilities (CRU)** guidelines and Ombudsman standards, suppliers are obligated to process refunds promptly once a billing error is validated.\n\n*   **Timeline:** Once we validate a claim, suppliers typically issue credit notes or direct refunds within **10 to 14 business days**.\n*   **Compliance:** We manage all regulatory correspondence to ensure strict adherence to these timelines, escalating to the Ombudsman if statutory deadlines are missed.\n\n---\n\n## 5. PROCESS & NEXT STEPS
 
 To proceed, we require **no manual data gathering** from your team. We simply need the signed **Letter of Authority (LOA)** attached.
 
@@ -57,7 +57,7 @@ To proceed, we require **no manual data gathering** from your team. We simply ne
 
 ---
 
-## 5. CONCLUSION
+## 6. COMMERCIAL TERMS & OPERATIONAL PLEDGE\n\n*   **Performance Model:** This audit is conducted on a strict **"No Win, No Fee"** basis. Foxlite Consulting's fee is contingent solely on the successful recovery of funds or secured savings.\n*   **Non-Intrusion Guarantee:** We understand the sensitive nature of nursing home environments. Our audit is entirely remote and data-driven; we will **not** require site visits or disrupt your care staff.\n*   **Data Security:** All client data is handled in strict compliance with GDPR and confidentiality standards.\n\n---\n\n## 7. CONCLUSION
 
 This project represents an immediate opportunity to recover significant capital for the Signa care Group without operational disruption.
 
