@@ -10,7 +10,7 @@
 
 ## 1. EXECUTIVE SUMMARY
 
-Foxlite Consulting,  is pleased to present this proposal for a comprehensive Utility Audit and Cost Recovery programme for the **Signa care Group**.
+Foxlite Consulting is pleased to present this proposal for a comprehensive Utility Audit and Cost Recovery programme for the **Signa care Group**.
 
 This proposal is submitted following the extensive discussions between yourself and **John Kavanagh**, who has identified this opportunity to secure significant cost savings for your group. Based on those discussions, we have been authorized to deploy our proprietary **audit platform** to conduct a forensic analysis of your historic and current utility expenditure.
 
@@ -20,7 +20,7 @@ This proposal is submitted following the extensive discussions between yourself 
 
 ## 2. THE SERVICE: FORENSIC UTILITY AUDIT
 
-We will utilize the **Foxlite Consulting's proprietary platform** engine to process your utility data. This is not a standard broker comparison; it is a forensic financial investigation.
+We will utilize **Foxlite Consulting's proprietary audit platform** to process your utility data. This is not a standard broker comparison; it is a forensic financial investigation.
 
 ### Scope of Work
 1.  **Historical Audit (6 Years):** We will audit all electricity and gas bills going back 6 years to identify:
@@ -52,7 +52,7 @@ To proceed, we require **no manual data gathering** from your team. We simply ne
 **The Workflow:**
 1.  **Sign LOA:** Please sign the attached Letter of Authority on your company letterhead.
 2.  **Data Retrieval:** Foxlite Consulting will use this authority to request all historical data directly from your suppliers (Electric Ireland, Bord Gáis, etc.).
-3.  **Forensic Analysis:** Our Orb AI engine will process the data to identify all recoverable funds.
+3.  **Forensic Analysis:** Our proprietary engine will process the data to identify all recoverable funds.
 4.  **Report & Claim:** We will present a "Findings Report" detailing the savings and initiate the rebate claims on your behalf.
 
 ---
@@ -68,4 +68,4 @@ We look forward to finalizing this partnership.
 **David Clarke**
 Group Managing Director
 Foxlite Consulting
-*(On behalf of Playbook Corporation)*
+
