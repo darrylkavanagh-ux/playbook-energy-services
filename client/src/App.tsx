@@ -8,6 +8,7 @@ import Results from "@/pages/Results";
 import OrbAI from "@/pages/OrbAI";
 import KavanAI from "@/pages/KavanAI";
 import SystemStatus from "@/pages/SystemStatus";
+import Foxlite from "@/pages/Foxlite";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/orb" component={OrbAI} />
       <Route path="/kavan" component={KavanAI} />
       <Route path="/status" component={SystemStatus} />
+      <Route path="/foxlite" component={Foxlite} />
       <Route component={NotFound} />
     </Switch>
   );
