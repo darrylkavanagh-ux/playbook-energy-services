@@ -38,34 +38,49 @@ export default function KavanAI() {
             
             <div className="space-y-4">
               {[
-                { id: "CASE-2024-089", name: "David Clarke vs. Cavan General", status: "CRITICAL", date: "02 FEB 2026", files: ["Brief to Senior Counsel", "AI Medical Assessment"] },
+                { 
+                  id: "CASE-2024-089", 
+                  name: "David Clarke vs. Cavan General", 
+                  status: "PROCESSING RBA", 
+                  date: "02 FEB 2026", 
+                  files: ["Brief to Senior Counsel", "AI Medical Assessment", "Opinion on Merits", "Forensic Chronology"] 
+                },
                 { id: "CASE-2024-042", name: "Waterford Crystal Asset Strip", status: "ONGOING", date: "28 JAN 2026", files: [] },
                 { id: "CASE-2023-115", name: "Rosie Dobbin Probate Fraud", status: "REVIEW", date: "15 JAN 2026", files: [] },
               ].map((c) => (
                 <div key={c.id} className="border-2 border-black hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between p-4 cursor-pointer">
                     <div className="flex items-center gap-4">
-                      <div className={`w-3 h-3 rounded-full border border-black ${c.status === 'CRITICAL' ? 'bg-[#FF3333] animate-pulse' : 'bg-gray-400'}`}></div>
+                      <div className={`w-3 h-3 rounded-full border border-black ${c.status === 'PROCESSING RBA' ? 'bg-[#FF3333] animate-[pulse_0.5s_ease-in-out_infinite]' : c.status === 'CRITICAL' ? 'bg-[#FF3333] animate-pulse' : 'bg-gray-400'}`}></div>
                       <div>
                         <div className="font-bold uppercase text-sm group-hover:underline">{c.name}</div>
                         <div className="font-mono text-xs text-gray-500">{c.id}</div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-bold text-xs bg-black text-white px-2 py-1 mb-1">{c.status}</div>
+                      <div className={`font-bold text-xs bg-black text-white px-2 py-1 mb-1 ${c.status === 'PROCESSING RBA' ? 'bg-[#FF3333]' : ''}`}>{c.status}</div>
                       <div className="font-mono text-xs">{c.date}</div>
                     </div>
                   </div>
                   
                   {/* Generated Files Section */}
                   {c.files.length > 0 && (
-                    <div className="border-t-2 border-black bg-gray-100 p-3 flex gap-2">
-                      {c.files.map((f) => (
-                        <div key={f} className="bg-white border border-black px-2 py-1 text-[10px] font-mono font-bold uppercase flex items-center gap-1 hover:bg-[#FF3333] hover:text-white cursor-pointer transition-colors">
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                          {f}
+                    <div className="border-t-2 border-black bg-gray-100 p-3">
+                      <div className="mb-2 font-mono text-[10px] uppercase font-bold text-gray-500">Legal Pack Generated:</div>
+                      <div className="flex flex-wrap gap-2">
+                        {c.files.map((f) => (
+                          <div key={f} className="bg-white border border-black px-2 py-1 text-[10px] font-mono font-bold uppercase flex items-center gap-1 hover:bg-[#FF3333] hover:text-white cursor-pointer transition-colors">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            {f}
+                          </div>
+                        ))}
+                      </div>
+                      {c.status === 'PROCESSING RBA' && (
+                        <div className="mt-3 border-t border-gray-300 pt-2 flex items-center gap-2 text-[#FF3333] font-mono text-[10px] font-bold uppercase animate-pulse">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"/><path d="M12 8V16"/><path d="M8 12H16"/></svg>
+                          Pushing to RBA Platform Core...
                         </div>
-                      ))}
+                      )}
                     </div>
                   )}
                 </div>
