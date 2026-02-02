@@ -1,6 +1,6 @@
 # LETTER OF AUTHORITY
 
-**[To be printed on Signicare Group Letterhead]**
+**[To be printed on Signa care Group Letterhead]**
 
 **To:** All Utility Suppliers / Network Operators
 **Date:** 02 February 2026
@@ -9,7 +9,7 @@
 
 **To Whom It May Concern,**
 
-Please accept this letter as formal authority for **Foxlite Consulting** (and their authorized representatives acting under **Playbook Corporation**) to act on behalf of **Signicare Group** and its associated nursing home entities in relation to our energy and utility accounts.
+Please accept this letter as formal authority for **Foxlite Consulting** (and their authorized representatives acting under **Playbook Corporation**) to act on behalf of **Signa care Group** and its associated nursing home entities in relation to our energy and utility accounts.
 
 **This authority grants them the right to:**
 1.  Request and receive all historical billing data, consumption records, and contract details (including half-hourly data and meter technical details).
@@ -22,7 +22,7 @@ Please accept this letter as formal authority for **Foxlite Consulting** (and th
 This authority is valid for a period of **12 months** from the date of signature.
 
 **Scope:**
-This authority covers all Electricity, Gas, Water, and Telecoms supplies registered to the Signicare Group.
+This authority covers all Electricity, Gas, Water, and Telecoms supplies registered to the Signa care Group.
 
 Please update your records accordingly and release the requested information to Foxlite Consulting immediately upon their request.
 
@@ -31,4 +31,4 @@ Please update your records accordingly and release the requested information to 
 __________________________
 **Rebecca Ellickson**
 Authorized Signatory
-**Signicare Group**
+**Signa care Group**

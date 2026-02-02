@@ -1,7 +1,7 @@
 # UTILITY AUDIT & RECOVERY PROPOSAL
 
 **Strictly Confidential**
-**To:** Rebecca Ellickson, Signicare Group
+**To:** Rebecca Ellickson, Signa care Group
 **From:** David Clarke, Group Managing Director, Foxlite Consulting
 **Date:** 02 February 2026
 **Reference:** SIG/UTIL/2026/001 (Re: Discussions with John Kavanagh)
@@ -10,11 +10,11 @@
 
 ## 1. EXECUTIVE SUMMARY
 
-Foxlite Consulting, acting as the interim operational arm of **Playbook Corporation**, is pleased to present this proposal for a comprehensive Utility Audit and Cost Recovery programme for the **Signicare Group**.
+Foxlite Consulting, acting as the interim operational arm of **Playbook Corporation**, is pleased to present this proposal for a comprehensive Utility Audit and Cost Recovery programme for the **Signa care Group**.
 
 This proposal is submitted following the extensive discussions between yourself and **John Kavanagh**, who has identified this opportunity to secure significant cost savings for your group. Based on those discussions, we have been authorized to deploy our proprietary **Orb AI Platform** to conduct a forensic analysis of your historic and current utility expenditure.
 
-**Our Objective:** To identify overcharges, secure retrospective rebates, and optimize future procurement for all nursing homes within your group, with **zero upfront cost** to Signicare.
+**Our Objective:** To identify overcharges, secure retrospective rebates, and optimize future procurement for all nursing homes within your group, with **zero upfront cost** to Signa care.
 
 ---
 
@@ -39,9 +39,9 @@ We will utilize the **Orb AI / No Compare** engine to process your utility data.
 
 *   **Daryl Kavanagh:** Interim CEO, Playbook Corporation.
 *   **David Clarke:** Group Managing Director, Foxlite Consulting.
-*   **John Kavanagh:** Strategic Advisor (Initiator of Signicare Partnership).
+*   **John Kavanagh:** Strategic Advisor (Initiator of Signa care Partnership).
 
-As the Group Managing Director, I (David Clarke) will personally oversee the delivery of this audit to ensure the maximum financial return for Signicare, building on the foundation laid by John Kavanagh.
+As the Group Managing Director, I (David Clarke) will personally oversee the delivery of this audit to ensure the maximum financial return for Signa care, building on the foundation laid by John Kavanagh.
 
 ---
 
@@ -59,7 +59,7 @@ To proceed, we require **no manual data gathering** from your team. We simply ne
 
 ## 5. CONCLUSION
 
-This project represents an immediate opportunity to recover significant capital for the Signicare Group without operational disruption.
+This project represents an immediate opportunity to recover significant capital for the Signa care Group without operational disruption.
 
 We look forward to finalizing this partnership.
 

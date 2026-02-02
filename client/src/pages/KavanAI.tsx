@@ -40,7 +40,7 @@ export default function KavanAI() {
               {[
                 { 
                   id: "CORP-2026-001", 
-                  name: "Signicare Group - Utility Audit", 
+                  name: "Signa care Group - Utility Audit", 
                   status: "PROPOSAL READY", 
                   date: "02 FEB 2026", 
                   files: ["Audit Proposal", "Letter of Authority (LOA)"] 
