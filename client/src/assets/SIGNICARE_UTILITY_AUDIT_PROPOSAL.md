@@ -20,7 +20,7 @@ This proposal is submitted following the extensive discussions between yourself 
 
 ## 2. THE SERVICE: FORENSIC UTILITY AUDIT
 
-We will utilize the **Orb AI / No Compare** engine to process your utility data. This is not a standard broker comparison; it is a forensic financial investigation.
+We will utilize the **Orb AI Commercial Engine** engine to process your utility data. This is not a standard broker comparison; it is a forensic financial investigation.
 
 ### Scope of Work
 1.  **Historical Audit (6 Years):** We will audit all electricity and gas bills going back 6 years to identify:
@@ -28,7 +28,7 @@ We will utilize the **Orb AI / No Compare** engine to process your utility data.
     *   VAT Overpayments (Nursing homes are often eligible for reduced rates).
     *   Climate Change Levy (CCL) Exemptions.
     *   Meter Faults and Estimated Billing Errors.
-2.  **Contract Optimization:** We will benchmark your current rates against the wholesale market using our live "No Compare" tariff engine to secure the lowest possible forward rates.
+2.  **Contract Optimization:** We will benchmark your current rates against the wholesale market using our live "Orb AI Commercial" tariff engine to secure the lowest possible forward rates.
 3.  **Rebate Recovery:** We will manage the entire claims process with suppliers to recover any overpaid sums directly to your account.
 
 ---
