@@ -39,6 +39,13 @@ export default function KavanAI() {
             <div className="space-y-4">
               {[
                 { 
+                  id: "CORP-2026-001", 
+                  name: "Signicare Group - Utility Audit", 
+                  status: "PROPOSAL READY", 
+                  date: "02 FEB 2026", 
+                  files: ["Audit Proposal", "Letter of Authority (LOA)"] 
+                },
+                { 
                   id: "CASE-2024-089", 
                   name: "David Clarke vs. Cavan General", 
                   status: "PROCESSING RBA", 
@@ -46,19 +53,18 @@ export default function KavanAI() {
                   files: ["Brief to Senior Counsel", "AI Medical Assessment", "Opinion on Merits", "Forensic Chronology"] 
                 },
                 { id: "CASE-2024-042", name: "Waterford Crystal Asset Strip", status: "ONGOING", date: "28 JAN 2026", files: [] },
-                { id: "CASE-2023-115", name: "Rosie Dobbin Probate Fraud", status: "REVIEW", date: "15 JAN 2026", files: [] },
               ].map((c) => (
                 <div key={c.id} className="border-2 border-black hover:bg-gray-50 transition-colors">
                   <div className="flex items-center justify-between p-4 cursor-pointer">
                     <div className="flex items-center gap-4">
-                      <div className={`w-3 h-3 rounded-full border border-black ${c.status === 'PROCESSING RBA' ? 'bg-[#FF3333] animate-[pulse_0.5s_ease-in-out_infinite]' : c.status === 'CRITICAL' ? 'bg-[#FF3333] animate-pulse' : 'bg-gray-400'}`}></div>
+                      <div className={`w-3 h-3 rounded-full border border-black ${c.status === 'PROCESSING RBA' ? 'bg-[#FF3333] animate-[pulse_0.5s_ease-in-out_infinite]' : c.status === 'CRITICAL' ? 'bg-[#FF3333] animate-pulse' : c.status === 'PROPOSAL READY' ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                       <div>
                         <div className="font-bold uppercase text-sm group-hover:underline">{c.name}</div>
                         <div className="font-mono text-xs text-gray-500">{c.id}</div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className={`font-bold text-xs bg-black text-white px-2 py-1 mb-1 ${c.status === 'PROCESSING RBA' ? 'bg-[#FF3333]' : ''}`}>{c.status}</div>
+                      <div className={`font-bold text-xs bg-black text-white px-2 py-1 mb-1 ${c.status === 'PROCESSING RBA' ? 'bg-[#FF3333]' : c.status === 'PROPOSAL READY' ? 'bg-green-600' : ''}`}>{c.status}</div>
                       <div className="font-mono text-xs">{c.date}</div>
                     </div>
                   </div>
@@ -66,7 +72,9 @@ export default function KavanAI() {
                   {/* Generated Files Section */}
                   {c.files.length > 0 && (
                     <div className="border-t-2 border-black bg-gray-100 p-3">
-                      <div className="mb-2 font-mono text-[10px] uppercase font-bold text-gray-500">Legal Pack Generated:</div>
+                      <div className="mb-2 font-mono text-[10px] uppercase font-bold text-gray-500">
+                        {c.id.startsWith("CORP") ? "Corporate Docs Generated:" : "Legal Pack Generated:"}
+                      </div>
                       <div className="flex flex-wrap gap-2">
                         {c.files.map((f) => (
                           <div key={f} className="bg-white border border-black px-2 py-1 text-[10px] font-mono font-bold uppercase flex items-center gap-1 hover:bg-[#FF3333] hover:text-white cursor-pointer transition-colors">
