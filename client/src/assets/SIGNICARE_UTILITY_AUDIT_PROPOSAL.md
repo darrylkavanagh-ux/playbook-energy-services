@@ -10,9 +10,9 @@
 
 ## 1. EXECUTIVE SUMMARY
 
-Foxlite Consulting, acting as the interim operational arm of **Playbook Corporation**, is pleased to present this proposal for a comprehensive Utility Audit and Cost Recovery programme for the **Signa care Group**.
+Foxlite Consulting,  is pleased to present this proposal for a comprehensive Utility Audit and Cost Recovery programme for the **Signa care Group**.
 
-This proposal is submitted following the extensive discussions between yourself and **John Kavanagh**, who has identified this opportunity to secure significant cost savings for your group. Based on those discussions, we have been authorized to deploy our proprietary **Orb AI Platform** to conduct a forensic analysis of your historic and current utility expenditure.
+This proposal is submitted following the extensive discussions between yourself and **John Kavanagh**, who has identified this opportunity to secure significant cost savings for your group. Based on those discussions, we have been authorized to deploy our proprietary **audit platform** to conduct a forensic analysis of your historic and current utility expenditure.
 
 **Our Objective:** To identify overcharges, secure retrospective rebates, and optimize future procurement for all nursing homes within your group, with **zero upfront cost** to Signa care.
 
@@ -33,19 +33,19 @@ We will utilize the **Foxlite Consulting's proprietary platform** engine to proc
 
 ---
 
-## 3. THE STRUCTURE & PARTNERSHIP
 
-**Foxlite Consulting** is a specialized utility auditing firm. We are delivering this project as a precursor to the full launch of **Playbook Corporation**.
 
-*   **Daryl Kavanagh:** Interim CEO, Playbook Corporation.
-*   **David Clarke:** Group Managing Director, Foxlite Consulting.
-*   **John Kavanagh:** Strategic Advisor (Initiator of Signa care Partnership).
 
-As the Group Managing Director, I (David Clarke) will personally oversee the delivery of this audit to ensure the maximum financial return for Signa care, building on the foundation laid by John Kavanagh.
+
+
+
+
+
+As the Group Managing Director, I (David Clarke) will personally oversee the delivery of this audit to ensure the maximum financial return for Signa care.
 
 ---
 
-## 4. PROCESS & NEXT STEPS
+## 3. PROJECTED OUTCOMES & SAVINGS\n\nBased on our forensic auditing of similar healthcare groups, we anticipate the following financial outcomes:\n\n*   **Forward Cost Reduction:** 15% - 22% annual savings on electricity and gas contracts through wholesale market benchmarking.\n*   **Retrospective Rebates:** Recovery of historic overcharges (up to 6 years), typically averaging **€15,000 - €40,000** per site depending on consumption volume.\n*   **Tax & Levy Exemptions:** Permanent removal of incorrect CCL and VAT charges, resulting in immediate cash flow improvement.\n\n---\n\n## 4. PROCESS & NEXT STEPS
 
 To proceed, we require **no manual data gathering** from your team. We simply need the signed **Letter of Authority (LOA)** attached.
 

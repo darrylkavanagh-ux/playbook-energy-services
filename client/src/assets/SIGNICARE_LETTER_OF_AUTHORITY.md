@@ -5,11 +5,11 @@
 **To:** All Utility Suppliers / Network Operators
 **Date:** 02 February 2026
 
-**RE: Authority for Foxlite Consulting / Playbook Corporation**
+**RE: Authority for Foxlite Consulting**
 
 **To Whom It May Concern,**
 
-Please accept this letter as formal authority for **Foxlite Consulting** (and their authorized representatives acting under **Playbook Corporation**) to act on behalf of **Signa care Group** and its associated nursing home entities in relation to our energy and utility accounts.
+Please accept this letter as formal authority for **Foxlite Consulting**  to act on behalf of **Signa care Group** and its associated nursing home entities in relation to our energy and utility accounts.
 
 **This authority grants them the right to:**
 1.  Request and receive all historical billing data, consumption records, and contract details (including half-hourly data and meter technical details).
