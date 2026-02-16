@@ -11,6 +11,13 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import { initializeDatabase } from './config/database';
 import CompleteAuditEngine from './engines/CompleteAuditEngine';
+import EmailBillProcessor from './services/EmailBillProcessor';
+
+// Import route modules
+import foxliteRoutes from './routes/foxlite';
+import nocompareRoutes from './routes/nocompare';
+import orbRoutes from './routes/orb';
+import kavanRoutes from './routes/kavan';
 
 // Load environment variables
 dotenv.config();
@@ -20,6 +27,21 @@ const __dirname = path.dirname(__filename);
 
 // Initialize engines
 const auditEngine = new CompleteAuditEngine();
+
+// Initialize email processor if configured
+let emailProcessor: EmailBillProcessor | null = null;
+if (process.env.EMAIL_HOST && process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
+  emailProcessor = new EmailBillProcessor({
+    user: process.env.EMAIL_USER,
+    password: process.env.EMAIL_PASSWORD,
+    host: process.env.EMAIL_HOST,
+    port: parseInt(process.env.EMAIL_PORT || '993'),
+    tls: process.env.EMAIL_TLS === 'true',
+    tlsOptions: {
+      rejectUnauthorized: process.env.EMAIL_REJECT_UNAUTHORIZED !== 'false'
+    }
+  });
+}
 
 async function startServer() {
   const app: Express = express();
@@ -76,6 +98,12 @@ async function startServer() {
     process.exit(1);
   }
   
+  // Start email monitoring if configured
+  if (emailProcessor) {
+    console.log('📧 Starting email bill processor...');
+    await emailProcessor.startMonitoring(parseInt(process.env.EMAIL_CHECK_INTERVAL || '5'));
+  }
+  
   // ============================================
   // API ROUTES
   // ============================================
@@ -87,7 +115,8 @@ async function startServer() {
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
       environment: process.env.NODE_ENV,
-      database: dbInitialized ? 'connected' : 'disconnected'
+      database: dbInitialized ? 'connected' : 'disconnected',
+      email_processor: emailProcessor ? 'enabled' : 'disabled'
     });
   });
   
@@ -105,9 +134,16 @@ async function startServer() {
         { name: 'Singapore', status: 'partial' }
       ],
       global_fraud_index: 84,
-      veritech_core_status: 'ONLINE'
+      veritech_core_status: 'ONLINE',
+      email_processor: emailProcessor ? 'monitoring' : 'disabled'
     });
   });
+  
+  // Mount platform-specific routes
+  app.use('/api/foxlite', foxliteRoutes);
+  app.use('/api/nocompare', nocompareRoutes);
+  app.use('/api/orb', orbRoutes);
+  app.use('/api/kavan', kavanRoutes);
   
   // ============================================
   // FOXLITE AUDIT API
