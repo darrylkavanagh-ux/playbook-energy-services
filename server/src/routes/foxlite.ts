@@ -8,10 +8,16 @@ import multer from 'multer';
 import path from 'path';
 import { nanoid } from 'nanoid';
 import { query } from '../config/database';
-import { ocrExtractionEngine } from '../engines/OCRExtractionEngine';
-import { vatRateAuditor } from '../engines/VATRateAuditor';
-import { tariffOptimizer } from '../engines/TariffOptimizer';
-import { completeAuditEngine } from '../engines/CompleteAuditEngine';
+import { OCRExtractionEngine } from '../engines/OCRExtractionEngine';
+import { VATRateAuditor } from '../engines/VATRateAuditor';
+import { TariffOptimizer } from '../engines/TariffOptimizer';
+import { CompleteAuditEngine } from '../engines/CompleteAuditEngine';
+
+// Instantiate engines
+const ocrExtractionEngine = new OCRExtractionEngine();
+const vatRateAuditor = new VATRateAuditor();
+const tariffOptimizer = new TariffOptimizer();
+const completeAuditEngine = new CompleteAuditEngine();
 import EmailBillProcessor from '../services/EmailBillProcessor';
 
 const router = express.Router();

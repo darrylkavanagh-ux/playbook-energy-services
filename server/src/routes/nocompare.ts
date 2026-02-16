@@ -8,8 +8,12 @@ import multer from 'multer';
 import path from 'path';
 import { nanoid } from 'nanoid';
 import { query } from '../config/database';
-import { ocrExtractionEngine } from '../engines/OCRExtractionEngine';
-import { tariffOptimizer } from '../engines/TariffOptimizer';
+import { OCRExtractionEngine } from '../engines/OCRExtractionEngine';
+import { TariffOptimizer } from '../engines/TariffOptimizer';
+
+// Instantiate engines
+const ocrExtractionEngine = new OCRExtractionEngine();
+const tariffOptimizer = new TariffOptimizer();
 
 const router = express.Router();
 
