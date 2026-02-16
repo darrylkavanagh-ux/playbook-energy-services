@@ -18,6 +18,7 @@ import foxliteRoutes from './routes/foxlite';
 import nocompareRoutes from './routes/nocompare';
 import orbRoutes from './routes/orb';
 import kavanRoutes from './routes/kavan';
+import forensicRoutes from './routes/forensic';
 
 // Load environment variables
 dotenv.config();
@@ -144,6 +145,7 @@ async function startServer() {
   app.use('/api/nocompare', nocompareRoutes);
   app.use('/api/orb', orbRoutes);
   app.use('/api/kavan', kavanRoutes);
+  app.use('/api/forensic', forensicRoutes);
   
   // ============================================
   // FOXLITE AUDIT API
@@ -411,6 +413,7 @@ async function startServer() {
     console.log('   • NO COMPARE: /api/nocompare/*');
     console.log('   • ORB AI:     /api/orb/*');
     console.log('   • KAVAN AI:   /api/kavan/*');
+    console.log('   • FORENSIC:   /api/forensic/*');
     console.log('   • System:     /api/system/status');
     console.log('');
   });

@@ -13,6 +13,7 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "db:migrate": "tsx server/src/config/database.ts",
+    "db:forensic-migrate": "tsx server/src/config/forensicDatabase.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
