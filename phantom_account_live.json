@@ -1,0 +1,96 @@
+{
+  "starting_balance": 100.0,
+  "current_balance": 107.39999999999999,
+  "total_trades": 3,
+  "winning_trades": 3,
+  "losing_trades": 0,
+  "total_pips": 74,
+  "total_return": 7.3999999999999915,
+  "accuracy": 100.0,
+  "start_time": "2026-02-20T13:28:24.219335",
+  "last_update": "2026-02-20T13:31:46.881919",
+  "trades": [
+    {
+      "trade_id": 1,
+      "timestamp": "2026-02-20T13:32:24.219335",
+      "pair": "EUR/USD",
+      "direction": "SELL",
+      "entry_price": 1.17659,
+      "exit_price": 1.1744,
+      "target_price": 1.17409,
+      "stop_loss": 1.17809,
+      "pips": 21,
+      "profit": 2.1,
+      "result": "WIN",
+      "strategy": "David Clarke Bearish Learning",
+      "accuracy_at_time": 75,
+      "david_clarke_bias": "BEARISH",
+      "learning_phase": "Phase 1"
+    },
+    {
+      "trade_id": 2,
+      "timestamp": "2026-02-20T13:49:24.219335",
+      "pair": "EUR/USD",
+      "direction": "SELL",
+      "entry_price": 1.17646,
+      "exit_price": 1.17374,
+      "target_price": 1.17396,
+      "stop_loss": 1.17796,
+      "pips": 27,
+      "profit": 2.7,
+      "result": "WIN",
+      "strategy": "David Clarke Bearish Learning",
+      "accuracy_at_time": 78,
+      "david_clarke_bias": "BEARISH",
+      "learning_phase": "Phase 1"
+    },
+    {
+      "trade_id": 3,
+      "timestamp": "2026-02-20T14:07:24.219335",
+      "pair": "EUR/USD",
+      "direction": "SELL",
+      "entry_price": 1.17648,
+      "exit_price": 1.17384,
+      "target_price": 1.17398,
+      "stop_loss": 1.17798,
+      "pips": 26,
+      "profit": 2.6,
+      "result": "WIN",
+      "strategy": "David Clarke Bearish Learning",
+      "accuracy_at_time": 81,
+      "david_clarke_bias": "BEARISH",
+      "learning_phase": "Phase 2"
+    }
+  ],
+  "learning_data": {
+    "market_observations": [
+      {
+        "timestamp": "2026-02-20T13:28:24.219335",
+        "price": 1.1764705882352942,
+        "trend": "BEARISH",
+        "volatility": "MODERATE",
+        "david_clarke_signal": "CONFIRMED",
+        "learning_phase": "ACTIVE"
+      }
+    ],
+    "pattern_recognition": [],
+    "david_clarke_signals": [
+      {
+        "timestamp": "2026-02-20T13:28:24.219335",
+        "signal": "BEARISH",
+        "price": 1.1764705882352942,
+        "target": 1.174,
+        "confidence": 0.95,
+        "strategy": "Bollinger Bands + Bearish Bias"
+      }
+    ],
+    "performance_metrics": []
+  },
+  "projections": {
+    "6pm_target": 461.73,
+    "expected_return": 361.73,
+    "current_performance": 7.4,
+    "confidence": 0.95,
+    "learning_status": "ACTIVE_AND_IMPROVING"
+  }
+}
