@@ -72,6 +72,12 @@
       "namedRegex": "^/contact(?:/)?$"
     },
     {
+      "page": "/excalibur",
+      "regex": "^/excalibur(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/excalibur(?:/)?$"
+    },
+    {
       "page": "/pricing",
       "regex": "^/pricing(?:/)?$",
       "routeKeys": {},
