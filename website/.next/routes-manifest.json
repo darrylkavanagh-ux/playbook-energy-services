@@ -2,8 +2,16 @@
   "version": 3,
   "pages404": true,
   "caseSensitive": false,
-  "basePath": "",
+  "basePath": "/foxlite-consulting",
   "redirects": [
+    {
+      "source": "/foxlite-consulting",
+      "destination": "/foxlite-consulting/",
+      "basePath": false,
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^/foxlite-consulting$"
+    },
     {
       "source": "/:file((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+)/",
       "destination": "/:file",

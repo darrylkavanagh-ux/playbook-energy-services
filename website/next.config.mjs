@@ -5,8 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
-  basePath: '',
+  basePath: '/foxlite-consulting',
 }
 
 export default nextConfig
