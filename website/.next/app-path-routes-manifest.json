@@ -5,6 +5,21 @@
   "/about/page": "/about",
   "/case-studies/page": "/case-studies",
   "/pricing/page": "/pricing",
+  "/services/all/page": "/services/all",
+  "/services/banking/page": "/services/banking",
   "/services/energy/page": "/services/energy",
-  "/services/page": "/services"
+  "/services/insurance/page": "/services/insurance",
+  "/services/property/page": "/services/property",
+  "/services/telecoms/page": "/services/telecoms",
+  "/services/waste/page": "/services/waste",
+  "/who-we-help/healthcare/page": "/who-we-help/healthcare",
+  "/who-we-help/hospitality/page": "/who-we-help/hospitality",
+  "/who-we-help/manufacturing/page": "/who-we-help/manufacturing",
+  "/who-we-help/multi-site/page": "/who-we-help/multi-site",
+  "/who-we-help/page": "/who-we-help",
+  "/who-we-help/property-management/page": "/who-we-help/property-management",
+  "/who-we-help/public-sector/page": "/who-we-help/public-sector",
+  "/who-we-help/retail/page": "/who-we-help/retail",
+  "/services/page": "/services",
+  "/services/fleet/page": "/services/fleet"
 }
