@@ -102,6 +102,15 @@
       "static/chunks/619-ba102abea3e3d0e4.js",
       "static/chunks/app/services/insurance/page-91827353834d42f3.js"
     ],
+    "/services/page": [
+      "static/chunks/webpack-864fe19774f0e722.js",
+      "static/chunks/4bd1b696-c023c6e3521b1417.js",
+      "static/chunks/255-102f2e5b2e3dc2ef.js",
+      "static/chunks/main-app-be3621a3ad8d837e.js",
+      "static/chunks/909-98d70bff1d824fec.js",
+      "static/chunks/619-ba102abea3e3d0e4.js",
+      "static/chunks/app/services/page-d8da1c2e975d72d7.js"
+    ],
     "/services/property/page": [
       "static/chunks/webpack-864fe19774f0e722.js",
       "static/chunks/4bd1b696-c023c6e3521b1417.js",
@@ -193,15 +202,6 @@
       "static/chunks/main-app-be3621a3ad8d837e.js",
       "static/chunks/909-98d70bff1d824fec.js",
       "static/chunks/app/who-we-help/retail/page-384acac0fdef1180.js"
-    ],
-    "/services/page": [
-      "static/chunks/webpack-864fe19774f0e722.js",
-      "static/chunks/4bd1b696-c023c6e3521b1417.js",
-      "static/chunks/255-102f2e5b2e3dc2ef.js",
-      "static/chunks/main-app-be3621a3ad8d837e.js",
-      "static/chunks/909-98d70bff1d824fec.js",
-      "static/chunks/619-ba102abea3e3d0e4.js",
-      "static/chunks/app/services/page-d8da1c2e975d72d7.js"
     ],
     "/services/fleet/page": [
       "static/chunks/webpack-864fe19774f0e722.js",
