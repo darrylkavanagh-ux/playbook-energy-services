@@ -1,0 +1,29 @@
+{
+  "analysis_date": "2026-02-26",
+  "source": "Gmail API Live Threads",
+  "account": "darryl.kavanagh.11@gmail.com",
+  "next_page_token": "13668374807515499584",
+  "threads_analyzed": 3,
+  "key_findings": {
+    "niamh_irish_active": {
+      "status": "CONFIRMED_ACTIVE",
+      "platform": "Manus AI",
+      "task": "NIAMH AND OLLIE",
+      "date": "December 2025",
+      "thread_id": "19b3959e57c6cf21",
+      "significance": "Active collaborator despite 0 historical email matches"
+    },
+    "new_individual_ollie": {
+      "status": "NEWLY_IDENTIFIED",
+      "context": "Collaboration task with Niamh Irish",
+      "platform": "Manus AI",
+      "investigation_status": "REQUIRES_FURTHER_ANALYSIS"
+    },
+    "manus_ai_integration": {
+      "access_granted": "December 2025",
+      "permissions": "Google Account data access",
+      "security_alert": "Google notification sent",
+      "function": "Task collaboration and management"
+    }
+  }
+}
