@@ -1,4 +1,4 @@
-# FOXLITE ENERGY SERVICES
+    # FOXLITE ENERGY SERVICES
 ## Independent Energy Consultants
 
 **Professional energy consulting services specializing in forensic audits, billing analysis, and regulatory compliance.**
