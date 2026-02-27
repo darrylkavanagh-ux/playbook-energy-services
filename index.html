@@ -5,1041 +5,144 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Foxlite Forensic Services — Independent forensic auditing for commercial organisations. We find overcharges. You keep the savings. Established 2019.">
-<meta name="keywords" content="forensic audit, utility audit, insurance review, overcharge recovery, energy audit, commercial savings, Foxlite, Ireland, UK">
 <title>Foxlite Forensic Services | Independent Forensic Auditing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
-/* ═══════════════════════════════════════════════════
-   FOXLITE FORENSIC SERVICES — DESIGN SYSTEM
-   Deep Royal Sapphire + Gold Leaf
-   ═══════════════════════════════════════════════════ */
-
-:root {
-–sapphire: #0A1628;
-–sapphire-mid: #12253F;
-–sapphire-light: #1B3A5C;
-–gold: #C5A050;
-–gold-light: #D4B872;
-–gold-muted: #A8894A;
-–gold-pale: #F5ECD7;
-–cream: #FAF7F2;
-–cream-warm: #F8F5F0;
-–white: #FFFFFF;
-–grey-50: #F9FAFB;
-–grey-100: #F3F4F6;
-–grey-300: #D1D5DB;
-–grey-400: #9CA3AF;
-–grey-500: #6B7280;
-–grey-600: #4B5563;
-–grey-700: #374151;
-–grey-800: #1F2937;
-–grey-900: #111827;
-–serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-–sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-–gold-rule: 1px solid rgba(197, 160, 80, 0.3);
-–transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-body { font-family: var(–sans); color: var(–grey-800); background: var(–white); line-height: 1.7; overflow-x: hidden; }
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
-
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-@media (min-width: 768px) { .container { padding: 0 40px; } }
-@media (min-width: 1024px) { .container { padding: 0 60px; } }
-
-/* ═══ NAVIGATION ═══ */
-.nav {
-position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-background: rgba(10, 22, 40, 0.97);
-backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-border-bottom: 1px solid rgba(197, 160, 80, 0.12);
-transition: var(–transition);
-}
-.nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
-.nav-inner {
-max-width: 1200px; margin: 0 auto; padding: 0 24px;
-display: flex; align-items: center; justify-content: space-between; height: 72px;
-}
-@media (min-width: 768px) { .nav-inner { padding: 0 40px; } }
-
-.nav-brand { display: flex; align-items: center; gap: 12px; }
-.nav-brand-text { font-family: var(–serif); font-size: 20px; font-weight: 600; color: var(–white); letter-spacing: 1px; }
-.nav-brand-text span { color: var(–gold); font-weight: 400; font-size: 14px; display: block; letter-spacing: 2px; text-transform: uppercase; margin-top: -2px; }
-
-.nav-links { display: none; align-items: center; gap: 32px; }
-@media (min-width: 1024px) { .nav-links { display: flex; } }
-.nav-links a {
-font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7);
-letter-spacing: 0.5px; text-transform: uppercase; transition: var(–transition);
-position: relative;
-}
-.nav-links a::after {
-content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
-background: var(–gold); transition: width 0.3s ease;
-}
-.nav-links a:hover { color: var(–white); }
-.nav-links a:hover::after { width: 100%; }
-
-.nav-cta {
-display: none; padding: 10px 24px; background: transparent; border: 1px solid var(–gold);
-color: var(–gold); font-family: var(–sans); font-size: 12px; font-weight: 600;
-letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer;
-transition: var(–transition);
-}
-@media (min-width: 1024px) { .nav-cta { display: inline-block; } }
-.nav-cta:hover { background: var(–gold); color: var(–sapphire); }
-
-.nav-mobile-toggle {
-display: flex; flex-direction: column; gap: 5px; cursor: pointer;
-background: none; border: none; padding: 8px;
-}
-@media (min-width: 1024px) { .nav-mobile-toggle { display: none; } }
-.nav-mobile-toggle span {
-width: 24px; height: 1.5px; background: var(–white); transition: var(–transition);
-}
-.nav-mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-.nav-mobile-toggle.active span:nth-child(2) { opacity: 0; }
-.nav-mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-.mobile-menu {
-display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-background: rgba(10, 22, 40, 0.98); backdrop-filter: blur(20px);
-padding: 40px 24px; z-index: 999;
-}
-.mobile-menu.active { display: flex; flex-direction: column; gap: 24px; }
-.mobile-menu a {
-font-family: var(–serif); font-size: 28px; color: var(–white);
-padding: 8px 0; border-bottom: var(–gold-rule);
-}
-.mobile-menu .mobile-cta {
-margin-top: 20px; padding: 16px 32px; background: var(–gold); color: var(–sapphire);
-text-align: center; font-family: var(–sans); font-size: 14px; font-weight: 600;
-letter-spacing: 1px; text-transform: uppercase;
-}
-
-/* ═══ HERO ═══ */
-.hero {
-position: relative; min-height: 100vh; display: flex; align-items: center;
-background: var(–sapphire); overflow: hidden;
-}
-.hero::before {
-content: ''; position: absolute; inset: 0;
-background:
-radial-gradient(ellipse at 20% 50%, rgba(27, 58, 92, 0.6) 0%, transparent 60%),
-radial-gradient(ellipse at 80% 20%, rgba(197, 160, 80, 0.06) 0%, transparent 50%),
-radial-gradient(ellipse at 60% 80%, rgba(27, 58, 92, 0.4) 0%, transparent 50%);
-}
-.hero::after {
-content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-background: linear-gradient(90deg, transparent, var(–gold-muted), transparent);
-}
-.hero-content { position: relative; z-index: 2; padding: 140px 0 100px; width: 100%; }
-.hero-label {
-display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 3px;
-text-transform: uppercase; color: var(–gold); margin-bottom: 32px;
-padding-bottom: 16px; border-bottom: 1px solid rgba(197, 160, 80, 0.3);
-opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
-}
-.hero h1 {
-font-family: var(–serif); font-size: clamp(36px, 6vw, 72px); font-weight: 400;
-color: var(–white); line-height: 1.1; margin-bottom: 24px; max-width: 800px;
-opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
-}
-.hero h1 em {
-font-style: italic; color: var(–gold-light);
-}
-.hero-sub {
-font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.6);
-line-height: 1.7; max-width: 560px; margin-bottom: 48px;
-opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
-}
-.hero-actions {
-display: flex; flex-wrap: wrap; gap: 16px;
-opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
-}
-.btn-primary {
-display: inline-flex; align-items: center; gap: 10px;
-padding: 16px 36px; background: var(–gold); color: var(–sapphire);
-font-family: var(–sans); font-size: 13px; font-weight: 600;
-letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer;
-transition: var(–transition);
-}
-.btn-primary:hover { background: var(–gold-light); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(197,160,80,0.3); }
-.btn-secondary {
-display: inline-flex; align-items: center; gap: 10px;
-padding: 16px 36px; background: transparent; color: var(–white);
-font-family: var(–sans); font-size: 13px; font-weight: 500;
-letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2);
-cursor: pointer; transition: var(–transition);
-}
-.btn-secondary:hover { border-color: var(–gold); color: var(–gold); }
-
-.hero-stats {
-display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
-margin-top: 80px; background: rgba(197, 160, 80, 0.15);
-border: 1px solid rgba(197, 160, 80, 0.15);
-opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
-}
-@media (min-width: 768px) { .hero-stats { grid-template-columns: repeat(4, 1fr); } }
-.hero-stat {
-padding: 28px 24px; background: rgba(10, 22, 40, 0.8);
-text-align: center;
-}
-.hero-stat-value {
-font-family: var(–serif); font-size: 36px; color: var(–gold);
-line-height: 1; margin-bottom: 8px;
-}
-.hero-stat-label {
-font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px;
-text-transform: uppercase; line-height: 1.4;
-}
-
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(24px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-/* ═══ SECTION COMMON ═══ */
-.section { padding: 100px 0; }
-@media (min-width: 768px) { .section { padding: 120px 0; } }
-.section-dark { background: var(–sapphire); color: var(–white); }
-.section-cream { background: var(–cream); }
-.section-label {
-font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
-color: var(–gold); margin-bottom: 16px;
-}
-.section-title {
-font-family: var(–serif); font-size: clamp(28px, 4vw, 48px); font-weight: 400;
-line-height: 1.2; margin-bottom: 20px; max-width: 640px;
-}
-.section-subtitle {
-font-size: 17px; color: var(–grey-500); line-height: 1.7;
-max-width: 560px; margin-bottom: 60px;
-}
-.section-dark .section-subtitle { color: rgba(255,255,255,0.5); }
-.gold-line {
-width: 48px; height: 1px; background: var(–gold); margin-bottom: 24px;
-}
-
-/* ═══ PROBLEM SECTION ═══ */
-.problem-grid {
-display: grid; grid-template-columns: 1fr; gap: 48px;
-}
-@media (min-width: 768px) { .problem-grid { grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; } }
-.problem-content { order: 2; }
-@media (min-width: 768px) { .problem-content { order: 1; } }
-.problem-visual { order: 1; }
-@media (min-width: 768px) { .problem-visual { order: 2; } }
-
-.problem-stat-card {
-background: var(–sapphire); padding: 48px 40px; position: relative; overflow: hidden;
-}
-.problem-stat-card::before {
-content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-background: linear-gradient(180deg, var(–gold), transparent);
-}
-.problem-stat-number {
-font-family: var(–serif); font-size: 64px; color: var(–gold); line-height: 1;
-margin-bottom: 12px;
-}
-.problem-stat-text {
-font-size: 18px; color: rgba(255,255,255,0.7); line-height: 1.6;
-}
-.problem-list { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
-.problem-list-item {
-display: flex; gap: 16px; align-items: flex-start;
-font-size: 15px; color: var(–grey-600); line-height: 1.6;
-}
-.problem-list-icon {
-flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px;
-border: 1px solid var(–gold); display: flex; align-items: center;
-justify-content: center; font-size: 10px; color: var(–gold);
-}
-
-/* ═══ SERVICES ═══ */
-.services-grid {
-display: grid; grid-template-columns: 1fr; gap: 1px;
-background: rgba(197, 160, 80, 0.15); border: 1px solid rgba(197, 160, 80, 0.15);
-}
-@media (min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
-.service-card {
-background: var(–sapphire-mid); padding: 40px 28px; transition: var(–transition);
-position: relative;
-}
-.service-card::before {
-content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-background: var(–gold); transform: scaleX(0); transform-origin: left;
-transition: transform 0.4s ease;
-}
-.service-card:hover::before { transform: scaleX(1); }
-.service-card:hover { background: var(–sapphire-light); }
-.service-icon {
-font-size: 28px; margin-bottom: 20px; display: block;
-}
-.service-name {
-font-family: var(–serif); font-size: 22px; color: var(–white);
-margin-bottom: 12px; line-height: 1.3;
-}
-.service-desc {
-font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7;
-}
-
-/* ═══ HOW IT WORKS ═══ */
-.process-steps {
-display: grid; grid-template-columns: 1fr; gap: 0;
-counter-reset: step;
-}
-@media (min-width: 768px) { .process-steps { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .process-steps { grid-template-columns: repeat(3, 1fr); } }
-.process-step {
-padding: 48px 32px; border-bottom: var(–gold-rule); position: relative;
-counter-increment: step;
-}
-@media (min-width: 768px) {
-.process-step { border-right: var(–gold-rule); }
-.process-step:nth-child(2n) { border-right: none; }
-}
-@media (min-width: 1024px) {
-.process-step { border-right: var(–gold-rule); }
-.process-step:nth-child(2n) { border-right: var(–gold-rule); }
-.process-step:nth-child(3n) { border-right: none; }
-}
-.process-step::before {
-content: counter(step, decimal-leading-zero); font-family: var(–serif);
-font-size: 48px; color: rgba(197, 160, 80, 0.15); line-height: 1;
-display: block; margin-bottom: 20px;
-}
-.process-step h3 {
-font-family: var(–serif); font-size: 22px; font-weight: 500;
-margin-bottom: 12px; color: var(–grey-800);
-}
-.process-step p {
-font-size: 14px; color: var(–grey-500); line-height: 1.7;
-}
-
-/* ═══ SECTORS ═══ */
-.sectors-grid {
-display: grid; grid-template-columns: 1fr; gap: 16px;
-}
-@media (min-width: 768px) { .sectors-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .sectors-grid { grid-template-columns: repeat(3, 1fr); } }
-.sector-card {
-padding: 32px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
-transition: var(–transition);
-}
-.sector-card:hover { border-color: rgba(197, 160, 80, 0.3); background: rgba(255,255,255,0.08); }
-.sector-icon { font-size: 24px; margin-bottom: 16px; }
-.sector-name { font-family: var(–serif); font-size: 20px; color: var(–white); margin-bottom: 8px; }
-.sector-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
-
-/* ═══ PRICING ═══ */
-.pricing-card {
-max-width: 640px; margin: 0 auto; padding: 60px 48px;
-background: var(–white); border: 1px solid rgba(197, 160, 80, 0.2);
-text-align: center; position: relative;
-}
-.pricing-card::before {
-content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-width: 60px; height: 2px; background: var(–gold);
-}
-.pricing-label {
-font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
-color: var(–gold); margin-bottom: 24px;
-}
-.pricing-value {
-font-family: var(–serif); font-size: 72px; color: var(–sapphire); line-height: 1;
-margin-bottom: 8px;
-}
-.pricing-value sup { font-size: 36px; vertical-align: super; }
-.pricing-desc {
-font-size: 17px; color: var(–grey-500); margin-bottom: 40px; line-height: 1.7;
-}
-.pricing-features { display: flex; flex-direction: column; gap: 16px; text-align: left; margin-bottom: 40px; }
-.pricing-feature {
-display: flex; align-items: center; gap: 14px; font-size: 15px; color: var(–grey-700);
-}
-.pricing-check {
-flex-shrink: 0; width: 20px; height: 20px; background: rgba(197, 160, 80, 0.1);
-display: flex; align-items: center; justify-content: center;
-font-size: 11px; color: var(–gold);
-}
-.pricing-cta {
-width: 100%; padding: 18px; background: var(–sapphire); color: var(–gold);
-font-family: var(–sans); font-size: 13px; font-weight: 600;
-letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer;
-transition: var(–transition);
-}
-.pricing-cta:hover { background: var(–sapphire-light); }
-
-/* ═══ TEAM ═══ */
-.team-grid {
-display: grid; grid-template-columns: 1fr; gap: 48px;
-}
-@media (min-width: 768px) { .team-grid { grid-template-columns: repeat(2, 1fr); gap: 60px; } }
-.team-card { text-align: center; }
-.team-photo {
-width: 120px; height: 120px; margin: 0 auto 24px;
-background: linear-gradient(135deg, var(–sapphire), var(–sapphire-light));
-border: 1px solid rgba(197, 160, 80, 0.2);
-display: flex; align-items: center; justify-content: center;
-font-family: var(–serif); font-size: 36px; color: var(–gold);
-}
-.team-name { font-family: var(–serif); font-size: 24px; margin-bottom: 4px; }
-.team-role { font-size: 13px; color: var(–gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
-.team-bio { font-size: 14px; color: var(–grey-500); line-height: 1.7; max-width: 400px; margin: 0 auto; }
-
-/* ═══ CTA SECTION ═══ */
-.cta-section {
-padding: 100px 0; background: var(–sapphire); text-align: center;
-position: relative; overflow: hidden;
-}
-.cta-section::before {
-content: ''; position: absolute; inset: 0;
-background: radial-gradient(ellipse at center, rgba(197, 160, 80, 0.05) 0%, transparent 70%);
-}
-.cta-content { position: relative; z-index: 2; }
-.cta-title {
-font-family: var(–serif); font-size: clamp(28px, 4vw, 48px); font-weight: 400;
-color: var(–white); margin-bottom: 20px;
-}
-.cta-title em { color: var(–gold-light); font-style: italic; }
-.cta-sub {
-font-size: 17px; color: rgba(255,255,255,0.5); max-width: 480px;
-margin: 0 auto 40px; line-height: 1.7;
-}
-
-/* ═══ CONTACT ═══ */
-.contact-grid {
-display: grid; grid-template-columns: 1fr; gap: 60px;
-}
-@media (min-width: 768px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
-.contact-info h3 {
-font-family: var(–serif); font-size: 28px; margin-bottom: 24px;
-}
-.contact-detail {
-display: flex; gap: 16px; align-items: flex-start; margin-bottom: 20px;
-}
-.contact-detail-icon {
-flex-shrink: 0; width: 36px; height: 36px; background: rgba(197, 160, 80, 0.08);
-display: flex; align-items: center; justify-content: center;
-font-size: 14px; color: var(–gold);
-}
-.contact-detail-text { font-size: 15px; color: var(–grey-600); line-height: 1.6; }
-.contact-detail-text strong { color: var(–grey-800); display: block; margin-bottom: 2px; }
-
-.contact-form { display: flex; flex-direction: column; gap: 20px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group label {
-font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
-color: var(–grey-500);
-}
-.form-group input, .form-group textarea, .form-group select {
-padding: 14px 16px; border: 1px solid var(–grey-300); background: var(–white);
-font-family: var(–sans); font-size: 15px; color: var(–grey-800);
-transition: var(–transition); outline: none;
-}
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-border-color: var(–gold);
-}
-.form-group textarea { min-height: 120px; resize: vertical; }
-.form-submit {
-padding: 16px 36px; background: var(–sapphire); color: var(–gold);
-font-family: var(–sans); font-size: 13px; font-weight: 600;
-letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer;
-transition: var(–transition); align-self: flex-start;
-}
-.form-submit:hover { background: var(–sapphire-light); }
-
-/* ═══ FOOTER ═══ */
-.footer {
-background: var(–grey-900); padding: 60px 0 0; color: rgba(255,255,255,0.5);
-}
-.footer-grid {
-display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px;
-border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-@media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
-.footer-brand { font-family: var(–serif); font-size: 20px; color: var(–white); margin-bottom: 12px; }
-.footer-brand span { color: var(–gold); }
-.footer-desc { font-size: 14px; line-height: 1.7; max-width: 280px; }
-.footer-heading {
-font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-color: var(–gold); margin-bottom: 16px;
-}
-.footer-links { display: flex; flex-direction: column; gap: 10px; }
-.footer-links a { font-size: 14px; transition: var(–transition); }
-.footer-links a:hover { color: var(–white); }
-.footer-bottom {
-padding: 24px 0; display: flex; flex-wrap: wrap; justify-content: space-between;
-gap: 12px; font-size: 12px;
-}
-.footer-legal { display: flex; gap: 24px; }
-.footer-legal a:hover { color: var(–white); }
-
-/* ═══ VERIFICATION BADGE ═══ */
-.veritech-badge {
-display: inline-flex; align-items: center; gap: 8px;
-padding: 6px 14px; background: rgba(197, 160, 80, 0.08);
-border: 1px solid rgba(197, 160, 80, 0.2);
-font-size: 11px; font-weight: 600; letter-spacing: 1px;
-text-transform: uppercase; color: var(–gold);
-}
-
-/* ═══ SCROLL ANIMATIONS ═══ */
-.reveal {
-opacity: 0; transform: translateY(32px);
-transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
+:root{--navy:#0B1D33;--navy-deep:#071526;--navy-mid:#132D4F;--gold:#D4A843;--gold-bright:#E2BC5C;--gold-dark:#B8912E;--cream:#FDF9F0;--white:#FFFFFF;--grey-400:#9CA3AF;--grey-500:#6B7280;--grey-600:#4B5563;--grey-700:#374151;--grey-800:#1F2937;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--sans);color:var(--grey-800);background:var(--white);line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy-deep);border-bottom:2px solid var(--gold)}.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}.nav-brand{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--white);letter-spacing:1px}.nav-brand span{display:block;font-size:11px;font-weight:400;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-top:-2px}.nav-links{display:none;align-items:center;gap:28px}@media(min-width:1024px){.nav-links{display:flex}}.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.75);letter-spacing:.5px;text-transform:uppercase}.nav-links a:hover{color:var(--gold)}.nav-cta-btn{display:none;padding:10px 24px;background:var(--gold);color:var(--navy-deep);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer}@media(min-width:1024px){.nav-cta-btn{display:inline-block}}.nav-cta-btn:hover{background:var(--gold-bright)}.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}@media(min-width:1024px){.hamburger{display:none}}.hamburger span{width:24px;height:2px;background:var(--gold)}.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--navy-deep);padding:32px 24px;z-index:999}.mob-menu.open{display:flex;flex-direction:column;gap:20px}.mob-menu a{font-family:var(--serif);font-size:26px;color:var(--white);padding:8px 0;border-bottom:1px solid rgba(212,168,67,.2)}.mob-menu .mob-cta{margin-top:16px;padding:16px;background:var(--gold);color:var(--navy-deep);text-align:center;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.hero{min-height:100vh;display:flex;align-items:center;background:var(--navy);padding:100px 24px 60px}@media(min-width:768px){.hero{padding:120px 40px 80px}}.hero-inner{max-width:1200px;margin:0 auto;width:100%}.hero-label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;padding-bottom:14px;border-bottom:2px solid var(--gold)}.hero h1{font-family:var(--serif);font-size:clamp(34px,6vw,68px);font-weight:500;color:var(--white);line-height:1.12;margin-bottom:24px;max-width:760px}.hero h1 em{font-style:italic;color:var(--gold)}.hero-sub{font-size:clamp(15px,2vw,19px);color:rgba(255,255,255,.65);line-height:1.75;max-width:540px;margin-bottom:40px}.hero-btns{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px}.btn-gold{display:inline-block;padding:16px 32px;background:var(--gold);color:var(--navy-deep);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer}.btn-gold:hover{background:var(--gold-bright)}.btn-outline{display:inline-block;padding:16px 32px;background:transparent;border:2px solid var(--gold);color:var(--gold);font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}.btn-outline:hover{background:var(--gold);color:var(--navy-deep)}
+.stats-bar{display:grid;grid-template-columns:repeat(2,1fr);border:2px solid var(--gold)}@media(min-width:768px){.stats-bar{grid-template-columns:repeat(4,1fr)}}.stat-item{padding:24px 20px;text-align:center;background:var(--navy-deep)}.stat-item+.stat-item{border-left:1px solid rgba(212,168,67,.3)}@media(max-width:767px){.stat-item:nth-child(1),.stat-item:nth-child(2){border-bottom:1px solid rgba(212,168,67,.3)}.stat-item:nth-child(3){border-left:none}}.stat-val{font-family:var(--serif);font-size:34px;color:var(--gold);line-height:1;margin-bottom:6px}.stat-lbl{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase;line-height:1.4}
+.sec{padding:80px 24px}@media(min-width:768px){.sec{padding:100px 40px}}.sec-inner{max-width:1200px;margin:0 auto}.sec-dark{background:var(--navy);color:var(--white)}.sec-cream{background:var(--cream)}.sec-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}.sec-title{font-family:var(--serif);font-size:clamp(26px,4vw,44px);font-weight:500;line-height:1.2;margin-bottom:16px;max-width:600px}.sec-sub{font-size:16px;color:var(--grey-500);line-height:1.75;max-width:540px;margin-bottom:48px}.sec-dark .sec-sub{color:rgba(255,255,255,.55)}.gold-bar{width:48px;height:3px;background:var(--gold);margin-bottom:20px}
+.prob-grid{display:grid;grid-template-columns:1fr;gap:40px}@media(min-width:768px){.prob-grid{grid-template-columns:1fr 1fr;gap:60px;align-items:center}}.prob-card{background:var(--navy);padding:44px 36px;border-left:4px solid var(--gold)}.prob-num{font-family:var(--serif);font-size:60px;color:var(--gold);line-height:1;margin-bottom:12px}.prob-text{font-size:17px;color:rgba(255,255,255,.7);line-height:1.65}.prob-list{margin-top:28px;display:flex;flex-direction:column;gap:14px}.prob-item{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--grey-600);line-height:1.6}.prob-icon{flex-shrink:0;width:22px;height:22px;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.svc-grid{display:grid;grid-template-columns:1fr;gap:2px;background:rgba(212,168,67,.3);border:2px solid var(--gold)}@media(min-width:600px){.svc-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(4,1fr)}}.svc-card{background:var(--navy);padding:32px 24px}.svc-card:hover{background:var(--navy-mid)}.svc-emoji{font-size:32px;margin-bottom:16px;display:block}.svc-name{font-family:var(--serif);font-size:22px;color:var(--white);margin-bottom:10px}.svc-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7}
+.proc-grid{display:grid;grid-template-columns:1fr;gap:0;counter-reset:step;border:1px solid rgba(212,168,67,.2)}@media(min-width:768px){.proc-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.proc-grid{grid-template-columns:repeat(3,1fr)}}.proc-step{padding:40px 28px;border-bottom:1px solid rgba(212,168,67,.15);counter-increment:step;background:var(--white)}@media(min-width:768px){.proc-step{border-right:1px solid rgba(212,168,67,.15)}}.proc-step::before{content:counter(step,decimal-leading-zero);font-family:var(--serif);font-size:44px;font-weight:700;color:var(--gold);line-height:1;display:block;margin-bottom:16px}.proc-step h3{font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:10px;color:var(--navy)}.proc-step p{font-size:14px;color:var(--grey-500);line-height:1.7}
+.sect-grid{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:600px){.sect-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.sect-grid{grid-template-columns:repeat(3,1fr)}}.sect-card{padding:28px 24px;background:var(--navy-mid);border:1px solid rgba(212,168,67,.2)}.sect-card:hover{border-color:var(--gold)}.sect-emoji{font-size:28px;margin-bottom:12px}.sect-name{font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:6px}.sect-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6}
+.price-card{max-width:600px;margin:0 auto;padding:52px 40px;background:var(--white);border:2px solid var(--gold);text-align:center}.price-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}.price-val{font-family:var(--serif);font-size:72px;color:var(--navy);line-height:1;margin-bottom:6px}.price-val sup{font-size:36px}.price-desc{font-size:16px;color:var(--grey-500);margin-bottom:36px}.price-list{display:flex;flex-direction:column;gap:14px;text-align:left;margin-bottom:36px}.price-item{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--grey-700)}.price-chk{flex-shrink:0;width:22px;height:22px;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.price-cta{width:100%;padding:18px;background:var(--navy);color:var(--gold);border:none;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}.price-cta:hover{background:var(--navy-mid)}
+.team-grid{display:grid;grid-template-columns:1fr;gap:40px}@media(min-width:768px){.team-grid{grid-template-columns:repeat(2,1fr);gap:60px}}.team-card{text-align:center}.team-avatar{width:110px;height:110px;margin:0 auto 20px;background:var(--navy);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:32px;color:var(--gold)}.team-name{font-family:var(--serif);font-size:24px;margin-bottom:4px;color:var(--navy)}.team-role{font-size:12px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;font-weight:600}.team-bio{font-size:14px;color:var(--grey-500);line-height:1.7;max-width:380px;margin:0 auto}.veri-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--navy);border:2px solid var(--gold);margin-top:40px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.cta-banner{padding:80px 24px;background:var(--navy);text-align:center}.cta-banner h2{font-family:var(--serif);font-size:clamp(26px,4vw,44px);color:var(--white);margin-bottom:16px}.cta-banner h2 em{color:var(--gold);font-style:italic}.cta-banner p{font-size:16px;color:rgba(255,255,255,.5);max-width:460px;margin:0 auto 32px}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:48px}@media(min-width:768px){.contact-grid{grid-template-columns:1fr 1fr}}.contact-info h3{font-family:var(--serif);font-size:28px;margin-bottom:20px;color:var(--navy)}.c-detail{display:flex;gap:14px;align-items:flex-start;margin-bottom:18px}.c-icon{flex-shrink:0;width:36px;height:36px;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700}.c-text{font-size:15px;color:var(--grey-600);line-height:1.6}.c-text strong{color:var(--navy);display:block;margin-bottom:2px}.form-group{margin-bottom:16px}.form-group label{display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--grey-500);margin-bottom:6px}.form-group input,.form-group textarea,.form-group select{width:100%;padding:14px 16px;border:2px solid #D1D5DB;background:var(--white);font-family:var(--sans);font-size:15px;color:var(--grey-800);outline:none}.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold)}.form-group textarea{min-height:110px;resize:vertical}.form-submit{padding:16px 32px;background:var(--gold);color:var(--navy-deep);border:none;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}.form-submit:hover{background:var(--gold-bright)}
+.footer{background:var(--navy-deep);padding:52px 24px 0;color:rgba(255,255,255,.5)}.footer-inner{max-width:1200px;margin:0 auto}.footer-grid{display:grid;grid-template-columns:1fr;gap:32px;padding-bottom:40px;border-bottom:1px solid rgba(212,168,67,.15)}@media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}.ft-brand{font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:10px}.ft-brand span{color:var(--gold)}.ft-desc{font-size:13px;line-height:1.7;max-width:260px}.ft-heading{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}.ft-links{display:flex;flex-direction:column;gap:8px}.ft-links a{font-size:13px}.ft-links a:hover{color:var(--gold)}.footer-bottom{padding:20px 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px}.footer-legal{display:flex;gap:20px}.footer-legal a:hover{color:var(--gold)}
 </style>
-
 </head>
 <body>
+<nav class="nav"><div class="nav-inner"><a href="#" class="nav-brand">FOXLITE<span>Forensic Services</span></a><div class="nav-links"><a href="#services">Services</a><a href="#process">How It Works</a><a href="#sectors">Sectors</a><a href="#pricing">Pricing</a><a href="#team">About</a><a href="#contact">Contact</a></div><a href="#contact" class="nav-cta-btn">Free Audit</a><button class="hamburger" id="hamBtn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+<div class="mob-menu" id="mobMenu"><a href="#services" onclick="closeMob()">Services</a><a href="#process" onclick="closeMob()">How It Works</a><a href="#sectors" onclick="closeMob()">Sectors</a><a href="#pricing" onclick="closeMob()">Pricing</a><a href="#team" onclick="closeMob()">About</a><a href="#contact" onclick="closeMob()">Contact</a><a href="#contact" class="mob-cta" onclick="closeMob()">Start Free Audit</a></div>
 
-<!-- ═══ NAVIGATION ═══ -->
+<section class="hero"><div class="hero-inner">
+<div class="hero-label">Independent Forensic Auditing &bull; Established 2019</div>
+<h1>We find overcharges.<br><em>You keep the savings.</em></h1>
+<p class="hero-sub">Specialist forensic auditors serving commercial organisations across Ireland and the United Kingdom. We identify and recover hidden overcharges in your utility bills, insurance premiums, and operational costs.</p>
+<div class="hero-btns"><a href="#contact" class="btn-gold">Start Your Free Audit &#8594;</a><a href="#process" class="btn-outline">How It Works</a></div>
+<div class="stats-bar"><div class="stat-item"><div class="stat-val">25%</div><div class="stat-lbl">Our Fee on<br>Recovered Savings</div></div><div class="stat-item"><div class="stat-val">&euro;0</div><div class="stat-lbl">Upfront Cost<br>to You</div></div><div class="stat-item"><div class="stat-val">6yr</div><div class="stat-lbl">Retrospective<br>Recovery Period</div></div><div class="stat-item"><div class="stat-val">8</div><div class="stat-lbl">Specialist Audit<br>Categories</div></div></div>
+</div></section>
 
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#" class="nav-brand">
-      <div class="nav-brand-text">FOXLITE<span>Forensic Services</span></div>
-    </a>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#process">How It Works</a>
-      <a href="#sectors">Sectors</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#team">About</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <a href="#contact" class="nav-cta">Free Audit</a>
-    <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<section class="sec sec-cream" id="problem"><div class="sec-inner"><div class="prob-grid"><div>
+<div class="gold-bar"></div><div class="sec-label">The Problem</div>
+<h2 class="sec-title">Businesses lose millions to hidden overcharges every year.</h2>
+<p style="font-size:15px;color:var(--grey-600);line-height:1.8;margin-bottom:28px">Energy bills, waste management, banking fees, telecoms, insurance, and property costs often contain systematic errors, legacy tariffs, and contractual overcharges that go undetected for years.</p>
+<div class="prob-list"><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Incorrect tariff rates applied after contract renewals</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Estimated billing overriding actual meter readings</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Insurance premiums inflated through price walking</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>VAT applied incorrectly or at wrong rates</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Standing charges, capacity charges, and levies miscalculated</span></div></div>
+</div><div><div class="prob-card"><div class="prob-num">73%</div><div class="prob-text">of commercial utility bills contain at least one billing error, according to industry auditing benchmarks.</div></div></div></div></div></section>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#services" onclick="closeMenu()">Services</a>
-  <a href="#process" onclick="closeMenu()">How It Works</a>
-  <a href="#sectors" onclick="closeMenu()">Sectors</a>
-  <a href="#pricing" onclick="closeMenu()">Pricing</a>
-  <a href="#team" onclick="closeMenu()">About</a>
-  <a href="#contact" onclick="closeMenu()">Contact</a>
-  <a href="#contact" class="mobile-cta" onclick="closeMenu()">Start Free Audit</a>
+<section class="sec sec-dark" id="services"><div class="sec-inner">
+<div class="sec-label">Our Services</div>
+<h2 class="sec-title" style="color:#fff">Eight specialist audit categories. One forensic standard.</h2>
+<p class="sec-sub">Every audit is conducted by experienced professionals using forensic-grade methodologies. We examine every line item, every tariff, and every calculation — going back six years.</p>
+<div class="svc-grid">
+<div class="svc-card"><span class="svc-emoji">&#9889;</span><div class="svc-name">Electricity</div><div class="svc-desc">Tariff verification, standing charge audits, capacity charge reviews, meter reading validation, PSO levy checks, and DUoS/TUoS analysis.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#128293;</span><div class="svc-name">Gas</div><div class="svc-desc">Unit rate forensics, carbon tax verification, meter accuracy, estimated vs actual billing, contract compliance, and supplier switching analysis.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#128167;</span><div class="svc-name">Water</div><div class="svc-desc">Volumetric charge audits, standing charge reviews, trade effluent assessments, surface water drainage, and meter calibration verification.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#9851;</span><div class="svc-name">Waste</div><div class="svc-desc">Collection frequency optimisation, weight-based vs volume billing, contamination charges, landfill tax verification, and recycling credit recovery.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#128222;</span><div class="svc-name">Telecoms</div><div class="svc-desc">Business line audits, broadband cost optimisation, mobile fleet management, SIP/VoIP migration analysis, and call charge verification.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#128737;&#65039;</span><div class="svc-name">Insurance</div><div class="svc-desc">Premium forensic review, price walking detection, broker performance assessment, coverage gap analysis, and claims history optimisation.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#128179;</span><div class="svc-name">Merchant Services</div><div class="svc-desc">Card processing fee audits, interchange+ optimisation, PCI compliance cost review, terminal rental assessments, and chargeback analysis.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#127970;</span><div class="svc-name">Rates</div><div class="svc-desc">Business rates appeals, rateable value assessments, transitional relief checks, empty property relief, and small business rate reviews.</div></div>
+</div></div></section>
+
+<section class="sec" id="process"><div class="sec-inner" style="text-align:center;margin-bottom:48px"><div class="sec-label">How It Works</div><h2 class="sec-title" style="margin:0 auto 16px;text-align:center">Six steps to recovered savings.</h2><p class="sec-sub" style="margin:0 auto">No disruption to your business. No upfront cost. We manage the entire process from initial review to recovered funds.</p></div><div class="sec-inner"><div class="proc-grid">
+<div class="proc-step"><h3>Free Review</h3><p>Send us a sample of recent bills. Our team conducts a preliminary assessment to identify potential overcharges and estimate the scale of recovery opportunity.</p></div>
+<div class="proc-step"><h3>Letter of Authority</h3><p>A simple, one-page document authorising us to request billing data directly from your suppliers. No commitment, no obligation at this stage.</p></div>
+<div class="proc-step"><h3>Data Collection</h3><p>We request complete billing histories from each supplier for the full six-year statutory period. All data handling is GDPR compliant.</p></div>
+<div class="proc-step"><h3>Forensic Audit</h3><p>Our specialists conduct a line-by-line examination of every bill, cross-referencing tariff rates, contract terms, regulatory requirements, and supplier calculations.</p></div>
+<div class="proc-step"><h3>Recovery &amp; Negotiation</h3><p>We present findings to each supplier with a formal claim for refund. We handle all correspondence, escalation, and if necessary, regulatory complaint.</p></div>
+<div class="proc-step"><h3>Ongoing Monitoring</h3><p>After recovery, we continue to monitor your accounts to ensure correct billing going forward and capture any future savings opportunities.</p></div>
+</div></div></section>
+
+<section class="sec sec-dark" id="sectors"><div class="sec-inner">
+<div class="sec-label">Who We Help</div>
+<h2 class="sec-title" style="color:#fff">Serving commercial organisations across every sector.</h2>
+<p class="sec-sub">From single-site businesses to multi-location enterprises, our forensic methodology scales to any organisation with commercial utility or insurance costs.</p>
+<div class="sect-grid">
+<div class="sect-card"><div class="sect-emoji">&#127976;</div><div class="sect-name">Hospitality</div><div class="sect-desc">Hotels, restaurants, pubs, and leisure facilities with high energy consumption and complex tariff structures.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#128722;</div><div class="sect-name">Retail</div><div class="sect-desc">Multi-site retailers, shopping centres, and convenience stores with aggregated billing opportunities.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#127973;</div><div class="sect-name">Healthcare</div><div class="sect-desc">Hospitals, clinics, nursing homes, and dental practices operating 24/7 with critical energy needs.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#127979;</div><div class="sect-name">Education</div><div class="sect-desc">Schools, colleges, universities, and training centres with seasonal usage patterns.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#9881;&#65039;</div><div class="sect-name">Manufacturing</div><div class="sect-desc">Production facilities with high-demand energy contracts, maximum demand charges, and power factor penalties.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#127970;</div><div class="sect-name">Property Management</div><div class="sect-desc">Commercial landlords, managing agents, and co-working spaces with shared utility infrastructure.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#128736;&#65039;</div><div class="sect-name">Construction</div><div class="sect-desc">Building contractors, developers, and project managers with temporary supply connections.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#128188;</div><div class="sect-name">Professional Services</div><div class="sect-desc">Law firms, accountancy practices, financial services, and consultancies with multiple office locations.</div></div>
+<div class="sect-card"><div class="sect-emoji">&#127806;</div><div class="sect-name">Agriculture</div><div class="sect-desc">Farming enterprises, food processing, cold storage, and rural businesses with specialist supply arrangements.</div></div>
+</div></div></section>
+
+<section class="sec sec-cream" id="pricing"><div class="sec-inner" style="text-align:center;margin-bottom:48px"><div class="sec-label">Pricing</div><h2 class="sec-title" style="margin:0 auto 16px;text-align:center">No savings, no fee.</h2><p class="sec-sub" style="margin:0 auto">Our interests are perfectly aligned with yours. We only earn when you save.</p></div><div class="sec-inner"><div class="price-card">
+<div class="price-label">Simple, Transparent Pricing</div>
+<div class="price-val">25<sup>%</sup></div>
+<div class="price-desc">of all recovered savings and ongoing reductions achieved.</div>
+<div class="price-list">
+<div class="price-item"><div class="price-chk">&#10003;</div><span>No upfront fees — ever</span></div>
+<div class="price-item"><div class="price-chk">&#10003;</div><span>Free initial review with no obligation</span></div>
+<div class="price-item"><div class="price-chk">&#10003;</div><span>Six-year retrospective recovery included</span></div>
+<div class="price-item"><div class="price-chk">&#10003;</div><span>All eight audit categories covered</span></div>
+<div class="price-item"><div class="price-chk">&#10003;</div><span>Ongoing monitoring at no additional cost</span></div>
+<div class="price-item"><div class="price-chk">&#10003;</div><span>Full supplier negotiation and recovery handled</span></div>
+<div class="price-item"><div class="price-chk">&#10003;</div><span>Maximum three-year engagement period</span></div>
 </div>
+<button class="price-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Your Free Review</button>
+</div></div></section>
 
-<!-- ═══ HERO ═══ -->
+<section class="sec" id="team"><div class="sec-inner" style="text-align:center;margin-bottom:48px"><div class="sec-label">Our Team</div><h2 class="sec-title" style="margin:0 auto 16px;text-align:center">Over 100 years combined experience.</h2><p class="sec-sub" style="margin:0 auto">Our forensic auditors combine decades of hands-on industry expertise with advanced analytical methodologies to uncover every overcharge.</p></div><div class="sec-inner">
+<div class="team-grid">
+<div class="team-card"><div class="team-avatar">DC</div><div class="team-name">David Clarke</div><div class="team-role">Managing Director</div><div class="team-bio">Over 30 years' experience in hospitality, maintenance services, and commercial property management. David brings an operator's understanding of where the real costs hide — and how suppliers exploit complexity to overcharge.</div></div>
+<div class="team-card"><div class="team-avatar">DD</div><div class="team-name">Derek Dunphy</div><div class="team-role">Head of Sales Development</div><div class="team-bio">Extensive background in client relationship management and business development. Derek ensures every client engagement runs smoothly from initial review through to recovered savings.</div></div>
+</div>
+<div style="text-align:center"><div class="veri-badge">&#10003;&ensp;VeriTech Certified&ensp;&bull;&ensp;Human-Led, AI-Assisted Methodology</div></div>
+</div></section>
 
-<section class="hero">
-  <div class="container hero-content">
-    <div class="hero-label">Independent Forensic Auditing &bull; Established 2019</div>
-    <h1>We find overcharges.<br><em>You keep the savings.</em></h1>
-    <p class="hero-sub">Specialist forensic auditors serving commercial organisations across Ireland and the United Kingdom. We identify and recover hidden overcharges in your utility bills, insurance premiums, and operational costs.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Start Your Free Audit &#8594;</a>
-      <a href="#process" class="btn-secondary">How It Works</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-value">25%</div>
-        <div class="hero-stat-label">Our Fee on<br>Recovered Savings</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value">€0</div>
-        <div class="hero-stat-label">Upfront Cost<br>to You</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value">6yr</div>
-        <div class="hero-stat-label">Retrospective<br>Recovery Period</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value">8</div>
-        <div class="hero-stat-label">Specialist Audit<br>Categories</div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="cta-banner"><h2>Stop paying more than you should.<br><em>Start recovering what's yours.</em></h2><p>Your initial review is free, confidential, and carries no obligation. Most clients see results within 90 days.</p><a href="#contact" class="btn-gold">Request Your Free Audit &#8594;</a></section>
 
-<!-- ═══ THE PROBLEM ═══ -->
+<section class="sec" id="contact"><div class="sec-inner"><div class="contact-grid"><div>
+<div class="gold-bar"></div><div class="sec-label">Get In Touch</div>
+<div class="contact-info"><h3>Contact Our Team</h3>
+<p style="font-size:15px;color:var(--grey-500);line-height:1.7;margin-bottom:28px">Whether you manage a single site or a portfolio of properties, we welcome your enquiry. The initial assessment is provided at no cost and with no obligation.</p>
+<div class="c-detail"><div class="c-icon">&#9993;</div><div class="c-text"><strong>Email</strong>info@foxliteservices.com</div></div>
+<div class="c-detail"><div class="c-icon">&#9742;</div><div class="c-text"><strong>Ireland</strong>David Clarke: +353 86 027 6700<br>Derek Dunphy: +353 89 706 4225</div></div>
+<div class="c-detail"><div class="c-icon">&#9742;</div><div class="c-text"><strong>United Kingdom</strong>+44 7923 121033</div></div>
+<div class="c-detail"><div class="c-icon">&#9679;</div><div class="c-text"><strong>Website</strong>www.foxliteservices.com</div></div>
+</div></div><div>
+<form id="cForm" onsubmit="submitForm(event)">
+<div class="form-group"><label>Your Name</label><input type="text" required placeholder="Full name"></div>
+<div class="form-group"><label>Email Address</label><input type="email" required placeholder="you@company.com"></div>
+<div class="form-group"><label>Company Name</label><input type="text" placeholder="Your organisation"></div>
+<div class="form-group"><label>Sector</label><select><option value="">Select your sector</option><option>Hospitality</option><option>Retail</option><option>Healthcare</option><option>Education</option><option>Manufacturing</option><option>Property Management</option><option>Construction</option><option>Professional Services</option><option>Agriculture</option><option>Other</option></select></div>
+<div class="form-group"><label>Message</label><textarea placeholder="Tell us about your business and what you'd like audited..."></textarea></div>
+<button type="submit" class="form-submit">Submit Enquiry &#8594;</button>
+</form></div></div></div></section>
 
-<section class="section section-cream" id="problem">
-  <div class="container">
-    <div class="problem-grid">
-      <div class="problem-content">
-        <div class="gold-line"></div>
-        <div class="section-label">The Problem</div>
-        <h2 class="section-title">Businesses lose millions to hidden overcharges every year.</h2>
-        <p style="font-size:16px; color:var(--grey-600); line-height:1.8; margin-bottom:32px;">Energy bills, waste management, banking fees, telecoms, insurance, and property costs often contain systematic errors, legacy tariffs, and contractual overcharges that go undetected for years. Most organisations simply don't have the specialist expertise or time to audit every line item across every supplier.</p>
-        <div class="problem-list">
-          <div class="problem-list-item">
-            <div class="problem-list-icon">&#10003;</div>
-            <span>Incorrect tariff rates applied after contract renewals</span>
-          </div>
-          <div class="problem-list-item">
-            <div class="problem-list-icon">&#10003;</div>
-            <span>Estimated billing overriding actual meter readings</span>
-          </div>
-          <div class="problem-list-item">
-            <div class="problem-list-icon">&#10003;</div>
-            <span>Insurance premiums inflated through price walking</span>
-          </div>
-          <div class="problem-list-item">
-            <div class="problem-list-icon">&#10003;</div>
-            <span>VAT applied incorrectly or at wrong rates</span>
-          </div>
-          <div class="problem-list-item">
-            <div class="problem-list-icon">&#10003;</div>
-            <span>Standing charges, capacity charges, and levies miscalculated</span>
-          </div>
-        </div>
-      </div>
-      <div class="problem-visual">
-        <div class="problem-stat-card">
-          <div class="problem-stat-number">73%</div>
-          <div class="problem-stat-text">of commercial utility bills contain at least one billing error, according to industry auditing benchmarks.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SERVICES ═══ -->
-
-<section class="section section-dark" id="services">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Our Services</div>
-      <h2 class="section-title" style="color:var(--white);">Eight specialist audit categories.<br>One forensic standard.</h2>
-      <p class="section-subtitle">Every audit is conducted by experienced professionals using forensic-grade methodologies. We examine every line item, every tariff, and every calculation — going back six years.</p>
-    </div>
-    <div class="services-grid reveal">
-      <div class="service-card">
-        <span class="service-icon">&#9889;</span>
-        <div class="service-name">Electricity</div>
-        <div class="service-desc">Tariff verification, standing charge audits, capacity charge reviews, meter reading validation, PSO levy checks, and DUoS/TUoS analysis.</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">&#128293;</span>
-        <div class="service-name">Gas</div>
-        <div class="service-desc">Unit rate forensics, carbon tax verification, meter accuracy, estimated vs actual billing, contract compliance, and supplier switching analysis.</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">&#128167;</span>
-        <div class="service-name">Water</div>
-        <div class="service-desc">Volumetric charge audits, standing charge reviews, trade effluent assessments, surface water drainage, and meter calibration verification.</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">&#9851;</span>
-        <div class="service-name">Waste</div>
-        <div class="service-desc">Collection frequency optimisation, weight-based vs volume billing, contamination charges, landfill tax verification, and recycling credit recovery.</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">&#128222;</span>
-        <div class="service-name">Telecoms</div>
-        <div class="service-desc">Business line audits, broadband cost optimisation, mobile fleet management, SIP/VoIP migration analysis, and call charge verification.</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">&#128737;</span>
-        <div class="service-name">Insurance</div>
-        <div class="service-desc">Premium forensic review, price walking detection, broker performance assessment, coverage gap analysis, and claims history optimisation.</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">&#128179;</span>
-        <div class="service-name">Merchant Services</div>
-        <div class="service-desc">Card processing fee audits, interchange+ optimisation, PCI compliance cost review, terminal rental assessments, and chargeback analysis.</div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">&#127970;</span>
-        <div class="service-name">Rates</div>
-        <div class="service-desc">Business rates appeals, rateable value assessments, transitional relief checks, empty property relief, and small business rate reviews.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ HOW IT WORKS ═══ -->
-
-<section class="section" id="process">
-  <div class="container">
-    <div class="reveal" style="text-align:center; margin-bottom:60px;">
-      <div class="section-label" style="text-align:center;">How It Works</div>
-      <h2 class="section-title" style="margin:0 auto 20px; text-align:center;">Six steps to recovered savings.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">No disruption to your business. No upfront cost. We manage the entire process from initial review to recovered funds.</p>
-    </div>
-    <div class="process-steps reveal">
-      <div class="process-step">
-        <h3>Free Review</h3>
-        <p>Send us a sample of recent bills. Our team conducts a preliminary assessment to identify potential overcharges and estimate the scale of recovery opportunity.</p>
-      </div>
-      <div class="process-step">
-        <h3>Letter of Authority</h3>
-        <p>A simple, one-page document authorising us to request billing data directly from your suppliers. No commitment, no obligation at this stage.</p>
-      </div>
-      <div class="process-step">
-        <h3>Data Collection</h3>
-        <p>We request complete billing histories from each supplier for the full six-year statutory period. All data handling is GDPR compliant.</p>
-      </div>
-      <div class="process-step">
-        <h3>Forensic Audit</h3>
-        <p>Our specialists conduct a line-by-line examination of every bill, cross-referencing tariff rates, contract terms, regulatory requirements, and supplier calculations.</p>
-      </div>
-      <div class="process-step">
-        <h3>Recovery &amp; Negotiation</h3>
-        <p>We present findings to each supplier with a formal claim for refund. We handle all correspondence, escalation, and if necessary, regulatory complaint.</p>
-      </div>
-      <div class="process-step">
-        <h3>Ongoing Monitoring</h3>
-        <p>After recovery, we continue to monitor your accounts to ensure correct billing going forward and capture any future savings opportunities.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SECTORS ═══ -->
-
-<section class="section section-dark" id="sectors">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Who We Help</div>
-      <h2 class="section-title" style="color:var(--white);">Serving commercial organisations across every sector.</h2>
-      <p class="section-subtitle">From single-site businesses to multi-location enterprises, our forensic methodology scales to any organisation with commercial utility or insurance costs.</p>
-    </div>
-    <div class="sectors-grid reveal">
-      <div class="sector-card">
-        <div class="sector-icon">&#127976;</div>
-        <div class="sector-name">Hospitality</div>
-        <div class="sector-desc">Hotels, restaurants, pubs, and leisure facilities with high energy consumption and complex tariff structures.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#128722;</div>
-        <div class="sector-name">Retail</div>
-        <div class="sector-desc">Multi-site retailers, shopping centres, and convenience stores with aggregated billing opportunities.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#127973;</div>
-        <div class="sector-name">Healthcare</div>
-        <div class="sector-desc">Hospitals, clinics, nursing homes, and dental practices operating 24/7 with critical energy needs.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#127979;</div>
-        <div class="sector-name">Education</div>
-        <div class="sector-desc">Schools, colleges, universities, and training centres with seasonal usage patterns.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#9881;</div>
-        <div class="sector-name">Manufacturing</div>
-        <div class="sector-desc">Production facilities with high-demand energy contracts, maximum demand charges, and power factor penalties.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#128218;</div>
-        <div class="sector-name">Property Management</div>
-        <div class="sector-desc">Commercial landlords, managing agents, and co-working spaces with shared utility infrastructure.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#128736;</div>
-        <div class="sector-name">Construction</div>
-        <div class="sector-desc">Building contractors, developers, and project managers with temporary supply connections and phased developments.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#128188;</div>
-        <div class="sector-name">Professional Services</div>
-        <div class="sector-desc">Law firms, accountancy practices, financial services, and consultancies with multiple office locations.</div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-icon">&#127968;</div>
-        <div class="sector-name">Agriculture</div>
-        <div class="sector-desc">Farming enterprises, food processing, cold storage, and rural businesses with specialist supply arrangements.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PRICING ═══ -->
-
-<section class="section section-cream" id="pricing">
-  <div class="container">
-    <div class="reveal" style="text-align:center; margin-bottom:60px;">
-      <div class="section-label" style="text-align:center;">Pricing</div>
-      <h2 class="section-title" style="margin:0 auto 20px; text-align:center;">No savings, no fee.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">Our interests are perfectly aligned with yours. We only earn when you save.</p>
-    </div>
-    <div class="pricing-card reveal">
-      <div class="pricing-label">Simple, Transparent Pricing</div>
-      <div class="pricing-value">25<sup>%</sup></div>
-      <div class="pricing-desc">of all recovered savings and ongoing reductions achieved.</div>
-      <div class="pricing-features">
-        <div class="pricing-feature">
-          <div class="pricing-check">&#10003;</div>
-          <span>No upfront fees — ever</span>
-        </div>
-        <div class="pricing-feature">
-          <div class="pricing-check">&#10003;</div>
-          <span>Free initial review with no obligation</span>
-        </div>
-        <div class="pricing-feature">
-          <div class="pricing-check">&#10003;</div>
-          <span>Six-year retrospective recovery included</span>
-        </div>
-        <div class="pricing-feature">
-          <div class="pricing-check">&#10003;</div>
-          <span>All eight audit categories covered</span>
-        </div>
-        <div class="pricing-feature">
-          <div class="pricing-check">&#10003;</div>
-          <span>Ongoing monitoring at no additional cost</span>
-        </div>
-        <div class="pricing-feature">
-          <div class="pricing-check">&#10003;</div>
-          <span>Full supplier negotiation and recovery handled</span>
-        </div>
-        <div class="pricing-feature">
-          <div class="pricing-check">&#10003;</div>
-          <span>Maximum three-year engagement period</span>
-        </div>
-      </div>
-      <button class="pricing-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Your Free Review</button>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TEAM ═══ -->
-
-<section class="section" id="team">
-  <div class="container">
-    <div class="reveal" style="text-align:center; margin-bottom:60px;">
-      <div class="section-label" style="text-align:center;">Our Team</div>
-      <h2 class="section-title" style="margin:0 auto 20px; text-align:center;">Over 100 years combined experience.</h2>
-      <p class="section-subtitle" style="margin:0 auto;">Our forensic auditors combine decades of hands-on industry expertise with advanced analytical methodologies to uncover every overcharge.</p>
-    </div>
-    <div class="team-grid reveal">
-      <div class="team-card">
-        <div class="team-photo">DC</div>
-        <div class="team-name">David Clarke</div>
-        <div class="team-role">Managing Director</div>
-        <div class="team-bio">Over 30 years' experience in hospitality, maintenance services, and commercial property management. David brings an operator's understanding of where the real costs hide — and how suppliers exploit complexity to overcharge.</div>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">DD</div>
-        <div class="team-name">Derek Dunphy</div>
-        <div class="team-role">Head of Sales Development</div>
-        <div class="team-bio">Extensive background in client relationship management and business development. Derek ensures every client engagement runs smoothly from initial review through to recovered savings.</div>
-      </div>
-    </div>
-    <div class="reveal" style="text-align:center; margin-top:48px;">
-      <div class="veritech-badge">&#10003; VeriTech Certified &bull; Human-Led, AI-Assisted Methodology</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ CTA ═══ -->
-
-<section class="cta-section">
-  <div class="container cta-content">
-    <h2 class="cta-title">Stop paying more than you should.<br><em>Start recovering what's yours.</em></h2>
-    <p class="cta-sub">Your initial review is free, confidential, and carries no obligation. Most clients see results within 90 days.</p>
-    <a href="#contact" class="btn-primary">Request Your Free Audit &#8594;</a>
-  </div>
-</section>
-
-<!-- ═══ CONTACT ═══ -->
-
-<section class="section" id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <div class="gold-line"></div>
-        <div class="section-label">Get In Touch</div>
-        <h3>Contact Our Irish Team</h3>
-        <p style="font-size:16px; color:var(--grey-500); line-height:1.7; margin-bottom:32px;">Whether you manage a single site or a portfolio of properties, we welcome your enquiry. The initial assessment is provided at no cost and with no obligation.</p>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">&#9993;</div>
-          <div class="contact-detail-text">
-            <strong>Email</strong>
-            info@foxliteservices.com
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">&#9742;</div>
-          <div class="contact-detail-text">
-            <strong>Ireland</strong>
-            David Clarke: +353 86 027 6700<br>
-            Derek Dunphy: +353 89 706 4225
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">&#9742;</div>
-          <div class="contact-detail-text">
-            <strong>United Kingdom</strong>
-            +44 7923 121033
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">&#127760;</div>
-          <div class="contact-detail-text">
-            <strong>Website</strong>
-            www.foxliteservices.com
-          </div>
-        </div>
-      </div>
-      <div class="contact-form reveal">
-        <form id="contactForm" onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required placeholder="Full name">
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" required placeholder="you@company.com">
-          </div>
-          <div class="form-group">
-            <label for="company">Company Name</label>
-            <input type="text" id="company" name="company" placeholder="Your organisation">
-          </div>
-          <div class="form-group">
-            <label for="sector">Sector</label>
-            <select id="sector" name="sector">
-              <option value="">Select your sector</option>
-              <option>Hospitality</option>
-              <option>Retail</option>
-              <option>Healthcare</option>
-              <option>Education</option>
-              <option>Manufacturing</option>
-              <option>Property Management</option>
-              <option>Construction</option>
-              <option>Professional Services</option>
-              <option>Agriculture</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your business and what you'd like audited..."></textarea>
-          </div>
-          <button type="submit" class="form-submit">Submit Enquiry &#8594;</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">FOXLITE <span>Forensic Services</span></div>
-        <p class="footer-desc">Independent forensic auditing firm established in 2019. Specialised in identifying and recovering business cost overcharges across Ireland and the United Kingdom.</p>
-      </div>
-      <div>
-        <div class="footer-heading">Services</div>
-        <div class="footer-links">
-          <a href="#services">Electricity Audit</a>
-          <a href="#services">Gas Audit</a>
-          <a href="#services">Insurance Review</a>
-          <a href="#services">Water &amp; Waste</a>
-          <a href="#services">Telecoms</a>
-          <a href="#services">Business Rates</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-heading">Company</div>
-        <div class="footer-links">
-          <a href="#team">About Us</a>
-          <a href="#process">How It Works</a>
-          <a href="#sectors">Sectors</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-heading">Contact</div>
-        <div class="footer-links">
-          <a href="mailto:info@foxliteservices.com">info@foxliteservices.com</a>
-          <a href="tel:+353860276700">+353 86 027 6700</a>
-          <a href="tel:+353897064225">+353 89 706 4225</a>
-          <a href="tel:+447923121033">+44 7923 121033</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Foxlite Forensic Services. All rights reserved.</span>
-      <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
-      </div>
-    </div>
-  </div>
-</footer>
+<footer class="footer"><div class="footer-inner"><div class="footer-grid">
+<div><div class="ft-brand">FOXLITE <span>Forensic Services</span></div><p class="ft-desc">Independent forensic auditing firm established in 2019. Specialised in identifying and recovering business cost overcharges across Ireland and the United Kingdom.</p></div>
+<div><div class="ft-heading">Services</div><div class="ft-links"><a href="#services">Electricity Audit</a><a href="#services">Gas Audit</a><a href="#services">Insurance Review</a><a href="#services">Water &amp; Waste</a><a href="#services">Telecoms</a><a href="#services">Business Rates</a></div></div>
+<div><div class="ft-heading">Company</div><div class="ft-links"><a href="#team">About Us</a><a href="#process">How It Works</a><a href="#sectors">Sectors</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></div></div>
+<div><div class="ft-heading">Contact</div><div class="ft-links"><a href="mailto:info@foxliteservices.com">info@foxliteservices.com</a><a href="tel:+353860276700">+353 86 027 6700</a><a href="tel:+353897064225">+353 89 706 4225</a><a href="tel:+447923121033">+44 7923 121033</a></div></div>
+</div><div class="footer-bottom"><span>&copy; 2026 Foxlite Forensic Services. All rights reserved.</span><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div></div></footer>
 
 <script>
-// ═══ NAVIGATION ═══
-const nav = document.getElementById('nav');
-const mobileToggle = document.getElementById('mobileToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-mobileToggle.addEventListener('click', () => {
-  mobileToggle.classList.toggle('active');
-  mobileMenu.classList.toggle('active');
-  document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-});
-
-function closeMenu() {
-  mobileToggle.classList.remove('active');
-  mobileMenu.classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-// ═══ SCROLL REVEAL ═══
-const reveals = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(el => revealObserver.observe(el));
-
-// ═══ SMOOTH SCROLL ═══
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      const offset = 72;
-      const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top: pos, behavior: 'smooth' });
-    }
-  });
-});
-
-// ═══ FORM HANDLER ═══
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.form-submit');
-  const originalText = btn.textContent;
-  btn.textContent = 'Enquiry Submitted ✓';
-  btn.style.background = '#2E7D32';
-  btn.style.color = '#fff';
-  setTimeout(() => {
-    btn.textContent = originalText;
-    btn.style.background = '';
-    btn.style.color = '';
-    e.target.reset();
-  }, 3000);
-}
+var hamBtn=document.getElementById('hamBtn'),mobMenu=document.getElementById('mobMenu');
+hamBtn.addEventListener('click',function(){mobMenu.classList.toggle('open');document.body.style.overflow=mobMenu.classList.contains('open')?'hidden':'';});
+function closeMob(){mobMenu.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t){window.scrollTo({top:t.offsetTop-68,behavior:'smooth'});}});});
+function submitForm(e){e.preventDefault();var b=e.target.querySelector('.form-submit');b.textContent='Enquiry Submitted \u2713';b.style.background='#2E7D32';b.style.color='#fff';setTimeout(function(){b.textContent='Submit Enquiry \u2192';b.style.background='';b.style.color='';e.target.reset();},3000);}
 </script>
 
 </body>
