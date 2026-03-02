@@ -70,3 +70,15 @@ credentials/
 
 # Session files
 comprehensive_system_audit.session.dill
+# SECURITY — added by Directive 5.0 Phase 1
+.env.*
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+credentials/
+private/
+
