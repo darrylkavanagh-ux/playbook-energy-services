@@ -1,7 +1,7 @@
 # COMPLETE DEPLOYMENT RUNBOOK — ORB AI ECOSYSTEM
 ## Version: 2.0 | Date: 14 March 2026
 ## Implements: Master Audit Report Phase 1 recommendations
-## Target: Deploy Foxlite Energy Services FIRST (first revenue)
+## Target: Deploy Playbook Energy Audit Services FIRST (first revenue)
 
 ---
 
@@ -78,8 +78,8 @@
 ### Step 1: Prepare Environment
 ```bash
 # On your local machine, clone the repository
-git clone https://github.com/darrylkavanagh-ux/foxlite-consulting.git
-cd foxlite-consulting
+git clone https://github.com/darrylkavanagh-ux/playbook-energy-services.git
+cd playbook-energy-services
 
 # Copy environment template
 cp .env.example .env
@@ -120,7 +120,7 @@ railway login
 
 # Create new project
 railway init
-# Project name: foxlite-consulting-backend
+# Project name: playbook-energy-services-backend
 
 # Add environment variables (copy from .env)
 railway variables set NODE_ENV=production
@@ -131,7 +131,7 @@ railway variables set JWT_SECRET=[your secret]
 # Deploy
 railway up
 
-# Note the deployment URL: https://foxlite-consulting-backend.railway.app
+# Note the deployment URL: https://playbook-energy-services-backend.railway.app
 ```
 
 ### Step 4: Deploy Frontend to Cloudflare Pages
@@ -148,7 +148,7 @@ npm run build
 
 # Deploy to Cloudflare Pages
 wrangler pages deploy dist \
-  --project-name foxlite-consulting \
+  --project-name playbook-energy-services \
   --branch main
 
 # OR use the GitHub Actions workflow already committed:
@@ -158,19 +158,19 @@ wrangler pages deploy dist \
 ### Step 5: Configure Domain
 ```bash
 # In Cloudflare Dashboard:
-# 1. Go to: Pages → foxlite-consulting → Custom Domains
+# 1. Go to: Pages → playbook-energy-services → Custom Domains
 # 2. Add: app.foxliteservices.com
-# 3. In DNS → Add CNAME: app → foxlite-consulting.pages.dev
+# 3. In DNS → Add CNAME: app → playbook-energy-services.pages.dev
 # 4. Wait for SSL certificate (5-10 minutes)
 ```
 
 ### Step 6: Verify Deployment
 ```bash
 # Test health endpoint
-curl https://foxlite-consulting-backend.railway.app/health
+curl https://playbook-energy-services-backend.railway.app/health
 
 # Expected response:
-# { "status": "healthy", "platform": "Foxlite Energy Services", "version": "1.0.0" }
+# { "status": "healthy", "platform": "Playbook Energy Audit Services", "version": "1.0.0" }
 
 # Test frontend
 curl -I https://app.foxliteservices.com
