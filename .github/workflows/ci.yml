@@ -1,0 +1,116 @@
+name: CI — Playbook Corporation
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  # ── TypeScript Compile & Lint ──────────────────────────────────────────────
+  type-check:
+    name: TypeScript — Compile & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: TypeScript compile check
+        run: npx tsc --noEmit
+
+      - name: ESLint check
+        run: npx eslint . --ext .ts,.tsx --max-warnings 0
+
+  # ── Security Scan ─────────────────────────────────────────────────────────
+  security-scan:
+    name: Security — Secret Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect hardcoded secrets
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Audit npm dependencies
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+  # ── V10 Process Recording Validation ──────────────────────────────────────
+  v10-compliance:
+    name: VeriTech-10 — Process Recording Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Check V10 recorder import in engine files
+        run: |
+          echo "Checking V10 Process Recorder coverage..."
+          missing=0
+          for f in $(find . -name "*.ts" -path "*/engines/*" -not -path "*/node_modules/*"); do
+            if ! grep -q "withV10Record\|processRecorder" "$f" 2>/dev/null; then
+              echo "  ❌ Missing V10 recording: $f"
+              missing=$((missing + 1))
+            fi
+          done
+          if [ $missing -gt 0 ]; then
+            echo "V10 COMPLIANCE FAILURE: $missing engine files missing process recording"
+            exit 1
+          fi
+          echo "  ✅ All engine files have V10 process recording"
+
+  # ── Build Check ───────────────────────────────────────────────────────────
+  build:
+    name: Build — Production
+    runs-on: ubuntu-latest
+    needs: [ type-check ]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: dist/
+          retention-days: 7

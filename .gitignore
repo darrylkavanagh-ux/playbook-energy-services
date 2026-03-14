@@ -2,83 +2,77 @@
 node_modules/
 .pnp
 .pnp.js
+.yarn/install-state.gz
 
-# Testing
-coverage/
-.nyc_output
+# Build outputs
+dist/
+build/
+.next/
+out/
+.nuxt/
+.output/
+.cache/
 
-# Production
-/dist
-/build
-
-# Misc
-.DS_Store
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-pnpm-debug.log*
-
-# Environment variables
+# Environment variables — NEVER COMMIT THESE
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-
-# IDEs
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-.idea/
-*.swp
-*.swo
-*~
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Uploads
-uploads/*
-!uploads/.gitkeep
+.env.production
+.env.staging
+*.env
 
 # Logs
 logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# OS
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Testing
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
 Thumbs.db
-ehthumbs.db
-Desktop.ini
 
-# Temporary files
+# TypeScript
+*.tsbuildinfo
+*.js.map
+
+# Temporary
 tmp/
 temp/
-*.tmp
+.temp/
 
-# Build artifacts
-*.tsbuildinfo
-
-# Credentials
-credentials/
+# Secrets — THESE MUST NEVER BE COMMITTED
 *.pem
 *.key
-*.crt
-
-# Session files
-comprehensive_system_audit.session.dill
-# SECURITY — added by Directive 5.0 Phase 1
-.env.*
-.env.local
-.env.*.local
-*.key
-*.pem
 *.p12
 *.pfx
-secrets/
-credentials/
-private/
+id_rsa
+id_ecdsa
+*.secret
 
+# Supabase
+.supabase/
+
+# Prisma
+prisma/migrations/dev/
+
+# Uploaded files (not for version control)
+uploads/
+evidence-uploads/

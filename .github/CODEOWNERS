@@ -1,0 +1,21 @@
+# CODEOWNERS — Playbook Corporation Limited
+# Every PR requires review from the designated owner of the affected area
+
+# Global — all files require Darryl Kavanagh review
+*                               @darrylkavanagh-ux
+
+# Core intelligence layer — restricted to senior review
+/orbit-i-implementation/shared/src/v10/         @darrylkavanagh-ux
+/orbit-i-implementation/shared/src/phases/      @darrylkavanagh-ux
+/orbit-i-implementation/shared/src/guards/      @darrylkavanagh-ux
+
+# Governance and legal documents — owner only
+/orbit-i-implementation/governance/             @darrylkavanagh-ux
+/MASTER_FORENSIC_AUDIT_REPORT_14MAR2026.md      @darrylkavanagh-ux
+/PLAYBOOK_GOVERNANCE_BRIEF_14MAR2026.md         @darrylkavanagh-ux
+
+# Deployment configuration — CFO and owner
+/orbit-i-implementation/deployment/             @darrylkavanagh-ux
+
+# Security policy — owner only  
+SECURITY.md                                     @darrylkavanagh-ux
