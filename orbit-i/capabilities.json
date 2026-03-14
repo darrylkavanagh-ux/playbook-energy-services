@@ -1,0 +1,59 @@
+{
+  "repository": "foxlite-consulting",
+  "purpose": "Foxlite Energy Services \u2014 commercial energy bill auditing platform (Phase 1 revenue target)",
+  "version": "1.0.0",
+  "phases_supported": [
+    1,
+    2,
+    3
+  ],
+  "roles": [
+    "UPLOADER",
+    "INGESTION_AI"
+  ],
+  "tools": [
+    {
+      "name": "ENERGY-AUDIT-PIPELINE",
+      "id": "ENG-ENERGY",
+      "phase": 2,
+      "inputs": [
+        "energy_bill"
+      ],
+      "outputs": [
+        "audit_report"
+      ],
+      "side_effects": [
+        "writes_supabase"
+      ]
+    },
+    {
+      "name": "UPLOAD-FORM-ENERGY",
+      "id": "UI-ENERGY",
+      "phase": 1,
+      "inputs": [
+        "energy_bill",
+        "client_metadata"
+      ],
+      "outputs": [
+        "document_record"
+      ],
+      "side_effects": [
+        "calls_phase1_upload"
+      ]
+    }
+  ],
+  "human_required_transitions": [
+    "ingested_to_awaiting_verification"
+  ],
+  "data_sources": [
+    "Supabase",
+    "Cloudflare R2"
+  ],
+  "external_integrations": [
+    "None (standalone)"
+  ],
+  "compliance": {
+    "gdpr": "UK",
+    "energy_regulations": "Ofgem"
+  }
+}
