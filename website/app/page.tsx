@@ -283,7 +283,7 @@ export default function HomePage() {
                 Their forensic approach is thorough and professional.
               </blockquote>
               <div className="text-lg text-textMid">
-                <strong>David Clarke</strong><br />
+                <strong>MANAGING DIRECTOR — FORENSIC AUDIT LEAD</strong><br />
                 Managing Director, Foxlite Forensic Services
               </div>
             </div>

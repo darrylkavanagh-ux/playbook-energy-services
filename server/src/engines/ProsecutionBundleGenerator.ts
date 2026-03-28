@@ -698,7 +698,7 @@ export class ProsecutionBundleGenerator {
     return [
       {
         report_id: 'ER-001',
-        expert_name: 'Dr. Sarah Chen',
+        expert_name: 'INTELLIGENCE ANALYST — CAPABILITY UNIT 007',
         expert_qualifications: [
           'PhD in Forensic Accounting',
           'Chartered Forensic Accountant',

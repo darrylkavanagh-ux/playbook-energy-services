@@ -156,7 +156,7 @@ export class AISpecialistTeam {
     this.addSpecialist({
       specialist_id: 'FIA-001',
       role: 'FINANCIAL_INTELLIGENCE_ANALYST',
-      name: 'Agent Sarah Chen',
+      name: 'INTELLIGENCE ANALYST — CAPABILITY UNIT 007',
       agency_model: 'FBI Financial Crimes Section',
       areas_of_expertise: [
         'Financial transaction analysis',

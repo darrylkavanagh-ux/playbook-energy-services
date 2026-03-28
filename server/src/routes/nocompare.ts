@@ -61,7 +61,7 @@ router.post('/upload', upload.single('bill'), async (req: Request, res: Response
 
     // Extract bill data
     console.log(`📄 Extracting data from ${file.filename}...`);
-    const extracted = await ocrExtractionEngine.extractBillData(file.path, 'pdf');
+    const extracted = await ocrExtractionEngine.extractBillData(file.path);
 
     // Create comparison ID
     const comparisonId = `CMP-${Date.now()}-${nanoid(8)}`;
@@ -78,13 +78,13 @@ router.post('/upload', upload.single('bill'), async (req: Request, res: Response
       `, [
         comparisonId,
         user_email,
-        extracted.supplier,
-        extracted.accountNumber,
-        extracted.billDate,
-        extracted.consumption.totalKwh,
-        extracted.charges.totalAmount,
-        extracted.tariffType || 'standard',
-        extracted.charges.standingCharge || 0
+        (extracted as any).supplier_name || (extracted as any).supplier,
+        extracted.account_number,
+        extracted.bill_date,
+        (extracted as any).kwh_consumption || 0,
+        (extracted as any).total_amount || 0,
+        (extracted as any).tariff_type || 'standard',
+        (extracted as any).standing_charges || 0
       ]);
     }
 
@@ -92,12 +92,12 @@ router.post('/upload', upload.single('bill'), async (req: Request, res: Response
       success: true,
       comparison_id: comparisonId,
       extracted_data: {
-        supplier: extracted.supplier,
-        account_number: extracted.accountNumber,
-        bill_date: extracted.billDate,
-        total_kwh: extracted.consumption.totalKwh,
-        total_cost: extracted.charges.totalAmount,
-        tariff_type: extracted.tariffType,
+        supplier: (extracted as any).supplier_name || (extracted as any).supplier,
+        account_number: extracted.account_number,
+        bill_date: extracted.bill_date,
+        total_kwh: (extracted as any).kwh_consumption || 0,
+        total_cost: (extracted as any).total_amount || 0,
+        tariff_type: (extracted as any).tariff_type,
       },
       message: 'Bill uploaded and processed successfully'
     });
@@ -152,12 +152,26 @@ router.post('/compare', async (req: Request, res: Response) => {
       occupancy: 3, // Average household
     };
 
-    // Run tariff optimization
-    const optimization = await tariffOptimizer.optimizeTariff(
-      usageProfile,
-      facilityData,
-      supplier,
-      tariff_type || 'standard'
+    // Build a synthetic usage pattern for findOptimalTariff
+    const usagePattern = {
+      annual_consumption_kwh: (monthly_kwh || 0) * 12,
+      day_percentage: 0.65,
+      night_percentage: 0.35,
+      peak_percentage: 0,
+      off_peak_percentage: 1,
+      profile_type: 'flat' as const,
+      seasonal_variation: 0.2
+    };
+    const syntheticBills = [{
+      supplier_name: supplier,
+      tariff_name: tariff_type || 'standard',
+      total_amount: current_monthly_cost * 12,
+      total_kwh: (monthly_kwh || 0) * 12
+    }];
+    // Run tariff optimization using the correct method
+    const optimization = tariffOptimizer.findOptimalTariff(
+      usagePattern as any,
+      syntheticBills as any
     );
 
     // Store recommendation
@@ -181,12 +195,14 @@ router.post('/compare', async (req: Request, res: Response) => {
       supplier,
       tariff_type || 'standard',
       current_monthly_cost,
-      optimization.recommendedTariff.supplier,
-      optimization.recommendedTariff.name,
-      optimization.projectedMonthlyCost,
-      optimization.annualSavings,
-      optimization.confidence
+      optimization.optimal_tariff.supplier,
+      optimization.optimal_tariff.tariff_name,
+      optimization.optimal_tariff.estimated_annual_cost / 12,
+      optimization.annual_savings,
+      optimization.percentage_savings / 100
     ]);
+
+    const projectedMonthlyCost = optimization.optimal_tariff.estimated_annual_cost / 12;
 
     res.json({
       success: true,
@@ -199,20 +215,20 @@ router.post('/compare', async (req: Request, res: Response) => {
         annual_cost: current_monthly_cost * 12,
       },
       recommended: {
-        supplier: optimization.recommendedTariff.supplier,
-        tariff_name: optimization.recommendedTariff.name,
-        tariff_type: optimization.recommendedTariff.type,
-        monthly_cost: optimization.projectedMonthlyCost,
-        annual_cost: optimization.projectedMonthlyCost * 12,
+        supplier: optimization.optimal_tariff.supplier,
+        tariff_name: optimization.optimal_tariff.tariff_name,
+        tariff_type: optimization.optimal_tariff.tariff_type,
+        monthly_cost: projectedMonthlyCost,
+        annual_cost: optimization.optimal_tariff.estimated_annual_cost,
       },
       savings: {
-        monthly: current_monthly_cost - optimization.projectedMonthlyCost,
-        annual: optimization.annualSavings,
-        percentage: ((current_monthly_cost - optimization.projectedMonthlyCost) / current_monthly_cost * 100).toFixed(1),
+        monthly: current_monthly_cost - projectedMonthlyCost,
+        annual: optimization.annual_savings,
+        percentage: optimization.percentage_savings.toFixed(1),
       },
-      confidence: (optimization.confidence * 100).toFixed(0) + '%',
-      message: optimization.annualSavings > 100 
-        ? `You could save €${optimization.annualSavings.toFixed(2)}/year by switching!`
+      confidence: optimization.percentage_savings.toFixed(0) + '%',
+      message: optimization.annual_savings > 100
+        ? `You could save €${optimization.annual_savings.toFixed(2)}/year by switching!`
         : 'You are already on a competitive tariff.'
     });
 

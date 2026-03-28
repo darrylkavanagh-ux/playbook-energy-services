@@ -47,7 +47,7 @@ export default function KavanAI() {
                 },
                 { 
                   id: "CASE-2024-089", 
-                  name: "David Clarke vs. Cavan General", 
+                  name: "FOREX TRADER VERIFICATION REQUIRED vs. Cavan General", 
                   status: "PROCESSING RBA", 
                   date: "02 FEB 2026", 
                   files: ["Brief to Senior Counsel", "AI Medical Assessment", "Opinion on Merits", "Forensic Chronology"] 

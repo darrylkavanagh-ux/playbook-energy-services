@@ -11,7 +11,7 @@ const foxliteLetterhead = {
   tagline: "Professional Energy Consulting",
   
   // Contact Information
-  director: "David Clarke",
+  director: "MANAGING DIRECTOR — IDENTITY VERIFICATION REQUIRED",
   title: "Group Managing Director", 
   email: "foxliteconsulting@gmail.com",
   

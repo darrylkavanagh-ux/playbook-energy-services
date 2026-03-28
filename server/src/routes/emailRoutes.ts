@@ -202,7 +202,7 @@ router.post('/monitor/start', async (req: Request, res: Response) => {
     
   } catch (error) {
     console.error('Email monitor start error:', error);
-    res.status(500).json({ error: `Failed to start email monitoring: ${error.message}` });
+    res.status(500).json({ error: `Failed to start email monitoring: ${error instanceof Error ? error.message : String(error)}` });
   }
 });
 
@@ -230,7 +230,7 @@ router.post('/monitor/check-now', async (req: Request, res: Response) => {
     });
     
   } catch (error) {
-    res.status(500).json({ error: `Inbox check failed: ${error.message}` });
+    res.status(500).json({ error: `Inbox check failed: ${error instanceof Error ? error.message : String(error)}` });
   }
 });
 

@@ -45,7 +45,7 @@ export function Footer() {
             </p>
             <div className="text-sm text-greyLight">
               <p>Email: info@foxlite.ie</p>
-              <p>Director: David Clarke</p>
+              <p>Director: MANAGING DIRECTOR — FORENSIC AUDIT LEAD</p>
               <p>Dublin, Ireland</p>
             </div>
           </div>

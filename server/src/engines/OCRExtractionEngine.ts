@@ -4,7 +4,9 @@
  */
 
 import Tesseract from 'tesseract.js';
-import pdfParse from 'pdf-parse';
+import * as pdfParseModule from 'pdf-parse';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const pdfParse = (pdfParseModule as any).default || pdfParseModule;
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -108,7 +110,7 @@ export class OCRExtractionEngine {
       
     } catch (error) {
       console.error('OCR Extraction Error:', error);
-      throw new Error(`Failed to extract bill data: ${error.message}`);
+      throw new Error(`Failed to extract bill data: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
   
@@ -219,7 +221,7 @@ export class OCRExtractionEngine {
           value = parseFloat(value) / 100; // Convert percentage to decimal
         }
         
-        billData[field] = value;
+        (billData as Record<string, unknown>)[field] = value;
       }
     }
     
@@ -325,7 +327,7 @@ export class OCRExtractionEngine {
     // Critical fields worth 10 points each
     criticalFields.forEach(field => {
       maxScore += 10;
-      if (billData[field] !== undefined && billData[field] !== null) {
+      if ((billData as Record<string, unknown>)[field] !== undefined && (billData as Record<string, unknown>)[field] !== null) {
         score += 10;
       }
     });
@@ -333,7 +335,7 @@ export class OCRExtractionEngine {
     // Important fields worth 5 points each
     importantFields.forEach(field => {
       maxScore += 5;
-      if (billData[field] !== undefined && billData[field] !== null) {
+      if ((billData as Record<string, unknown>)[field] !== undefined && (billData as Record<string, unknown>)[field] !== null) {
         score += 5;
       }
     });

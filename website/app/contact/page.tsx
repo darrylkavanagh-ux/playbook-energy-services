@@ -80,7 +80,7 @@ export default function ContactPage() {
                   
                   <div>
                     <h3 className="font-semibold text-navy mb-2">Managing Director</h3>
-                    <p className="text-textMid">David Clarke</p>
+                    <p className="text-textMid">MANAGING DIRECTOR — FORENSIC AUDIT LEAD</p>
                   </div>
                   
                   <div>

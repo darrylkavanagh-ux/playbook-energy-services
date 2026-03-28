@@ -40,7 +40,10 @@
  */
 
 import crypto from 'crypto';
-import QRCode from 'qrcode';
+// QRCode loaded dynamically at runtime (install: pnpm add qrcode)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let QRCode: any;
+try { QRCode = require('qrcode'); } catch { QRCode = null; }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // INTERFACES & TYPES
