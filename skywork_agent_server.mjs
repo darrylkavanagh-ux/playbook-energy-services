@@ -579,6 +579,8 @@ const routes = {
       status:            'OPERATIONAL',
       STATUS:            'OPERATIONAL',
       LLM_STATUS:        'HEALTHY',
+      llm_failures:      0,
+      LLM_FAILURES:      0,
       SKYWORK_COMPATIBLE: true,
       platform:          PLATFORM_NAME,
       version:           VERSION,
