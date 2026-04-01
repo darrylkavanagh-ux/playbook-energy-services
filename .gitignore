@@ -1,78 +1,153 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
-.yarn/install-state.gz
+# ============================================================
+# PLAYBOOK CORPORATION LIMITED — Standard .gitignore
+# Applies to all VeriTech / ORB AI / Kavan AI repositories
+# Last updated: 2026-04-01
+# ============================================================
 
-# Build outputs
-dist/
-build/
-.next/
-out/
-.nuxt/
-.output/
-.cache/
+# ------ OS artifacts ------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
 
-# Environment variables — NEVER COMMIT THESE
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.production
-.env.staging
-*.env
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Runtime data
-pids/
-*.pid
-*.seed
-*.pid.lock
-
-# Testing
-coverage/
-.nyc_output/
-
-# IDE
+# ------ Editor / IDE ------
 .vscode/
 .idea/
 *.swp
 *.swo
-.DS_Store
-Thumbs.db
+*~
+.project
+.classpath
+.settings/
+*.sublime-workspace
+*.sublime-project
+.history/
 
-# TypeScript
+# ------ Node / NPM / Yarn / PNPM ------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# ------ Build outputs ------
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.output/
+.vercel/
+.netlify/
+
+# ------ Python ------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.whl
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+htmlcov/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ------ TypeScript ------
 *.tsbuildinfo
-*.js.map
+tsconfig.tsbuildinfo
 
-# Temporary
-tmp/
-temp/
-.temp/
+# ------ Test outputs ------
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
 
-# Secrets — THESE MUST NEVER BE COMMITTED
+# ------ Environment / Secrets (CRITICAL — never commit) ------
+.env
+.env.*
+!.env.example
+!.env.test.example
 *.pem
 *.key
 *.p12
 *.pfx
+*.cer
+*.crt
 id_rsa
-id_ecdsa
+id_ed25519
 *.secret
+secrets.json
+secrets.yaml
+secrets.yml
 
-# Supabase
-.supabase/
+# ------ Database files ------
+*.db
+*.sqlite
+*.sqlite3
 
-# Prisma
-prisma/migrations/dev/
+# ------ Logs ------
+logs/
+*.log
+*.log.*
 
-# Uploaded files (not for version control)
-uploads/
-evidence-uploads/
+# ------ Temporary files ------
+tmp/
+temp/
+.tmp/
+
+# ------ Package manager locks (keep these — do NOT ignore) ------
+# package-lock.json  ← commit this
+# yarn.lock          ← commit this
+# pnpm-lock.yaml     ← commit this
+
+# ------ Miscellaneous ------
+*.bak
+*.orig
+*.rej
+*.patch
+*.diff
+.turbo/
