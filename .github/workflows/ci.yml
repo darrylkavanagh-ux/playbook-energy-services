@@ -2,6 +2,13 @@ name: CI — Playbook Corporation
 
 on:
   push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'CVK1100-corpus/**'
+      - 'GITHUB_SYNC/**'
+      - 'archive/**'
+      - 'ACTOR_FILES/**'
     branches: [ main, master, develop ]
   pull_request:
     branches: [ main, master ]
