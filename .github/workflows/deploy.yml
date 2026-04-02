@@ -6,6 +6,13 @@ name: Foxlite Energy Services — Build, Test & Deploy
 
 on:
   push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'CVK1100-corpus/**'
+      - 'GITHUB_SYNC/**'
+      - 'archive/**'
+      - 'ACTOR_FILES/**'
     branches: [main, develop]
   pull_request:
     branches: [main]
