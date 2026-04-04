@@ -15,7 +15,6 @@ on:
 
 env:
   NODE_VERSION: '20.x'
-  PNPM_VERSION: '9'
 
 jobs:
   type-check:
@@ -24,9 +23,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with: { version: '${{ env.PNPM_VERSION }}' }
+        with:
+          run_install: false
       - uses: actions/setup-node@v4
-        with: { node-version: '${{ env.NODE_VERSION }}', cache: 'pnpm' }
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm exec tsc --noEmit
         continue-on-error: true
@@ -42,9 +44,12 @@ jobs:
       - uses: gitleaks/gitleaks-action@v2
         env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
       - uses: pnpm/action-setup@v4
-        with: { version: '${{ env.PNPM_VERSION }}' }
+        with:
+          run_install: false
       - uses: actions/setup-node@v4
-        with: { node-version: '${{ env.NODE_VERSION }}', cache: 'pnpm' }
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm audit --audit-level=moderate
         continue-on-error: true
@@ -54,11 +59,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with: { version: '${{ env.PNPM_VERSION }}' }
-      - uses: actions/setup-node@v4
-        with: { node-version: '${{ env.NODE_VERSION }}', cache: 'pnpm' }
-      - run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Check V10 recorder import in engine files
         run: |
           missing=0
@@ -68,7 +68,7 @@ jobs:
               missing=$((missing + 1))
             fi
           done
-          echo "V10 check complete. Missing: $missing"
+          echo "V10 compliance: $missing gaps (non-blocking)"
         continue-on-error: true
 
   build:
@@ -78,9 +78,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with: { version: '${{ env.PNPM_VERSION }}' }
+        with:
+          run_install: false
       - uses: actions/setup-node@v4
-        with: { node-version: '${{ env.NODE_VERSION }}', cache: 'pnpm' }
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm run build
         continue-on-error: true
