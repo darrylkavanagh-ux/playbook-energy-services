@@ -1,6 +1,6 @@
 /**
- * FOXLITE API ROUTES
- * Endpoints for FOXLITE Energy Services audit platform
+ * UTILITY AUDIT API ROUTES
+ * Endpoints for client utility audit services platform
  */
 
 import express, { Request, Response } from 'express';
@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
     const uniqueId = nanoid(8);
     const timestamp = Date.now();
     const ext = path.extname(file.originalname);
-    cb(null, `foxlite-${timestamp}-${uniqueId}${ext}`);
+    cb(null, `audit-${timestamp}-${uniqueId}${ext}`);
   },
 });
 
@@ -52,7 +52,7 @@ const upload = multer({
 
 
 /**
- * POST /api/foxlite/audit/upload
+ * POST /api/utility-audit/audit/upload
  * Upload energy bills for audit
  */
 router.post('/audit/upload', upload.array('bills', 50), async (req: Request, res: Response) => {
@@ -98,7 +98,7 @@ router.post('/audit/upload', upload.array('bills', 50), async (req: Request, res
 
 
 /**
- * POST /api/foxlite/audit/analyze
+ * POST /api/utility-audit/audit/analyze
  * Analyze uploaded bills
  */
 router.post('/audit/analyze', async (req: Request, res: Response) => {
@@ -127,7 +127,7 @@ router.post('/audit/analyze', async (req: Request, res: Response) => {
     }
 
     // Run complete audit (performCompleteAudit expects file paths, project_id, customer)
-    const { customer_name = 'Foxlite Client' } = req.body;
+    const { customer_name = 'Utility Audit Client' } = req.body;
     const auditResult = await completeAuditEngine.performCompleteAudit(
       bill_paths,
       {
@@ -172,7 +172,7 @@ router.post('/audit/analyze', async (req: Request, res: Response) => {
 
 
 /**
- * GET /api/foxlite/audit/:projectId
+ * GET /api/utility-audit/audit/:projectId
  * Get audit project details
  */
 router.get('/audit/:projectId', async (req: Request, res: Response) => {
@@ -197,7 +197,7 @@ router.get('/audit/:projectId', async (req: Request, res: Response) => {
 
 
 /**
- * GET /api/foxlite/audits
+ * GET /api/utility-audit/audits
  * List all audit projects for a customer
  */
 router.get('/audits', async (req: Request, res: Response) => {
@@ -230,7 +230,7 @@ router.get('/audits', async (req: Request, res: Response) => {
 
 
 /**
- * POST /api/foxlite/reference-code/generate
+ * POST /api/utility-audit/reference-code/generate
  * Generate a new reference code for customer
  */
 router.post('/reference-code/generate', async (req: Request, res: Response) => {
@@ -264,7 +264,7 @@ router.post('/reference-code/generate', async (req: Request, res: Response) => {
 
 
 /**
- * GET /api/foxlite/reference-codes/:customerId
+ * GET /api/utility-audit/reference-codes/:customerId
  * Get all reference codes for a customer
  */
 router.get('/reference-codes/:customerId', async (req: Request, res: Response) => {
@@ -287,7 +287,7 @@ router.get('/reference-codes/:customerId', async (req: Request, res: Response) =
 
 
 /**
- * POST /api/foxlite/reference-code/deactivate
+ * POST /api/utility-audit/reference-code/deactivate
  * Deactivate a reference code
  */
 router.post('/reference-code/deactivate', async (req: Request, res: Response) => {
@@ -313,7 +313,7 @@ router.post('/reference-code/deactivate', async (req: Request, res: Response) =>
 
 
 /**
- * GET /api/foxlite/email-logs
+ * GET /api/utility-audit/email-logs
  * Get email processing logs
  */
 router.get('/email-logs', async (req: Request, res: Response) => {
