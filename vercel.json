@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "cd website && npm install && npm run build",
+  "buildCommand": "cd website && npm ci && npm run build",
   "outputDirectory": "website/out",
-  "installCommand": "cd website && npm install",
+  "installCommand": "cd website && npm ci",
   "framework": null,
   "ignoreCommand": "exit 0"
 }
