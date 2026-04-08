@@ -76,3 +76,8 @@ prisma/migrations/dev/
 # Uploaded files (not for version control)
 uploads/
 evidence-uploads/
+
+# Auto-added by deployment fixer
+.env.*.local
+.vercel
+.railway
