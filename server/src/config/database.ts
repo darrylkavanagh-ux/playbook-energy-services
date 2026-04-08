@@ -6,8 +6,8 @@ dotenv.config();
 const poolConfig: PoolConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: parseInt(process.env.DB_PORT || '5432'),
-  database: process.env.DB_NAME || 'foxlite_db',
-  user: process.env.DB_USER || 'foxlite_user',
+  database: process.env.DB_NAME || 'client_db',
+  user: process.env.DB_USER || 'client_user',
   password: process.env.DB_PASSWORD,
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000,

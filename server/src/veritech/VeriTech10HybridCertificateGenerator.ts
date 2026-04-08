@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 🦊 FOXLITE CONSULTING - VERITECH-10 HYBRID AI-HUMAN VERIFICATION SYSTEM
+ * 🦊 CLIENT CONSULTING - VERITECH-10 HYBRID AI-HUMAN VERIFICATION SYSTEM
  * 98.5% AI Verification + 1.5% Human-in-the-Loop Expert Validation
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * 
@@ -9,7 +9,7 @@
  * analysis (98.5%) with mandatory human expert validation (1.5%) to meet the
  * highest legal and regulatory standards for court-admissible evidence.
  * 
- * POWERED BY: Foxlite Consulting Ltd.
+ * POWERED BY: Client Consulting Ltd.
  * CERTIFICATION: VeriTech-10 Blockchain Verified®
  * ARCHITECTURE: 98.5% AI + 1.5% Human Expert Validation
  * 
@@ -88,7 +88,7 @@ export interface VeriTechCertificate {
   certificateId: string;
   issueDate: Date;
   issuingAuthority: string;
-  issuingCompany: 'Foxlite Consulting Ltd';
+  issuingCompany: 'Client Consulting Ltd';
   certificationSystem: 'VeriTech-10 Blockchain Verified® (Hybrid AI-Human)';
   
   // Verification Architecture
@@ -419,7 +419,7 @@ const VERITECH_10_HYBRID_LAYERS = [
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export class VeriTech10HybridCertificateGenerator {
-  private readonly COMPANY_NAME = 'Foxlite Consulting Ltd';
+  private readonly COMPANY_NAME = 'Client Consulting Ltd';
   private readonly CERTIFICATION_SYSTEM = 'VeriTech-10 Blockchain Verified® (Hybrid AI-Human)';
   private readonly CLASSIFICATION = 'ATTORNEY-CLIENT PRIVILEGED - STRICTLY CONFIDENTIAL';
   
@@ -429,7 +429,7 @@ export class VeriTech10HybridCertificateGenerator {
   
   // Branding assets URLs
   private readonly VERITECH_SEAL_URL = 'https://www.genspark.ai/api/files/s/MDcUXlpK';
-  private readonly FOXLITE_LOGO_URL = 'https://www.genspark.ai/api/files/s/Jun5RjEW';
+  private readonly CLIENT_LOGO_URL = 'https://www.genspark.ai/api/files/s/Jun5RjEW';
 
   /**
    * Generate a complete VeriTech-10 Hybrid AI-Human certificate
@@ -521,7 +521,7 @@ export class VeriTech10HybridCertificateGenerator {
     // STEP 8: QR CODE GENERATION
     // ────────────────────────────────────────────────────────────────────────────
     console.log('📱 PHASE 7: QR CODE GENERATION\n');
-    const verificationUrl = `https://veritech.foxlite.ie/verify/${certificateId}`;
+    const verificationUrl = `https://veritech.client.ie/verify/${certificateId}`;
     const qrCodeImage = await this.generateQRCode(verificationUrl);
     console.log(`✅ QR Code generated\n`);
 
@@ -833,7 +833,7 @@ export class VeriTech10HybridCertificateGenerator {
         jurisdictions: ['Ireland', 'United Kingdom', 'EU', 'United States'],
         caseTypes: ['Criminal fraud', 'Corporate investigations', 'Employment disputes', 'IP theft', 'Regulatory compliance']
       },
-      contactEmail: 'sarah.oconnor@foxlite.ie',
+      contactEmail: 'sarah.oconnor@client.ie',
       professionalIndemnity: {
         insurer: 'AIG Europe Limited',
         policyNumber: 'PI-FORENS-2026-00123',
@@ -1037,7 +1037,7 @@ export class VeriTech10HybridCertificateGenerator {
     console.log(`📄 Exporting VeriTech-10 Hybrid certificate to PDF...`);
     console.log(`   Architecture: ${certificate.verificationArchitecture.aiVerificationPercentage}% AI + ${certificate.verificationArchitecture.humanVerificationPercentage}% Human`);
     console.log(`   Human Expert: ${certificate.humanValidation.reviewer.name}`);
-    console.log(`   Including: VeriTech Seal + Foxlite Logo + Human Expert Attestation`);
+    console.log(`   Including: VeriTech Seal + Client Logo + Human Expert Attestation`);
     
     // In production, would generate actual PDF with all details
     return Buffer.from('PDF_CONTENT_WITH_HUMAN_VALIDATION');
@@ -1079,7 +1079,7 @@ export class VeriTech10HybridCertificateGenerator {
 <body>
   <div class="certificate">
     <div class="header">
-      <img src="${this.FOXLITE_LOGO_URL}" alt="Foxlite Consulting" style="height: 100px;">
+      <img src="${this.CLIENT_LOGO_URL}" alt="Client Consulting" style="height: 100px;">
       <h1>VeriTech-10 Hybrid AI-Human Certification</h1>
       <img src="${this.VERITECH_SEAL_URL}" alt="VeriTech Certified" class="seal">
       <p><strong>Certificate ID:</strong> ${certificate.certificateId}</p>

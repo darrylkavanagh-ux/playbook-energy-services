@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 🦊 FOXLITE CONSULTING - ORB AI FORENSIC PLATFORM
+ * 🦊 CLIENT CONSULTING - ORB AI FORENSIC PLATFORM
  * Unified Data Extraction Orchestrator
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * 
@@ -8,7 +8,7 @@
  * Central orchestration system that coordinates all data extraction sources,
  * manages forensic workflows, and delivers VeriTech-10 certified evidence packages.
  * 
- * POWERED BY: Foxlite Consulting Ltd.
+ * POWERED BY: Client Consulting Ltd.
  * CERTIFICATION: VeriTech-10 Blockchain Verified
  * 
  * COMPLIANCE:
@@ -116,7 +116,7 @@ interface EvidencePackage {
   caseReference: string;
   createdAt: Date;
   createdBy: string;
-  company: 'Foxlite Consulting Ltd';
+  company: 'Client Consulting Ltd';
   classification: 'ATTORNEY-CLIENT PRIVILEGED - STRICTLY CONFIDENTIAL';
   contents: EvidenceItem[];
   chainOfCustody: ChainOfCustodyEntry[];
@@ -147,7 +147,7 @@ interface ChainOfCustodyEntry {
 }
 
 interface LegalCertification {
-  certifiedBy: 'Foxlite Consulting Ltd - Orb AI Forensic Platform';
+  certifiedBy: 'Client Consulting Ltd - Orb AI Forensic Platform';
   certificationDate: Date;
   veriTechVerified: boolean;
   veriTechScore: number;
@@ -167,7 +167,7 @@ interface IntegrityHashes {
 interface VeriTechCertificate {
   certificateId: string;
   issueDate: Date;
-  issuingAuthority: 'Foxlite Consulting Ltd - VeriTech-10 Certification System';
+  issuingAuthority: 'Client Consulting Ltd - VeriTech-10 Certification System';
   caseReference: string;
   evidencePackageId: string;
   verificationLayers: VerificationLayer[];
@@ -217,7 +217,7 @@ export class DataExtractionOrchestrator {
   private startTime: Date;
 
   // Branding
-  private readonly COMPANY_NAME = 'Foxlite Consulting Ltd';
+  private readonly COMPANY_NAME = 'Client Consulting Ltd';
   private readonly PLATFORM_NAME = 'Orb AI Forensic Platform';
   private readonly VERITECH_VERSION = 'VeriTech-10';
   private readonly CLASSIFICATION = 'ATTORNEY-CLIENT PRIVILEGED - STRICTLY CONFIDENTIAL';

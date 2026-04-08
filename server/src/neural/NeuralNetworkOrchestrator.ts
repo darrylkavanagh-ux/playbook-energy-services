@@ -13,7 +13,7 @@
  *           └── VERITECH V10 SYSTEM (10-Layer Verification Protocol)
  *
  *   Developer & Blockchain Architect: DARRYL KAVANAGH
- *   Repository: darrylkavanagh-ux / foxlite-consulting
+ *   Repository: darrylkavanagh-ux / client-consulting
  *   IP Status: PROPRIETARY — All Rights Reserved © 2026
  *
  * CAPABILITY ROLES — NO HUMAN NAMES IN REPOSITORY
@@ -52,7 +52,7 @@ export const IP_REGISTRY = {
   universe:             'ORB AI LIMITED',
   certificate_authority:'PLAYBOOK AI VERIFICATION CENTRES',
   verification_system:  'VERITECH V10 — 10-Layer Verification Protocol',
-  repository:           'darrylkavanagh-ux/foxlite-consulting',
+  repository:           'darrylkavanagh-ux/client-consulting',
   ip_status:            'PROPRIETARY — All Rights Reserved © 2026',
   compliance_deadline:  '2026-08-02 (EU AI Act)',
   judicial_authority:   'Judge Victoria Sharpe Ruling, June 2025',

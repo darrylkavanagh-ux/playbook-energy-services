@@ -132,8 +132,8 @@ export function corsMiddleware(req: Request, res: Response, next: NextFunction):
   const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:5173',
-    'https://app.foxliteservices.com',
-    'https://foxlite.ie',
+    'https://app.clientservices.com',
+    'https://client.ie',
     'https://playbook-energy-services.vercel.app'
   ];
   

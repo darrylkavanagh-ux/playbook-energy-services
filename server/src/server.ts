@@ -199,7 +199,7 @@ async function startServer() {
    * POST /api/utility-audit/audit/analyze
    * Perform complete audit analysis
    */
-  app.post('/api/foxlite/audit/analyze', async (req, res) => {
+  app.post('/api/utility-audit/audit/analyze', async (req, res) => {
     try {
       const { bill_files, facility_data, customer_name } = req.body;
       
@@ -228,10 +228,10 @@ async function startServer() {
   });
   
   /**
-   * GET /api/foxlite/audit/:projectId
+   * GET /api/utility-audit/audit/:projectId
    * Get audit project status
    */
-  app.get('/api/foxlite/audit/:projectId', async (req, res) => {
+  app.get('/api/utility-audit/audit/:projectId', async (req, res) => {
     try {
       const { projectId } = req.params;
       
@@ -446,7 +446,7 @@ async function startServer() {
     console.log(`✅ AI Engines: 12/12 Online`);
     console.log('');
     console.log('📍 Endpoints:');
-    console.log('   • FOXLITE:    /api/foxlite/*');
+    console.log('   • UTILITY AUDIT:    /api/utility-audit/*');
     console.log('   • NO COMPARE: /api/nocompare/*');
     console.log('   • ORB AI:     /api/orb/*');
     console.log('   • KAVAN AI:   /api/kavan/*');

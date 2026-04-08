@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * 🦊 FOXLITE CONSULTING - VERITECH-10 CERTIFICATION SYSTEM
+ * 🦊 CLIENT CONSULTING - VERITECH-10 CERTIFICATION SYSTEM
  * Enterprise Certificate Generator with Blockchain Verification
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * 
@@ -9,7 +9,7 @@
  * with comprehensive verification layers, blockchain anchoring, and compliance
  * with global legal standards.
  * 
- * POWERED BY: Foxlite Consulting Ltd.
+ * POWERED BY: Client Consulting Ltd.
  * CERTIFICATION: VeriTech-10 Blockchain Verified®
  * SEAL: VeriTech CERTIFIED 10 - BLOCKCHAIN VERIFIED
  * 
@@ -54,7 +54,7 @@ export interface VeriTechCertificate {
   certificateId: string;
   issueDate: Date;
   issuingAuthority: string;
-  issuingCompany: 'Foxlite Consulting Ltd';
+  issuingCompany: 'Client Consulting Ltd';
   certificationSystem: 'VeriTech-10 Blockchain Verified®';
   
   // Case & Evidence Reference
@@ -246,13 +246,13 @@ const VERITECH_10_LAYERS = [
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export class VeriTech10CertificateGenerator {
-  private readonly COMPANY_NAME = 'Foxlite Consulting Ltd';
+  private readonly COMPANY_NAME = 'Client Consulting Ltd';
   private readonly CERTIFICATION_SYSTEM = 'VeriTech-10 Blockchain Verified®';
   private readonly CLASSIFICATION = 'ATTORNEY-CLIENT PRIVILEGED - STRICTLY CONFIDENTIAL';
   
   // Branding assets URLs (from provided images)
   private readonly VERITECH_SEAL_URL = 'https://www.genspark.ai/api/files/s/MDcUXlpK';
-  private readonly FOXLITE_LOGO_URL = 'https://www.genspark.ai/api/files/s/Jun5RjEW';
+  private readonly CLIENT_LOGO_URL = 'https://www.genspark.ai/api/files/s/Jun5RjEW';
 
   /**
    * Generate a complete VeriTech-10 certificate for evidence package
@@ -318,7 +318,7 @@ export class VeriTech10CertificateGenerator {
     // STEP 6: QR CODE GENERATION
     // ────────────────────────────────────────────────────────────────────────────
     console.log('📱 Generating verification QR code...');
-    const verificationUrl = `https://veritech.foxlite.ie/verify/${certificateId}`;
+    const verificationUrl = `https://veritech.client.ie/verify/${certificateId}`;
     const qrCodeImage = await this.generateQRCode(verificationUrl);
     console.log(`✅ QR Code generated\n`);
 
@@ -335,7 +335,7 @@ export class VeriTech10CertificateGenerator {
         'Member: Association of Certified Fraud Examiners'
       ],
       experience: '150+ court appearances in IE, UK, EU courts',
-      contactEmail: 'expert.witness@foxlite.ie',
+      contactEmail: 'expert.witness@client.ie',
       reportAvailable: true,
       courtAppearanceAvailable: true
     };
@@ -584,11 +584,11 @@ export class VeriTech10CertificateGenerator {
     // Placeholder - would integrate with PDFKit or similar
     console.log(`📄 Exporting certificate ${certificate.certificateId} to PDF...`);
     console.log(`   Including: VeriTech Seal (${this.VERITECH_SEAL_URL})`);
-    console.log(`   Including: Foxlite Logo (${this.FOXLITE_LOGO_URL})`);
+    console.log(`   Including: Client Logo (${this.CLIENT_LOGO_URL})`);
     
     // In production, would generate actual PDF with:
     // - Official VeriTech-10 seal
-    // - Foxlite Consulting branding
+    // - Client Consulting branding
     // - All verification layer results
     // - QR code for verification
     // - Digital signature
@@ -620,7 +620,7 @@ export class VeriTech10CertificateGenerator {
 </head>
 <body>
   <div class="header">
-    <img src="${this.FOXLITE_LOGO_URL}" alt="Foxlite Consulting" style="height: 80px;">
+    <img src="${this.CLIENT_LOGO_URL}" alt="Client Consulting" style="height: 80px;">
     <h1>VeriTech-10 Certification</h1>
     <img src="${this.VERITECH_SEAL_URL}" alt="VeriTech Certified" class="seal">
     <p><strong>Certificate ID:</strong> ${certificate.certificateId}</p>

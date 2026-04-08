@@ -316,15 +316,15 @@ export class EmailBillProcessor {
   
   /**
    * Extract reference code from email
-   * Format: REF-XXXXX or FOXLITE-XXXXX or AUDIT-XXXXX
+   * Format: REF-XXXXX or CLIENT-XXXXX or AUDIT-XXXXX
    */
   private extractReferenceCode(email: ParsedMail): string | null {
     const text = `${email.subject || ''} ${email.text || ''}`;
     
-    // Pattern: REF-XXXXX, FOXLITE-XXXXX, AUDIT-XXXXX, or FL-XXXXX
+    // Pattern: REF-XXXXX, CLIENT-XXXXX, AUDIT-XXXXX, or FL-XXXXX
     const patterns = [
       /REF-([A-Z0-9]{8,})/i,
-      /FOXLITE-([A-Z0-9]{8,})/i,
+      /CLIENT-([A-Z0-9]{8,})/i,
       /AUDIT-([A-Z0-9]{8,})/i,
       /FL-([A-Z0-9]{8,})/i,
       /Reference:\s*([A-Z0-9-]{8,})/i
@@ -487,9 +487,9 @@ export class EmailBillProcessor {
     projectId: string,
     expiresInDays?: number
   ): Promise<string> {
-    // Format: FOXLITE-{RANDOM8}
+    // Format: CLIENT-{RANDOM8}
     const randomPart = nanoid(8).toUpperCase();
-    const code = `FOXLITE-${randomPart}`;
+    const code = `CLIENT-${randomPart}`;
     
     const expiresAt = expiresInDays 
       ? new Date(Date.now() + expiresInDays * 24 * 60 * 60 * 1000)

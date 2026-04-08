@@ -95,13 +95,13 @@ const PLATFORM_DIRECTORY = {
     name:     'DARRYL KAVANAGH',
     role:     'Developer, Blockchain Architect, IP Owner',
     function: 'Developer of all code, blockchain architecture, and proprietary tools. All IP in the repositories derives from the registered IP owner at Playbook Corporation Limited.',
-    repository: 'darrylkavanagh-ux/foxlite-consulting',
+    repository: 'darrylkavanagh-ux/client-consulting',
   },
 };
 
 const ALL_PLATFORMS = [
   { id: 'orb-ai',              name: 'Orb AI Forensic Investigation Platform',  rating: PLATFORM_RATING, max: PLATFORM_MAX, category: 'Forensic Investigation' },
-  { id: 'foxlite',             name: 'Foxlite Energy Audit Platform',            rating: PLATFORM_RATING, max: PLATFORM_MAX, category: 'Energy Billing Audit' },
+  { id: 'client',             name: 'Client Energy Audit Platform',            rating: PLATFORM_RATING, max: PLATFORM_MAX, category: 'Energy Billing Audit' },
   { id: 'no-compare',          name: 'No Compare Energy Tariff Platform',        rating: PLATFORM_RATING, max: PLATFORM_MAX, category: 'Energy Comparison' },
   { id: 'kavan-ai',            name: 'Kavan AI Legal Intelligence Platform',     rating: PLATFORM_RATING, max: PLATFORM_MAX, category: 'Legal Services AI' },
   { id: 'forensic-platform',   name: 'Playbook AI Forensic Investigation Suite', rating: PLATFORM_RATING, max: PLATFORM_MAX, category: 'White-Collar Fraud Investigation' },
@@ -119,7 +119,7 @@ const ALL_PLATFORMS = [
 const IP_LOG = {
   developer:              'DARRYL KAVANAGH',
   blockchain_architect:   'DARRYL KAVANAGH',
-  repository:             'darrylkavanagh-ux/foxlite-consulting',
+  repository:             'darrylkavanagh-ux/client-consulting',
   parent_company:         'PLAYBOOK CORPORATION LIMITED',
   subsidiary_universe:    'ORB AI LIMITED',
   certificate_authority:  'PLAYBOOK AI VERIFICATION CENTRES',

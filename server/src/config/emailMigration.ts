@@ -214,7 +214,7 @@ $$ LANGUAGE plpgsql;
 
 -- INSERT INTO reference_codes (code, customer_id, project_id, expires_at)
 -- SELECT
---   'FOXLITE-' || substring(md5(random()::text) from 1 for 8),
+--   'CLIENT-' || substring(md5(random()::text) from 1 for 8),
 --   'CUST-001',
 --   'PROJ-001',
 --   NOW() + interval '90 days'
