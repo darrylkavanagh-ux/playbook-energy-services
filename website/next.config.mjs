@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  trailingSlash: true,
+  basePath: '',
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  basePath: '/foxlite-consulting',
+  trailingSlash: true,
 }
 
 export default nextConfig

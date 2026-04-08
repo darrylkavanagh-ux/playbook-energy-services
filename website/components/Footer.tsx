@@ -44,8 +44,8 @@ export function Footer() {
               Independent forensic auditing firm established in 2019, based in Dublin, Ireland.
             </p>
             <div className="text-sm text-greyLight">
-              <p>Email: info@foxlite.ie</p>
-              <p>Director: MANAGING DIRECTOR — FORENSIC AUDIT LEAD</p>
+              <p>Email: info@foxliteforensics.com</p>
+              <p>Director: David Clarke</p>
               <p>Dublin, Ireland</p>
             </div>
           </div>

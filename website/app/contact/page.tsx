@@ -75,7 +75,7 @@ export default function ContactPage() {
                 <div className="space-y-6 mb-8">
                   <div>
                     <h3 className="font-semibold text-navy mb-2">Email</h3>
-                    <p className="text-textMid">info@foxlite.ie</p>
+                    <p className="text-textMid">info@foxliteforensics.com</p>
                   </div>
                   
                   <div>
