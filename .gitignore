@@ -134,6 +134,15 @@ logs/
 *.log
 *.log.*
 
+# ------ Uploaded files (not for version control) ------
+uploads/
+evidence-uploads/
+
+# ------ Deployment artifacts ------
+.env.*.local
+.vercel
+.railway
+
 # ------ Temporary files ------
 tmp/
 temp/

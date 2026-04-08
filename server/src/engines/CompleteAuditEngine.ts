@@ -69,7 +69,7 @@ export class CompleteAuditEngine {
         bills.push(billData);
         console.log(`✅ Extracted: ${billData.supplier_name} - ${billData.bill_date}`);
       } catch (error) {
-        console.error(`❌ Failed to extract ${filePath}:`, error.message);
+        console.error(`❌ Failed to extract ${filePath}:`, (error instanceof Error ? error.message : String(error)));
       }
     }
     

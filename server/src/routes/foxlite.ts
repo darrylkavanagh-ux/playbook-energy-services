@@ -115,7 +115,7 @@ router.post('/audit/analyze', async (req: Request, res: Response) => {
     const extractedBills = [];
     for (const billPath of bill_paths) {
       try {
-        const extracted = await ocrExtractionEngine.extractBillData(billPath, 'pdf');
+        const extracted = await ocrExtractionEngine.extractBillData(billPath);
         extractedBills.push(extracted);
       } catch (error) {
         console.error(`Failed to extract ${billPath}:`, error);
@@ -126,16 +126,19 @@ router.post('/audit/analyze', async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'No bills could be extracted' });
     }
 
-    // Run complete audit
-    const auditResult = await completeAuditEngine.runCompleteAudit(extractedBills, {
-      facilityType: 'nursing_home',
-      squareMeters: 2000,
-      operatingHours: { weekday: 24, weekend: 24 },
-      hasHvac: true,
-      hasKitchen: true,
-      hasIndustrialEquipment: false,
-      occupancy: 60,
-    });
+    // Run complete audit (performCompleteAudit expects file paths, project_id, customer)
+    const { customer_name = 'Foxlite Client' } = req.body;
+    const auditResult = await completeAuditEngine.performCompleteAudit(
+      bill_paths,
+      {
+        type: 'nursing_home',
+        hiqa_registered: true,
+        care_facility: true,
+        residential_care: true,
+      },
+      project_id,
+      customer_name
+    );
 
     // Update project with results
     await query(`
@@ -148,9 +151,9 @@ router.post('/audit/analyze', async (req: Request, res: Response) => {
         completed_at = NOW()
       WHERE id = $4
     `, [
-      auditResult.totalBilled,
-      auditResult.totalOvercharge,
-      auditResult.recoverableAmount,
+      (auditResult as any).total_overcharge + (auditResult as any).total_recoverable,
+      auditResult.total_overcharge,
+      auditResult.total_recoverable,
       project_id
     ]);
 

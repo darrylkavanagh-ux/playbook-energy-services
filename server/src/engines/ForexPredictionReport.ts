@@ -45,7 +45,7 @@ const generateSampleEURUSDData = (): ForexPrice[] => {
  */
 export async function generateDavidClarkePrediction(): Promise<string> {
   
-  console.log('🎯 Generating EUR/USD prediction for David Clarke...');
+  console.log('🎯 Generating EUR/USD prediction — LICENSED FOREX TRADER VERIFICATION REQUIRED...');
   
   // Generate sample data
   const historicalData = generateSampleEURUSDData();
@@ -149,7 +149,7 @@ ${analysis.economic_events.slice(0, 2).map(event =>
 👤 HUMAN VERIFICATION (REQUIRED):
 
    Status:          ⏳ AWAITING DAVID CLARKE
-   Assigned To:     David Clarke (Expert Trader, 10+ years)
+   Assigned To:     LICENSED FOREX TRADER — VERIFICATION REQUIRED
    
    David's Task:
    1. Review AI analysis above
@@ -178,14 +178,14 @@ ${analysis.economic_events.slice(0, 2).map(event =>
 
 ───────────────────────────────────────────────────────────────
 
-✅ NEXT STEP: David Clarke to verify and approve
+✅ NEXT STEP: LICENSED FOREX TRADER VERIFICATION REQUIRED to verify and approve
                Final report will include human confidence boost
                Target accuracy: 98.5%
 
 ═══════════════════════════════════════════════════════════════
 `;
 
-  console.log('✅ Prediction report generated for David Clarke');
+  console.log('✅ Prediction report generated — LICENSED FOREX TRADER VERIFICATION REQUIRED');
   
   return report;
 }
@@ -224,7 +224,7 @@ export function generateShortSummary(
 
 ⚠️  NOT a direct buy/sell signal. Educational only. FCA unauthorized.
 
-👤 NEXT: David Clarke to verify (5 min) → Final 98.5% accuracy
+👤 NEXT: LICENSED FOREX TRADER VERIFICATION REQUIRED to verify → Final 98.5% accuracy
 ═══════════════════════════════════════════════════════════════
 `;
 }

@@ -36,10 +36,23 @@
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
-import { google, gmail_v1 } from 'googleapis';
-import { OAuth2Client } from 'google-auth-library';
+// googleapis, google-auth-library, parse-full-name loaded dynamically at runtime
+// Install: pnpm add googleapis google-auth-library parse-full-name
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let google: any, gmail_v1: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let OAuth2Client: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let parseFullName: any;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const gapis = require('googleapis'); google = gapis.google; gmail_v1 = gapis.gmail_v1;
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  OAuth2Client = require('google-auth-library').OAuth2Client;
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  parseFullName = require('parse-full-name').parseFullName;
+} catch { /* Optional dependencies not installed */ }
 import crypto from 'crypto';
-import { parseFullName } from 'parse-full-name';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // INTERFACES & TYPES
@@ -286,8 +299,10 @@ interface ComplianceCheck {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export class GmailForensicSystem {
-  private oauth2Client: OAuth2Client;
-  private gmail: gmail_v1.Gmail;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private oauth2Client: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private gmail: any;
   private config: GmailConfig;
   private caseId: string;
   private extractionId: string;
@@ -440,7 +455,7 @@ export class GmailForensicSystem {
     const parts = message.payload?.parts || [];
 
     // Parse headers
-    const getHeader = (name: string) => headers.find(h => h.name?.toLowerCase() === name.toLowerCase())?.value || '';
+    const getHeader = (name: string) => headers.find((h: { name?: string; value?: string }) => h.name?.toLowerCase() === name.toLowerCase())?.value || '';
     
     // Extract email addresses
     const parseEmailAddr = (addr: string): EmailAddress => {
@@ -453,9 +468,9 @@ export class GmailForensicSystem {
     };
 
     const from = parseEmailAddr(getHeader('from'));
-    const to = getHeader('to').split(',').map(a => parseEmailAddr(a.trim()));
-    const cc = getHeader('cc').split(',').filter(a => a).map(a => parseEmailAddr(a.trim()));
-    const bcc = getHeader('bcc').split(',').filter(a => a).map(a => parseEmailAddr(a.trim()));
+    const to = getHeader('to').split(',').map((a: string) => parseEmailAddr(a.trim()));
+    const cc = getHeader('cc').split(',').filter((a: string) => a).map((a: string) => parseEmailAddr(a.trim()));
+    const bcc = getHeader('bcc').split(',').filter((a: string) => a).map((a: string) => parseEmailAddr(a.trim()));
 
     // Extract body
     const body = this.extractBody(message.payload);
@@ -505,7 +520,7 @@ export class GmailForensicSystem {
       internalDate: parseInt(message.internalDate || '0'),
       body,
       attachments,
-      headers: headers.map(h => ({ name: h.name!, value: h.value! })),
+      headers: headers.map((h: { name?: string; value?: string }) => ({ name: h.name!, value: h.value! })),
       authentication,
       labels: message.labelIds || [],
       snippet: message.snippet || '',
@@ -672,7 +687,7 @@ export class GmailForensicSystem {
       });
 
       const messages = response.data.messages || [];
-      allMessages.push(...messages.map(m => m.id!));
+      allMessages.push(...messages.map((m: { id?: string }) => m.id!));
       retrieved += messages.length;
 
       pageToken = response.data.nextPageToken || undefined;

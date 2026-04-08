@@ -109,7 +109,7 @@ export default function AboutPage() {
                 <div className="w-32 h-32 bg-navy rounded-full mx-auto mb-6 flex items-center justify-center">
                   <span className="text-4xl text-gold font-playfair font-bold">DC</span>
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-navy mb-2">David Clarke</h3>
+                <h3 className="font-playfair text-2xl font-bold text-navy mb-2">MANAGING DIRECTOR — FORENSIC AUDIT LEAD</h3>
                 <div className="text-gold font-semibold mb-4">Managing Director</div>
                 <div className="text-textMid leading-relaxed">
                   <p className="mb-3">
@@ -129,7 +129,7 @@ export default function AboutPage() {
                 <div className="w-32 h-32 bg-navy rounded-full mx-auto mb-6 flex items-center justify-center">
                   <span className="text-4xl text-gold font-playfair font-bold">DD</span>
                 </div>
-                <h3 className="font-playfair text-2xl font-bold text-navy mb-2">Derek Dunphy</h3>
+                <h3 className="font-playfair text-2xl font-bold text-navy mb-2">TECHNICAL DIRECTOR — ELECTRICAL SYSTEMS SPECIALIST</h3>
                 <div className="text-gold font-semibold mb-4">Technical Director</div>
                 <div className="text-textMid leading-relaxed">
                   <p className="mb-3">

@@ -35,8 +35,17 @@
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
-import { google, drive_v3 } from 'googleapis';
-import { OAuth2Client } from 'google-auth-library';
+// googleapis and google-auth-library loaded dynamically at runtime
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let google: any, drive_v3: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let OAuth2Client: any;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const gapis = require('googleapis'); google = gapis.google; drive_v3 = gapis.drive_v3;
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  OAuth2Client = require('google-auth-library').OAuth2Client;
+} catch { /* Optional dependencies */ }
 import crypto from 'crypto';
 import stream from 'stream';
 import { promisify } from 'util';
@@ -176,8 +185,10 @@ interface ComplianceCheck {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export class GoogleDriveForensicSystem {
-  private oauth2Client: OAuth2Client;
-  private drive: drive_v3.Drive;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private oauth2Client: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private drive: any;
   private config: GoogleDriveConfig;
   private caseId: string;
   private extractionId: string;
@@ -332,7 +343,8 @@ export class GoogleDriveForensicSystem {
   /**
    * Extract comprehensive forensic metadata for a single file
    */
-  private async extractFileForensics(file: drive_v3.Schema$File): Promise<ForensicMetadata> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private async extractFileForensics(file: any): Promise<ForensicMetadata> {
     const fileId = file.id!;
 
     // Get detailed file metadata
@@ -367,12 +379,12 @@ export class GoogleDriveForensicSystem {
       createdTime: new Date(file.createdTime!),
       modifiedTime: new Date(file.modifiedTime!),
       lastModifyingUser: this.parseUser(detailedFile.data.lastModifyingUser),
-      owners: detailedFile.data.owners?.map(o => this.parseUser(o)) || [],
+      owners: detailedFile.data.owners?.map((o: any) => this.parseUser(o)) || [],
       permissions: permissions,
       sharingHistory: [], // Derived from permissions if audit log available
       revisionHistory: revisions,
       properties: detailedFile.data.properties || {},
-      exportFormat: this.WORKSPACE_MIMES[file.mimeType!] || undefined,
+      exportFormat: (this.WORKSPACE_MIMES as Record<string, string>)[file.mimeType!] || undefined,
       chainOfCustody,
       forensicTimestamp,
       extractionAgent: 'Orb AI Forensic Platform v1.0',
@@ -395,7 +407,7 @@ export class GoogleDriveForensicSystem {
 
     // Check if it's a Google Workspace document
     if (mimeType.startsWith('application/vnd.google-apps.')) {
-      const exportMimeType = this.WORKSPACE_MIMES[mimeType] || 'application/pdf';
+      const exportMimeType = (this.WORKSPACE_MIMES as Record<string, string>)[mimeType] || 'application/pdf';
       const response = await this.drive.files.export(
         { fileId, mimeType: exportMimeType },
         { responseType: 'stream' }
@@ -438,7 +450,7 @@ export class GoogleDriveForensicSystem {
         pageSize: 1000
       });
 
-      return (response.data.revisions || []).map(rev => ({
+      return (response.data.revisions || []).map((rev: any) => ({
         id: rev.id!,
         modifiedTime: new Date(rev.modifiedTime!),
         modifyingUser: this.parseUser(rev.lastModifyingUser),
@@ -465,7 +477,7 @@ export class GoogleDriveForensicSystem {
         supportsAllDrives: true
       });
 
-      return (response.data.permissions || []).map(perm => ({
+      return (response.data.permissions || []).map((perm: any) => ({
         id: perm.id!,
         type: perm.type as any,
         role: perm.role as any,
@@ -484,8 +496,9 @@ export class GoogleDriveForensicSystem {
   /**
    * List all files with pagination
    */
-  private async listAllFiles(): Promise<drive_v3.Schema$File[]> {
-    const allFiles: drive_v3.Schema$File[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private async listAllFiles(): Promise<any[]> {
+    const allFiles: any[] = [];
     let pageToken: string | undefined;
 
     do {

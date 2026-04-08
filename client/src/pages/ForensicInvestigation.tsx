@@ -68,7 +68,7 @@ export default function ForensicInvestigation() {
       const data = await response.json();
       alert(`Conspiracy Analysis Complete!\n\n${data.results.conspiracy_links_detected} conspiracy links detected\n${data.results.high_confidence_links} high-confidence links`);
     } catch (error) {
-      alert('Analysis failed: ' + error.message);
+      alert('Analysis failed: ' + (error instanceof Error ? error.message : String(error)));
     } finally {
       setLoading(false);
     }
@@ -349,7 +349,7 @@ export default function ForensicInvestigation() {
               </div>
               <div>
                 <div className="font-bold uppercase mb-2">Authorized Users</div>
-                <div>Darryl Kavanagh, Director</div>
+                <div>PLATFORM DIRECTOR — PLAYBOOK CORPORATION LIMITED</div>
                 <div>Playbook Corporation Limited</div>
               </div>
             </div>

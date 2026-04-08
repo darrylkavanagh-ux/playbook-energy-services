@@ -236,7 +236,8 @@ export class TariffOptimizer {
       `;
       
       const result = await db.query(query);
-      this.tariffDatabase = result.rows.map(row => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.tariffDatabase = result.rows.map((row: any) => ({
         supplier: row.supplier,
         tariff_name: row.tariff_name,
         tariff_type: row.tariff_type,

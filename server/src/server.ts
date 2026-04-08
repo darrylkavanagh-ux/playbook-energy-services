@@ -19,6 +19,9 @@ import nocompareRoutes from './routes/nocompare';
 import orbRoutes from './routes/orb';
 import kavanRoutes from './routes/kavan';
 import forensicRoutes from './routes/forensic';
+import forexRoutes from './routes/forex';
+import neuralRoutes from './routes/neural';
+import veritechRoutes from './routes/veritech';
 
 // Load environment variables
 dotenv.config();
@@ -91,12 +94,11 @@ async function startServer() {
     }
   });
   
-  // Initialize database
+  // Initialize database (non-fatal – platform runs without DB in dev/sandbox)
   console.log('🔌 Initializing database...');
   const dbInitialized = await initializeDatabase();
   if (!dbInitialized) {
-    console.error('❌ Failed to initialize database');
-    process.exit(1);
+    console.warn('⚠️  Database unavailable – continuing in DB-less mode (Forex, health, and static routes still active)');
   }
   
   // Start email monitoring if configured
@@ -146,6 +148,9 @@ async function startServer() {
   app.use('/api/orb', orbRoutes);
   app.use('/api/kavan', kavanRoutes);
   app.use('/api/forensic', forensicRoutes);
+  app.use('/api/forex', forexRoutes);
+  app.use('/api/neural', neuralRoutes);
+  app.use('/api/veritech', veritechRoutes);
   
   // ============================================
   // FOXLITE AUDIT API
@@ -206,7 +211,7 @@ async function startServer() {
       
     } catch (error) {
       console.error('Audit error:', error);
-      res.status(500).json({ error: `Audit failed: ${error.message}` });
+      res.status(500).json({ error: `Audit failed: ${error instanceof Error ? error.message : String(error)}` });
     }
   });
   
@@ -259,7 +264,7 @@ async function startServer() {
       
     } catch (error) {
       console.error('Upload error:', error);
-      res.status(500).json({ error: `Failed to process bill: ${error.message}` });
+      res.status(500).json({ error: `Failed to process bill: ${error instanceof Error ? error.message : String(error)}` });
     }
   });
   
@@ -291,7 +296,7 @@ async function startServer() {
       
     } catch (error) {
       console.error('Comparison error:', error);
-      res.status(500).json({ error: `Comparison failed: ${error.message}` });
+      res.status(500).json({ error: `Comparison failed: ${error instanceof Error ? error.message : String(error)}` });
     }
   });
   
@@ -375,15 +380,41 @@ async function startServer() {
   // SERVE FRONTEND (Production)
   // ============================================
   
-  const staticPath = process.env.NODE_ENV === 'production'
-    ? path.resolve(__dirname, '..', 'public')
-    : path.resolve(__dirname, '..', '..', 'dist', 'public');
-  
+  // Resolve static path robustly — works in both production (Railway/Vercel) and sandbox
+  const candidatePaths = [
+    path.resolve(__dirname, '..', 'public'),                          // Railway: dist/server.js → dist/public
+    path.resolve(__dirname, 'public'),                                // alternative flat
+    path.resolve(process.cwd(), 'dist', 'public'),                   // sandbox: cwd/dist/public
+    path.resolve(process.cwd(), 'public'),                            // Vercel static output
+  ];
+  const fs = await import('fs');
+  const staticPath = candidatePaths.find(p => {
+    try { fs.accessSync(p); return true; } catch { return false; }
+  }) || candidatePaths[0];
+
+  console.log(`📁 Static files served from: ${staticPath}`);
   app.use(express.static(staticPath));
-  
-  // Handle client-side routing
+
+  // Handle client-side routing — only for non-API paths
   app.get('*', (req, res) => {
-    res.sendFile(path.join(staticPath, 'index.html'));
+    const indexPath = path.join(staticPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.json({
+        platform: 'Orb AI Forensic & Forex Platform v2.0',
+        status: 'API_ONLY_MODE',
+        message: 'Frontend not built — API is fully operational',
+        api_endpoints: [
+          'GET /api/health',
+          'GET /api/forex/health',
+          'POST /api/forex/predict',
+          'POST /api/forex/verify',
+          'GET /api/forensic/readiness',
+          'GET /api/system/status',
+        ],
+      });
+    }
   });
   
   // Error handling middleware

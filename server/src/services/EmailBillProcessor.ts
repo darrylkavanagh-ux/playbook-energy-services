@@ -164,7 +164,8 @@ export class EmailBillProcessor {
         fetch.on('message', (msg, seqno) => {
           msg.on('body', async (stream, info) => {
             try {
-              const parsed = await simpleParser(stream);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const parsed = await simpleParser(stream as any) as ParsedMail;
               const processed = await this.processEmail(parsed, seqno);
               processedEmails.push(processed);
               
@@ -306,7 +307,7 @@ export class EmailBillProcessor {
         attachments_count: email.attachments?.length || 0,
         processed_bills: [],
         status: 'error',
-        error_message: error.message,
+        error_message: (error instanceof Error ? error.message : String(error)),
         received_at: email.date || new Date(),
         processed_at: new Date()
       };

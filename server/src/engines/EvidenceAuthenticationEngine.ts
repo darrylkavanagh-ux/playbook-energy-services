@@ -354,7 +354,7 @@ export class EvidenceAuthenticationEngine {
           result: 'INCONCLUSIVE',
           confidence_score: 0,
           anomalies: ['Authentication failed'],
-          metadata: { error: error.message }
+          metadata: { error: (error instanceof Error ? error.message : String(error)) }
         });
       }
     }
