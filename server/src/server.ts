@@ -1,6 +1,6 @@
 /**
  * MAIN EXPRESS SERVER
- * Complete backend API for FOXLITE + NO COMPARE platforms
+ * Complete backend API for ORB AI Platform (NoCompare, VeriTech, Utility Audit clients)
  */
 
 import express, { Express, Request, Response, NextFunction } from 'express';
@@ -14,7 +14,7 @@ import CompleteAuditEngine from './engines/CompleteAuditEngine';
 import EmailBillProcessor from './services/EmailBillProcessor';
 
 // Import route modules
-import foxliteRoutes from './routes/foxlite';
+import utilityAuditRoutes from './routes/utilityAudit';
 import nocompareRoutes from './routes/nocompare';
 import orbRoutes from './routes/orb';
 import kavanRoutes from './routes/kavan';
@@ -155,7 +155,7 @@ async function startServer() {
   });
   
   // Mount platform-specific routes
-  app.use('/api/foxlite', foxliteRoutes);
+  app.use('/api/utility-audit', utilityAuditRoutes);
   app.use('/api/nocompare', nocompareRoutes);
   app.use('/api/orb', orbRoutes);
   app.use('/api/kavan', kavanRoutes);
@@ -165,14 +165,14 @@ async function startServer() {
   app.use('/api/veritech', veritechRoutes);
   
   // ============================================
-  // FOXLITE AUDIT API
+  // UTILITY AUDIT API (Client Services)
   // ============================================
   
   /**
-   * POST /api/foxlite/audit/upload
+   * POST /api/utility-audit/audit/upload
    * Upload bills for forensic audit
    */
-  app.post('/api/foxlite/audit/upload', upload.array('bills', 100), async (req, res) => {
+  app.post('/api/utility-audit/audit/upload', upload.array('bills', 100), async (req, res) => {
     try {
       const files = req.files as Express.Multer.File[];
       
@@ -196,7 +196,7 @@ async function startServer() {
   });
   
   /**
-   * POST /api/foxlite/audit/analyze
+   * POST /api/utility-audit/audit/analyze
    * Perform complete audit analysis
    */
   app.post('/api/foxlite/audit/analyze', async (req, res) => {

@@ -8,7 +8,7 @@ import Results from "@/pages/Results";
 import OrbAI from "@/pages/OrbAI";
 import KavanAI from "@/pages/KavanAI";
 import SystemStatus from "@/pages/SystemStatus";
-import Foxlite from "@/pages/Foxlite";
+import UtilityAudit from "@/pages/UtilityAudit";
 import ForensicInvestigation from "@/pages/ForensicInvestigation";
 import NotFound from "@/pages/not-found";
 
@@ -22,7 +22,8 @@ function Router() {
       <Route path="/kavan" component={KavanAI} />
       <Route path="/forensic" component={ForensicInvestigation} />
       <Route path="/status" component={SystemStatus} />
-      <Route path="/foxlite" component={Foxlite} />
+      <Route path="/utility-audit" component={UtilityAudit} />
+      <Route path="/foxlite" component={UtilityAudit} />
       <Route component={NotFound} />
     </Switch>
   );
