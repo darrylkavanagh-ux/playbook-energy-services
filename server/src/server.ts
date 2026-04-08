@@ -22,6 +22,17 @@ import forensicRoutes from './routes/forensic';
 import forexRoutes from './routes/forex';
 import neuralRoutes from './routes/neural';
 import veritechRoutes from './routes/veritech';
+import healthRoutes from './routes/health';
+
+// Import security middleware
+import {
+  securityHeaders,
+  rateLimiter,
+  corsMiddleware,
+  validateInput,
+  requestLogger,
+  errorHandler
+} from './middleware/security';
 
 // Load environment variables
 dotenv.config();
@@ -51,22 +62,32 @@ async function startServer() {
   const app: Express = express();
   const server = createServer(app);
   
+  // ============================================
+  // SECURITY MIDDLEWARE (Week 2 - Priority 1)
+  // ============================================
+  
+  // Apply security headers (Helmet equivalent)
+  app.use(securityHeaders);
+  
+  // Request logging for audit trail
+  app.use(requestLogger);
+  
+  // CORS configuration
+  app.use(corsMiddleware);
+  
+  // Rate limiting (100 req/15min per IP)
+  app.use(rateLimiter({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: 'Too many requests from this IP, please try again later.'
+  }));
+  
   // Middleware
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
   
-  // CORS
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', process.env.CORS_ORIGIN || '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    
-    if (req.method === 'OPTIONS') {
-      return res.sendStatus(200);
-    }
-    next();
-  });
+  // Input validation (XSS, SQL injection protection)
+  app.use(validateInput);
   
   // Configure multer for file uploads
   const storage = multer.diskStorage({
@@ -111,17 +132,8 @@ async function startServer() {
   // API ROUTES
   // ============================================
   
-  // Health check
-  app.get('/api/health', (req, res) => {
-    res.json({
-      status: 'healthy',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
-      environment: process.env.NODE_ENV,
-      database: dbInitialized ? 'connected' : 'disconnected',
-      email_processor: emailProcessor ? 'enabled' : 'disabled'
-    });
-  });
+  // Health check endpoints (comprehensive monitoring)
+  app.use(healthRoutes);
   
   // System status
   app.get('/api/system/status', (req, res) => {
@@ -417,14 +429,8 @@ async function startServer() {
     }
   });
   
-  // Error handling middleware
-  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error('Server error:', err);
-    res.status(500).json({
-      error: 'Internal server error',
-      message: process.env.NODE_ENV === 'development' ? err.message : undefined
-    });
-  });
+  // Error handling middleware (comprehensive security error handler)
+  app.use(errorHandler);
   
   // Start server
   const port = process.env.PORT || 3000;
