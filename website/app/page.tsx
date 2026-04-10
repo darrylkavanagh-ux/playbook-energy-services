@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Section, SectionLabel, SectionTitle, GoldRule } from '@/components/Section'
 import { ServiceCard } from '@/components/ServiceCard'
@@ -291,25 +292,86 @@ export default function HomePage() {
         </Section>
       </section>
 
-      {/* Final CTA */}
+      {/* Calculator CTA */}
       <section className="py-20 bg-navy text-white">
+        <Section>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <FadeIn>
+              <div>
+                <SectionLabel className="text-gold">Free Savings Calculator</SectionLabel>
+                <h2 className="font-playfair text-4xl font-bold text-white mb-4">
+                  Find out exactly what you could recover
+                </h2>
+                <p className="text-xl text-greyLight mb-6 leading-relaxed">
+                  Enter your annual bills for electricity, gas, waste, telecoms, insurance
+                  and more. Our calculator shows your estimated overcharge — and how much
+                  you could get back going back six years.
+                </p>
+                <ul className="text-greyLight space-y-2 mb-8">
+                  <li className="flex items-center gap-3"><span className="text-gold">✓</span> No login required</li>
+                  <li className="flex items-center gap-3"><span className="text-gold">✓</span> Instant estimate</li>
+                  <li className="flex items-center gap-3"><span className="text-gold">✓</span> Based on real industry error rates</li>
+                  <li className="flex items-center gap-3"><span className="text-gold">✓</span> Works for single site or multi-site portfolios</li>
+                </ul>
+                <Link
+                  href="/calculator"
+                  className="inline-block bg-gold hover:bg-goldDark text-navy font-bold text-lg px-10 py-4 rounded-xl transition-colors"
+                >
+                  Try the Calculator →
+                </Link>
+              </div>
+            </FadeIn>
+            <FadeIn delay={200}>
+              <div className="bg-white/10 backdrop-blur rounded-2xl p-8 space-y-4">
+                <div className="text-center mb-4">
+                  <p className="text-greyLight text-sm font-semibold uppercase tracking-wider">Example — Hotel with 3 sites</p>
+                </div>
+                {[
+                  { label: 'Annual electricity spend', val: '€72,000', sub: '3 sites × €24,000' },
+                  { label: 'Estimated annual overcharge (18%)', val: '€12,960', sub: 'Industry average error rate', red: true },
+                  { label: '6-year recovery potential', val: '€77,760', sub: 'Full retrospective period' },
+                  { label: 'Foxlite fee (25%)', val: '€19,440', sub: 'Only paid if we recover' },
+                  { label: 'You keep', val: '€58,320', sub: 'Net recovery to your business', gold: true },
+                ].map((row) => (
+                  <div key={row.label} className="flex justify-between items-start border-b border-white/10 pb-3 last:border-0">
+                    <div>
+                      <p className={`font-medium text-sm ${row.gold ? 'text-gold' : 'text-white'}`}>{row.label}</p>
+                      <p className="text-greyLight/60 text-xs">{row.sub}</p>
+                    </div>
+                    <span className={`font-bold text-lg ${row.gold ? 'text-gold' : row.red ? 'text-red-400' : 'text-white'}`}>{row.val}</span>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </Section>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-cream">
         <Section>
           <div className="text-center">
             <FadeIn>
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold mb-6">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-navy mb-6">
                 Ready to recover your overcharges?
               </h2>
-              <p className="text-xl text-greyLight mb-8 max-w-2xl mx-auto">
-                Start with a free audit. No upfront costs, no risk. 
+              <p className="text-xl text-textMid mb-8 max-w-2xl mx-auto">
+                Start with a free audit. No upfront costs, no risk.
                 We only get paid when we find savings for your business.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="text-lg px-8 py-4">
+                <Link
+                  href="/contact"
+                  className="bg-navy hover:bg-midNavy text-white font-bold text-lg px-10 py-4 rounded-xl transition-colors"
+                >
                   Start Free Audit
-                </Button>
-                <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-navy">
-                  Contact Us
-                </Button>
+                </Link>
+                <a
+                  href="tel:+353860276700"
+                  className="border-2 border-navy text-navy hover:bg-navy hover:text-white font-bold text-lg px-10 py-4 rounded-xl transition-colors"
+                >
+                  Call David: +353 86 027 6700
+                </a>
               </div>
             </FadeIn>
           </div>
