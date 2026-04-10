@@ -3,9 +3,5 @@
   "name": "foxlite-forensics-production",
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "outputDirectory": "out",
-  "installCommand": "npm install",
-  "git": {
-    "deploymentEnabled": true
-  }
+  "installCommand": "npm install"
 }
