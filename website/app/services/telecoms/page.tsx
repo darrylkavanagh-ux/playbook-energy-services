@@ -2,182 +2,116 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Section, SectionLabel, SectionTitle, GoldRule } from '@/components/Section'
 import { FadeIn } from '@/components/FadeIn'
-import { Button } from '@/components/ui/button'
+
 
 export const metadata: Metadata = {
   title: 'Telecoms Audits | Foxlite Forensic Services',
-  description: 'Mobile, landline, and internet service cost verification to identify billing discrepancies.',
+  description: 'Forensic audit of mobile, broadband, landline and unified communications costs. Identify billing errors, duplicate lines and contract overcharges.',
 }
 
 export default function TelecomsServicePage() {
   return (
     <>
-      {/* Header */}
       <section className="pt-32 pb-20 bg-navy text-white">
         <Section>
           <div className="text-center">
             <FadeIn>
               <div className="text-6xl mb-6">📡</div>
-              <SectionLabel className="text-gold">Telecoms & Broadband Audits</SectionLabel>
+              <SectionLabel className="text-gold">Telecoms Audits</SectionLabel>
               <SectionTitle className="text-white">
-                Comprehensive telecoms cost analysis and billing verification
+                Recover telecoms overcharges — mobile, broadband, landlines and unified comms
               </SectionTitle>
               <GoldRule className="mb-8" />
               <p className="text-xl text-greyLight max-w-3xl mx-auto leading-relaxed">
-                Our telecoms audits identify billing errors, service overcharges, and contract issues 
-                across mobile, landline, and internet services.
+                Telecoms billing is among the most error-prone business cost categories. 
+                Duplicate lines, stale contracts, incorrect bundles and rate misapplication 
+                create overcharges that compound undetected for years.
               </p>
             </FadeIn>
           </div>
         </Section>
       </section>
 
-      {/* Main Content */}
       <section className="py-20">
         <Section>
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* Main Description */}
             <div className="lg:col-span-2">
               <FadeIn>
-                <div className="prose prose-lg max-w-none">
-                  <h2 className="font-playfair text-3xl font-bold text-navy mb-6">
-                    Telecoms & Broadband Forensic Analysis
-                  </h2>
-                  
-                  <p className="text-lg text-textMid leading-relaxed mb-6">
-                    Telecoms costs are complex and often contain hidden charges and billing errors. 
-                    Our forensic telecoms audits examine all aspects of your communication services, 
-                    from mobile contracts to broadband agreements, identifying overcharges and optimizing costs.
-                  </p>
-                  
-                  <h3 className="font-playfair text-2xl font-bold text-navy mb-4">What We Analyze</h3>
-                  
-                  <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    <div>
-                      <h4 className="font-semibold text-navy mb-2">Mobile Services</h4>
-                      <ul className="text-textMid space-y-1">
-                        <li>• Monthly plan charges</li>
-                        <li>• Data usage and overages</li>
-                        <li>• International roaming fees</li>
-                        <li>• Device financing costs</li>
+                <h2 className="font-playfair text-3xl font-bold text-navy mb-6">Telecoms Cost Forensic Analysis</h2>
+                <p className="text-lg text-textMid leading-relaxed mb-6">
+                  Business telecoms contracts evolve over time — new lines are added, bundles are 
+                  changed, and legacy services linger on invoice long after the physical service 
+                  has been decommissioned. Contract auto-renewals lock businesses into rates that 
+                  are significantly above current market rates.
+                </p>
+                <p className="text-lg text-textMid leading-relaxed mb-8">
+                  Foxlite audits every telecoms invoice line — from mobile handset plans to SIP 
+                  trunks, MPLS circuits to broadband connections — cross-referencing charges against 
+                  contracted rates, usage records, and active service inventories to identify and 
+                  recover all overcharges.
+                </p>
+
+                <h3 className="font-playfair text-2xl font-bold text-navy mb-4">What We Audit</h3>
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  {[
+                    { title: 'Mobile & SIM Costs', items: ['Tariff above contracted rate', 'Roaming charge disputes', 'Data overage charge errors', 'Legacy handset charges on inactive SIMs'] },
+                    { title: 'Broadband & Fixed Lines', items: ['Line rental above agreed rate', 'Duplicate broadband circuits', 'Decommissioned ISDN lines still billed', 'Speed/service tier mismatches'] },
+                    { title: 'Unified Communications', items: ['VoIP per-seat charges above contract', 'Call recording storage overcharges', 'Auto-renew rate escalation disputes', 'MS Teams/Cisco licensing errors'] },
+                    { title: 'Contract & Billing Errors', items: ['Early termination fee disputes', 'Minimum usage commitment miscalculations', 'Bundled minutes overage errors', 'Multi-site billing consolidation errors'] },
+                  ].map(cat => (
+                    <div key={cat.title} className="bg-cream rounded-xl p-5">
+                      <h4 className="font-semibold text-navy mb-3">{cat.title}</h4>
+                      <ul className="space-y-1">
+                        {cat.items.map(item => (
+                          <li key={item} className="flex items-start gap-2 text-textMid text-sm">
+                            <span className="text-gold mt-0.5 flex-shrink-0">•</span>{item}
+                          </li>
+                        ))}
                       </ul>
                     </div>
-                    
-                    <div>
-                      <h4 className="font-semibold text-navy mb-2">Fixed Line Services</h4>
-                      <ul className="text-textMid space-y-1">
-                        <li>• Broadband and line rental</li>
-                        <li>• Call charges and packages</li>
-                        <li>• Installation and setup fees</li>
-                        <li>• Equipment rental costs</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <h3 className="font-playfair text-2xl font-bold text-navy mb-4">Common Overcharges We Find</h3>
-                  
-                  <div className="bg-cream rounded-lg p-6 mb-8">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <div className="font-semibold text-navy mb-2">Billing Errors</div>
-                        <div className="text-textMid text-sm">Incorrect usage calculations, wrong tariff applications</div>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy mb-2">Hidden Charges</div>
-                        <div className="text-textMid text-sm">Premium service fees, admin charges</div>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy mb-2">Contract Issues</div>
-                        <div className="text-textMid text-sm">Unfavorable terms, automatic renewals</div>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy mb-2">Service Mismatches</div>
-                        <div className="text-textMid text-sm">Over-provisioned services, unused features</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <p className="text-lg text-textMid leading-relaxed">
-                    Our expertise in telecoms regulations and service agreements ensures 
-                    we identify every possible saving opportunity while maintaining optimal 
-                    communication services for your business operations.
+                  ))}
+                </div>
+
+                <div className="bg-navy text-white rounded-xl p-6 mb-8">
+                  <h3 className="font-playfair text-xl font-bold mb-3">Case Example</h3>
+                  <p className="text-greyLight text-sm leading-relaxed">
+                    A 12-location retail chain had two broadband lines being billed at one location 
+                    for three years following a supplier change in 2021 — the original line had never 
+                    been formally ceased. The telecoms audit also identified line rental charges on 
+                    two disconnected ISDN numbers across two other sites. Total telecoms recovery: 
+                    <span className="text-gold font-bold"> €21,600</span>.
                   </p>
                 </div>
               </FadeIn>
             </div>
 
-            {/* Sidebar */}
             <div className="lg:col-span-1">
               <FadeIn delay={200}>
-                <div className="bg-cream rounded-lg p-6 sticky top-24">
-                  <h3 className="font-playfair text-xl font-bold text-navy mb-4">How It Works</h3>
-                  
+                <div className="bg-cream rounded-xl p-6 sticky top-24">
+                  <h3 className="font-playfair text-xl font-bold text-navy mb-4">Audit Process</h3>
                   <div className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-navy">1</span>
+                    {[
+                      { n: '1', title: 'Service Inventory', desc: 'Compile full inventory of all active and billed telecoms services across all sites' },
+                      { n: '2', title: 'Contract Review', desc: 'Gather all current and expired telecoms contracts and rate schedules' },
+                      { n: '3', title: 'Bill Reconciliation', desc: 'Cross-reference 24–60 months of invoices against contracted rates for each service line' },
+                      { n: '4', title: 'Ghost Service Identification', desc: 'Identify disconnected or inactive services still being billed' },
+                      { n: '5', title: 'Recovery & Optimisation', desc: 'File recovery claims and recommend contract optimisation going forward' },
+                    ].map(step => (
+                      <div key={step.n} className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-xs font-bold text-navy">{step.n}</span>
+                        </div>
+                        <div>
+                          <div className="font-semibold text-navy text-sm">{step.title}</div>
+                          <div className="text-textMid text-xs">{step.desc}</div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="font-semibold text-navy">Service Inventory</div>
-                        <div className="text-sm text-textMid">Catalog all mobile, landline, and broadband services</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-navy">2</span>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy">Usage Analysis</div>
-                        <div className="text-sm text-textMid">Analyze actual usage patterns against billed amounts</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-navy">3</span>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy">Contract Review</div>
-                        <div className="text-sm text-textMid">Examine all service agreements and tariff structures</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-navy">4</span>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy">Bill Verification</div>
-                        <div className="text-sm text-textMid">Verify all charges against contract terms</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-navy">5</span>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy">Provider Negotiation</div>
-                        <div className="text-sm text-textMid">Handle disputes and renegotiate service terms</div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-start space-x-3">
-                      <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-navy">6</span>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-navy">Service Optimization</div>
-                        <div className="text-sm text-textMid">Implement ongoing cost monitoring and optimization</div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                  
-                  <div className="mt-8 pt-6 border-t border-greyLight">
-                    <Button className="w-full">
-                      Start Telecoms Audit
-                    </Button>
+                  <div className="mt-6 pt-4 border-t border-greyLight">
+                    <Link href="/contact">
+                      <Link href="/contact" className="inline-block px-6 py-3 bg-[#C4A44E] text-[#0B1A2B] font-semibold rounded-lg hover:bg-[#B8943E] transition-all duration-200 text-center w-full block">Start Telecoms Audit</Link>
+                    </Link>
                   </div>
                 </div>
               </FadeIn>
@@ -186,74 +120,46 @@ export default function TelecomsServicePage() {
         </Section>
       </section>
 
-      {/* Related Services */}
-      <section className="py-20 bg-cream">
+      <section className="py-16 bg-gold">
         <Section>
-          <div className="text-center mb-12">
-            <FadeIn>
-              <SectionLabel>Related Services</SectionLabel>
-              <SectionTitle>
-                Other audits that complement telecoms analysis
-              </SectionTitle>
-            </FadeIn>
+          <FadeIn>
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="font-playfair text-3xl font-bold text-navy mb-4">
+                Average telecoms audit recovery: €11,200
+              </h2>
+              <p className="text-navy/80 text-lg mb-6">
+                No upfront costs. 25% of recovered amounts only — nothing if we find nothing.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/calculator"><Link href="/calculator" className="inline-block px-6 py-3 bg-[#C4A44E] text-[#0B1A2B] font-semibold rounded-lg hover:bg-[#B8943E] transition-all duration-200 text-center">Calculate My Savings</Link></Link>
+                <Link href="/contact"><Link href="/contact" className="inline-block px-6 py-3 border-2 border-[#C4A44E] text-[#C4A44E] font-semibold rounded-lg hover:bg-[#C4A44E] hover:text-[#0B1A2B] transition-all duration-200 text-center">Free Consultation</Link></Link>
+              </div>
+            </div>
+          </FadeIn>
+        </Section>
+      </section>
+
+      <section className="py-16 bg-cream">
+        <Section>
+          <div className="text-center mb-10">
+            <FadeIn><SectionLabel>Related Services</SectionLabel><SectionTitle>Complement your telecoms audit</SectionTitle></FadeIn>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <FadeIn delay={0}>
-              <Link href="/services/banking" className="group">
-                <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 p-6 h-full">
-                  <div className="text-4xl mb-4">💳</div>
-                  <h3 className="font-playfair text-xl font-bold text-navy mb-3 group-hover:text-gold transition-colors">
-                    Banking & Finance
-                  </h3>
-                  <p className="text-textMid">
-                    Bank charges, loan fees, and financial service cost analysis
-                  </p>
-                </div>
-              </Link>
-            </FadeIn>
-            
-            <FadeIn delay={200}>
-              <Link href="/services/energy" className="group">
-                <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 p-6 h-full">
-                  <div className="text-4xl mb-4">⚡</div>
-                  <h3 className="font-playfair text-xl font-bold text-navy mb-3 group-hover:text-gold transition-colors">
-                    Energy Audits
-                  </h3>
-                  <p className="text-textMid">
-                    Electricity, gas, and renewable energy cost analysis
-                  </p>
-                </div>
-              </Link>
-            </FadeIn>
-            
-            <FadeIn delay={400}>
-              <Link href="/services/property" className="group">
-                <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 p-6 h-full">
-                  <div className="text-4xl mb-4">🏢</div>
-                  <h3 className="font-playfair text-xl font-bold text-navy mb-3 group-hover:text-gold transition-colors">
-                    Property Management
-                  </h3>
-                  <p className="text-textMid">
-                    Property maintenance, service charges, and facility management
-                  </p>
-                </div>
-              </Link>
-            </FadeIn>
-            
-            <FadeIn delay={600}>
-              <Link href="/services/all" className="group">
-                <div className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 p-6 h-full">
-                  <div className="text-4xl mb-4">📊</div>
-                  <h3 className="font-playfair text-xl font-bold text-navy mb-3 group-hover:text-gold transition-colors">
-                    Complete Audit
-                  </h3>
-                  <p className="text-textMid">
-                    Comprehensive audit across all cost categories
-                  </p>
-                </div>
-              </Link>
-            </FadeIn>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { icon: '⚡', title: 'Energy Audits', href: '/services/energy', desc: 'Electricity and gas overcharge recovery' },
+              { icon: '♻️', title: 'Waste Management', href: '/services/waste', desc: 'Waste collection and disposal billing review' },
+              { icon: '📊', title: 'Complete Audit', href: '/services/all', desc: 'All 8 cost categories in one engagement' },
+            ].map(s => (
+              <FadeIn key={s.title}>
+                <Link href={s.href} className="group">
+                  <div className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all border border-greyLight">
+                    <div className="text-4xl mb-3">{s.icon}</div>
+                    <h3 className="font-playfair text-lg font-bold text-navy mb-2 group-hover:text-gold transition-colors">{s.title}</h3>
+                    <p className="text-textMid text-sm">{s.desc}</p>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
           </div>
         </Section>
       </section>

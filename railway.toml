@@ -6,7 +6,7 @@ buildCommand = "npm install -g pnpm@10.4.1 && pnpm install --frozen-lockfile && 
 startCommand = "node dist/server.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
-healthcheckPath = "/api/forex/health"
+healthcheckPath = "/api/health"
 healthcheckTimeout = 300
 
 [variables]

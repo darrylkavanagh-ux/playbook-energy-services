@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Section, SectionLabel, SectionTitle, GoldRule } from '@/components/Section'
 import { FadeIn } from '@/components/FadeIn'
-import { Button } from '@/components/ui/button'
+
 
 export const metadata: Metadata = {
   title: 'Pricing | Foxlite Forensic Services',
@@ -86,9 +87,7 @@ export default function PricingPage() {
                   </li>
                 </ul>
                 
-                <Button variant="outline" className="w-full">
-                  Book Consultation
-                </Button>
+                <Link href="/contact" className="inline-block px-6 py-3 border-2 border-[#C4A44E] text-[#C4A44E] font-semibold rounded-lg hover:bg-[#C4A44E] hover:text-[#0B1A2B] transition-all duration-200 text-center w-full block">Book Consultation</Link>
               </div>
             </FadeIn>
 
@@ -125,9 +124,7 @@ export default function PricingPage() {
                   </li>
                 </ul>
                 
-                <Button className="w-full bg-navy text-white hover:bg-midNavy">
-                  Start Audit
-                </Button>
+                <Link href="/contact" className="inline-block px-6 py-3 bg-[#C4A44E] text-[#0B1A2B] font-semibold rounded-lg hover:bg-[#B8943E] transition-all duration-200 text-center w-full block">Start Audit</Link>
               </div>
             </FadeIn>
 
@@ -292,12 +289,8 @@ export default function PricingPage() {
                 We only get paid when we find savings for your business.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="text-lg px-8 py-4">
-                  Book Free Consultation
-                </Button>
-                <Button variant="outline" size="lg" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-navy">
-                  Contact Us
-                </Button>
+                <Link href="/contact" className="inline-block px-8 py-4 bg-[#C4A44E] text-[#0B1A2B] font-semibold rounded-xl text-lg hover:bg-[#B8943E] transition-all duration-200 text-center">Book Free Consultation</Link>
+                <Link href="/contact" className="inline-block px-8 py-4 border-2 border-[#C4A44E] text-[#C4A44E] font-semibold rounded-xl text-lg hover:bg-[#C4A44E] hover:text-[#0B1A2B] transition-all duration-200 text-center">Contact Us</Link>
               </div>
             </FadeIn>
           </div>

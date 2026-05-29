@@ -1,45 +1,51 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { cn } from '@/lib/utils'
 
 interface FadeInProps {
   children: React.ReactNode
   className?: string
   delay?: number
+  direction?: 'up' | 'down' | 'left' | 'right' | 'none'
 }
 
-export function FadeIn({ children, className, delay = 0 }: FadeInProps) {
-  const [isVisible, setIsVisible] = useState(false)
+export function FadeIn({ children, className = '', delay = 0, direction = 'up' }: FadeInProps) {
+  const [visible, setVisible] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setIsVisible(true), delay)
+          const timer = setTimeout(() => setVisible(true), delay)
+          return () => clearTimeout(timer)
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
     )
-
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
+    if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [delay])
+
+  const getInitialTransform = () => {
+    switch (direction) {
+      case 'up':    return 'translateY(32px)'
+      case 'down':  return 'translateY(-32px)'
+      case 'left':  return 'translateX(32px)'
+      case 'right': return 'translateX(-32px)'
+      default:      return 'none'
+    }
+  }
 
   return (
     <div
       ref={ref}
-      className={cn(
-        'transition-all duration-1000 ease-out',
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
-          : 'opacity-0 translate-y-8',
-        className
-      )}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translate(0,0)' : getInitialTransform(),
+        transition: `opacity 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}ms, transform 0.75s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+      }}
     >
       {children}
     </div>

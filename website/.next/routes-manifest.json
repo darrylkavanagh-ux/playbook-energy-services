@@ -2,16 +2,8 @@
   "version": 3,
   "pages404": true,
   "caseSensitive": false,
-  "basePath": "/foxlite-consulting",
+  "basePath": "",
   "redirects": [
-    {
-      "source": "/foxlite-consulting",
-      "destination": "/foxlite-consulting/",
-      "basePath": false,
-      "internal": true,
-      "statusCode": 308,
-      "regex": "^/foxlite-consulting$"
-    },
     {
       "source": "/:file((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+)/",
       "destination": "/:file",
@@ -60,6 +52,12 @@
       "namedRegex": "^/about(?:/)?$"
     },
     {
+      "page": "/calculator",
+      "regex": "^/calculator(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/calculator(?:/)?$"
+    },
+    {
       "page": "/case-studies",
       "regex": "^/case\\-studies(?:/)?$",
       "routeKeys": {},
@@ -82,6 +80,12 @@
       "regex": "^/pricing(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/pricing(?:/)?$"
+    },
+    {
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy(?:/)?$"
     },
     {
       "page": "/services",
@@ -136,6 +140,12 @@
       "regex": "^/services/waste(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/services/waste(?:/)?$"
+    },
+    {
+      "page": "/team",
+      "regex": "^/team(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/team(?:/)?$"
     },
     {
       "page": "/who-we-help",

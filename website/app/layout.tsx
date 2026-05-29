@@ -3,6 +3,7 @@ import { Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
+import { CookieConsent } from '@/components/CookieConsent'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -57,6 +58,7 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   )

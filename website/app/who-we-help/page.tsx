@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Section, SectionLabel, SectionTitle, GoldRule } from '@/components/Section'
 import { FadeIn } from '@/components/FadeIn'
-import { Button } from '@/components/ui/button'
+
 
 export const metadata: Metadata = {
   title: 'Who We Help | Foxlite Forensic Services',

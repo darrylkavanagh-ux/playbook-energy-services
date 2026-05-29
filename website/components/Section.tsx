@@ -1,16 +1,15 @@
 import { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
 
 interface SectionProps {
   children: ReactNode
   className?: string
 }
 
-export function Section({ children, className }: SectionProps) {
+export function Section({ children, className = '' }: SectionProps) {
   return (
-    <section className={cn('max-w-7xl mx-auto px-4 sm:px-6 lg:px-8', className)}>
+    <div className={`max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 ${className}`}>
       {children}
-    </section>
+    </div>
   )
 }
 
@@ -19,9 +18,9 @@ interface SectionLabelProps {
   className?: string
 }
 
-export function SectionLabel({ children, className }: SectionLabelProps) {
+export function SectionLabel({ children, className = '' }: SectionLabelProps) {
   return (
-    <div className={cn('text-gold text-sm font-dm-sans uppercase tracking-wider font-semibold mb-2', className)}>
+    <div className={`eyebrow ${className}`}>
       {children}
     </div>
   )
@@ -32,14 +31,18 @@ interface SectionTitleProps {
   className?: string
 }
 
-export function SectionTitle({ children, className }: SectionTitleProps) {
+export function SectionTitle({ children, className = '' }: SectionTitleProps) {
   return (
-    <h2 className={cn('font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-navy mb-6', className)}>
+    <h2 className={`font-playfair text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 ${className}`}>
       {children}
     </h2>
   )
 }
 
-export function GoldRule({ className }: { className?: string }) {
-  return <div className={cn('h-px bg-gold w-24 mx-auto', className)} />
+export function GoldRule({ className = '' }: { className?: string }) {
+  return <div className={`gold-rule ${className}`} />
+}
+
+export function GoldRuleLeft({ className = '' }: { className?: string }) {
+  return <div className={`gold-rule-left ${className}`} />
 }

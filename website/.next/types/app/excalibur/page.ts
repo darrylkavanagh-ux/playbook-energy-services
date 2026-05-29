@@ -1,4 +1,4 @@
-// File: /workspace/foxlite-consulting/website/app/excalibur/page.tsx
+// File: /home/user/webapp/website/app/excalibur/page.tsx
 import * as entry from '../../../../app/excalibur/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
