@@ -1,8 +1,10 @@
-# Ignore everything except website folder
+# Ignore everything at root except website/ and deployment config
 /*
 !/website
+!/.vercelignore
+!/vercel.json
 
-# Always ignore
+# Always ignore build artefacts
 node_modules
 .env*
 .next
