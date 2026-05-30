@@ -1,21 +1,19 @@
 /**
  * PHANTOM ACCOUNT SERVICE
  * =============================================================================
- * Multi-asset paper trading engine. Replaces phantom_account_live.json.
+ * Multi-asset paper trading engine with dual persistence:
+ *   PRIMARY:  Supabase (when SUPABASE_URL is configured) — all trades, equity
+ *             curve, and account aggregate are stored in PostgreSQL tables.
+ *   FALLBACK: JSON files in data/ — used when Supabase is not configured.
  *
- * Tracks:
- *   - Virtual portfolio (starting balance configurable, default $10,000)
- *   - Open and closed phantom trades across Forex, Crypto, and Stocks
- *   - Real P&L computed from live prices when trade is closed
- *   - Aggregate performance: win rate, Sharpe ratio, max drawdown, profit factor
+ * Supabase tables used:
+ *   - phantom_trades       (one row per trade)
+ *   - phantom_account      (aggregate account stats)
+ *   - equity_curve         (timestamped equity points)
  *
- * Paper trading model:
- *   - Trades execute at signal entry_price (slippage not modelled in v1)
- *   - Position size = signal.position_size_pct × account equity
- *   - SL/TP triggers are checked when recordPrice() is called
- *   - No margin/leverage in v1 — trades are fully funded
- *
- * Persistence: JSON file (same pattern as OutcomeTracker)
+ * The in-memory account object remains as the working copy for fast access.
+ * After each mutation, both the JSON fallback AND Supabase are written to
+ * asynchronously (fire-and-forget, logged on error).
  */
 
 import fs from 'fs';
@@ -23,6 +21,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
 import type { TradingSignal } from '../engines/MultiAssetTradingEngine.js';
+import supabaseService, { isSupabaseEnabled } from './SupabaseService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -183,6 +182,35 @@ export class PhantomAccountService {
     } catch (e) {
       console.warn('[PhantomAccount] Could not save to disk:', e);
     }
+    // Fire-and-forget Supabase sync
+    this.syncToSupabase().catch(err => console.warn('[PhantomAccount] Supabase sync error:', err.message));
+  }
+
+  /** Sync aggregate account stats to Supabase */
+  private async syncToSupabase(): Promise<void> {
+    if (!isSupabaseEnabled()) return;
+    await supabaseService.upsertPhantomAccount({
+      account_id:          this.account.account_id,
+      name:                this.account.name,
+      starting_balance:    this.account.starting_balance,
+      current_balance:     this.account.current_balance,
+      peak_balance:        this.account.peak_balance,
+      total_trades:        this.account.total_trades,
+      open_trades_count:   this.account.open_trades_count,
+      closed_trades_count: this.account.closed_trades_count,
+      winning_trades:      this.account.winning_trades,
+      losing_trades:       this.account.losing_trades,
+      breakeven_trades:    this.account.breakeven_trades,
+      total_pnl_usd:       this.account.total_pnl_usd,
+      total_pnl_pct:       this.account.total_pnl_pct,
+      win_rate_pct:        this.account.win_rate_pct,
+      profit_factor:       this.account.profit_factor,
+      max_drawdown_pct:    this.account.max_drawdown_pct,
+      sharpe_ratio:        this.account.sharpe_ratio,
+      measured_accuracy:   this.account.measured_accuracy,
+      inception_date:      this.account.inception_date,
+      last_updated:        this.account.last_updated,
+    });
   }
 
   // ── Open a new phantom trade from a signal ────────────────────────────────
@@ -221,15 +249,27 @@ export class PhantomAccountService {
     this.account.total_trades++;
     this.account.open_trades_count++;
 
-    this.account.equity_curve.push({
+    const eqPoint = {
       timestamp: new Date().toISOString(),
       equity:    this.account.current_balance,
       trade_id:  trade.trade_id,
       event:     `OPEN ${trade.direction} ${trade.symbol} @ ${trade.entry_price}`,
-    });
+    };
+    this.account.equity_curve.push(eqPoint);
 
     this.recalcStats();
     this.save();
+
+    // Async: persist trade + equity point to Supabase
+    if (isSupabaseEnabled()) {
+      supabaseService.upsertPhantomTrade(trade as any).catch(
+        e => console.warn('[PhantomAccount] Trade upsert error:', e.message),
+      );
+      supabaseService.appendEquityCurvePoint({ ...eqPoint, account_id: this.account.account_id }).catch(
+        e => console.warn('[PhantomAccount] Equity curve error:', e.message),
+      );
+    }
+
     return { success: true, trade };
   }
 
@@ -276,15 +316,27 @@ export class PhantomAccountService {
       this.account.peak_balance = this.account.current_balance;
     }
 
-    this.account.equity_curve.push({
+    const closedEqPoint = {
       timestamp: new Date().toISOString(),
       equity:    this.account.current_balance,
       trade_id:  trade.trade_id,
       event:     `CLOSE ${trade.direction} ${trade.symbol} @ ${exit_price} | P&L: $${pnlUsd.toFixed(2)}`,
-    });
+    };
+    this.account.equity_curve.push(closedEqPoint);
 
     this.recalcStats();
     this.save();
+
+    // Async: sync closed trade + equity point to Supabase
+    if (isSupabaseEnabled()) {
+      supabaseService.upsertPhantomTrade(trade as any).catch(
+        e => console.warn('[PhantomAccount] Trade close sync error:', e.message),
+      );
+      supabaseService.appendEquityCurvePoint({ ...closedEqPoint, account_id: this.account.account_id }).catch(
+        e => console.warn('[PhantomAccount] Equity curve error:', e.message),
+      );
+    }
+
     return { success: true, trade };
   }
 

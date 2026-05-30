@@ -912,7 +912,7 @@ export default function OracleEngine() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 border-b-4 border-black pb-8">
           <div>
             <div className="inline-block bg-black text-[#00FFFF] border-4 border-black px-4 py-1 font-mono font-bold uppercase mb-4 neo-shadow">
-              ORB AI Oracle Engine — Strategic Roadmap
+              Playbook Trading — Oracle Engine v3.0
             </div>
             <h1 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] tracking-tighter">
               Oracle<br />Engine

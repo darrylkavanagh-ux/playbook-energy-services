@@ -11,7 +11,21 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["client/src/*"]
+    }
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "client/src",
+    "client/src/**/*",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "server"
+  ]
 }

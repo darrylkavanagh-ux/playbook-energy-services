@@ -25,6 +25,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import type { TradingSignal, SignalAction } from '../engines/MultiAssetTradingEngine.js';
+import supabaseService, { isSupabaseEnabled } from './SupabaseService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -153,6 +154,14 @@ export class OutcomeTracker {
 
     this.outcomes.set(signal.signal_id, record);
     saveToDisk(this.outcomes);
+
+    // Async: persist to Supabase
+    if (isSupabaseEnabled()) {
+      supabaseService.upsertOutcome(record as any).catch(
+        e => console.warn('[OutcomeTracker] Supabase register error:', e.message),
+      );
+    }
+
     return record;
   }
 
@@ -207,6 +216,25 @@ export class OutcomeTracker {
 
     this.outcomes.set(signal_id, record);
     saveToDisk(this.outcomes);
+
+    // Async: persist to Supabase + trigger calibration retrain
+    if (isSupabaseEnabled()) {
+      supabaseService.upsertOutcome(record as any).catch(
+        e => console.warn('[OutcomeTracker] Supabase outcome error:', e.message),
+      );
+    }
+
+    // Trigger calibration retrain every 10 new resolved outcomes
+    const resolvedCount = Array.from(this.outcomes.values()).filter(o => o.outcome !== 'PENDING').length;
+    if (resolvedCount % 10 === 0 && resolvedCount >= 10) {
+      import('./SignalCalibrationService.js').then(({ signalCalibrator }) => {
+        signalCalibrator.rebuild().then(result => {
+          if (result.success) {
+            console.log(`[OutcomeTracker] Calibration retrained on ${resolvedCount} outcomes. ECE: ${result.metrics?.expected_calibration_error?.toFixed(3)}`);
+          }
+        });
+      }).catch(() => { /* ignore — calibration is best-effort */ });
+    }
 
     return { success: true, outcome: record };
   }

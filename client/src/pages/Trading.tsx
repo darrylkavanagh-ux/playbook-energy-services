@@ -7,7 +7,7 @@ import Layout from "../components/Layout";
 
 type AssetClass = "forex" | "crypto" | "stock";
 type SignalAction = "BUY" | "SELL" | "HOLD";
-type TabId = "scanner" | "signal" | "hitl" | "phantom" | "accuracy" | "pnl";
+type TabId = "scanner" | "signal" | "hitl" | "phantom" | "accuracy" | "pnl" | "calibration";
 
 interface TradingSignal {
   signal_id: string;
@@ -1577,6 +1577,260 @@ function AccuracyTab() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// CALIBRATION TAB — Isotonic Regression Model Viewer
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface CalibrationData {
+  summary: {
+    trained:       boolean;
+    sample_count:  number;
+    ece:           number | null;
+    status:        string;
+    last_trained:  string | null;
+  };
+  metrics: {
+    total_resolved_signals:     number;
+    calibration_status:         string;
+    expected_calibration_error: number;
+    max_calibration_error:      number;
+    brier_score:                number;
+    reliability_score:          number;
+    bins: Array<{
+      bin_label:          string;
+      sample_count:       number;
+      empirical_win_rate: number;
+      calibrated_prob:    number;
+    }>;
+  } | null;
+  demo_table: Array<{ raw_pct: number; calibrated_pct: number; tier: string }>;
+  accuracy_layers: Record<string, string>;
+}
+
+function CalibrationTab() {
+  const [data, setData] = useState<CalibrationData | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [retraining, setRetraining] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const load = async () => {
+    setLoading(true); setError(null);
+    try {
+      const r = await fetch("/api/trading/calibration");
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      setData(await r.json());
+    } catch (e: any) { setError(e.message); }
+    finally { setLoading(false); }
+  };
+
+  const retrain = async () => {
+    setRetraining(true);
+    try {
+      const r = await fetch("/api/trading/calibration/rebuild", { method: "POST" });
+      const result = await r.json();
+      if (result.success) { await load(); }
+      else { setError(result.error || "Retrain failed"); }
+    } catch (e: any) { setError(e.message); }
+    finally { setRetraining(false); }
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const tierColour = (tier: string) => {
+    if (tier === "HIGH")     return "bg-emerald-400 text-black";
+    if (tier === "MODERATE") return "bg-yellow-300 text-black";
+    if (tier === "LOW")      return "bg-orange-400 text-black";
+    return "bg-red-400 text-white";
+  };
+
+  const statusColour = (status: string) => {
+    if (status === "ROBUST")        return "bg-emerald-400 text-black";
+    if (status === "TRAINED")       return "bg-[#00FFFF] text-black";
+    if (status === "PRELIMINARY")   return "bg-yellow-300 text-black";
+    return "bg-red-400 text-white";
+  };
+
+  return (
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl font-black uppercase">Signal Calibration</h2>
+          <p className="font-mono text-sm mt-1 opacity-70">Isotonic Regression — Pool Adjacent Violators Algorithm</p>
+        </div>
+        <div className="flex gap-3">
+          <button
+            onClick={load}
+            disabled={loading}
+            className="neo-button bg-[#00FFFF] border-4 border-black px-4 py-2 font-mono font-bold neo-shadow"
+          >{loading ? "Loading…" : "Refresh"}</button>
+          <button
+            onClick={retrain}
+            disabled={retraining}
+            className="neo-button bg-black text-white border-4 border-black px-4 py-2 font-mono font-bold neo-shadow"
+          >{retraining ? "Retraining…" : "Retrain Model"}</button>
+        </div>
+      </div>
+
+      {error && (
+        <div className="border-4 border-red-500 bg-red-50 p-4 font-mono text-red-700">
+          ❌ {error}
+        </div>
+      )}
+
+      {data && (
+        <>
+          {/* Status Banner */}
+          <div className="border-4 border-black p-6 neo-shadow bg-white grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <div className="font-mono text-xs uppercase mb-1 opacity-60">Model Status</div>
+              <span className={`font-mono font-bold text-sm px-3 py-1 border-2 border-black ${statusColour(data.summary.status)}`}>
+                {data.summary.status.replace(/_/g, " ")}
+              </span>
+            </div>
+            <div>
+              <div className="font-mono text-xs uppercase mb-1 opacity-60">Training Samples</div>
+              <div className="text-2xl font-black">{data.summary.sample_count}</div>
+              <div className="font-mono text-xs">min 10 needed</div>
+            </div>
+            <div>
+              <div className="font-mono text-xs uppercase mb-1 opacity-60">ECE (lower = better)</div>
+              <div className="text-2xl font-black">
+                {data.summary.ece !== null ? data.summary.ece.toFixed(3) : "N/A"}
+              </div>
+              <div className="font-mono text-xs">target &lt; 0.05</div>
+            </div>
+            <div>
+              <div className="font-mono text-xs uppercase mb-1 opacity-60">Last Trained</div>
+              <div className="font-mono text-xs">
+                {data.summary.last_trained
+                  ? new Date(data.summary.last_trained).toLocaleString()
+                  : "Never — need resolved outcomes"}
+              </div>
+            </div>
+          </div>
+
+          {/* Accuracy Layers */}
+          <div className="border-4 border-black p-6 neo-shadow bg-black text-white">
+            <h3 className="font-mono font-bold text-[#FFD700] uppercase mb-4">Accuracy Stack</h3>
+            <div className="grid gap-3">
+              {Object.entries(data.accuracy_layers).map(([key, value]) => (
+                <div key={key} className="flex items-start gap-4 border border-white/20 p-3">
+                  <div className="font-mono text-xs text-[#00FFFF] uppercase w-48 shrink-0">
+                    {key.replace(/_/g, " ")}
+                  </div>
+                  <div className="font-mono text-sm opacity-80">{value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Calibration Demo Table */}
+          <div className="border-4 border-black neo-shadow bg-white overflow-hidden">
+            <div className="bg-black text-white px-6 py-4">
+              <h3 className="font-mono font-bold uppercase">Raw Confidence → Calibrated Probability</h3>
+              <p className="font-mono text-xs opacity-60 mt-1">
+                This table shows what the engine's raw confidence score actually means in terms of true win probability
+              </p>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full font-mono text-sm">
+                <thead className="border-b-4 border-black bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left font-bold border-r-2 border-black">Raw Confidence %</th>
+                    <th className="px-4 py-3 text-left font-bold border-r-2 border-black">Calibrated Probability %</th>
+                    <th className="px-4 py-3 text-left font-bold border-r-2 border-black">Tier</th>
+                    <th className="px-4 py-3 text-left font-bold">Direction</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.demo_table.map((row, i) => (
+                    <tr key={i} className="border-b-2 border-black hover:bg-gray-50">
+                      <td className="px-4 py-3 border-r-2 border-black font-bold">{row.raw_pct}%</td>
+                      <td className="px-4 py-3 border-r-2 border-black">
+                        <div className="flex items-center gap-2">
+                          <div className="h-2 bg-[#00FFFF] border border-black" style={{ width: `${row.calibrated_pct}%`, maxWidth: "120px" }} />
+                          <span className="font-bold">{row.calibrated_pct}%</span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 border-r-2 border-black">
+                        <span className={`px-2 py-0.5 border-2 border-black text-xs font-bold ${tierColour(row.tier)}`}>
+                          {row.tier}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-xs opacity-60">
+                        {row.tier === "HIGH" ? "Strong edge — full size" :
+                         row.tier === "MODERATE" ? "Reasonable edge" :
+                         row.tier === "LOW" ? "Marginal — reduce size" : "Near coin-flip — skip"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Calibration Bins */}
+          {data.metrics && data.metrics.bins && (
+            <div className="border-4 border-black neo-shadow bg-white overflow-hidden">
+              <div className="bg-[#00FFFF] border-b-4 border-black px-6 py-4">
+                <h3 className="font-mono font-bold uppercase">Calibration Bins — Empirical vs Calibrated</h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full font-mono text-sm">
+                  <thead className="border-b-4 border-black bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left font-bold border-r-2 border-black">Bin</th>
+                      <th className="px-4 py-3 text-left font-bold border-r-2 border-black">Samples</th>
+                      <th className="px-4 py-3 text-left font-bold border-r-2 border-black">Empirical Win Rate</th>
+                      <th className="px-4 py-3 text-left font-bold border-r-2 border-black">Calibrated Prob</th>
+                      <th className="px-4 py-3 text-left font-bold">Gap (Miscalibration)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.metrics.bins.filter(b => b.sample_count > 0).map((bin, i) => {
+                      const gap = Math.abs(bin.calibrated_prob - bin.empirical_win_rate);
+                      return (
+                        <tr key={i} className="border-b-2 border-black hover:bg-gray-50">
+                          <td className="px-4 py-3 border-r-2 border-black font-bold">{bin.bin_label}</td>
+                          <td className="px-4 py-3 border-r-2 border-black">{bin.sample_count}</td>
+                          <td className="px-4 py-3 border-r-2 border-black">{(bin.empirical_win_rate * 100).toFixed(1)}%</td>
+                          <td className="px-4 py-3 border-r-2 border-black">{(bin.calibrated_prob * 100).toFixed(1)}%</td>
+                          <td className={`px-4 py-3 font-bold ${gap > 0.1 ? "text-red-600" : gap > 0.05 ? "text-orange-500" : "text-green-600"}`}>
+                            {(gap * 100).toFixed(1)}pp {gap <= 0.05 ? "✅" : gap <= 0.10 ? "⚠️" : "❌"}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* Algorithm explanation */}
+          <div className="border-4 border-black p-6 neo-shadow bg-gray-900 text-white font-mono text-sm space-y-3">
+            <h3 className="font-bold uppercase text-[#00FFFF]">Algorithm: Isotonic Regression (PAV)</h3>
+            <p className="opacity-80">The Pool Adjacent Violators algorithm enforces monotonicity: higher raw confidence must never map to lower calibrated probability.</p>
+            <p className="opacity-80">ECE (Expected Calibration Error) measures average |calibrated - empirical| weighted by bin size. ECE &lt; 0.05 = excellent.</p>
+            <p className="opacity-80">Model auto-retrains every 10 resolved outcomes. Minimum 10 samples for preliminary model, 100+ for robust calibration.</p>
+            <div className="border-t border-white/20 pt-3 text-[#FFD700]">
+              Phase 2: Replace with fine-tuned FinBERT + temperature scaling for sentence-level calibration.
+            </div>
+          </div>
+        </>
+      )}
+
+      {!data && !loading && (
+        <div className="border-4 border-black p-8 text-center font-mono neo-shadow">
+          <div className="text-4xl mb-4">⚙️</div>
+          <p className="font-bold">No calibration data yet</p>
+          <p className="opacity-60 text-sm mt-2">Generate signals and record outcomes to train the calibration model</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // MAIN PAGE
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -1590,12 +1844,13 @@ export default function Trading() {
   }, []);
 
   const tabs: { id: TabId; label: string; icon: string }[] = [
-    { id: "scanner",  label: "Market Scanner",     icon: "🔍" },
-    { id: "signal",   label: "Signal Generator",   icon: "⚡" },
-    { id: "hitl",     label: "HITL Portal",         icon: "👤" },
-    { id: "phantom",  label: "Phantom Account",    icon: "📋" },
-    { id: "pnl",      label: "P&L Calculator",     icon: "💰" },
-    { id: "accuracy", label: "Accuracy Analytics", icon: "📊" },
+    { id: "scanner",     label: "Market Scanner",     icon: "🔍" },
+    { id: "signal",      label: "Signal Generator",   icon: "⚡" },
+    { id: "hitl",        label: "HITL Portal",         icon: "👤" },
+    { id: "phantom",     label: "Phantom Account",    icon: "📋" },
+    { id: "pnl",         label: "P&L Calculator",     icon: "💰" },
+    { id: "accuracy",   label: "Accuracy Analytics", icon: "📊" },
+    { id: "calibration", label: "Calibration",        icon: "⚙️" },
   ];
 
   return (
@@ -1605,22 +1860,23 @@ export default function Trading() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 border-b-4 border-black pb-8">
           <div>
             <div className="inline-block bg-[#00FFFF] border-4 border-black px-4 py-1 font-mono font-bold uppercase mb-4 neo-shadow">
-              ORB AI Trading Engine v2 — Architecture B
+              Playbook Trading — Orb AI Universe v3.0
             </div>
             <h1 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] tracking-tighter">
-              Multi-Asset<br />Trading
+              Playbook<br />Trading
             </h1>
           </div>
           <div className="mt-6 md:mt-0 max-w-sm text-right">
             <p className="font-mono text-sm mb-3">
               Real RSI · MACD · BB · ATR · S/R<br />
               Forex + Crypto + Stocks<br />
-              Live price feeds · HITL verification
+              Supabase · WebSocket · HITL · Calibrated
             </p>
             <div className="flex gap-2 justify-end flex-wrap">
               <span className="neo-tag bg-black text-[#00FFFF] font-mono text-xs px-2 py-1 border-2 border-black">Architecture B LIVE</span>
-              <span className="neo-tag bg-black text-[#00FFFF] font-mono text-xs px-2 py-1 border-2 border-black">No Sine Wave</span>
-              <span className="neo-tag bg-black text-[#00FFFF] font-mono text-xs px-2 py-1 border-2 border-black">HITL Active</span>
+              <span className="neo-tag bg-black text-[#00FFFF] font-mono text-xs px-2 py-1 border-2 border-black">Supabase Connected</span>
+              <span className="neo-tag bg-black text-[#00FFFF] font-mono text-xs px-2 py-1 border-2 border-black">Calibrated Signals</span>
+              <span className="neo-tag bg-black text-[#FFD700] font-mono text-xs px-2 py-1 border-2 border-black">HITL Active</span>
             </div>
           </div>
         </div>
@@ -1663,8 +1919,9 @@ export default function Trading() {
           {activeTab === "signal"   && <SignalTab  onOpenPhantom={handleOpenPhantom} />}
           {activeTab === "hitl"     && <HITLTab />}
           {activeTab === "phantom"  && <PhantomTab pendingOpen={pendingPhantom} />}
-          {activeTab === "pnl"      && <PnLCalculatorTab />}
-          {activeTab === "accuracy" && <AccuracyTab />}
+          {activeTab === "pnl"         && <PnLCalculatorTab />}
+          {activeTab === "accuracy"    && <AccuracyTab />}
+          {activeTab === "calibration" && <CalibrationTab />}
         </div>
 
         {/* Disclaimer */}
