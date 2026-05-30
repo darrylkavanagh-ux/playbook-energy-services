@@ -160,3 +160,6 @@ temp/
 *.patch
 *.diff
 .turbo/
+
+# ------ Design references (large binaries) ------
+design-ref/
