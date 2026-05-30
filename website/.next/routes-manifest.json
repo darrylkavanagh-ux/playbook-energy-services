@@ -76,6 +76,12 @@
       "namedRegex": "^/excalibur(?:/)?$"
     },
     {
+      "page": "/forensic-capabilities",
+      "regex": "^/forensic\\-capabilities(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/forensic\\-capabilities(?:/)?$"
+    },
+    {
       "page": "/pricing",
       "regex": "^/pricing(?:/)?$",
       "routeKeys": {},
