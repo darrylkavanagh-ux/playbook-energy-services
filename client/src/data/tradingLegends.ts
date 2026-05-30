@@ -1,0 +1,875 @@
+/**
+ * TRADING LEGENDS & MARKET HISTORY DATASET
+ * =============================================================================
+ * Comprehensive dataset covering:
+ *   - Top 10 greatest traders of all time (1900–2026)
+ *   - 25 major market events that shaped trading
+ *   - Evolution of trading technology (Pre-phone → Phone → Internet → AI)
+ *   - Key strategies, quotes, and lessons from each legend
+ *
+ * Sources: Investopedia, Market Wizards (Jack Schwager), Wikipedia,
+ *          Renaissance Technologies research, Quantum Fund records,
+ *          Dukascopy historical research, IG Markets history
+ */
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TRADER PROFILES
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface TraderProfile {
+  id:             string;
+  rank:           number;
+  name:           string;
+  nickname:       string;
+  born:           number;
+  died?:          number;
+  nationality:    string;
+  era:            'pre_phone' | 'phone_era' | 'computer_era' | 'internet_era' | 'ai_era';
+  primary_market: string;
+  markets:        string[];
+  peak_net_worth: string;
+  best_trade:     string;
+  best_trade_profit: string;
+  best_trade_year: number;
+  career_returns:  string;
+  fund?:           string;
+  strategy:        string;
+  strategy_detail: string;
+  key_rules:       string[];
+  famous_quote:    string;
+  major_events_traded: string[];
+  technology_used: string;
+  biggest_loss?:   string;
+  lessons:         string[];
+  colour:          string;  // brand colour for UI
+  avatar_initials: string;
+}
+
+export const TRADER_PROFILES: TraderProfile[] = [
+  {
+    id: 'jesse_livermore',
+    rank: 1,
+    name: 'Jesse Livermore',
+    nickname: 'The Boy Plunger / The Great Bear of Wall Street',
+    born: 1877,
+    died: 1940,
+    nationality: 'American',
+    era: 'pre_phone',
+    primary_market: 'Stocks & Commodities',
+    markets: ['US Stocks', 'Cotton', 'Wheat', 'Coffee'],
+    peak_net_worth: '$100 million (1929) ≈ $1.7 billion today',
+    best_trade: 'Short sold the entire US stock market before the 1929 Wall Street Crash',
+    best_trade_profit: '$100 million in a single day — the greatest short in history',
+    best_trade_year: 1929,
+    career_returns: 'Made and lost 4 fortunes; net fortune lost to bankruptcy in 1934',
+    strategy: 'Price action momentum + pivotal points',
+    strategy_detail: 'Livermore traded entirely from reading the ticker tape — strips of paper printing stock prices at 15-minute delays. He memorised price patterns, waited for "pivotal points" (key breakout levels), and never traded against the primary trend. He used no charts — only numbers in his head.',
+    key_rules: [
+      'Never average down a losing position — "Losers average losers"',
+      'Wait for the market to confirm your position before increasing size',
+      'Trade with the trend — the line of least resistance',
+      'Cut losses immediately; let profits run without a predetermined limit',
+      'Never act on tips — only your own analysis',
+      'Markets are never wrong — opinions often are',
+    ],
+    famous_quote: '"The big money is not in the individual fluctuations but in the main movements — that is, not in reading the tape but in sizing up the entire market and its trend."',
+    major_events_traded: ['1906 San Francisco Earthquake (short US Steel)', '1907 Panic', '1929 Wall Street Crash', '1906–1907 Cotton manipulation'],
+    technology_used: 'Ticker tape machine (Thomas Edison, 1867) — prices printed on paper strips, 15–20 minute delay. No telephone trading; orders placed in person at bucket shops then NYSE member firms.',
+    biggest_loss: 'Lost everything 4 times; final bankruptcy 1934, died penniless 1940',
+    lessons: [
+      'Even the greatest trader needs position sizing discipline — unlimited leverage destroyed him',
+      'Psychological consistency matters as much as technical skill',
+      'Having a system means nothing without the discipline to follow it',
+    ],
+    colour: '#1a1a2e',
+    avatar_initials: 'JL',
+  },
+  {
+    id: 'george_soros',
+    rank: 2,
+    name: 'George Soros',
+    nickname: 'The Man Who Broke the Bank of England',
+    born: 1930,
+    nationality: 'Hungarian-American',
+    era: 'computer_era',
+    primary_market: 'Forex & Global Macro',
+    markets: ['GBP/USD', 'USD/JPY', 'Equities', 'Bonds', 'Commodities'],
+    peak_net_worth: '$8.1 billion',
+    best_trade: 'Short GBP/DEM on Black Wednesday 1992 — forced UK out of the ERM',
+    best_trade_profit: '$1.5 billion profit in 24 hours on a $10 billion position',
+    best_trade_year: 1992,
+    career_returns: 'Quantum Fund: ~30% average annual returns 1970–2000',
+    fund: 'Quantum Fund',
+    strategy: 'Reflexivity — exploiting feedback loops between market perception and reality',
+    strategy_detail: 'Soros\'s "Theory of Reflexivity" argues markets are never in equilibrium — prices influence fundamentals which influence prices in a self-reinforcing loop. He identifies when the narrative about an asset diverges from its intrinsic value, then bets on the correction. The Bank of England trade worked because the UK\'s ERM peg was fundamentally unsustainable — German reunification had made UK interest rates impossibly high.',
+    key_rules: [
+      'Markets are always biased — find the dominant bias and trade it',
+      'When you are right, double down; when wrong, cut immediately',
+      'The bigger the distortion, the bigger the eventual correction',
+      'Invest first, investigate later — use the market\'s feedback',
+      'It\'s not whether you\'re right or wrong, but how much you make when right',
+    ],
+    famous_quote: '"It\'s not whether you\'re right or wrong that\'s important, but how much money you make when you\'re right and how much you lose when you\'re wrong."',
+    major_events_traded: ['1992 Black Wednesday (GBP)', '1997 Asian Financial Crisis (THB, MYR)', '1999 Dot-com bubble', '2007–08 subprime mortgage'],
+    technology_used: 'Bloomberg terminals, Reuters Dealing 2000, direct bank interdealer lines. First to use computer modelling for macro positions in the 1980s.',
+    biggest_loss: '~$700 million in 1 week during the 1987 crash on the wrong side initially',
+    lessons: [
+      'Macro events create the largest, most reliable price dislocations',
+      'Government currency pegs are often the most predictable failure points',
+      'Leverage amplifies both genius and error — position size is everything',
+    ],
+    colour: '#0f3460',
+    avatar_initials: 'GS',
+  },
+  {
+    id: 'stanley_druckenmiller',
+    rank: 3,
+    name: 'Stanley Druckenmiller',
+    nickname: 'The Macro Master',
+    born: 1953,
+    nationality: 'American',
+    era: 'computer_era',
+    primary_market: 'Global Macro (Forex + Bonds + Equities)',
+    markets: ['EUR/USD', 'USD/JPY', 'US Treasuries', 'German Bunds', 'S&P 500'],
+    peak_net_worth: '$6.5 billion',
+    best_trade: 'Co-executed the 1992 GBP short with Soros; separately predicted the fall of the Berlin Wall and bought German marks 1989',
+    best_trade_profit: '$1 billion+ contribution to the GBP short; $1.8 billion on German reunification trade',
+    best_trade_year: 1992,
+    career_returns: '30.4% average annual returns at Duquesne Capital 1981–2010 — ZERO losing years over 30 years',
+    fund: 'Duquesne Capital',
+    strategy: 'Global macro concentration — make a very few very large bets',
+    strategy_detail: 'Druckenmiller is famous for concentration: he runs highly concentrated positions and sizes up aggressively when conviction is highest. He follows liquidity (central bank money flows) first, then valuations. He identifies when earnings or monetary policy is about to change direction before consensus, then positions early. Unlike most fund managers, he holds stocks for 6–24 months not days.',
+    key_rules: [
+      'Earnings don\'t move markets — it\'s the rate of change of earnings expectations',
+      'Concentrate your best ideas — diversification is protection against ignorance',
+      'Liquidity moves markets — follow the Fed\'s balance sheet first',
+      'The most important thing is to preserve capital; the second is to make money',
+      'Never, ever invest in the present — always invest in the future 18 months out',
+    ],
+    famous_quote: '"I\'ve learned many things from George Soros, but perhaps the most significant is that it\'s not whether you\'re right or wrong, but how much you make when you\'re right and how much you lose when you\'re wrong."',
+    major_events_traded: ['1989 Berlin Wall / German reunification', '1992 Black Wednesday', '1999–2000 tech bubble (long then short)', '2008 financial crisis'],
+    technology_used: 'Bloomberg, Reuters, proprietary quant screens at Duquesne. Notorious for keeping multiple monitors and reading company reports obsessively.',
+    lessons: [
+      'Consistency over brilliance: 30 years, 30% annual returns, zero down years beats any single "home run"',
+      'Macro catalysts (political events, central bank policy) precede price moves — follow liquidity',
+      'The ability to admit you\'re wrong and pivot is more valuable than any trading system',
+    ],
+    colour: '#16213e',
+    avatar_initials: 'SD',
+  },
+  {
+    id: 'paul_tudor_jones',
+    rank: 4,
+    name: 'Paul Tudor Jones',
+    nickname: 'PTJ',
+    born: 1954,
+    nationality: 'American',
+    era: 'computer_era',
+    primary_market: 'Futures & Macro (Forex, Equities, Commodities)',
+    markets: ['S&P 500 futures', 'EUR/USD', 'Gold', 'US Bonds'],
+    peak_net_worth: '$7.5 billion',
+    best_trade: 'Predicted and profited from Black Monday 1987 — tripled his fund in a single month',
+    best_trade_profit: '200% return in October 1987 alone when S&P fell 22% in one day',
+    best_trade_year: 1987,
+    career_returns: '~25% average annual returns; Tudor Investment Corp +1200% from 1988–2010',
+    fund: 'Tudor Investment Corp / Tudor BVI Global Fund',
+    strategy: 'Technical trend following with macro overlay; 5:1 risk/reward minimum',
+    strategy_detail: 'Jones studies 200-day moving averages obsessively and uses market tops/bottoms to identify inflection points. His "5 to 1" rule means he never takes a trade unless he can see a setup where he makes $5 for every $1 he risks. He filmed himself trading in 1987 (the "Trader" documentary) and the footage shows him predicting the crash using 1929 as a template — he overlaid 1987 S&P chart on the 1929 Dow.',
+    key_rules: [
+      '"5 to 1" risk/reward — never risk $1 unless you can make $5',
+      '"Losers average losers" — never add to a losing position',
+      'Don\'t focus on making money; focus on protecting what you have',
+      'The most important rule: play great defence, not great offence',
+      'Every day I assume every position I have is wrong',
+    ],
+    famous_quote: '"The most important rule of trading is to play great defense, not great offense. Every day I assume every position I have is wrong. I know where my stop risk points are going to be. I do that so I can define my maximum possible drawdown."',
+    major_events_traded: ['1987 Black Monday (tripled fund)', '1990 Japanese asset bubble collapse', '2008 financial crisis', 'COVID-19 2020'],
+    technology_used: 'Reuters Dealing 2000, Bloomberg. Famous for having multiple screens and running quantitative research teams alongside his gut-instinct macro calls.',
+    biggest_loss: 'Down ~15% in 1994 bond market rout; recovered fully within 2 years',
+    lessons: [
+      'Risk management is the only consistent edge — brilliant trades fail without it',
+      'Historical parallels (1929 vs 1987) can be powerful pattern recognition tools',
+      'Great traders are paranoid about being wrong — they plan exits before entries',
+    ],
+    colour: '#533483',
+    avatar_initials: 'PTJ',
+  },
+  {
+    id: 'bruce_kovner',
+    rank: 5,
+    name: 'Bruce Kovner',
+    nickname: 'The Philosopher Trader',
+    born: 1945,
+    nationality: 'American',
+    era: 'computer_era',
+    primary_market: 'Forex & Commodities (Global Macro)',
+    markets: ['USD/DEM', 'GBP/USD', 'Gold', 'Oil', 'Agricultural futures'],
+    peak_net_worth: '$5.3 billion',
+    best_trade: 'Borrowed $3,000 on a credit card in 1977 to buy soybean futures — turned it into $40,000 (then lost most of it in one day — his most important lesson)',
+    best_trade_profit: 'Caxton Associates: $14 billion managed, ~$2 billion personal gains from macro trades',
+    best_trade_year: 1983,
+    career_returns: 'Caxton Associates: ~21% average annual returns 1983–2012',
+    fund: 'Caxton Associates',
+    strategy: 'Macro trend following with deep fundamental research',
+    strategy_detail: 'Kovner (Harvard-educated political economist who drove a cab before trading) combines macro economic analysis with technical trend-following. He sizes positions based on volatility — smaller in volatile markets, larger when calm. A former student of Michael Marcus, he trained Bruce Kovner who then trained Paul Tudor Jones — the "Commodity Corp dynasty."',
+    key_rules: [
+      'Risk maximum 1–2% of capital on any single trade',
+      'Analyse the market\'s fundamentals first; use technicals for timing',
+      'If you personalise losses you can\'t trade — become a professional',
+      'Position size based on volatility, not conviction alone',
+      'Never get so committed to a view that you can\'t see the other side',
+    ],
+    famous_quote: '"Novice traders trade 5 to 10 times too big. They are taking 5 to 10 percent risks on a trade when they should be taking 1 to 2 percent risks."',
+    major_events_traded: ['1985 Plaza Accord (USD depreciation)', '1987 Black Monday', '1992 ERM crisis', '1994 bond market rout'],
+    technology_used: 'Pioneered use of computers at Caxton for quantitative research while keeping human discretion for final decisions.',
+    lessons: [
+      'Position sizing is the number one skill — most traders blow up from oversizing, not bad analysis',
+      'Academic intelligence doesn\'t guarantee trading success; emotional control does',
+      'Combine macro thinking with technical execution',
+    ],
+    colour: '#e94560',
+    avatar_initials: 'BK',
+  },
+  {
+    id: 'bill_lipschutz',
+    rank: 6,
+    name: 'Bill Lipschutz',
+    nickname: 'The Sultan of Currencies',
+    born: 1956,
+    nationality: 'American',
+    era: 'computer_era',
+    primary_market: 'Forex (pure currency specialist)',
+    markets: ['USD/DEM', 'GBP/USD', 'USD/JPY', 'USD/CHF'],
+    peak_net_worth: '$2 billion+',
+    best_trade: 'Turned $12,000 inheritance into $250,000 before joining Salomon Brothers; at Salomon generated $300 million/year for the firm',
+    best_trade_profit: '$300 million per year consistently at Salomon Brothers 1982–1990',
+    best_trade_year: 1985,
+    career_returns: 'Generated $300–400M/year for Salomon; HATHERSAGE Capital ~20% annual returns',
+    fund: 'Hathersage Capital Management',
+    strategy: 'Psychological and sentiment analysis of currency markets',
+    strategy_detail: 'Lipschutz is the only major trader on this list who trades forex exclusively. He believes currency markets are 98% psychological — understanding the "narrative" driving a currency pair matters more than the numbers. He trades large size with defined risk, often holding positions for weeks. His edge was being at Salomon during the interbank market\'s formative years — he had access to the largest order flows on earth.',
+    key_rules: [
+      'If most traders are bullish on a currency, the trade is probably already done',
+      'Use options to define risk on large forex positions',
+      'The narrative shifts BEFORE the numbers — sentiment leads fundamentals',
+      'Never use stop-losses in the traditional sense — use option structures',
+      'Think in terms of "what if I\'m wrong?" before entering any trade',
+    ],
+    famous_quote: '"You have to be able to place a trade and feel comfortable that you\'re taking reasonable risk, because if the risk scares you, you either shouldn\'t be in the trade or your position size is too large."',
+    major_events_traded: ['1985 Plaza Accord', '1987 Louvre Accord', 'Overnight USD collapse events 1988–1989', '1992 ERM crisis'],
+    technology_used: 'Reuters Dealing 2000 interdealer system — the first computerised interbank forex platform. Salomon had direct telephone lines to every major bank globally.',
+    lessons: [
+      'Specialise in one market deeply rather than trading everything superficially',
+      'Forex is the most liquid, most sentiment-driven market — psychology is the edge',
+      'Define maximum loss before entering, not during panic',
+    ],
+    colour: '#f5a623',
+    avatar_initials: 'BL',
+  },
+  {
+    id: 'michael_marcus',
+    rank: 7,
+    name: 'Michael Marcus',
+    nickname: 'The Mentor\'s Mentor',
+    born: 1944,
+    nationality: 'American',
+    era: 'phone_era',
+    primary_market: 'Commodities & Forex',
+    markets: ['Gold', 'Silver', 'Wheat', 'Cotton', 'USD/DEM', 'JPY futures'],
+    peak_net_worth: '$300 million+',
+    best_trade: 'Turned $30,000 into $80 million — a 2,600× return — over 20 years at Commodities Corporation',
+    best_trade_profit: '$80 million from $30,000 initial capital (2,600× return)',
+    best_trade_year: 1979,
+    career_returns: '$30,000 → $80 million over ~20 years at Commodities Corp',
+    fund: 'Commodities Corporation (mentor to Bruce Kovner)',
+    strategy: 'Trend following with fundamental catalyst confirmation',
+    strategy_detail: 'Marcus was the prototype for the "Market Wizard" trader — pure discretionary trend follower who combined commodity fundamentals (crop reports, weather) with price trend analysis. He worked at Commodities Corporation (funded MIT academics turned traders) and was the first to show that a disciplined trend-following approach could generate extraordinary returns. He mentored Bruce Kovner, who mentored Paul Tudor Jones — making Marcus the patriarch of a generation of billionaire traders.',
+    key_rules: [
+      'Every morning ask: "If I owned no positions, would I put on the same ones I have now?"',
+      'Know your exit point before entering — always',
+      'Fundamentals set the direction; technicals set the timing',
+      'When you have a big position going your way, add more — scale up winners',
+      'Patience is a skill: wait for the fat pitch, then swing hard',
+    ],
+    famous_quote: '"When I\'m trading well, I\'m basically trying to be positioned right for the big moves. The really big money is made on the really big moves."',
+    major_events_traded: ['1970s commodity supercycle', '1973 oil embargo', '1979 Iranian Revolution (oil/gold)', '1980 gold spike to $800', '1985 Plaza Accord'],
+    technology_used: 'Phone-era trading — direct calls to commodity pit brokers, Reuters teletype feeds for news, hand-drawn charts. No computers until late 1970s.',
+    lessons: [
+      'The foundation of trend-following works across all eras — from ticker tape to algorithms',
+      'Mentorship chains create compounding knowledge — invest in teaching others',
+      'Small edge + large position + trend = enormous returns over time',
+    ],
+    colour: '#27ae60',
+    avatar_initials: 'MM',
+  },
+  {
+    id: 'jim_simons',
+    rank: 8,
+    name: 'Jim Simons',
+    nickname: 'The Quant King',
+    born: 1938,
+    died: 2024,
+    nationality: 'American',
+    era: 'internet_era',
+    primary_market: 'All asset classes (quantitative)',
+    markets: ['Forex', 'Equities', 'Commodities', 'Bonds', 'Futures', 'Options'],
+    peak_net_worth: '$31 billion',
+    best_trade: 'The Medallion Fund itself — 30 consecutive years of ~66% gross annual returns',
+    best_trade_profit: 'Medallion Fund: ~$100 billion in cumulative profits 1988–2018',
+    best_trade_year: 2000,
+    career_returns: 'Medallion Fund: 66% gross / 39% net annual returns 1988–2018. $1,000 invested in 1988 = $23.5 million by 2018',
+    fund: 'Renaissance Technologies / Medallion Fund',
+    strategy: 'Pure quantitative pattern recognition — no fundamental or macro views',
+    strategy_detail: 'Simons was a mathematics professor and Cold War codebreaker before trading. Renaissance employs no economists or MBAs — only mathematicians, physicists, and computer scientists. The Medallion Fund identified 100s of tiny statistical patterns in market data (mean reversion, microstructure patterns, cross-asset correlations) and traded them simultaneously with high leverage. Each trade has a tiny edge — but making 100,000 trades/year with a tiny edge creates enormous compounding.',
+    key_rules: [
+      'Let the data speak — no narrative or macro views allowed',
+      'Find uncorrelated strategies and combine them — diversification of alphas',
+      'Trade frequency: the more trades with a positive edge, the more reliable the return',
+      'Human judgement overrides quant signals only for extreme tail events',
+      'Hire mathematicians, not economists — economists explain the past',
+    ],
+    famous_quote: '"Past performance is the best predictor of future performance if you can find a persistence signal in it. We don\'t override the models. If the model says buy, we buy."',
+    major_events_traded: ['1987 crash (profited)', '1998 LTCM crisis (survived)', '2000 dot-com bust (profited)', '2008 financial crisis (profited)', 'COVID-2020 (profited)'],
+    technology_used: 'Custom supercomputers, petabytes of historical market data, machine learning decades before AI was fashionable. By 2000s: co-location at exchanges, microsecond execution.',
+    lessons: [
+      'The edge doesn\'t have to be large — it has to be consistent and scalable',
+      'Data + compute > any individual\'s intuition at scale',
+      'The future of all trading is quantitative; quant is not a niche, it is the market',
+    ],
+    colour: '#8e44ad',
+    avatar_initials: 'JS',
+  },
+  {
+    id: 'andrew_krieger',
+    rank: 9,
+    name: 'Andrew Krieger',
+    nickname: 'The Man Who Shorted an Entire Country',
+    born: 1956,
+    nationality: 'American',
+    era: 'computer_era',
+    primary_market: 'Forex (pure currency)',
+    markets: ['NZD/USD', 'USD/DEM', 'GBP/USD'],
+    peak_net_worth: '$100 million+',
+    best_trade: 'Shorted the New Zealand Dollar in 1987 post-Black Monday with a position larger than New Zealand\'s entire money supply',
+    best_trade_profit: '$300 million for Bankers Trust in 1987 from one currency trade',
+    best_trade_year: 1987,
+    career_returns: 'Made $300 million for Bankers Trust in 1987; reportedly received $3 million bonus vs the $300 million he generated',
+    fund: 'Bankers Trust (then Quantum Fund for Soros)',
+    strategy: 'Fundamental currency valuation with aggressive leverage',
+    strategy_detail: 'After Black Monday 1987, investors fled to "safe" currencies including the New Zealand Dollar. Krieger identified that the NZD was massively overvalued on fundamentals. He took a short position exceeding the entire NZD money supply — literally shorting more NZD than existed — using options and spot forex. The New Zealand government called Bankers Trust to complain. Krieger resigned shortly after receiving a $3 million bonus on $300 million of profits.',
+    key_rules: [
+      'In currency crises, the market will overshoot — fade the extremes',
+      'When a small currency is artificially supported, the reversion is violent',
+      'Use options to build positions larger than spot market liquidity allows',
+      'A truly undervalued/overvalued currency is the highest-probability trade available',
+    ],
+    famous_quote: '"The dollar was clearly overvalued. I felt the markets had overreacted and currencies like the New Zealand Dollar had become overvalued in the flight to quality."',
+    major_events_traded: ['1987 Black Monday aftermath (NZD short)', 'Post-Plaza Accord USD weakness'],
+    technology_used: 'Reuters Dealing 2000, Bankers Trust\'s proprietary options pricing models — early computerised options valuation gave Krieger a structural edge over competitors still pricing options by hand.',
+    lessons: [
+      'Aggressive conviction + leverage = extraordinary outcomes (positive and negative)',
+      'Knowing when consensus is wrong about a currency\'s fair value is the purest forex edge',
+      'Large institutions often underpay for extraordinary performance',
+    ],
+    colour: '#e74c3c',
+    avatar_initials: 'AK',
+  },
+  {
+    id: 'richard_dennis',
+    rank: 10,
+    name: 'Richard Dennis',
+    nickname: 'The Prince of the Pit',
+    born: 1949,
+    nationality: 'American',
+    era: 'phone_era',
+    primary_market: 'Commodities futures (pit trading)',
+    markets: ['Soybeans', 'Corn', 'Wheat', 'Gold', 'T-Bond futures', 'S&P futures'],
+    peak_net_worth: '$200 million+',
+    best_trade: 'Turned $1,600 into $200 million from 1970–1983 — a 125,000× return',
+    best_trade_profit: '$200 million from $1,600 over 13 years',
+    best_trade_year: 1974,
+    career_returns: '$1,600 → $200 million (1970–1983); also famous Turtle Trading experiment',
+    strategy: 'Systematic trend following ("Turtle Trading")',
+    strategy_detail: 'Dennis started trading with $1,600 borrowed from his family in the Chicago commodity pits at age 17. He developed a systematic breakout-trading system: buy when prices break to new 20-day highs, sell when prices break to new 20-day lows. To prove trading could be taught, he ran the famous "Turtle Trading" experiment (1983–84): he trained 23 ordinary people his rules and gave them accounts. The Turtles made over $175 million in 5 years — proving systematic trend following can be taught.',
+    key_rules: [
+      'Trade the system, not your opinion — the system is right, opinions are noise',
+      'Buy strength, sell weakness — breakouts identify where money is flowing',
+      'Risk exactly 1–2% per trade; never deviate',
+      'A losing streak is just a statistical reality — stick to the system',
+      '"The Turtle Rules": 20-day breakout entry, 10-day breakout exit, 1% risk',
+    ],
+    famous_quote: '"I always say you could publish my trading rules in the newspaper and no one would follow them. The key is consistency and discipline."',
+    major_events_traded: ['1973–74 commodity supercycle', '1979 Iranian Revolution (oil spike)', '1980 Silver Hunt Brothers corner', '1982 bond bull market start'],
+    technology_used: 'Open outcry pit trading (hand signals, phone relays to floor brokers). Dennis was an early adopter of computerised back-testing in the 1970s — unprecedented for pit traders.',
+    biggest_loss: 'Lost ~$10 million in 1 week in 1987; eventually closed his fund in 1988 after losses',
+    lessons: [
+      'Trading can be systemised and taught — edge is in execution and discipline, not innate talent',
+      'Pit trading era produced the greatest trend-followers; systematic rules still work today',
+      'Drawdowns are inevitable — the question is whether you stick to your rules through them',
+    ],
+    colour: '#2ecc71',
+    avatar_initials: 'RD',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARKET EVENTS TIMELINE
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface MarketEvent {
+  id:            string;
+  year:          number;
+  month?:        number;
+  date_label:    string;
+  title:         string;
+  category:      'crash' | 'crisis' | 'policy' | 'war' | 'technology' | 'pandemic' | 'geopolitical';
+  impact:        'catastrophic' | 'severe' | 'major' | 'significant';
+  markets_hit:   string[];
+  fx_impact:     string;
+  key_move:      string;
+  who_won:       string;
+  who_lost:      string;
+  lesson:        string;
+  traders_involved?: string[];
+  colour:        string;
+}
+
+export const MARKET_EVENTS: MarketEvent[] = [
+  {
+    id: 'weimar_hyperinflation',
+    year: 1923,
+    month: 11,
+    date_label: 'Nov 1923',
+    title: 'Weimar Hyperinflation — Deutsche Mark Collapse',
+    category: 'crisis',
+    impact: 'catastrophic',
+    markets_hit: ['USD/DEM', 'Gold', 'German Bonds'],
+    fx_impact: 'DEM reached 4.2 trillion per 1 USD. Citizens used banknotes as wallpaper and firewood.',
+    key_move: 'USD/DEM: 4.2 trillion ×. German savings wiped out in weeks.',
+    who_won: 'Anyone holding physical gold, USD, GBP, or real assets. Currency speculators who shorted DEM from abroad made fortunes.',
+    who_lost: 'Every German holding savings in DEM — entire middle class wiped out. Bondholders received worthless paper.',
+    lesson: 'Hyperinflation is the ultimate currency trade — when a government prints unlimited money, the currency always reaches zero. Physical assets always outlast fiat in extremis.',
+    colour: '#e74c3c',
+  },
+  {
+    id: 'wall_street_crash_1929',
+    year: 1929,
+    month: 10,
+    date_label: 'Oct 1929',
+    title: 'Wall Street Crash — The Great Depression Begins',
+    category: 'crash',
+    impact: 'catastrophic',
+    markets_hit: ['US Stocks', 'Commodities', 'USD', 'Global trade'],
+    fx_impact: 'Gold standard prevented currency depreciation initially; UK finally abandoned gold in 1931 causing GBP -30%.',
+    key_move: 'Dow Jones fell 89% peak-to-trough. US GDP fell 29%. Unemployment hit 25%.',
+    who_won: 'Jesse Livermore made $100 million ($1.7B today) by shorting the market. Roger Babson had warned publicly and positioned short.',
+    who_lost: 'Virtually all retail investors. John D. Rockefeller\'s fortune halved. Banks globally. 9,000 US banks failed.',
+    lesson: 'The largest fortunes in a crash are made by those who identify the unsustainability before it\'s obvious. Leverage in bull markets creates the conditions for catastrophic crashes.',
+    traders_involved: ['jesse_livermore'],
+    colour: '#c0392b',
+  },
+  {
+    id: 'bretton_woods_1944',
+    year: 1944,
+    month: 7,
+    date_label: 'Jul 1944',
+    title: 'Bretton Woods Agreement — New World Monetary Order',
+    category: 'policy',
+    impact: 'catastrophic',
+    markets_hit: ['USD', 'All global currencies', 'Gold'],
+    fx_impact: 'USD became the world reserve currency. All currencies pegged to USD at fixed rates. Gold fixed at $35/oz. Killed speculation for 27 years.',
+    key_move: 'USD became the anchor of the global monetary system. IMF and World Bank created.',
+    who_won: 'US exporters, US government (seigniorage on USD). Global trade stability for post-war reconstruction.',
+    who_lost: 'Currency speculators — fixed rates meant no volatility, no trading profits for nearly 3 decades.',
+    lesson: 'Government pegs eliminate volatility until they can\'t — fixed systems always end, and when they do, the repricing is violent. The Bretton Woods collapse in 1971 created modern forex trading.',
+    colour: '#27ae60',
+  },
+  {
+    id: 'nixon_shock_1971',
+    year: 1971,
+    month: 8,
+    date_label: 'Aug 1971',
+    title: 'Nixon Shock — US Leaves the Gold Standard',
+    category: 'policy',
+    impact: 'catastrophic',
+    markets_hit: ['USD', 'Gold', 'All major currencies'],
+    fx_impact: 'USD immediately fell. Gold surged from $35 to $850 over the next decade (+2,300%). Modern floating exchange rate system born.',
+    key_move: 'Gold: $35 → $850 (+2,300%) by 1980. USD/DEM fell 30% within 2 years.',
+    who_won: 'Gold holders, commodity traders. The moment that created the modern forex market — every trader since 1971 owes their career to Nixon.',
+    who_lost: 'USD holders, anyone in fixed-rate USD bonds, central banks holding USD reserves.',
+    lesson: 'When a government breaks a monetary promise (gold convertibility), the repricing of real assets is violent and sustained. Nixon\'s decision birthed the $7.5 trillion/day forex market.',
+    colour: '#f39c12',
+  },
+  {
+    id: 'first_oil_crisis_1973',
+    year: 1973,
+    month: 10,
+    date_label: 'Oct 1973',
+    title: 'OPEC Oil Embargo — First Oil Crisis',
+    category: 'geopolitical',
+    impact: 'catastrophic',
+    markets_hit: ['Oil', 'USD', 'Equities', 'Inflation (all currencies)'],
+    fx_impact: 'USD weakened significantly. Oil-exporting countries\' currencies strengthened. Petrodollar recycling created new USD demand mechanism.',
+    key_move: 'Oil price quadrupled in 3 months: $3 → $12/barrel. Triggered stagflation across the West.',
+    who_won: 'OPEC nations, commodity traders long oil and gold, Michael Marcus and other commodity trend-followers.',
+    who_lost: 'Stock market investors (Dow fell 45%). Countries with oil-dependent economies. USD holders through 1970s inflation.',
+    lesson: 'Geopolitical events create the most violent and sustained commodity moves. Commodity currencies (AUD, CAD, NOK, SAR) are directly linked to commodity prices — understanding this link is core forex analysis.',
+    traders_involved: ['michael_marcus'],
+    colour: '#e67e22',
+  },
+  {
+    id: 'plaza_accord_1985',
+    year: 1985,
+    month: 9,
+    date_label: 'Sep 1985',
+    title: 'Plaza Accord — G5 Deliberately Weakens the Dollar',
+    category: 'policy',
+    impact: 'severe',
+    markets_hit: ['USD/JPY', 'USD/DEM', 'USD/GBP', 'US exports'],
+    fx_impact: 'USD fell 50% against JPY and DEM over 2 years. JPY went from 240 → 120 per USD. Created the Japanese asset bubble.',
+    key_move: 'USD/JPY: 240 → 120 (-50%) over 2 years. The most orchestrated currency devaluation in modern history.',
+    who_won: 'Anyone short USD: Bruce Kovner, Michael Marcus, Bill Lipschutz. Japanese exporters initially (gained in USD terms).',
+    who_lost: 'US exporters initially, USD holders, anyone long USD/JPY. Eventually Japan — the cheap yen triggered a bubble that crashed in 1990.',
+    lesson: 'Central banks can and do coordinate to move currencies by decree. Government policy is the single largest forex catalyst — macro traders who position ahead of policy shifts make the biggest returns.',
+    traders_involved: ['bruce_kovner', 'michael_marcus', 'bill_lipschutz'],
+    colour: '#3498db',
+  },
+  {
+    id: 'black_monday_1987',
+    year: 1987,
+    month: 10,
+    date_label: 'Oct 19, 1987',
+    title: 'Black Monday — Largest Single-Day Crash in History',
+    category: 'crash',
+    impact: 'catastrophic',
+    markets_hit: ['US Stocks (S&P -22%)', 'All global equities', 'USD', 'Hong Kong Stocks'],
+    fx_impact: 'USD fell sharply on Black Monday. Flight to JPY and DEM as safe havens. USD/JPY fell from 154 to 121 within weeks.',
+    key_move: 'S&P 500 fell 22.6% in one day — still the largest single-day % drop ever. Dow: -508 points.',
+    who_won: 'Paul Tudor Jones tripled his fund (returned 200% in October alone). Andrew Krieger shorted NZD for $300 million. Short sellers globally.',
+    who_lost: 'Portfolio insurance holders (ironically triggered the crash). Most institutional investors. The 1987 generation of retail traders.',
+    lesson: 'Programme trading and leverage can create feedback loops where selling triggers more selling. The traders who had pre-identified the overvaluation made generational returns. "The tape tells all" — Livermore was right even 50 years later.',
+    traders_involved: ['paul_tudor_jones', 'andrew_krieger'],
+    colour: '#c0392b',
+  },
+  {
+    id: 'japanese_bubble_1989',
+    year: 1989,
+    month: 12,
+    date_label: 'Dec 1989',
+    title: 'Japanese Asset Bubble Peak — Nikkei at 38,915',
+    category: 'crash',
+    impact: 'catastrophic',
+    markets_hit: ['Nikkei', 'Japanese real estate', 'USD/JPY', 'JPY bonds'],
+    fx_impact: 'JPY strengthened excessively through 1990s (deflationary trap). USD/JPY fell from 160 (1990) to 80 (1995) — unprecedented JPY strength.',
+    key_move: 'Nikkei: 38,915 (1989) → 7,600 (2003). Tokyo real estate fell 80%. Japan\'s "Lost Decade" became "Lost 3 Decades."',
+    who_won: 'Short sellers of Japanese real estate companies, anyone long USD/JPY short-term after 1990, Stanley Druckenmiller (had positioned for this).',
+    who_lost: 'Japanese banks, real estate companies, lifetime employment companies. Japanese retail investors. The entire Japanese economy for 30 years.',
+    lesson: 'Asset bubbles inflated by policy (the Plaza Accord forced JPY up, making Japanese assets cheap for foreign buyers) always revert. Nikkei returned to 38,915 only in 2024 — 35 years later.',
+    traders_involved: ['stanley_druckenmiller'],
+    colour: '#e74c3c',
+  },
+  {
+    id: 'black_wednesday_1992',
+    year: 1992,
+    month: 9,
+    date_label: 'Sep 16, 1992',
+    title: 'Black Wednesday — Soros Breaks the Bank of England',
+    category: 'crisis',
+    impact: 'catastrophic',
+    markets_hit: ['GBP/DEM', 'GBP/USD', 'UK Gilts', 'Italian Lira'],
+    fx_impact: 'GBP fell from DEM 2.95 to DEM 2.20 (-25%) within weeks of ERM exit. Bank of England lost £3.3 billion defending the indefensible peg.',
+    key_move: 'GBP fell 15% overnight when UK withdrew from ERM. UK interest rates briefly hit 15% to defend the peg before capitulation.',
+    who_won: 'George Soros: $1.5 billion. Stanley Druckenmiller: contributed $1 billion. Every trader short GBP into the ERM exit.',
+    who_lost: 'UK taxpayers (£3.3 billion lost defending the peg). The Conservative government\'s credibility. Homeowners with variable rate mortgages as rates spiked.',
+    lesson: 'A currency peg that conflicts with economic reality will always fail. No central bank has unlimited reserves. The bigger the distortion maintained artificially, the bigger the snap when it breaks.',
+    traders_involved: ['george_soros', 'stanley_druckenmiller'],
+    colour: '#c0392b',
+  },
+  {
+    id: 'asian_crisis_1997',
+    year: 1997,
+    month: 7,
+    date_label: 'Jul 1997',
+    title: 'Asian Financial Crisis — Tiger Economies Collapse',
+    category: 'crisis',
+    impact: 'catastrophic',
+    markets_hit: ['THB/USD', 'MYR/USD', 'IDR/USD', 'PHP/USD', 'Asian equities'],
+    fx_impact: 'Thai Baht fell 50% in weeks. Indonesian Rupiah fell 80%. Malaysian Ringgit fell 40%. South Korean Won fell 50%.',
+    key_move: 'THB/USD: from 25 to 56 baht per dollar (-55%). IDR/USD: from 2,400 to 14,000 per dollar (-83%).',
+    who_won: 'Macro funds short Asian currencies. George Soros (though he was accused of triggering it, the fundamentals were already broken). USD holders.',
+    who_lost: 'Asian governments and central banks. Companies with USD-denominated debt. IMF-dependent economies forced into austerity. 20 million people pushed into poverty.',
+    lesson: 'Emerging market currency pegs backed by insufficient USD reserves are the classic macro trade. Current account deficits funded by hot money always end the same way — violent devaluation.',
+    traders_involved: ['george_soros'],
+    colour: '#e74c3c',
+  },
+  {
+    id: 'ltcm_1998',
+    year: 1998,
+    month: 9,
+    date_label: 'Sep 1998',
+    title: 'LTCM Collapse — When Genius Failed',
+    category: 'crisis',
+    impact: 'severe',
+    markets_hit: ['US Bonds', 'Emerging market bonds', 'USD/RUB', 'Equity vol'],
+    fx_impact: 'Russian Ruble defaulted and devalued. USD/RUB: from 6 to 21 (-71%). LTCM\'s positions nearly crashed the entire global financial system.',
+    key_move: 'LTCM had $1.25 trillion in derivative exposure on $4.7 billion equity — 27:1 effective leverage. Lost $4.6 billion in 4 months.',
+    who_won: 'Those who had avoided LTCM-style convergence trades. Fed-orchestrated bailout prevented systemic collapse; 14 banks contributed $3.6 billion.',
+    who_lost: 'LTCM investors: lost everything. Two Nobel Prize winners (Merton and Scholes) proved models can\'t price tail risk. The 14 bailout banks.',
+    lesson: 'Mathematical models that assume normal distributions break in tail events. Leverage can destroy even Nobel Prize-level intellect. Markets can remain irrational longer than you can remain solvent.',
+    colour: '#8e44ad',
+  },
+  {
+    id: 'dotcom_bust_2000',
+    year: 2000,
+    month: 3,
+    date_label: 'Mar 2000',
+    title: 'Dot-Com Bust — NASDAQ Falls 78%',
+    category: 'crash',
+    impact: 'severe',
+    markets_hit: ['NASDAQ', 'Tech stocks globally', 'USD (paradoxically strengthened)', 'Venture capital'],
+    fx_impact: 'EUR/USD fell from 1.07 (1999 launch) to 0.82 by 2000 — EUR lost 25% against USD despite US crash. Capital flows into USD continued as global reserve currency.',
+    key_move: 'NASDAQ: 5,048 (Mar 2000) → 1,114 (Oct 2002), -78% in 2.5 years.',
+    who_won: 'Short sellers of overvalued tech. Jim Simons (Medallion Fund profited). Value investors who avoided tech.',
+    who_lost: 'Retail investors who bought tech IPOs. VC funds. Employees with stock options in bankrupt companies. $5 trillion in market cap destroyed.',
+    lesson: 'Narrative-driven bubbles (the "internet changes everything" story) can sustain extreme valuations for years — but fundamentals eventually win. The EUR launched at 1.07 and fell to 0.82 — even a central bank launch event can be overwhelmed by flows.',
+    traders_involved: ['jim_simons', 'stanley_druckenmiller'],
+    colour: '#e74c3c',
+  },
+  {
+    id: 'financial_crisis_2008',
+    year: 2008,
+    month: 9,
+    date_label: 'Sep 2008',
+    title: 'Global Financial Crisis — Lehman Brothers Collapses',
+    category: 'crash',
+    impact: 'catastrophic',
+    markets_hit: ['USD (flight to safety paradox)', 'EUR/USD', 'GBP/USD', 'Global equities', 'Credit markets'],
+    fx_impact: 'USD paradoxically strengthened (flight to safety). EUR/USD fell from 1.60 to 1.25 (-22%). GBP/USD fell from 2.00 to 1.35 (-33%). AUD/USD fell from 0.98 to 0.60 (-39%).',
+    key_move: 'GBP/USD: 2.00 → 1.35. AUD/USD: 0.98 → 0.60. S&P 500: -57% peak to trough.',
+    who_won: 'John Paulson made $15 billion betting on subprime collapse (greatest single trade in history). Jim Simons\' Medallion Fund made 80% in 2008. Short sellers of banks.',
+    who_lost: 'Lehman Brothers employees (26,000 jobs). Global stock market investors lost $30+ trillion. Homeowners in the US, UK, Spain, Ireland. Every major bank required bailouts.',
+    lesson: 'Systemic risk is invisible until it\'s catastrophic. The USD\'s reserve currency status means it strengthens in a crisis — counterintuitively. Leverage in the banking system is the multiplier that turns a housing correction into a global depression.',
+    traders_involved: ['jim_simons', 'stanley_druckenmiller'],
+    colour: '#c0392b',
+  },
+  {
+    id: 'euro_debt_crisis_2010',
+    year: 2010,
+    month: 4,
+    date_label: 'Apr 2010',
+    title: 'European Sovereign Debt Crisis — "Whatever It Takes"',
+    category: 'crisis',
+    impact: 'severe',
+    markets_hit: ['EUR/USD', 'Greek bonds', 'Spanish bonds', 'Italian bonds', 'EUR/CHF'],
+    fx_impact: 'EUR/USD fell from 1.51 (Dec 2009) to 1.19 (Jun 2010) — -21% in 6 months. EUR/CHF hit parity in 2011, forcing SNB to impose a cap.',
+    key_move: 'EUR/USD: 1.51 → 1.19 (-21%). Greek bonds: yield hit 40%. EUR/CHF: forced to 1.20 floor by SNB in Sep 2011.',
+    who_won: 'EUR/USD short sellers. CHF bulls (until SNB capped it). ECB\'s "whatever it takes" eventually stabilised the euro.',
+    who_lost: 'Greek citizens (GDP fell 25%). Holders of peripheral EU bonds. EUR/CHF longs who were wiped out when SNB removed cap in Jan 2015 (EUR/CHF fell 30% in minutes).',
+    lesson: 'A monetary union without fiscal union creates structural currency stress. Central bank interventions (SNB cap, ECB QE) can suppress market forces — until they can\'t.',
+    colour: '#e67e22',
+  },
+  {
+    id: 'snb_shock_2015',
+    year: 2015,
+    month: 1,
+    date_label: 'Jan 15, 2015',
+    title: 'SNB Removes EUR/CHF Floor — The "Frankenshock"',
+    category: 'policy',
+    impact: 'catastrophic',
+    markets_hit: ['EUR/CHF', 'CHF/USD', 'CHF/GBP', 'Forex brokers globally'],
+    fx_impact: 'EUR/CHF fell from 1.20 to 0.85 (-30%) in minutes. Largest single forex move in modern history in a major currency pair.',
+    key_move: 'EUR/CHF: 1.20 → 0.85 (-30%) in under 30 minutes. Several large forex brokers went bankrupt overnight (FXCM needed emergency $300M loan).',
+    who_won: 'Anyone long CHF/short EUR on 15 Jan 2015. Long-term CHF bulls who had waited 3.5 years for the cap to break.',
+    who_lost: 'Retail EUR/CHF longs (wiped out, with negative balances — brokers absorbed $200M+ in losses). FXCM, Alpari UK (went bust), Excel Markets (went bust).',
+    lesson: 'Central bank pegs are time bombs. The SNB cap had been "guaranteed" for 3 years — until it wasn\'t. Forex is the most liquid market on earth but can gap with zero liquidity in a tail event. Never be on the wrong side of an artificial peg.',
+    colour: '#c0392b',
+  },
+  {
+    id: 'brexit_2016',
+    year: 2016,
+    month: 6,
+    date_label: 'Jun 24, 2016',
+    title: 'Brexit Vote — GBP Flash Crash',
+    category: 'geopolitical',
+    impact: 'severe',
+    markets_hit: ['GBP/USD', 'EUR/GBP', 'GBP/JPY', 'FTSE 100'],
+    fx_impact: 'GBP/USD fell from 1.50 to 1.32 (-12%) overnight — largest single-day GBP move since the 1992 ERM exit.',
+    key_move: 'GBP/USD: 1.50 → 1.32 on June 24 (-12%). EUR/GBP: 0.76 → 0.83 (+9%).',
+    who_won: 'Anyone short GBP. USD holders. Peter Hargreaves (co-founder of Hargreaves Lansdown, heavily funded the Leave campaign).',
+    who_lost: 'GBP holders, UK importers, anyone who bet on Remain. GBP never recovered above 1.50 for 8 years.',
+    lesson: 'Political events create the most predictable asymmetric forex opportunities. When a binary outcome (Leave/Remain) has one side completely un-priced by the market, the repricing is violent.',
+    colour: '#3498db',
+  },
+  {
+    id: 'covid_crash_2020',
+    year: 2020,
+    month: 3,
+    date_label: 'Mar 2020',
+    title: 'COVID-19 Pandemic — Global Markets Frozen',
+    category: 'pandemic',
+    impact: 'catastrophic',
+    markets_hit: ['All asset classes', 'USD/EM currencies', 'Oil (went negative)', 'Global equities'],
+    fx_impact: 'USD surged (flight to safety). BRL/USD fell 30%. MXN/USD fell 25%. Oil futures went negative for first time ever (-$37/barrel for WTI May contract).',
+    key_move: 'S&P 500: -34% in 23 trading days (fastest bear market in history). GBP/USD: 1.32 → 1.14 (-14%). Oil: $65 → -$37 (negative)',
+    who_won: 'Jim Simons\' Medallion Fund (up 76% in 2020). Bill Ackman\'s CDS hedge made $2.6 billion. Vaccine makers. Tech stocks post-rebound.',
+    who_lost: 'Airlines, hospitality, oil companies. Retail investors who panic sold in March. Countries with USD-denominated debt in emerging markets.',
+    lesson: 'Black swan events are unpriceable — but having a hedged portfolio for unknown unknowns costs less than the tail risk. The market recovery (V-shape) was unprecedented — central bank intervention now reflexively floors all crashes.',
+    traders_involved: ['jim_simons'],
+    colour: '#8e44ad',
+  },
+  {
+    id: 'ukraine_war_2022',
+    year: 2022,
+    month: 2,
+    date_label: 'Feb 2022',
+    title: 'Russia Invades Ukraine — Energy & Food Crisis',
+    category: 'war',
+    impact: 'severe',
+    markets_hit: ['EUR/USD', 'USD/RUB', 'Natural gas', 'Wheat', 'Sunflower oil'],
+    fx_impact: 'USD/RUB spiked from 75 to 140 (+87%) then reversed to 57 as Russia demanded ruble payment for gas. EUR weakened vs USD as energy-dependent European economy hit.',
+    key_move: 'Natural gas: +500% in Europe. Wheat: +50%. EUR/USD: 1.15 → 0.96 (-17%), 20-year low for EUR.',
+    who_won: 'Energy commodity traders. USD holders. Norway (gas exporter, NOK strengthened). India and China (bought cheap Russian oil).',
+    who_lost: 'European consumers. German industry. Wheat-importing African nations. Russian oligarchs with frozen assets.',
+    lesson: 'Geopolitical events rewrite commodity supply chains permanently. The EUR weakness in 2022 was driven entirely by energy import costs — understanding trade balances matters for currency analysis.',
+    colour: '#e74c3c',
+  },
+  {
+    id: 'ai_trading_2024',
+    year: 2024,
+    month: 1,
+    date_label: '2024–2025',
+    title: 'AI Trading Revolution — Algorithms Now >70% of Volume',
+    category: 'technology',
+    impact: 'major',
+    markets_hit: ['All markets globally', 'Forex microstructure', 'Equity HFT'],
+    fx_impact: 'AI-driven order flow now dominates forex microstructure. Spreads tighter than ever but liquidity can disappear instantly in tail events.',
+    key_move: 'Renaissance Technologies-style quant funds now manage $1 trillion+. AI models predict short-term price moves with 55–60% accuracy consistently.',
+    who_won: 'Quant funds with superior data and compute. Retail traders using AI-assisted analysis. Brokers with AI order execution.',
+    who_lost: 'Traditional discretionary macro funds (AUM declining). Floor traders (extinct). Analysts replaced by AI models.',
+    lesson: 'AI is the new ticker tape — those who integrate machine intelligence into their workflow will survive; those who resist will become irrelevant. The Orb AI platform sits in this wave.',
+    colour: '#00FFFF',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TRADING TECHNOLOGY ERAS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface TechEra {
+  id:          string;
+  name:        string;
+  period:      string;
+  years:       [number, number];
+  description: string;
+  tools:       string[];
+  speed:       string;
+  key_traders: string[];
+  advantage:   string;
+  limitation:  string;
+}
+
+export const TECH_ERAS: TechEra[] = [
+  {
+    id: 'pit_era',
+    name: 'The Pit & Ticker Tape Era',
+    period: '1860s–1940s',
+    years: [1860, 1949],
+    description: 'Trading happened in physical open-outcry pits — the Chicago Board of Trade (1848), NYSE floor (1817). Prices were transmitted via ticker tape — a continuous paper strip printed by telegraph. Traders stood in hexagonal pits making hand signals to floor brokers. Jesse Livermore memorised ticker tape numbers and never used a chart. A "bucket shop" was an off-exchange betting parlour where Livermore honed his skills age 14.',
+    tools: ['Open outcry hand signals', 'Ticker tape machine (Edison, 1867)', 'Telegraph cables', 'Physical paper order slips', 'Chalk price boards'],
+    speed: '15–20 minute price delay via ticker tape. Orders took minutes to reach the pit.',
+    key_traders: ['jesse_livermore', 'richard_dennis (early)'],
+    advantage: 'Psychological mastery of reading crowd behaviour in the pit. Price discovery was slower, creating larger mispricings.',
+    limitation: 'Information advantage determined by physical proximity. No overnight trading. Limited leverage. Fills could be hours away.',
+  },
+  {
+    id: 'phone_era',
+    name: 'The Telephone & Telex Era',
+    period: '1950s–1979',
+    years: [1950, 1979],
+    description: 'Telephone trading dominated from the 1950s to 1979. Banks traded currencies over direct phone lines — "voice broker" networks. Reuters launched its first teletype service in 1851. FX trading exploded after the Bretton Woods collapse in 1971 — suddenly currencies moved freely and there was money to be made. Trades were confirmed by telex and recorded on paper. Michael Marcus and the Commodities Corporation era (1969) pioneered systematic trading in this era.',
+    tools: ['Direct telephone lines to pits', 'Reuters teletype news wire', 'Telex confirmation systems', 'Hand-drawn bar charts', 'Paper order books'],
+    speed: 'Phone trades: 30 seconds to 5 minutes from order to fill. Confirmation by telex within hours.',
+    key_traders: ['michael_marcus', 'richard_dennis', 'bruce_kovner (early)'],
+    advantage: 'Relationship networks provided information edge. Fewer participants meant larger mispricings lasted longer.',
+    limitation: 'Limited to market hours. Overnight risk unhedgeable. Maximum of 2–3 currency pairs monitored simultaneously.',
+  },
+  {
+    id: 'computer_era',
+    name: 'The Bloomberg & Reuters Era',
+    period: '1980s–1999',
+    years: [1980, 1999],
+    description: 'Bloomberg launched in 1981 (Michael Bloomberg\'s terminals). Reuters Dealing 2000 launched in 1981 — the first computerised interdealer forex platform. This allowed banks to trade electronically for the first time. Bill Lipschutz at Salomon Brothers used Reuters Dealing as the foundation for $300M/year forex profits. By 1992, George Soros used computer modelling to size the $10 billion GBP short. Fax machines (1980s) replaced telexes; eventually email (1990s) began replacing fax.',
+    tools: ['Bloomberg Terminal (1981)', 'Reuters Dealing 2000 (1981)', 'Spreadsheet modelling (Lotus 1-2-3, then Excel)', 'Early algorithmic execution', 'Fax machines'],
+    speed: 'Electronic orders: 2–5 seconds. Bloomberg price feeds: real-time streaming.',
+    key_traders: ['george_soros', 'stanley_druckenmiller', 'paul_tudor_jones', 'bruce_kovner', 'bill_lipschutz', 'andrew_krieger'],
+    advantage: 'Real-time prices for the first time. Spreadsheet modelling of positions. Cross-market correlation analysis became possible.',
+    limitation: 'Still largely phone-confirmed. Retail access completely blocked. Minimum ticket sizes ($1M+) excluded most participants.',
+  },
+  {
+    id: 'internet_era',
+    name: 'The Online Retail Era',
+    period: '2000–2014',
+    years: [2000, 2014],
+    description: 'The internet democratised forex. OANDA launched in 1996, IG Index in 1974 but online from 1998. Retail forex platforms (MetaTrader 4, launched 2005) allowed anyone to trade from a laptop. High-frequency trading emerged — by 2010, HFT was 60%+ of US equity volume. Jim Simons\' Renaissance Technologies had by now been running algorithms for 20 years. Social trading (eToro 2007) created copy-trading. Information parity began — the institutional information edge narrowed.',
+    tools: ['Online retail platforms (MT4, IG, OANDA)', 'ECN direct market access', 'Algorithmic execution APIs', 'Technical analysis software', 'News automation (Bloomberg, Reuters Machine Readable)'],
+    speed: 'Millisecond execution at major brokers. HFT: microsecond.',
+    key_traders: ['jim_simons (dominant)', 'bill_lipschutz (Hathersage)'],
+    advantage: 'Global 24/7 access. Democratised access to interbank rates. Automated strategy back-testing.',
+    limitation: 'HFT made scalping for small traders nearly impossible. Information edge collapsed — everyone had Bloomberg.',
+  },
+  {
+    id: 'ai_era',
+    name: 'The AI & Machine Learning Era',
+    period: '2015–present',
+    years: [2015, 2026],
+    description: 'Deep learning (2012), transformer models (2017, Attention Is All You Need), and LLMs (GPT-3, 2020) transformed quantitative finance. NLP sentiment analysis now parses central bank speeches in milliseconds. Reinforcement learning agents trade in live markets. Alternative data (satellite imagery of car parks, credit card transaction data, social media sentiment) now generates significant alpha. The Orb AI Multi-Asset Trading Engine (2026) sits in this era — combining Architecture B real technical analysis with HITL verification, representing the responsible AI trading frontier.',
+    tools: ['Large Language Models for news sentiment', 'Reinforcement learning trading agents', 'Alternative data APIs', 'Cloud supercomputing', 'Blockchain/DeFi order books', 'AI signal verification (VeriTech-10)'],
+    speed: 'Nanosecond HFT execution. AI signal generation: seconds. Human verification: minutes.',
+    key_traders: ['jim_simons (legacy)', 'Renaissance Technologies successors', 'Two Sigma', 'Citadel', 'Orb AI (current)'],
+    advantage: 'Unstructured data (news, speeches, satellite) now tradeable. Pattern recognition at scale no human can replicate.',
+    limitation: 'Arms race — AI vs AI. Overcrowded strategies. Fat finger / flash crash risk from correlated algorithms. Regulatory lag.',
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DATASETS REGISTRY (for the "what data do we need" section)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface DatasetEntry {
+  name:        string;
+  provider:    string;
+  url:         string;
+  free:        boolean;
+  cost?:       string;
+  coverage:    string;
+  format:      string;
+  useCase:     string;
+  priority:    'essential' | 'important' | 'nice_to_have';
+}
+
+export const REQUIRED_DATASETS: DatasetEntry[] = [
+  // PRICE DATA
+  { name: 'Forex Daily OHLCV (1970–present)',   provider: 'Alpha Vantage',          url: 'https://www.alphavantage.co', free: true, coverage: 'EUR/USD, GBP/USD, 50+ pairs, daily since 1970', format: 'JSON/CSV', useCase: 'Historical backtesting, signal validation', priority: 'essential' },
+  { name: 'Forex Tick Data (2000–present)',      provider: 'Dukascopy',               url: 'https://www.dukascopy.com/swiss/english/marketwatch/historical/', free: true, coverage: '30+ pairs, tick data', format: 'CSV', useCase: 'High-frequency backtesting', priority: 'important' },
+  { name: 'Crypto OHLCV (2013–present)',         provider: 'CoinGecko',               url: 'https://www.coingecko.com/api', free: true, coverage: 'BTC, ETH, 10,000+ coins', format: 'JSON', useCase: 'Crypto signal generation', priority: 'essential' },
+  { name: 'US Stocks Daily (1990–present)',      provider: 'Alpha Vantage / Yahoo',   url: 'https://finance.yahoo.com', free: true, coverage: 'NYSE, NASDAQ, all US stocks', format: 'JSON', useCase: 'Equity signal generation', priority: 'essential' },
+  { name: 'Global Equities (1920–present)',      provider: 'Global Financial Data',   url: 'https://www.globalfinancialdata.com', free: false, cost: '$3,000/yr', coverage: 'US, UK, EU, Japan stocks back to 1920', format: 'CSV', useCase: 'Historical crash analysis', priority: 'nice_to_have' },
+
+  // ECONOMIC DATA
+  { name: 'ECB Interest Rates (1999–present)',   provider: 'ECB Data Portal',         url: 'https://data.ecb.europa.eu', free: true, coverage: 'All ECB rates, monetary policy', format: 'CSV/JSON', useCase: 'Central bank overlay for EUR pairs', priority: 'essential' },
+  { name: 'Federal Reserve FRED Database',       provider: 'St Louis Fed',            url: 'https://fred.stlouisfed.org', free: true, coverage: '800,000 economic time series', format: 'JSON/CSV', useCase: 'US macro data, GDP, CPI, unemployment', priority: 'essential' },
+  { name: 'IMF Exchange Rate History',           provider: 'IMF',                     url: 'https://www.imf.org/en/Publications/SPROLLs/world-economic-outlook-databases', free: true, coverage: 'All currencies, annual, 1945–present', format: 'CSV', useCase: 'Long-term currency trend analysis', priority: 'important' },
+  { name: 'World Bank GDP Data',                 provider: 'World Bank',              url: 'https://data.worldbank.org', free: true, coverage: '200+ countries, GDP, trade', format: 'CSV/JSON', useCase: 'Macro fundamental analysis', priority: 'important' },
+
+  // NEWS & SENTIMENT
+  { name: 'Financial News API',                  provider: 'Finnhub',                 url: 'https://finnhub.io', free: true, cost: 'Free 60 req/min', coverage: 'Real-time news, 60 req/min free', format: 'JSON', useCase: 'Live news sentiment in signals', priority: 'essential' },
+  { name: 'NewsAPI Financial',                   provider: 'NewsAPI.org',             url: 'https://newsapi.org', free: true, cost: 'Free 100 req/day', coverage: '80,000 sources', format: 'JSON', useCase: 'News sentiment analysis', priority: 'essential' },
+  { name: 'Central Bank Speeches (NLP)',         provider: 'BIS / Central Bank sites', url: 'https://www.bis.org/cbspeeches/', free: true, coverage: 'All major CB speeches 2000–present', format: 'PDF/text', useCase: 'Hawkish/dovish NLP classification', priority: 'important' },
+
+  // MARKET MICROSTRUCTURE
+  { name: 'COT Report (Commitment of Traders)', provider: 'CFTC',                    url: 'https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm', free: true, coverage: 'Weekly positioning data for all futures', format: 'CSV', useCase: 'Sentiment extremes — contrarian signals', priority: 'important' },
+  { name: 'Options Implied Volatility',          provider: 'CBOE / Alpha Vantage',   url: 'https://www.cboe.com', free: false, cost: '$500/yr', coverage: 'VIX, currency vol, equity vol', format: 'JSON', useCase: 'Volatility-adjusted position sizing', priority: 'important' },
+
+  // HISTORICAL EVENTS
+  { name: 'Crisis Events Database',             provider: 'IMF/BIS Research',        url: 'https://www.imf.org/en/Publications/WP/Issues/2018/09/14/Systemic-Banking-Crises-Revisited-46232', free: true, coverage: 'All banking/currency crises 1970–2020', format: 'Excel', useCase: 'Historical event overlay on price charts', priority: 'important' },
+];

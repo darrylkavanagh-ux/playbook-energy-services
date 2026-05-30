@@ -10,6 +10,8 @@ import KavanAI from "@/pages/KavanAI";
 import SystemStatus from "@/pages/SystemStatus";
 import Foxlite from "@/pages/Foxlite";
 import ForensicInvestigation from "@/pages/ForensicInvestigation";
+import Trading from "@/pages/Trading";
+import TradingLegends from "@/pages/TradingLegends";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -23,6 +25,8 @@ function Router() {
       <Route path="/forensic" component={ForensicInvestigation} />
       <Route path="/status" component={SystemStatus} />
       <Route path="/foxlite" component={Foxlite} />
+      <Route path="/trading" component={Trading} />
+      <Route path="/legends" component={TradingLegends} />
       <Route component={NotFound} />
     </Switch>
   );

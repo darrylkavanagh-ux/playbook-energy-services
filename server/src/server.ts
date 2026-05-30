@@ -27,6 +27,8 @@ import veritechRoutes from './routes/veritech';
 import { mountForensicPlatformV2 } from './routes/forensicPlatformV2';
 import blockintRoutes from './routes/blockint';
 import platformRoutes from './routes/platform';
+// ── Multi-Asset Trading Engine (Forex + Crypto + Stocks) ─────────────────────
+import tradingRoutes from './routes/trading';
 
 // Load environment variables
 dotenv.config();
@@ -156,6 +158,10 @@ async function startServer() {
   app.use('/api/forex', forexRoutes);
   app.use('/api/neural', neuralRoutes);
   app.use('/api/veritech', veritechRoutes);
+
+  // ── Multi-Asset Trading Engine ─────────────────────────────────────────────
+  app.use('/api/trading', tradingRoutes);
+  console.log('✅ Multi-Asset Trading routes mounted: /api/trading/*');
 
   // ── Blockchain Intelligence (TRM BLOCKINT standalone route) ──────────────
   app.use('/api/blockint', blockintRoutes);
@@ -424,9 +430,15 @@ async function startServer() {
         message: 'Frontend not built — API is fully operational',
         api_endpoints: [
           'GET /api/health',
+          'GET /api/trading/health',
+          'POST /api/trading/signal',
+          'GET /api/trading/scan',
+          'GET /api/trading/accuracy',
+          'GET /api/trading/hitl/pending',
+          'POST /api/trading/verify',
+          'GET /api/trading/phantom',
           'GET /api/forex/health',
           'POST /api/forex/predict',
-          'POST /api/forex/verify',
           'GET /api/forensic/readiness',
           'GET /api/system/status',
         ],
