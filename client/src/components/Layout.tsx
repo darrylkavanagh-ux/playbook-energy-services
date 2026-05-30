@@ -11,6 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { name: "Forensic",    path: "/forensic",color: "bg-[#FF0000]" },
     { name: "Trading",     path: "/trading", color: "bg-emerald-400" },
     { name: "Legends",     path: "/legends", color: "bg-[#FFD700]" },
+    { name: "Oracle",      path: "/oracle",  color: "bg-[#00FFFF]" },
   ];
 
   return (

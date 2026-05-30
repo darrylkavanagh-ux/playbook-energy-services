@@ -12,6 +12,7 @@ import Foxlite from "@/pages/Foxlite";
 import ForensicInvestigation from "@/pages/ForensicInvestigation";
 import Trading from "@/pages/Trading";
 import TradingLegends from "@/pages/TradingLegends";
+import OracleEngine from "@/pages/OracleEngine";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/foxlite" component={Foxlite} />
       <Route path="/trading" component={Trading} />
       <Route path="/legends" component={TradingLegends} />
+      <Route path="/oracle" component={OracleEngine} />
       <Route component={NotFound} />
     </Switch>
   );
