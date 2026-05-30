@@ -7,7 +7,13 @@
  * The old /api/forex/* routes remain untouched for backward compatibility.
  *
  * ENDPOINTS:
- *   POST   /api/trading/signal         — Generate signal for any asset
+ *   POST   /api/trading/signal              — Generate signal for any asset
+ *   POST   /api/trading/cb-nlp/score        — Score central bank text (FED/ECB/BOE/BOJ/BIS)
+ *   GET    /api/trading/cb-nlp/summary      — Latest CB NLP scores per central bank
+ *   GET    /api/trading/cb-nlp/divergence   — Cross-bank divergence signals (forex pairs)
+ *   POST   /api/trading/smart-money/cot     — Process CFTC COT data for smart money flow
+ *   GET    /api/trading/smart-money/:symbol — Latest smart money signal for a symbol
+ *   GET    /api/trading/smart-money         — All tracked smart money signals
  *   POST   /api/trading/watchlist      — Batch signals for a watchlist
  *   GET    /api/trading/scan           — Auto-scan all supported assets
  *   POST   /api/trading/outcome        — Record actual price outcome (Step 3)
@@ -34,6 +40,8 @@ import { newsService }       from '../services/NewsService.js';
 import { phantomAccount }    from '../services/PhantomAccountService.js';
 import supabaseService, { isSupabaseEnabled } from '../services/SupabaseService.js';
 import { signalCalibrator }  from '../services/SignalCalibrationService.js';
+import { centralBankNLP }    from '../services/CentralBankNLPService.js';
+import { smartMoneyFlow }    from '../services/SmartMoneyFlowService.js';
 import type { AssetClass }   from '../services/MarketDataService.js';
 
 const router = express.Router();
@@ -103,30 +111,6 @@ router.get('/health', async (_req: Request, res: Response) => {
       cache_entries: cacheStatus.entries,
     },
     outcome_stats:   outcomeSummary,
-    phantom_summary: {
-      balance:           phantomSummary.balance,
-      measured_accuracy: phantomSummary.measured_accuracy,
-      total_trades:      phantomSummary.total_trades,
-    },
-    supported_assets:  multiAssetEngine.getSupportedAssets(),
-    timestamp:         new Date().toISOString(),
-    disclaimer:        'Live trading requires additional regulatory authorisation. This engine provides AI-assisted analysis only.',
-  });
-});
-      outcome_tracker:  'ONLINE',
-      news_service:     process.env.NEWS_API_KEY || process.env.FINNHUB_API_KEY ? 'LIVE' : 'FALLBACK',
-      phantom_account:  'ONLINE',
-      hitl_queue:       `${hitlQueue.size} pending`,
-    },
-    live_data: {
-      alpha_vantage: !!process.env.ALPHA_VANTAGE_API_KEY,
-      finnhub:       !!process.env.FINNHUB_API_KEY,
-      news_api:      !!process.env.NEWS_API_KEY,
-      fmp:           !!process.env.FMP_API_KEY,
-      cryptocompare: !!process.env.CRYPTOCOMPARE_API_KEY,
-      cache_entries: cacheStatus.entries,
-    },
-    outcome_stats:     outcomeSummary,
     phantom_summary: {
       balance:           phantomSummary.balance,
       measured_accuracy: phantomSummary.measured_accuracy,
@@ -707,25 +691,6 @@ router.get('/news', async (req: Request, res: Response) => {
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GET /api/trading/market-data — Raw price data for a symbol
-// ─────────────────────────────────────────────────────────────────────────────
-router.get('/market-data', async (req: Request, res: Response) => {
-  try {
-    const symbol     = String(req.query.symbol || 'EUR/USD').toUpperCase();
-    const assetClass = String(req.query.asset_class || 'forex') as AssetClass;
-
-    if (!['forex', 'crypto', 'stock'].includes(assetClass)) {
-      return res.status(400).json({ error: 'asset_class must be forex | crypto | stock' });
-    }
-
-    const data = await marketDataService.fetch(symbol, assetClass);
-    res.json({ success: true, data });
-  } catch (error) {
-    res.status(500).json({ error: `Market data fetch failed: ${error instanceof Error ? error.message : String(error)}` });
-  }
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
 // GET /api/trading/calibration — Signal calibration model + metrics
 // ─────────────────────────────────────────────────────────────────────────────
 router.get('/calibration', (_req: Request, res: Response) => {
@@ -802,13 +767,215 @@ router.get('/market-data', async (req: Request, res: Response) => {
     if (!['forex', 'crypto', 'stock'].includes(asset_class)) {
       return res.status(400).json({ error: 'asset_class must be forex | crypto | stock' });
     }
-    const price = await marketDataService.getCurrentPrice(symbol.toUpperCase(), asset_class as any);
+    const data  = await marketDataService.fetch(symbol.toUpperCase(), asset_class as any);
+    const price  = data.quote?.price ?? null;
     res.json({
       success: true,
       symbol:  symbol.toUpperCase(),
       asset_class,
       price,
       timestamp: new Date().toISOString(),
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/trading/cb-nlp/score — Score central bank text for hawkish/dovish
+// ─────────────────────────────────────────────────────────────────────────────
+router.post('/cb-nlp/score', async (req: Request, res: Response) => {
+  try {
+    const { text, source, speech_title, speech_date } = req.body as {
+      text?: string;
+      source?: string;
+      speech_title?: string;
+      speech_date?: string;
+    };
+
+    if (!text || typeof text !== 'string' || text.trim().length < 20) {
+      return res.status(400).json({
+        error: 'body.text required — minimum 20 characters of central bank speech or statement text',
+        example: {
+          text:         'The committee remains committed to restoring price stability. Further rate hikes may be appropriate.',
+          source:       'FED',
+          speech_title: 'FOMC Statement May 2025',
+          speech_date:  '2025-05-07',
+        },
+      });
+    }
+
+    if (!source || !['FED','ECB','BOE','BOJ','BIS'].includes(String(source).toUpperCase())) {
+      return res.status(400).json({
+        error: 'body.source required — must be one of: FED, ECB, BOE, BOJ, BIS',
+      });
+    }
+
+    const result = centralBankNLP.scoreText(
+      text,
+      String(source).toUpperCase(),
+      speech_title || 'Manual Input',
+      speech_date  || new Date().toISOString().split('T')[0],
+    );
+
+    // Broadcast to WS clients
+    if ((globalThis as any).__playbookBroadcast) {
+      (globalThis as any).__playbookBroadcast({
+        type:   'CB_NLP_SCORED',
+        source: result.source,
+        tone:   result.stance_label,
+        score:  result.net_stance,
+        ts:     result.scored_at,
+      });
+    }
+
+    res.json({ success: true, result });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/trading/cb-nlp/summary — Latest scores per central bank
+// ─────────────────────────────────────────────────────────────────────────────
+router.get('/cb-nlp/summary', (_req: Request, res: Response) => {
+  try {
+    const summary = centralBankNLP.getSummary();
+
+    res.json({
+      success:       true,
+      latest_scores: summary.latest_scores,
+      global_stance: summary.global_stance,
+      last_updated:  summary.last_updated,
+      banks_tracked: Object.keys(summary.latest_scores),
+      note:          'Scores persist in memory + Supabase cb_nlp_scores table. Net > 0 = hawkish, Net < 0 = dovish.',
+      legend:        { hawkish: '+1 to +3 per keyword', dovish: '-1 to -3 per keyword', net: 'sum of all weighted matches' },
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/trading/cb-nlp/divergence — Cross-bank divergence → forex signals
+// ─────────────────────────────────────────────────────────────────────────────
+router.get('/cb-nlp/divergence', (_req: Request, res: Response) => {
+  try {
+    const divergence = centralBankNLP.getDivergenceSignals();
+    const summary    = centralBankNLP.getSummary();
+
+    res.json({
+      success:          true,
+      divergence_count: divergence.length,
+      signals:          divergence,
+      global_stance:    summary.global_stance,
+      banks_with_data:  Object.keys(summary.latest_scores),
+      interpretation:   'BUY = first currency stronger (more hawkish central bank); SELL = first currency weaker.',
+      pairs_monitored:  ['EUR/USD', 'GBP/USD', 'USD/JPY', 'EUR/GBP', 'EUR/JPY', 'GBP/JPY'],
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// POST /api/trading/smart-money/cot — Process CFTC COT data
+// ─────────────────────────────────────────────────────────────────────────────
+router.post('/smart-money/cot', async (req: Request, res: Response) => {
+  try {
+    const { cot_data, asset_class } = req.body as {
+      cot_data?: {
+        symbol:              string;
+        report_date:         string;
+        commercials_long:    number;
+        commercials_short:   number;
+        large_specs_long:    number;
+        large_specs_short:   number;
+        small_specs_long:    number;
+        small_specs_short:   number;
+        open_interest:       number;
+      };
+      asset_class?: string;
+    };
+
+    if (!cot_data || !cot_data.symbol) {
+      return res.status(400).json({
+        error: 'body.cot_data required with fields: symbol, report_date, commercials_long/short, large_specs_long/short, small_specs_long/short, open_interest',
+        example: {
+          cot_data: {
+            symbol:            'EUR/USD',
+            report_date:       '2025-05-27',
+            commercials_long:  125000,
+            commercials_short: 98000,
+            large_specs_long:  210000,
+            large_specs_short: 87000,
+            small_specs_long:  45000,
+            small_specs_short: 56000,
+            open_interest:     563000,
+          },
+          asset_class: 'forex',
+        },
+      });
+    }
+
+    const signal = smartMoneyFlow.processCOT(cot_data, asset_class || 'forex');
+
+    if ((globalThis as any).__playbookBroadcast) {
+      (globalThis as any).__playbookBroadcast({
+        type:        'SMART_MONEY_UPDATED',
+        symbol:      cot_data.symbol,
+        sentiment:   signal.institutional_sentiment,
+        signal_type: signal.cot_signal,
+        ts:          signal.report_date,
+      });
+    }
+
+    res.json({ success: true, signal });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/trading/smart-money/:symbol — Latest smart money signal for symbol
+// ─────────────────────────────────────────────────────────────────────────────
+router.get('/smart-money/:symbol', (req: Request, res: Response) => {
+  try {
+    const symbol = req.params.symbol.toUpperCase();
+    const signal = smartMoneyFlow.getSignal(symbol);
+
+    if (!signal) {
+      return res.status(404).json({
+        success: false,
+        symbol,
+        error:   `No smart money data for ${symbol}. POST /api/trading/smart-money/cot with COT data first.`,
+      });
+    }
+
+    res.json({ success: true, symbol, signal });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GET /api/trading/smart-money — All tracked smart money signals
+// ─────────────────────────────────────────────────────────────────────────────
+router.get('/smart-money', (_req: Request, res: Response) => {
+  try {
+    const all       = smartMoneyFlow.getAllSignals();
+    const summary   = smartMoneyFlow.getSummary();
+
+    res.json({
+      success:       true,
+      count:         all.length,
+      summary,
+      signals:       all,
+      legend: {
+        institutional_sentiment: '-100 (max bearish) to +100 (max bullish)',
+        signal_type:             'ACCUMULATION | DISTRIBUTION | EXTREME_LONG | EXTREME_SHORT | NEUTRAL',
+        reversal_alert:          'true when large specs at extremes and commercials flip',
+      },
     });
   } catch (err: any) {
     res.status(500).json({ success: false, error: err.message });

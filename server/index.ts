@@ -205,6 +205,134 @@ async function startServer() {
     });
   });
 
+  // ── V10 Compliance Gate endpoints ──────────────────────────────────────────
+
+  app.get('/api/v10/report', async (_req: Request, res: Response) => {
+    try {
+      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
+      const report       = v10Gate.generateReport();
+      res.json({ success: true, report });
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  app.get('/api/v10/features', async (_req: Request, res: Response) => {
+    try {
+      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
+      const all          = v10Gate.evaluateAll();
+      const certified    = all.filter((f: any) => f.status === 'CERTIFIED');
+      const pending      = all.filter((f: any) => f.status === 'PENDING');
+      const failed       = all.filter((f: any) => f.status === 'FAILED');
+      res.json({
+        success:        true,
+        overall_score:  v10Gate.getOverallScore(),
+        gate_open:      v10Gate.isGateOpen(),
+        total:          all.length,
+        certified_count: certified.length,
+        pending_count:   pending.length,
+        failed_count:    failed.length,
+        features:        all,
+      });
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  app.get('/api/v10/features/:id', async (req: Request, res: Response) => {
+    try {
+      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
+      const feature      = v10Gate.getFeature(req.params.id);
+      if (!feature) return res.status(404).json({ error: `Feature ${req.params.id} not found` });
+      res.json({ success: true, feature });
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  app.post('/api/v10/features/:id/evidence', async (req: Request, res: Response) => {
+    try {
+      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
+      const { type, score, description, passed, tested_at } = req.body;
+      if (!type || score === undefined || !description) {
+        return res.status(400).json({ error: 'Required: type, score, description' });
+      }
+      const result = v10Gate.submitEvidence(req.params.id, {
+        type, score: Number(score),
+        description,
+        passed:     passed !== false,
+        tested_at:  tested_at || new Date().toISOString(),
+      });
+      res.json(result);
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  // V10 Update Queue endpoints
+
+  app.get('/api/v10/updates', async (_req: Request, res: Response) => {
+    try {
+      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      res.json({
+        success:  true,
+        summary:  selfUpdate.getSummary(),
+        updates:  selfUpdate.getAll(),
+        note:     `Only '${(await import('./services/V10ComplianceGate.js')).AUTHORIZED_APPROVER}' can authorize or reject updates.`,
+      });
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  app.post('/api/v10/updates', async (req: Request, res: Response) => {
+    try {
+      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const { title, description, category, impact, target_feature, proposed_change, expected_benefit, risk_assessment, proposer } = req.body;
+      if (!title || !description || !category || !impact || !target_feature || !proposed_change) {
+        return res.status(400).json({ error: 'Required: title, description, category, impact, target_feature, proposed_change' });
+      }
+      const update = selfUpdate.propose({ title, description, category, impact, target_feature, proposed_change, expected_benefit: expected_benefit || 'Not specified', risk_assessment: risk_assessment || 'Not assessed', proposer });
+      res.json({ success: true, update, message: `Update queued. Awaiting authorization from ${(await import('./services/V10ComplianceGate.js')).AUTHORIZED_APPROVER}.` });
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  app.post('/api/v10/updates/:id/authorize', async (req: Request, res: Response) => {
+    try {
+      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const approver = String(req.query.approver || req.body.approver || '');
+      const notes    = String(req.query.notes    || req.body.notes    || '');
+      const result   = selfUpdate.authorize(req.params.id, approver, notes);
+      const status   = result.success ? 200 : 403;
+      res.status(status).json(result);
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  app.post('/api/v10/updates/:id/reject', async (req: Request, res: Response) => {
+    try {
+      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const approver = String(req.query.approver || req.body.approver || '');
+      const reason   = String(req.query.reason   || req.body.reason   || 'No reason provided');
+      const result   = selfUpdate.reject(req.params.id, approver, reason);
+      const status   = result.success ? 200 : 403;
+      res.status(status).json(result);
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+  app.post('/api/v10/propose-improvements', async (_req: Request, res: Response) => {
+    try {
+      const { v10Gate }    = await import('./services/V10ComplianceGate.js');
+      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const features = v10Gate.evaluateAll().map((f: any) => ({
+        id:     f.id,
+        name:   f.name,
+        score:  f.score,
+        status: f.status,
+        notes:  f.notes,
+      }));
+      const proposals = selfUpdate.proposeFromV10Gaps(features);
+      res.json({
+        success:          true,
+        proposals_queued: proposals.length,
+        proposals,
+        message:          proposals.length > 0
+          ? `${proposals.length} improvement proposals queued. Awaiting Darryl authorization before any changes are applied.`
+          : 'No new improvement proposals needed at this time.',
+      });
+    } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
+  });
+
+
   // ── Global health endpoint ─────────────────────────────────────────────────
   app.get('/api/health', (_req: Request, res: Response) => {
     res.json({

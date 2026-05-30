@@ -13,6 +13,7 @@ import ForensicInvestigation from "@/pages/ForensicInvestigation";
 import Trading from "@/pages/Trading";
 import TradingLegends from "@/pages/TradingLegends";
 import OracleEngine from "@/pages/OracleEngine";
+import V10Dashboard from "@/pages/V10Dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/trading" component={Trading} />
       <Route path="/legends" component={TradingLegends} />
       <Route path="/oracle" component={OracleEngine} />
+      <Route path="/v10" component={V10Dashboard} />
       <Route component={NotFound} />
     </Switch>
   );
