@@ -12,14 +12,21 @@
 <style>
 :root{--navy:#0B1D33;--navy-deep:#071526;--navy-mid:#132D4F;--gold:#D4A843;--gold-bright:#E2BC5C;--gold-dark:#B8912E;--cream:#FDF9F0;--white:#FFFFFF;--grey-400:#9CA3AF;--grey-500:#6B7280;--grey-600:#4B5563;--grey-700:#374151;--grey-800:#1F2937;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--sans);color:var(--grey-800);background:var(--white);line-height:1.7;overflow-x:hidden}a{text-decoration:none;color:inherit}
-.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy-deep);border-bottom:2px solid var(--gold)}.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}.nav-brand{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--white);letter-spacing:1px}.nav-brand span{display:block;font-size:11px;font-weight:400;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-top:-2px}.nav-links{display:none;align-items:center;gap:28px}@media(min-width:1024px){.nav-links{display:flex}}.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.75);letter-spacing:.5px;text-transform:uppercase}.nav-links a:hover{color:var(--gold)}.nav-cta-btn{display:none;padding:10px 24px;background:var(--gold);color:var(--navy-deep);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer}@media(min-width:1024px){.nav-cta-btn{display:inline-block}}.nav-cta-btn:hover{background:var(--gold-bright)}.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}@media(min-width:1024px){.hamburger{display:none}}.hamburger span{width:24px;height:2px;background:var(--gold)}.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--navy-deep);padding:32px 24px;z-index:999}.mob-menu.open{display:flex;flex-direction:column;gap:20px}.mob-menu a{font-family:var(--serif);font-size:26px;color:var(--white);padding:8px 0;border-bottom:1px solid rgba(212,168,67,.2)}.mob-menu .mob-cta{margin-top:16px;padding:16px;background:var(--gold);color:var(--navy-deep);text-align:center;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--navy-deep);border-bottom:2px solid var(--gold)}.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:68px}.nav-brand{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--white);letter-spacing:1px}.nav-brand span{display:block;font-size:11px;font-weight:400;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-top:-2px}.nav-links{display:none;align-items:center;gap:28px}@media(min-width:1024px){.nav-links{display:flex}}.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.75);letter-spacing:.5px;text-transform:uppercase}.nav-links a:hover{color:var(--gold)}.nav-cta-btn{display:none;padding:10px 24px;background:var(--gold);color:var(--navy-deep);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer}@media(min-width:1024px){.nav-cta-btn{display:inline-block}}.nav-cta-btn:hover{background:var(--gold-bright)}.hamburger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}@media(min-width:1024px){.hamburger{display:none}}.hamburger span{width:24px;height:2px;background:var(--gold)}.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--navy-deep);padding:32px 24px;z-index:999;overflow-y:auto}.mob-menu.open{display:flex;flex-direction:column;gap:20px}.mob-menu a{font-family:var(--serif);font-size:26px;color:var(--white);padding:8px 0;border-bottom:1px solid rgba(212,168,67,.2)}.mob-menu .mob-cta{margin-top:16px;padding:16px;background:var(--gold);color:var(--navy-deep);text-align:center;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
 .hero{min-height:100vh;display:flex;align-items:center;background:var(--navy);padding:100px 24px 60px}@media(min-width:768px){.hero{padding:120px 40px 80px}}.hero-inner{max-width:1200px;margin:0 auto;width:100%}.hero-label{display:inline-block;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;padding-bottom:14px;border-bottom:2px solid var(--gold)}.hero h1{font-family:var(--serif);font-size:clamp(34px,6vw,68px);font-weight:500;color:var(--white);line-height:1.12;margin-bottom:24px;max-width:760px}.hero h1 em{font-style:italic;color:var(--gold)}.hero-sub{font-size:clamp(15px,2vw,19px);color:rgba(255,255,255,.65);line-height:1.75;max-width:540px;margin-bottom:40px}.hero-btns{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:64px}.btn-gold{display:inline-block;padding:16px 32px;background:var(--gold);color:var(--navy-deep);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:none;cursor:pointer}.btn-gold:hover{background:var(--gold-bright)}.btn-outline{display:inline-block;padding:16px 32px;background:transparent;border:2px solid var(--gold);color:var(--gold);font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}.btn-outline:hover{background:var(--gold);color:var(--navy-deep)}
 .stats-bar{display:grid;grid-template-columns:repeat(2,1fr);border:2px solid var(--gold)}@media(min-width:768px){.stats-bar{grid-template-columns:repeat(4,1fr)}}.stat-item{padding:24px 20px;text-align:center;background:var(--navy-deep)}.stat-item+.stat-item{border-left:1px solid rgba(212,168,67,.3)}@media(max-width:767px){.stat-item:nth-child(1),.stat-item:nth-child(2){border-bottom:1px solid rgba(212,168,67,.3)}.stat-item:nth-child(3){border-left:none}}.stat-val{font-family:var(--serif);font-size:34px;color:var(--gold);line-height:1;margin-bottom:6px}.stat-lbl{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase;line-height:1.4}
 .sec{padding:80px 24px}@media(min-width:768px){.sec{padding:100px 40px}}.sec-inner{max-width:1200px;margin:0 auto}.sec-dark{background:var(--navy);color:var(--white)}.sec-cream{background:var(--cream)}.sec-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}.sec-title{font-family:var(--serif);font-size:clamp(26px,4vw,44px);font-weight:500;line-height:1.2;margin-bottom:16px;max-width:600px}.sec-sub{font-size:16px;color:var(--grey-500);line-height:1.75;max-width:540px;margin-bottom:48px}.sec-dark .sec-sub{color:rgba(255,255,255,.55)}.gold-bar{width:48px;height:3px;background:var(--gold);margin-bottom:20px}
 .prob-grid{display:grid;grid-template-columns:1fr;gap:40px}@media(min-width:768px){.prob-grid{grid-template-columns:1fr 1fr;gap:60px;align-items:center}}.prob-card{background:var(--navy);padding:44px 36px;border-left:4px solid var(--gold)}.prob-num{font-family:var(--serif);font-size:60px;color:var(--gold);line-height:1;margin-bottom:12px}.prob-text{font-size:17px;color:rgba(255,255,255,.7);line-height:1.65}.prob-list{margin-top:28px;display:flex;flex-direction:column;gap:14px}.prob-item{display:flex;gap:14px;align-items:flex-start;font-size:15px;color:var(--grey-600);line-height:1.6}.prob-icon{flex-shrink:0;width:22px;height:22px;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
 .svc-grid{display:grid;grid-template-columns:1fr;gap:2px;background:rgba(212,168,67,.3);border:2px solid var(--gold)}@media(min-width:600px){.svc-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.svc-grid{grid-template-columns:repeat(4,1fr)}}.svc-card{background:var(--navy);padding:32px 24px}.svc-card:hover{background:var(--navy-mid)}.svc-emoji{font-size:32px;margin-bottom:16px;display:block}.svc-name{font-family:var(--serif);font-size:22px;color:var(--white);margin-bottom:10px}.svc-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7}
+/* Services detail section */
+.svc-detail-grid{display:grid;grid-template-columns:1fr;gap:32px}@media(min-width:768px){.svc-detail-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1200px){.svc-detail-grid{grid-template-columns:repeat(2,1fr)}}.svc-detail-card{padding:40px 32px;background:var(--white);border:1px solid rgba(212,168,67,.3);border-top:4px solid var(--gold);transition:box-shadow .2s}.svc-detail-card:hover{box-shadow:0 8px 40px rgba(11,29,51,.1)}.svc-detail-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}.svc-detail-icon{width:52px;height:52px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}.svc-detail-title{font-family:var(--serif);font-size:24px;color:var(--navy);line-height:1.2}.svc-detail-desc{font-size:14px;color:var(--grey-600);line-height:1.75;margin-bottom:20px}.svc-detail-list{display:flex;flex-direction:column;gap:8px}.svc-detail-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--grey-600);line-height:1.6}.svc-detail-item::before{content:"&#10003;";flex-shrink:0;width:18px;height:18px;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px}.svc-detail-tag{display:inline-block;padding:4px 12px;background:rgba(212,168,67,.12);color:var(--gold-dark);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-top:16px}
+/* How we work section */
+.hww-intro{display:grid;grid-template-columns:1fr;gap:48px;margin-bottom:64px}@media(min-width:768px){.hww-intro{grid-template-columns:1fr 1fr;align-items:center}}.hww-phases{display:flex;flex-direction:column;gap:0}.hww-phase{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:1px solid rgba(212,168,67,.15)}.hww-phase:last-child{border-bottom:none}.hww-phase-num{padding:32px 20px;background:var(--navy-deep);display:flex;align-items:flex-start;justify-content:center;padding-top:36px}.hww-phase-n{font-family:var(--serif);font-size:40px;color:var(--gold);font-weight:700;line-height:1}.hww-phase-body{padding:32px 28px;background:var(--navy-mid)}.hww-phase-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}.hww-phase-title{font-family:var(--serif);font-size:22px;color:var(--white);margin-bottom:10px}.hww-phase-text{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7}.hww-phase-items{margin-top:14px;display:flex;flex-direction:column;gap:6px}.hww-phase-item{font-size:13px;color:rgba(255,255,255,.5);display:flex;gap:8px;align-items:flex-start;line-height:1.5}.hww-phase-item::before{content:"→";color:var(--gold);flex-shrink:0}.hww-promise{padding:48px 40px;background:var(--navy-deep);border:2px solid var(--gold)}.hww-promise-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}.hww-promise h3{font-family:var(--serif);font-size:28px;color:var(--white);margin-bottom:20px}.hww-promise-list{display:flex;flex-direction:column;gap:12px}.hww-promise-item{display:flex;gap:14px;align-items:flex-start;font-size:14px;color:rgba(255,255,255,.7);line-height:1.6}.hww-check{flex-shrink:0;width:22px;height:22px;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+/* Process grid (existing) */
 .proc-grid{display:grid;grid-template-columns:1fr;gap:0;counter-reset:step;border:1px solid rgba(212,168,67,.2)}@media(min-width:768px){.proc-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.proc-grid{grid-template-columns:repeat(3,1fr)}}.proc-step{padding:40px 28px;border-bottom:1px solid rgba(212,168,67,.15);counter-increment:step;background:var(--white)}@media(min-width:768px){.proc-step{border-right:1px solid rgba(212,168,67,.15)}}.proc-step::before{content:counter(step,decimal-leading-zero);font-family:var(--serif);font-size:44px;font-weight:700;color:var(--gold);line-height:1;display:block;margin-bottom:16px}.proc-step h3{font-family:var(--serif);font-size:22px;font-weight:600;margin-bottom:10px;color:var(--navy)}.proc-step p{font-size:14px;color:var(--grey-500);line-height:1.7}
 .sect-grid{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:600px){.sect-grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.sect-grid{grid-template-columns:repeat(3,1fr)}}.sect-card{padding:28px 24px;background:var(--navy-mid);border:1px solid rgba(212,168,67,.2)}.sect-card:hover{border-color:var(--gold)}.sect-emoji{font-size:28px;margin-bottom:12px}.sect-name{font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:6px}.sect-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6}
+/* Calculator */
+.calc-wrap{max-width:820px;margin:0 auto}.calc-steps{display:flex;gap:0;margin-bottom:48px;border:2px solid var(--gold)}.calc-step-btn{flex:1;padding:16px 8px;background:var(--navy-deep);border:none;cursor:pointer;text-align:center;font-family:var(--sans);transition:background .2s;border-right:1px solid rgba(212,168,67,.3)}.calc-step-btn:last-child{border-right:none}.calc-step-btn.active{background:var(--gold)}.calc-step-num{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1;margin-bottom:4px}.calc-step-btn.active .calc-step-num{color:var(--navy-deep)}.calc-step-lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5)}.calc-step-btn.active .calc-step-lbl{color:var(--navy-deep)}.calc-panel{display:none}.calc-panel.active{display:block}.calc-section-title{font-family:var(--serif);font-size:26px;color:var(--white);margin-bottom:8px}.calc-section-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:32px}.calc-field{margin-bottom:20px}.calc-field label{display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}.calc-field input,.calc-field select{width:100%;padding:14px 16px;background:var(--navy-deep);border:2px solid rgba(212,168,67,.3);color:var(--white);font-family:var(--sans);font-size:15px;outline:none}.calc-field input::placeholder{color:rgba(255,255,255,.3)}.calc-field input:focus,.calc-field select:focus{border-color:var(--gold)}.calc-field select option{background:var(--navy-deep);color:var(--white)}.calc-field-note{font-size:12px;color:rgba(255,255,255,.35);margin-top:5px}.calc-grid{display:grid;grid-template-columns:1fr;gap:20px}@media(min-width:600px){.calc-grid{grid-template-columns:1fr 1fr}}.calc-required-badge{display:inline-block;font-size:10px;font-weight:700;background:var(--gold);color:var(--navy-deep);padding:2px 6px;letter-spacing:.5px;text-transform:uppercase;margin-left:6px;vertical-align:middle}.calc-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:28px;border-top:1px solid rgba(212,168,67,.2)}.calc-back-btn{padding:14px 28px;background:transparent;border:2px solid rgba(212,168,67,.4);color:rgba(255,255,255,.6);font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer}.calc-back-btn:hover{border-color:var(--gold);color:var(--white)}.calc-next-btn{padding:14px 32px;background:var(--gold);border:none;color:var(--navy-deep);font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}.calc-next-btn:hover{background:var(--gold-bright)}.calc-results{background:var(--navy-deep);border:2px solid var(--gold);padding:40px}.calc-results-header{text-align:center;margin-bottom:32px}.calc-results-company{font-size:13px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}.calc-results-title{font-family:var(--serif);font-size:32px;color:var(--white);margin-bottom:4px}.calc-results-subtitle{font-size:14px;color:rgba(255,255,255,.45)}.calc-big-numbers{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:32px}@media(min-width:600px){.calc-big-numbers{grid-template-columns:repeat(3,1fr)}}.calc-big-num{padding:28px 20px;text-align:center;border:1px solid rgba(212,168,67,.25);background:rgba(212,168,67,.04)}.calc-big-val{font-family:var(--serif);font-size:36px;color:var(--gold);line-height:1;margin-bottom:6px}.calc-big-lbl{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;line-height:1.4}.calc-breakdown{margin-bottom:32px}.calc-breakdown-title{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}.calc-breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(212,168,67,.1)}.calc-breakdown-row:last-child{border-bottom:none}.calc-bd-label{font-size:14px;color:rgba(255,255,255,.65)}.calc-bd-vals{text-align:right}.calc-bd-overcharge{font-size:14px;color:var(--gold);font-weight:600}.calc-bd-spend{font-size:12px;color:rgba(255,255,255,.3)}.calc-disclaimer{font-size:12px;color:rgba(255,255,255,.3);line-height:1.6;padding:16px;background:rgba(255,255,255,.03);border-left:3px solid rgba(212,168,67,.3);margin-bottom:28px}.calc-cta-section{text-align:center}.calc-cta-text{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:20px}.calc-reset-btn{margin-top:16px;padding:12px 24px;background:transparent;border:1px solid rgba(212,168,67,.3);color:rgba(255,255,255,.4);font-family:var(--sans);font-size:12px;cursor:pointer;letter-spacing:1px;text-transform:uppercase}.calc-reset-btn:hover{color:var(--white);border-color:var(--gold)}.calc-error{font-size:13px;color:#ff6b6b;margin-top:8px;display:none}
 .price-card{max-width:600px;margin:0 auto;padding:52px 40px;background:var(--white);border:2px solid var(--gold);text-align:center}.price-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}.price-val{font-family:var(--serif);font-size:72px;color:var(--navy);line-height:1;margin-bottom:6px}.price-val sup{font-size:36px}.price-desc{font-size:16px;color:var(--grey-500);margin-bottom:36px}.price-list{display:flex;flex-direction:column;gap:14px;text-align:left;margin-bottom:36px}.price-item{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--grey-700)}.price-chk{flex-shrink:0;width:22px;height:22px;background:var(--gold);color:var(--navy-deep);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.price-cta{width:100%;padding:18px;background:var(--navy);color:var(--gold);border:none;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer}.price-cta:hover{background:var(--navy-mid)}
 .team-grid{display:grid;grid-template-columns:1fr;gap:40px}@media(min-width:768px){.team-grid{grid-template-columns:repeat(2,1fr);gap:60px}}.team-card{text-align:center}.team-avatar{width:110px;height:110px;margin:0 auto 20px;background:var(--navy);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:32px;color:var(--gold)}.team-name{font-family:var(--serif);font-size:24px;margin-bottom:4px;color:var(--navy)}.team-role{font-size:12px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;font-weight:600}.team-bio{font-size:14px;color:var(--grey-500);line-height:1.7;max-width:380px;margin:0 auto}.veri-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--navy);border:2px solid var(--gold);margin-top:40px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 .cta-banner{padding:80px 24px;background:var(--navy);text-align:center}.cta-banner h2{font-family:var(--serif);font-size:clamp(26px,4vw,44px);color:var(--white);margin-bottom:16px}.cta-banner h2 em{color:var(--gold);font-style:italic}.cta-banner p{font-size:16px;color:rgba(255,255,255,.5);max-width:460px;margin:0 auto 32px}
@@ -28,24 +35,25 @@
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-inner"><a href="#" class="nav-brand">FOXLITE<span>Forensic Services</span></a><div class="nav-links"><a href="#services">Services</a><a href="#process">How It Works</a><a href="#sectors">Sectors</a><a href="#pricing">Pricing</a><a href="#team">About</a><a href="#contact">Contact</a></div><a href="#contact" class="nav-cta-btn">Free Audit</a><button class="hamburger" id="hamBtn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
-<div class="mob-menu" id="mobMenu"><a href="#services" onclick="closeMob()">Services</a><a href="#process" onclick="closeMob()">How It Works</a><a href="#sectors" onclick="closeMob()">Sectors</a><a href="#pricing" onclick="closeMob()">Pricing</a><a href="#team" onclick="closeMob()">About</a><a href="#contact" onclick="closeMob()">Contact</a><a href="#contact" class="mob-cta" onclick="closeMob()">Start Free Audit</a></div>
+<nav class="nav"><div class="nav-inner"><a href="#" class="nav-brand">FOXLITE<span>Forensic Services</span></a><div class="nav-links"><a href="#services">Services</a><a href="#how-we-work">How We Work</a><a href="#calculator">Calculator</a><a href="#sectors">Sectors</a><a href="#pricing">Pricing</a><a href="#team">About</a><a href="#contact">Contact</a></div><a href="#calculator" class="nav-cta-btn">Savings Calculator</a><button class="hamburger" id="hamBtn" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+<div class="mob-menu" id="mobMenu"><a href="#services" onclick="closeMob()">Services</a><a href="#how-we-work" onclick="closeMob()">How We Work</a><a href="#calculator" onclick="closeMob()">Calculator</a><a href="#sectors" onclick="closeMob()">Sectors</a><a href="#pricing" onclick="closeMob()">Pricing</a><a href="#team" onclick="closeMob()">About</a><a href="#contact" onclick="closeMob()">Contact</a><a href="#calculator" class="mob-cta" onclick="closeMob()">Savings Calculator</a></div>
 
 <section class="hero"><div class="hero-inner">
 <div class="hero-label">Independent Forensic Auditing &bull; Established 2019</div>
 <h1>We find overcharges.<br><em>You keep the savings.</em></h1>
 <p class="hero-sub">Specialist forensic auditors serving commercial organisations across Ireland and the United Kingdom. We identify and recover hidden overcharges in your utility bills, insurance premiums, and operational costs.</p>
-<div class="hero-btns"><a href="#contact" class="btn-gold">Start Your Free Audit &#8594;</a><a href="#process" class="btn-outline">How It Works</a></div>
+<div class="hero-btns"><a href="#calculator" class="btn-gold">Estimate Your Savings &#8594;</a><a href="#how-we-work" class="btn-outline">How It Works</a></div>
 <div class="stats-bar"><div class="stat-item"><div class="stat-val">25%</div><div class="stat-lbl">Our Fee on<br>Recovered Savings</div></div><div class="stat-item"><div class="stat-val">&euro;0</div><div class="stat-lbl">Upfront Cost<br>to You</div></div><div class="stat-item"><div class="stat-val">6yr</div><div class="stat-lbl">Retrospective<br>Recovery Period</div></div><div class="stat-item"><div class="stat-val">8</div><div class="stat-lbl">Specialist Audit<br>Categories</div></div></div>
 </div></section>
 
 <section class="sec sec-cream" id="problem"><div class="sec-inner"><div class="prob-grid"><div>
 <div class="gold-bar"></div><div class="sec-label">The Problem</div>
 <h2 class="sec-title">Businesses lose millions to hidden overcharges every year.</h2>
-<p style="font-size:15px;color:var(--grey-600);line-height:1.8;margin-bottom:28px">Energy bills, waste management, banking fees, telecoms, insurance, and property costs often contain systematic errors, legacy tariffs, and contractual overcharges that go undetected for years.</p>
+<p style="font-size:15px;color:var(--grey-600);line-height:1.8;margin-bottom:28px">Energy bills, waste management, telecoms, insurance, and property costs often contain systematic errors, legacy tariffs, and contractual overcharges that go undetected for years.</p>
 <div class="prob-list"><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Incorrect tariff rates applied after contract renewals</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Estimated billing overriding actual meter readings</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Insurance premiums inflated through price walking</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>VAT applied incorrectly or at wrong rates</span></div><div class="prob-item"><div class="prob-icon">&#10003;</div><span>Standing charges, capacity charges, and levies miscalculated</span></div></div>
 </div><div><div class="prob-card"><div class="prob-num">73%</div><div class="prob-text">of commercial utility bills contain at least one billing error, according to industry auditing benchmarks.</div></div></div></div></div></section>
 
+<!-- ═══════════════════════════════ SERVICES ═══════════════════════════════ -->
 <section class="sec sec-dark" id="services"><div class="sec-inner">
 <div class="sec-label">Our Services</div>
 <h2 class="sec-title" style="color:#fff">Eight specialist audit categories. One forensic standard.</h2>
@@ -58,18 +66,344 @@
 <div class="svc-card"><span class="svc-emoji">&#128222;</span><div class="svc-name">Telecoms</div><div class="svc-desc">Business line audits, broadband cost optimisation, mobile fleet management, SIP/VoIP migration analysis, and call charge verification.</div></div>
 <div class="svc-card"><span class="svc-emoji">&#128737;&#65039;</span><div class="svc-name">Insurance</div><div class="svc-desc">Premium forensic review, price walking detection, broker performance assessment, coverage gap analysis, and claims history optimisation.</div></div>
 <div class="svc-card"><span class="svc-emoji">&#128179;</span><div class="svc-name">Merchant Services</div><div class="svc-desc">Card processing fee audits, interchange+ optimisation, PCI compliance cost review, terminal rental assessments, and chargeback analysis.</div></div>
-<div class="svc-card"><span class="svc-emoji">&#127970;</span><div class="svc-name">Rates</div><div class="svc-desc">Business rates appeals, rateable value assessments, transitional relief checks, empty property relief, and small business rate reviews.</div></div>
+<div class="svc-card"><span class="svc-emoji">&#127970;</span><div class="svc-name">Business Rates</div><div class="svc-desc">Rates appeals, rateable value assessments, transitional relief checks, empty property relief, and small business rate reviews.</div></div>
+</div>
+</div></section>
+
+<!-- ═══════════════════════════ SERVICES DETAIL ════════════════════════════ -->
+<section class="sec sec-cream" id="services-detail"><div class="sec-inner">
+<div style="text-align:center;margin-bottom:56px">
+<div class="sec-label" style="text-align:center">What We Audit</div>
+<h2 class="sec-title" style="margin:0 auto 16px;text-align:center">Forensic methodology across all eight categories.</h2>
+<p class="sec-sub" style="margin:0 auto;text-align:center">Each audit category is a distinct specialisation. Our team applies a systematic, evidence-based approach to every engagement, leaving no billing line unchallenged.</p>
+</div>
+<div class="svc-detail-grid">
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#9889;</div><div class="svc-detail-title">Electricity Audit</div></div>
+<div class="svc-detail-desc">Commercial electricity billing is complex — with multiple tariff components, levies, and distribution charges layered onto unit rates. Our forensic process unpicks every element and compares it against your contracted terms and prevailing market rates.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Tariff rate validation against contract and published schedules</div>
+<div class="svc-detail-item">Maximum demand and capacity charge analysis</div>
+<div class="svc-detail-item">Meter reading accuracy and estimated billing forensics</div>
+<div class="svc-detail-item">PSO levy, distribution, and transmission use-of-system charges</div>
+<div class="svc-detail-item">VAT rate verification and carbon tax compliance</div>
+<div class="svc-detail-item">Retrospective recovery going back six years</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 15–22%</div>
+</div>
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#128293;</div><div class="svc-detail-title">Gas Audit</div></div>
+<div class="svc-detail-desc">Gas suppliers frequently apply incorrect unit rates after contract renewals, use estimated readings that systematically overstate consumption, and miscalculate carbon tax obligations. We identify and recover all excess charges.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Unit rate and standing charge forensics</div>
+<div class="svc-detail-item">Estimated versus actual consumption reconciliation</div>
+<div class="svc-detail-item">Carbon tax rate and calculation verification</div>
+<div class="svc-detail-item">Meter calibration and accuracy assessment</div>
+<div class="svc-detail-item">Contract compliance and switching entitlement review</div>
+<div class="svc-detail-item">Full billing history audit for six-year recovery window</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 12–19%</div>
+</div>
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#128167;</div><div class="svc-detail-title">Water Audit</div></div>
+<div class="svc-detail-desc">Water billing for commercial premises frequently includes surface water drainage charges, trade effluent fees, and volumetric charges that are applied incorrectly or without proper measurement. Many organisations are paying for infrastructure they do not use.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Volumetric consumption charge verification</div>
+<div class="svc-detail-item">Standing charge and connection fee review</div>
+<div class="svc-detail-item">Surface water drainage assessment and challenge</div>
+<div class="svc-detail-item">Trade effluent consent compliance review</div>
+<div class="svc-detail-item">Meter accuracy testing and calibration records review</div>
+<div class="svc-detail-item">Rateable value-based charging challenges where applicable</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 8–14%</div>
+</div>
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#9851;</div><div class="svc-detail-title">Waste Management Audit</div></div>
+<div class="svc-detail-desc">Waste collection contracts are frequently poorly negotiated and even more poorly monitored. Charges for frequency, volume, weight, and disposal are routinely applied at incorrect rates, with additional charges levied without contractual basis.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Collection frequency versus contract specification review</div>
+<div class="svc-detail-item">Weight-based versus volume-based charge reconciliation</div>
+<div class="svc-detail-item">Landfill gate fee and tax verification</div>
+<div class="svc-detail-item">Contamination and surcharge challenge</div>
+<div class="svc-detail-item">Recycling credit entitlement assessment</div>
+<div class="svc-detail-item">Multi-stream waste cost benchmarking</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 14–22%</div>
+</div>
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#128222;</div><div class="svc-detail-title">Telecoms Audit</div></div>
+<div class="svc-detail-desc">Business telecoms costs accumulate through legacy contracts, unused lines, incorrect call charges, and unmanaged mobile fleets. Our audit identifies every redundant service, every miscalculated charge, and every switching opportunity.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Fixed line and broadband cost forensics</div>
+<div class="svc-detail-item">Mobile fleet usage and tariff optimisation</div>
+<div class="svc-detail-item">Legacy PSTN and ISDN circuit identification</div>
+<div class="svc-detail-item">Call charge verification and itemised billing analysis</div>
+<div class="svc-detail-item">SIP/VoIP migration opportunity assessment</div>
+<div class="svc-detail-item">Roaming and international charge review</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 11–18%</div>
+</div>
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#128737;&#65039;</div><div class="svc-detail-title">Insurance Premium Audit</div></div>
+<div class="svc-detail-desc">Price walking — the practice of incrementally increasing premiums on renewal without justification — is endemic in commercial insurance markets. We forensically examine your premium history, broker arrangements, and policy terms to recover overcharges.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Multi-year premium history and price walking analysis</div>
+<div class="svc-detail-item">Broker commission and remuneration disclosure review</div>
+<div class="svc-detail-item">Claims history impact assessment and challenge</div>
+<div class="svc-detail-item">Coverage adequacy and duplication review</div>
+<div class="svc-detail-item">Regulatory complaint support where overcharging is evidenced</div>
+<div class="svc-detail-item">Market benchmarking and alternative placement review</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 10–15%</div>
+</div>
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#128179;</div><div class="svc-detail-title">Merchant Services Audit</div></div>
+<div class="svc-detail-desc">Card processing fees are among the most opaque charges in commercial finance. Interchange fees, scheme fees, acquirer margins, and terminal rental costs combine to create significant unexplained expenditure. Our audit brings full transparency.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Interchange fee rate analysis and optimisation</div>
+<div class="svc-detail-item">Scheme fee and acquirer margin benchmarking</div>
+<div class="svc-detail-item">Terminal rental cost review and renegotiation support</div>
+<div class="svc-detail-item">PCI DSS compliance cost assessment</div>
+<div class="svc-detail-item">Chargeback ratio monitoring and dispute management review</div>
+<div class="svc-detail-item">Alternative acquirer and gateway cost comparison</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 8–13%</div>
+</div>
+
+<div class="svc-detail-card">
+<div class="svc-detail-head"><div class="svc-detail-icon">&#127970;</div><div class="svc-detail-title">Business Rates Audit</div></div>
+<div class="svc-detail-desc">Business rates assessments are frequently inaccurate, and many commercial occupiers fail to challenge incorrect rateable values or claim available reliefs. Our specialists identify every grounds for appeal and every relief entitlement.</div>
+<div class="svc-detail-list">
+<div class="svc-detail-item">Rateable value accuracy assessment and appeal preparation</div>
+<div class="svc-detail-item">Transitional relief and phasing entitlement review</div>
+<div class="svc-detail-item">Empty property and part-occupation relief claims</div>
+<div class="svc-detail-item">Small business rates relief eligibility assessment</div>
+<div class="svc-detail-item">Charitable and mandatory relief identification</div>
+<div class="svc-detail-item">Valuation Office appeal support and representation</div>
+</div>
+<div class="svc-detail-tag">Typical overcharge rate: 7–12%</div>
+</div>
+
 </div></div></section>
 
-<section class="sec" id="process"><div class="sec-inner" style="text-align:center;margin-bottom:48px"><div class="sec-label">How It Works</div><h2 class="sec-title" style="margin:0 auto 16px;text-align:center">Six steps to recovered savings.</h2><p class="sec-sub" style="margin:0 auto">No disruption to your business. No upfront cost. We manage the entire process from initial review to recovered funds.</p></div><div class="sec-inner"><div class="proc-grid">
-<div class="proc-step"><h3>Free Review</h3><p>Send us a sample of recent bills. Our team conducts a preliminary assessment to identify potential overcharges and estimate the scale of recovery opportunity.</p></div>
-<div class="proc-step"><h3>Letter of Authority</h3><p>A simple, one-page document authorising us to request billing data directly from your suppliers. No commitment, no obligation at this stage.</p></div>
-<div class="proc-step"><h3>Data Collection</h3><p>We request complete billing histories from each supplier for the full six-year statutory period. All data handling is GDPR compliant.</p></div>
-<div class="proc-step"><h3>Forensic Audit</h3><p>Our specialists conduct a line-by-line examination of every bill, cross-referencing tariff rates, contract terms, regulatory requirements, and supplier calculations.</p></div>
-<div class="proc-step"><h3>Recovery &amp; Negotiation</h3><p>We present findings to each supplier with a formal claim for refund. We handle all correspondence, escalation, and if necessary, regulatory complaint.</p></div>
-<div class="proc-step"><h3>Ongoing Monitoring</h3><p>After recovery, we continue to monitor your accounts to ensure correct billing going forward and capture any future savings opportunities.</p></div>
-</div></div></section>
+<!-- ══════════════════════════ HOW WE WORK ════════════════════════════════ -->
+<section class="sec sec-dark" id="how-we-work"><div class="sec-inner">
+<div class="hww-intro">
+<div>
+<div class="sec-label">How We Work</div>
+<h2 class="sec-title" style="color:#fff">A structured, evidence-led recovery process.</h2>
+<p style="font-size:16px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:24px">Every Foxlite engagement follows a forensic protocol developed over decades of commercial auditing experience. We handle everything — from first contact to final payment — with no disruption to your day-to-day operations.</p>
+<p style="font-size:15px;color:rgba(255,255,255,.4);line-height:1.75;">Our process is built on three principles: <strong style="color:var(--gold)">full transparency</strong> at every stage, <strong style="color:var(--gold)">evidence before claims</strong>, and <strong style="color:var(--gold)">no fee unless we recover</strong>. You will always know exactly what we have found, what we are claiming, and how much you will receive.</p>
+</div>
+<div class="hww-promise">
+<div class="hww-promise-label">Our Client Promise</div>
+<h3>What you can always expect from Foxlite.</h3>
+<div class="hww-promise-list">
+<div class="hww-promise-item"><div class="hww-check">&#10003;</div><span>No upfront cost — ever. We work entirely on a contingency basis.</span></div>
+<div class="hww-promise-item"><div class="hww-check">&#10003;</div><span>No disruption to your business. We deal directly with suppliers on your behalf.</span></div>
+<div class="hww-promise-item"><div class="hww-check">&#10003;</div><span>Full written report of all findings before any recovery is pursued.</span></div>
+<div class="hww-promise-item"><div class="hww-check">&#10003;</div><span>Complete GDPR compliance. All data is handled under strict confidentiality.</span></div>
+<div class="hww-promise-item"><div class="hww-check">&#10003;</div><span>Six years retrospective recovery — the full statutory window applied in every case.</span></div>
+<div class="hww-promise-item"><div class="hww-check">&#10003;</div><span>Ongoing monitoring included at no additional charge after initial recovery.</span></div>
+</div>
+</div>
+</div>
 
+<div class="hww-phases">
+<div class="hww-phase">
+<div class="hww-phase-num"><div class="hww-phase-n">01</div></div>
+<div class="hww-phase-body">
+<div class="hww-phase-label">Phase One</div>
+<div class="hww-phase-title">Initial Review &amp; Scoping</div>
+<div class="hww-phase-text">We begin with a no-obligation review of a sample of your recent bills across whichever categories you wish to audit. This typically takes 2–3 business days and is provided entirely free of charge.</div>
+<div class="hww-phase-items">
+<div class="hww-phase-item">You send us recent invoices — no historic data required at this stage</div>
+<div class="hww-phase-item">Our team identifies visible anomalies and estimates recovery potential</div>
+<div class="hww-phase-item">We provide a written scoping report with indicative findings</div>
+<div class="hww-phase-item">No commitment required — you decide whether to proceed</div>
+</div>
+</div>
+</div>
+<div class="hww-phase">
+<div class="hww-phase-num"><div class="hww-phase-n">02</div></div>
+<div class="hww-phase-body">
+<div class="hww-phase-label">Phase Two</div>
+<div class="hww-phase-title">Letter of Authority &amp; Data Collection</div>
+<div class="hww-phase-text">Once you decide to proceed, you sign a single Letter of Authority that authorises us to request billing data directly from each of your suppliers on your behalf. We handle all data requests.</div>
+<div class="hww-phase-items">
+<div class="hww-phase-item">One-page Letter of Authority — simple and clearly explained</div>
+<div class="hww-phase-item">We contact each supplier directly to request six years of billing history</div>
+<div class="hww-phase-item">All supplier communications are handled professionally and confidentially</div>
+<div class="hww-phase-item">Data collection typically takes 4–8 weeks depending on supplier responsiveness</div>
+</div>
+</div>
+</div>
+<div class="hww-phase">
+<div class="hww-phase-num"><div class="hww-phase-n">03</div></div>
+<div class="hww-phase-body">
+<div class="hww-phase-label">Phase Three</div>
+<div class="hww-phase-title">Forensic Audit</div>
+<div class="hww-phase-text">Our specialists conduct a line-by-line examination of every invoice across the full six-year period. Every figure is cross-referenced against your contract terms, published tariff schedules, regulatory requirements, and metering data.</div>
+<div class="hww-phase-items">
+<div class="hww-phase-item">Full bill-level forensic analysis using proprietary audit methodology</div>
+<div class="hww-phase-item">Contract term verification against actual charges applied</div>
+<div class="hww-phase-item">Tariff, rate, and levy compliance checked against regulator records</div>
+<div class="hww-phase-item">All anomalies documented with supporting evidence before any claim is raised</div>
+</div>
+</div>
+</div>
+<div class="hww-phase">
+<div class="hww-phase-num"><div class="hww-phase-n">04</div></div>
+<div class="hww-phase-body">
+<div class="hww-phase-label">Phase Four</div>
+<div class="hww-phase-title">Findings Report &amp; Client Approval</div>
+<div class="hww-phase-text">Before we make any claim to any supplier, we present you with a complete written findings report. You review every identified overcharge, approve the claim amounts, and confirm you are satisfied before we proceed.</div>
+<div class="hww-phase-items">
+<div class="hww-phase-item">Detailed findings report with category-by-category breakdown</div>
+<div class="hww-phase-item">Supporting evidence provided for every line of claimed overcharge</div>
+<div class="hww-phase-item">Total recovery estimate and projected Foxlite fee clearly stated</div>
+<div class="hww-phase-item">You approve all claims before a single letter is sent to suppliers</div>
+</div>
+</div>
+</div>
+<div class="hww-phase">
+<div class="hww-phase-num"><div class="hww-phase-n">05</div></div>
+<div class="hww-phase-body">
+<div class="hww-phase-label">Phase Five</div>
+<div class="hww-phase-title">Recovery &amp; Negotiation</div>
+<div class="hww-phase-text">We present formal, evidence-based claims to each supplier and negotiate the full recovery on your behalf. Most claims are settled within 60–90 days. Where suppliers refuse or delay without cause, we escalate through regulatory channels.</div>
+<div class="hww-phase-items">
+<div class="hww-phase-item">Formal written claim submitted to each supplier with full evidence pack</div>
+<div class="hww-phase-item">Skilled negotiation to achieve maximum settlement</div>
+<div class="hww-phase-item">Regulatory escalation where suppliers fail to engage properly</div>
+<div class="hww-phase-item">All recovery credited to your account — payments go directly to you</div>
+</div>
+</div>
+</div>
+<div class="hww-phase">
+<div class="hww-phase-num"><div class="hww-phase-n">06</div></div>
+<div class="hww-phase-body">
+<div class="hww-phase-label">Phase Six</div>
+<div class="hww-phase-title">Ongoing Monitoring &amp; Reporting</div>
+<div class="hww-phase-text">Following successful recovery, Foxlite provides ongoing monitoring of your accounts at no additional charge. We continue to check that suppliers are billing correctly and alert you to any future anomalies for up to three years.</div>
+<div class="hww-phase-items">
+<div class="hww-phase-item">Quarterly billing reviews across all audited categories</div>
+<div class="hww-phase-item">Automatic alerting if billing patterns change unexpectedly</div>
+<div class="hww-phase-item">Annual review meeting to assess performance and opportunities</div>
+<div class="hww-phase-item">Maximum three-year monitoring engagement at no additional cost</div>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+
+<!-- ══════════════════════════ SAVINGS CALCULATOR ═════════════════════════ -->
+<section class="sec" id="calculator" style="background:var(--navy)"><div class="sec-inner">
+<div style="text-align:center;margin-bottom:48px">
+<div class="sec-label" style="text-align:center">Savings Calculator</div>
+<h2 class="sec-title" style="color:var(--white);margin:0 auto 16px;text-align:center">Estimate your recovery potential.</h2>
+<p class="sec-sub" style="margin:0 auto;text-align:center;color:rgba(255,255,255,.5)">Enter your monthly costs across any or all of our eight audit categories. We will estimate the overcharges we are likely to find and your net recovery after our 25% fee.</p>
+</div>
+<div class="calc-wrap">
+<div class="calc-steps">
+<button class="calc-step-btn active" id="stepBtn1" onclick="goStep(1)"><div class="calc-step-num">01</div><div class="calc-step-lbl">Your Business</div></button>
+<button class="calc-step-btn" id="stepBtn2" onclick="goStep(2)"><div class="calc-step-num">02</div><div class="calc-step-lbl">Monthly Costs</div></button>
+<button class="calc-step-btn" id="stepBtn3" onclick="goStep(3)"><div class="calc-step-num">03</div><div class="calc-step-lbl">Audit Period</div></button>
+<button class="calc-step-btn" id="stepBtn4" onclick="goStep(4)"><div class="calc-step-num">04</div><div class="calc-step-lbl">Your Results</div></button>
+</div>
+
+<!-- Step 1: Business Profile -->
+<div class="calc-panel active" id="calcStep1">
+<div class="calc-section-title">Your Business Profile</div>
+<div class="calc-section-sub">Help us tailor the estimate to your sector. Overcharge rates vary by industry — hospitality typically sees higher rates than professional services, for example.</div>
+<div class="calc-field"><label>Business / Organisation Name</label><input type="text" id="cBusinessName" placeholder="Your organisation name" autocomplete="off"></div>
+<div class="calc-grid">
+<div class="calc-field"><label>Sector <span class="calc-required-badge">Required</span></label>
+<select id="cSector">
+<option value="">Select your sector</option>
+<option value="Hospitality">Hospitality (Hotels, Pubs, Restaurants)</option>
+<option value="Retail">Retail</option>
+<option value="Healthcare">Healthcare</option>
+<option value="Education">Education</option>
+<option value="Manufacturing">Manufacturing</option>
+<option value="Property Management">Property Management</option>
+<option value="Construction">Construction</option>
+<option value="Professional Services">Professional Services</option>
+<option value="Agriculture">Agriculture</option>
+<option value="Other">Other / Not Listed</option>
+</select>
+<div class="calc-error" id="errSector">Please select your sector to continue.</div>
+</div>
+<div class="calc-field"><label>Number of Sites</label>
+<select id="cSites">
+<option value="1">Single site</option>
+<option value="2">2–5 sites</option>
+<option value="3">6–20 sites</option>
+<option value="4">21+ sites</option>
+</select>
+</div>
+</div>
+<div class="calc-nav"><div></div><button class="calc-next-btn" onclick="step1Next()">Next: Monthly Costs &#8594;</button></div>
+</div>
+
+<!-- Step 2: Monthly Costs -->
+<div class="calc-panel" id="calcStep2">
+<div class="calc-section-title">Monthly Costs</div>
+<div class="calc-section-sub">Enter your approximate monthly spend in each category. Leave any category blank if it does not apply to your business. Electricity is required — all others are optional.</div>
+<div class="calc-grid">
+<div class="calc-field"><label>&#9889; Electricity <span class="calc-required-badge">Required</span></label><input type="number" id="cElec" min="0" placeholder="Monthly spend (&#8364;)" autocomplete="off"><div class="calc-field-note">Approximate monthly electricity bill</div><div class="calc-error" id="errElec">Please enter your monthly electricity spend.</div></div>
+<div class="calc-field"><label>&#128293; Gas</label><input type="number" id="cGas" min="0" placeholder="Monthly spend (&#8364;)" autocomplete="off"><div class="calc-field-note">Approximate monthly gas bill (if applicable)</div></div>
+<div class="calc-field"><label>&#128167; Water</label><input type="number" id="cWater" min="0" placeholder="Monthly spend (&#8364;)" autocomplete="off"><div class="calc-field-note">Combined water and wastewater charges</div></div>
+<div class="calc-field"><label>&#9851; Waste Management</label><input type="number" id="cWaste" min="0" placeholder="Monthly spend (&#8364;)" autocomplete="off"><div class="calc-field-note">Waste collection and disposal costs</div></div>
+<div class="calc-field"><label>&#128222; Telecoms</label><input type="number" id="cTelecoms" min="0" placeholder="Monthly spend (&#8364;)" autocomplete="off"><div class="calc-field-note">Mobile, broadband, landlines combined</div></div>
+<div class="calc-field"><label>&#128737; Insurance</label><input type="number" id="cInsurance" min="0" placeholder="Monthly equivalent (&#8364;)" autocomplete="off"><div class="calc-field-note">Annual premium divided by 12</div></div>
+<div class="calc-field"><label>&#128179; Merchant Services</label><input type="number" id="cMerchant" min="0" placeholder="Monthly fees (&#8364;)" autocomplete="off"><div class="calc-field-note">Card processing fees and terminal rental</div></div>
+<div class="calc-field"><label>&#127970; Business Rates</label><input type="number" id="cRates" min="0" placeholder="Monthly equivalent (&#8364;)" autocomplete="off"><div class="calc-field-note">Annual rates bill divided by 12</div></div>
+</div>
+<div class="calc-nav"><button class="calc-back-btn" onclick="goStep(1)">&#8592; Back</button><button class="calc-next-btn" onclick="step2Next()">Next: Audit Period &#8594;</button></div>
+</div>
+
+<!-- Step 3: Audit Period -->
+<div class="calc-panel" id="calcStep3">
+<div class="calc-section-title">Audit Period</div>
+<div class="calc-section-sub">We can audit up to six years of historical billing. The longer the period, the greater the potential recovery. Most clients select the full six years to maximise the retrospective claim.</div>
+<div class="calc-field" style="max-width:360px">
+<label>Years to audit <span class="calc-required-badge">Required</span></label>
+<select id="cYears">
+<option value="1">1 year</option>
+<option value="2">2 years</option>
+<option value="3">3 years (recommended)</option>
+<option value="4">4 years</option>
+<option value="5">5 years</option>
+<option value="6" selected>6 years (maximum recovery)</option>
+</select>
+<div class="calc-field-note">The statutory recovery period is six years. We recommend selecting the maximum.</div>
+</div>
+<div style="margin-top:32px;padding:24px 28px;background:rgba(212,168,67,.07);border-left:3px solid var(--gold)">
+<div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Why six years?</div>
+<p style="font-size:14px;color:rgba(255,255,255,.55);line-height:1.7">The Statute of Limitations in Ireland and the UK allows recovery of overcharges going back six years from the date of discovery. Selecting the maximum period gives Foxlite the widest possible window to identify and recover accumulated overcharges. There is no additional cost for auditing the full period.</p>
+</div>
+<div class="calc-nav"><button class="calc-back-btn" onclick="goStep(2)">&#8592; Back</button><button class="calc-next-btn" onclick="runCalculator()">Calculate My Savings &#8594;</button></div>
+</div>
+
+<!-- Step 4: Results -->
+<div class="calc-panel" id="calcStep4">
+<div class="calc-results" id="calcResults"></div>
+<div class="calc-nav" style="margin-top:0;padding-top:24px"><button class="calc-back-btn" onclick="goStep(3)">&#8592; Revise Inputs</button><a href="#contact" class="calc-next-btn" style="text-decoration:none">Request Free Audit &#8594;</a></div>
+<div style="text-align:center"><button class="calc-reset-btn" onclick="resetCalc()">&#8635; Start Again</button></div>
+</div>
+
+</div>
+</div></section>
+
+<!-- ══════════════════════════ SECTORS ════════════════════════════════════ -->
 <section class="sec sec-dark" id="sectors"><div class="sec-inner">
 <div class="sec-label">Who We Help</div>
 <h2 class="sec-title" style="color:#fff">Serving commercial organisations across every sector.</h2>
@@ -118,7 +452,6 @@
 <p style="font-size:15px;color:var(--grey-500);line-height:1.7;margin-bottom:28px">Whether you manage a single site or a portfolio of properties, we welcome your enquiry. The initial assessment is provided at no cost and with no obligation.</p>
 <div class="c-detail"><div class="c-icon">&#9993;</div><div class="c-text"><strong>Email</strong>info@foxliteservices.com</div></div>
 <div class="c-detail"><div class="c-icon">&#9742;</div><div class="c-text"><strong>Ireland</strong>David Clarke: +353 86 027 6700<br>Derek Dunphy: +353 89 706 4225</div></div>
-
 <div class="c-detail"><div class="c-icon">&#9679;</div><div class="c-text"><strong>Website</strong>www.foxliteservices.com</div></div>
 </div></div><div>
 <form id="cForm" onsubmit="submitForm(event)">
@@ -133,16 +466,128 @@
 <footer class="footer"><div class="footer-inner"><div class="footer-grid">
 <div><div class="ft-brand">FOXLITE <span>Forensic Services</span></div><p class="ft-desc">Independent forensic auditing firm established in 2019. Specialised in identifying and recovering business cost overcharges across Ireland and the United Kingdom.</p></div>
 <div><div class="ft-heading">Services</div><div class="ft-links"><a href="#services">Electricity Audit</a><a href="#services">Gas Audit</a><a href="#services">Insurance Review</a><a href="#services">Water &amp; Waste</a><a href="#services">Telecoms</a><a href="#services">Business Rates</a></div></div>
-<div><div class="ft-heading">Company</div><div class="ft-links"><a href="#team">About Us</a><a href="#process">How It Works</a><a href="#sectors">Sectors</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></div></div>
+<div><div class="ft-heading">Company</div><div class="ft-links"><a href="#team">About Us</a><a href="#how-we-work">How It Works</a><a href="#calculator">Savings Calculator</a><a href="#sectors">Sectors</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></div></div>
 <div><div class="ft-heading">Contact</div><div class="ft-links"><a href="mailto:info@foxliteservices.com">info@foxliteservices.com</a><a href="tel:+353860276700">+353 86 027 6700</a><a href="tel:+353897064225">+353 89 706 4225</a></div></div>
 </div><div class="footer-bottom"><span>&copy; 2026 Foxlite Forensic Services. All rights reserved.</span><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div></div></footer>
 
 <script>
+// ── Nav / Mobile menu ───────────────────────────────────────────────────────
 var hamBtn=document.getElementById('hamBtn'),mobMenu=document.getElementById('mobMenu');
 hamBtn.addEventListener('click',function(){mobMenu.classList.toggle('open');document.body.style.overflow=mobMenu.classList.contains('open')?'hidden':'';});
 function closeMob(){mobMenu.classList.remove('open');document.body.style.overflow='';}
-document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t){window.scrollTo({top:t.offsetTop-68,behavior:'smooth'});}});});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){if(this.getAttribute('href')==='#')return;e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t){window.scrollTo({top:t.offsetTop-68,behavior:'smooth'});}});});
 function submitForm(e){e.preventDefault();var b=e.target.querySelector('.form-submit');b.textContent='Enquiry Submitted \u2713';b.style.background='#2E7D32';b.style.color='#fff';setTimeout(function(){b.textContent='Submit Enquiry \u2192';b.style.background='';b.style.color='';e.target.reset();},3000);}
+
+// ── Calculator ──────────────────────────────────────────────────────────────
+var currentStep=1;
+
+var SECTOR_RATES={
+  'Hospitality':0.22,'Retail':0.18,'Healthcare':0.17,'Education':0.15,
+  'Manufacturing':0.20,'Property Management':0.21,'Construction':0.16,
+  'Professional Services':0.15,'Agriculture':0.17,'Other':0.16
+};
+
+function goStep(n){
+  for(var i=1;i<=4;i++){
+    document.getElementById('calcStep'+i).classList.remove('active');
+    document.getElementById('stepBtn'+i).classList.remove('active');
+  }
+  document.getElementById('calcStep'+n).classList.add('active');
+  document.getElementById('stepBtn'+n).classList.add('active');
+  currentStep=n;
+  // Scroll to calculator on mobile
+  var sec=document.getElementById('calculator');
+  if(sec&&window.innerWidth<768){window.scrollTo({top:sec.offsetTop-68,behavior:'smooth'});}
+}
+
+function step1Next(){
+  var s=document.getElementById('cSector').value;
+  var err=document.getElementById('errSector');
+  if(!s){err.style.display='block';return;}
+  err.style.display='none';
+  goStep(2);
+}
+
+function step2Next(){
+  var elec=parseFloat(document.getElementById('cElec').value)||0;
+  var err=document.getElementById('errElec');
+  if(elec<=0){err.style.display='block';return;}
+  err.style.display='none';
+  goStep(3);
+}
+
+function n(id){return parseFloat(document.getElementById(id).value)||0;}
+function fmt(v){return '\u20ac'+Math.round(v).toLocaleString('en-IE');}
+
+function runCalculator(){
+  var sector=document.getElementById('cSector').value||'Other';
+  var biz=document.getElementById('cBusinessName').value||'Your Business';
+  var years=parseInt(document.getElementById('cYears').value)||6;
+  var sectorRate=SECTOR_RATES[sector]||0.16;
+
+  var cats=[
+    {label:'Electricity',      spend:n('cElec')     *12, rate:0.19},
+    {label:'Gas',              spend:n('cGas')      *12, rate:0.17},
+    {label:'Water',            spend:n('cWater')    *12, rate:0.10},
+    {label:'Waste Management', spend:n('cWaste')    *12, rate:0.18},
+    {label:'Telecoms',         spend:n('cTelecoms') *12, rate:0.15},
+    {label:'Insurance',        spend:n('cInsurance')*12, rate:0.12},
+    {label:'Merchant Services',spend:n('cMerchant') *12, rate:0.11},
+    {label:'Business Rates',   spend:n('cRates')    *12, rate:0.09}
+  ].filter(function(c){return c.spend>0;});
+
+  var byCategory=cats.map(function(c){
+    var totalSpend=c.spend*years;
+    var effectiveRate=(c.rate+sectorRate)/2;
+    var overcharge=totalSpend*effectiveRate;
+    return {label:c.label,spend:totalSpend,overcharge:overcharge};
+  });
+
+  var totalSpend=byCategory.reduce(function(s,c){return s+c.spend;},0);
+  var totalOvercharge=byCategory.reduce(function(s,c){return s+c.overcharge;},0);
+  var foxliteFee=totalOvercharge*0.25;
+  var netRecovery=totalOvercharge-foxliteFee;
+
+  var bdRows=byCategory.map(function(c){
+    return '<div class="calc-breakdown-row"><div class="calc-bd-label">'+c.label+'</div><div class="calc-bd-vals"><div class="calc-bd-overcharge">'+fmt(c.overcharge)+' estimated overcharge</div><div class="calc-bd-spend">'+fmt(c.spend)+' spend over '+years+' yr</div></div></div>';
+  }).join('');
+
+  var html='<div class="calc-results-header">'
+    +'<div class="calc-results-company">'+biz+' &bull; '+sector+'</div>'
+    +'<div class="calc-results-title">Estimated Recovery Opportunity</div>'
+    +'<div class="calc-results-subtitle">Based on '+years+'-year audit across '+byCategory.length+' categor'+(byCategory.length===1?'y':'ies')+'</div>'
+    +'</div>'
+    +'<div class="calc-big-numbers">'
+    +'<div class="calc-big-num"><div class="calc-big-val">'+fmt(totalOvercharge)+'</div><div class="calc-big-lbl">Estimated Total<br>Overcharge</div></div>'
+    +'<div class="calc-big-num"><div class="calc-big-val">'+fmt(foxliteFee)+'</div><div class="calc-big-lbl">Foxlite Fee<br>(25%)</div></div>'
+    +'<div class="calc-big-num"><div class="calc-big-val">'+fmt(netRecovery)+'</div><div class="calc-big-lbl">Your Net<br>Recovery</div></div>'
+    +'</div>'
+    +'<div class="calc-breakdown"><div class="calc-breakdown-title">Breakdown by Category</div>'+bdRows+'</div>'
+    +'<div class="calc-disclaimer">These figures are indicative estimates based on published sector overcharge benchmarks. Actual recovery depends on your specific billing history, contracts, and suppliers. Foxlite will provide a precise assessment following the free initial review. There is no cost and no obligation to proceed.</div>'
+    +'<div class="calc-cta-section"><div class="calc-cta-text">Ready to confirm these figures with a free forensic review?</div>'
+    +'<a href="#contact" class="calc-next-btn" style="text-decoration:none;display:inline-block">Request Your Free Audit &#8594;</a></div>';
+
+  document.getElementById('calcResults').innerHTML=html;
+  goStep(4);
+}
+
+function resetCalc(){
+  document.getElementById('cBusinessName').value='';
+  document.getElementById('cSector').value='';
+  document.getElementById('cElec').value='';
+  document.getElementById('cGas').value='';
+  document.getElementById('cWater').value='';
+  document.getElementById('cWaste').value='';
+  document.getElementById('cTelecoms').value='';
+  document.getElementById('cInsurance').value='';
+  document.getElementById('cMerchant').value='';
+  document.getElementById('cRates').value='';
+  document.getElementById('cYears').value='6';
+  document.getElementById('calcResults').innerHTML='';
+  goStep(1);
+  var sec=document.getElementById('calculator');
+  if(sec){window.scrollTo({top:sec.offsetTop-68,behavior:'smooth'});}
+}
 </script>
 
 </body>
