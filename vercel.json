@@ -5,5 +5,13 @@
   "outputDirectory": "website/out",
   "installCommand": "cd website && npm install --legacy-peer-deps",
   "framework": null,
-  "ignoreCommand": "exit 0"
+  "ignoreCommand": "exit 0",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.foxliteforensics.com" }],
+      "destination": "https://foxliteforensics.com/$1",
+      "permanent": true
+    }
+  ]
 }
