@@ -1,3 +1,9 @@
 {
-  "version": 2
+  "version": 2,
+  "name": "foxlite-forensics-production",
+  "buildCommand": null,
+  "outputDirectory": "website/out",
+  "installCommand": null,
+  "framework": null,
+  "ignoreCommand": "exit 0"
 }
