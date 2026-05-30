@@ -1,17 +1,8 @@
 {
   "version": 2,
-  "name": "foxlite-forensics-production",
-  "buildCommand": "cd website && npm install --legacy-peer-deps && npm run build",
-  "outputDirectory": "website/out",
-  "installCommand": "cd website && npm install --legacy-peer-deps",
-  "framework": null,
-  "ignoreCommand": "exit 0",
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.foxliteforensics.com" }],
-      "destination": "https://foxliteforensics.com/$1",
-      "permanent": true
-    }
-  ]
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "ignoreCommand": "exit 0"
 }

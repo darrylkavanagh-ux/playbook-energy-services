@@ -1,14 +1,11 @@
-# Ignore everything at root except website/ and deployment config
-/*
-!/website
-!/.vercelignore
-!/vercel.json
-
-# Always ignore build artefacts
-node_modules
+# Ignore everything EXCEPT the Foxlite Vite SPA source
+/website
+/client
+/server
+/.github
+/node_modules
 .env*
-.next
+dist
 .cache
 *.log
 .DS_Store
-pnpm-lock.yaml
