@@ -1,0 +1,12 @@
+# Ignore everything except website folder
+/*
+!/website
+
+# Always ignore
+node_modules
+.env*
+.next
+.cache
+*.log
+.DS_Store
+pnpm-lock.yaml
