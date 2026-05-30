@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_IE',
-    url: 'https://foxliteservices.com',
+    url: 'https://foxliteforensics.com',
     siteName: 'Foxlite Forensic Services',
     title: 'Foxlite Forensic Services | Independent Forensic Auditing',
     description: 'We find overcharges. You keep the savings. Independent forensic auditing firm established in 2019, based in Dublin, Ireland.',
@@ -52,7 +52,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="canonical" href="https://foxliteservices.com" />
+        <link rel="canonical" href="https://foxliteforensics.com" />
       </head>
       <body className="font-dm-sans antialiased">
         <Nav />
