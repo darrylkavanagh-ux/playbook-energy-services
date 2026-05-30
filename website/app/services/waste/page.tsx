@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Section, SectionLabel, SectionTitle, GoldRule } from '@/components/Section'
 import { FadeIn } from '@/components/FadeIn'
-import { Button } from '@/components/ui/button'
+
 
 export const metadata: Metadata = {
   title: 'Waste Management Audits | Foxlite Forensic Services',
@@ -175,9 +175,7 @@ export default function WasteServicePage() {
                   </div>
                   
                   <div className="mt-8 pt-6 border-t border-greyLight">
-                    <Button className="w-full">
-                      Start Waste Audit
-                    </Button>
+                    <Link href="/contact" className="inline-block px-6 py-3 bg-[#C4A44E] text-[#0B1A2B] font-semibold rounded-lg hover:bg-[#B8943E] transition-all duration-200 text-center w-full block">Start Waste Audit</Link>
                   </div>
                 </div>
               </FadeIn>

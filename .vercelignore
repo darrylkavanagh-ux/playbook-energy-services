@@ -1,0 +1,11 @@
+# Ignore everything EXCEPT the Foxlite Vite SPA source
+/website
+/client
+/server
+/.github
+/node_modules
+.env*
+dist
+.cache
+*.log
+.DS_Store

@@ -5,7 +5,7 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  basePath: '/foxlite-consulting',
+  // basePath removed — site is deployed at root on Vercel (foxlite-forensics-production)
 }
 
 export default nextConfig

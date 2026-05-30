@@ -23,6 +23,11 @@ import forexRoutes from './routes/forex';
 import neuralRoutes from './routes/neural';
 import veritechRoutes from './routes/veritech';
 
+// ── Forensic Investigation Platform v2 ──────────────────────────────────────
+import { mountForensicPlatformV2 } from './routes/forensicPlatformV2';
+import blockintRoutes from './routes/blockint';
+import platformRoutes from './routes/platform';
+
 // Load environment variables
 dotenv.config();
 
@@ -151,6 +156,18 @@ async function startServer() {
   app.use('/api/forex', forexRoutes);
   app.use('/api/neural', neuralRoutes);
   app.use('/api/veritech', veritechRoutes);
+
+  // ── Blockchain Intelligence (TRM BLOCKINT standalone route) ──────────────
+  app.use('/api/blockint', blockintRoutes);
+  console.log('✅ TRM BLOCKINT routes mounted: /api/blockint/*');
+
+  // ── Platform RBAC / Cases (standalone route) ─────────────────────────────
+  app.use('/api/platform', platformRoutes);
+  console.log('✅ Platform routes mounted: /api/platform/*');
+
+  // ── Forensic Investigation Platform v2 ──────────────────────────────────
+  mountForensicPlatformV2(app);
+  console.log('✅ Forensic Platform v2 mounted: /api/v2/*');
   
   // ============================================
   // FOXLITE AUDIT API
@@ -440,12 +457,22 @@ async function startServer() {
     console.log(`✅ AI Engines: 12/12 Online`);
     console.log('');
     console.log('📍 Endpoints:');
-    console.log('   • FOXLITE:    /api/foxlite/*');
-    console.log('   • NO COMPARE: /api/nocompare/*');
-    console.log('   • ORB AI:     /api/orb/*');
-    console.log('   • KAVAN AI:   /api/kavan/*');
-    console.log('   • FORENSIC:   /api/forensic/*');
-    console.log('   • System:     /api/system/status');
+    console.log('   • FOXLITE:        /api/foxlite/*');
+    console.log('   • NO COMPARE:     /api/nocompare/*');
+    console.log('   • ORB AI:         /api/orb/*');
+    console.log('   • KAVAN AI:       /api/kavan/*');
+    console.log('   • FORENSIC v1:    /api/forensic/*');
+    console.log('   • System:         /api/system/status');
+    console.log('');
+    console.log('🔬 Forensic Platform v2 (Production-Ready):');
+    console.log('   • AUTH:           /api/v2/auth/*');
+    console.log('   • CASES:          /api/v2/cases/*');
+    console.log('   • EVIDENCE VAULT: /api/v2/evidence/*');
+    console.log('   • BLOCKCHAIN:     /api/v2/blockchain/*  [TRM BLOCKINT]');
+    console.log('   • OCR/EXTRACT:    /api/v2/ocr/*');
+    console.log('   • REPORTS:        /api/v2/reports/*');
+    console.log('   • AUDIT LOG:      /api/v2/audit/*');
+    console.log('   • HEALTH:         /api/v2/health');
     console.log('');
   });
 }

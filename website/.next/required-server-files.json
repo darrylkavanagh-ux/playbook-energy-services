@@ -13,7 +13,7 @@
     "typedRoutes": false,
     "distDir": ".next",
     "cleanDistDir": true,
-    "assetPrefix": "/foxlite-consulting",
+    "assetPrefix": "",
     "cacheMaxMemorySize": 52428800,
     "configOrigin": "next.config.mjs",
     "useFileSystemPublicRoutes": true,
@@ -47,7 +47,7 @@
         256,
         384
       ],
-      "path": "/foxlite-consulting/_next/image/",
+      "path": "/_next/image/",
       "loader": "default",
       "loaderFile": "",
       "domains": [],
@@ -71,9 +71,9 @@
       "pagesBufferLength": 5
     },
     "amp": {
-      "canonicalBase": "/foxlite-consulting"
+      "canonicalBase": ""
     },
-    "basePath": "/foxlite-consulting",
+    "basePath": "",
     "sassOptions": {},
     "trailingSlash": true,
     "i18n": null,
@@ -100,7 +100,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/workspace",
+    "outputFileTracingRoot": "/home/user/webapp",
     "experimental": {
       "useSkewCookie": false,
       "cacheLife": {
@@ -290,11 +290,11 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.mjs",
     "turbopack": {
-      "root": "/workspace"
+      "root": "/home/user/webapp"
     }
   },
-  "appDir": "/workspace/foxlite-consulting/website",
-  "relativeAppDir": "foxlite-consulting/website",
+  "appDir": "/home/user/webapp/website",
+  "relativeAppDir": "website",
   "files": [
     ".next/routes-manifest.json",
     ".next/server/pages-manifest.json",
