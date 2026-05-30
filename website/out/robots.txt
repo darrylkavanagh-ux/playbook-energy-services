@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://foxliteservices.com/sitemap.xml
+Sitemap: https://foxliteforensics.com/sitemap.xml
