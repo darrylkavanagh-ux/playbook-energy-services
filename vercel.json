@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "name": "foxlite-forensics-production",
   "buildCommand": "cd website && npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "website/out",
   "installCommand": "cd website && npm install --legacy-peer-deps",
