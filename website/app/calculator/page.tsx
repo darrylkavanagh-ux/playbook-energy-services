@@ -48,8 +48,9 @@ interface FormData {
   telecoms:            string
   waste:               string
   insurance:           string
-  fleet:               string
-  banking:             string
+  water:               string
+  merchantServices:    string
+  businessRates:       string
   yearsUnaudited:      string
 }
 
@@ -67,8 +68,8 @@ export default function CalculatorPage() {
   const [step, setStep]           = useState<Step>(1)
   const [form, setForm]           = useState<FormData>({
     businessName: '', sector: '', electricitySupplier: '', electricitySpend: '',
-    gasSupplier: '', gasSpend: '', telecoms: '', waste: '', insurance: '', fleet: '',
-    banking: '', yearsUnaudited: '3',
+    gasSupplier: '', gasSpend: '', water: '', telecoms: '', waste: '', insurance: '',
+    merchantServices: '', businessRates: '', yearsUnaudited: '3',
   })
   const [results, setResults]     = useState<Results | null>(null)
   const [contactForm, setContact] = useState({ name: '', email: '', phone: '', message: '' })
@@ -84,13 +85,14 @@ export default function CalculatorPage() {
     const years      = Math.min(Math.max(n(form.yearsUnaudited), 1), 6)
 
     const cats = [
-      { label: 'Electricity',       spend: n(form.electricitySpend) * 12, rate: 0.19  },
-      { label: 'Gas / Heating',     spend: n(form.gasSpend)          * 12, rate: 0.17  },
-      { label: 'Telecoms',          spend: n(form.telecoms)          * 12, rate: 0.15  },
-      { label: 'Waste Management',  spend: n(form.waste)             * 12, rate: 0.18  },
-      { label: 'Insurance',         spend: n(form.insurance)         * 12, rate: 0.12  },
-      { label: 'Fleet',             spend: n(form.fleet)             * 12, rate: sectorRate },
-      { label: 'Banking & Finance', spend: n(form.banking)           * 12, rate: 0.14  },
+      { label: 'Electricity',          spend: n(form.electricitySpend)  * 12, rate: 0.19  },
+      { label: 'Gas',                   spend: n(form.gasSpend)           * 12, rate: 0.17  },
+      { label: 'Water',                 spend: n(form.water)              * 12, rate: 0.10  },
+      { label: 'Waste Management',      spend: n(form.waste)              * 12, rate: 0.18  },
+      { label: 'Telecoms',              spend: n(form.telecoms)           * 12, rate: 0.15  },
+      { label: 'Insurance',             spend: n(form.insurance)          * 12, rate: 0.12  },
+      { label: 'Merchant Services',     spend: n(form.merchantServices)   * 12, rate: 0.11  },
+      { label: 'Business Rates',        spend: n(form.businessRates)      * 12, rate: 0.09  },
     ].filter(c => c.spend > 0)
 
     const byCategory = cats.map(c => ({
@@ -294,13 +296,14 @@ export default function CalculatorPage() {
 
                 <div className="space-y-5">
                   {([
-                    { label: 'Electricity',                       field: 'electricitySpend' as keyof FormData, icon: '⚡', required: true  },
-                    { label: 'Gas / Heating',                     field: 'gasSpend'          as keyof FormData, icon: '🔥', required: false },
-                    { label: 'Telecoms (mobile, broadband, etc)', field: 'telecoms'          as keyof FormData, icon: '📡', required: false },
-                    { label: 'Waste Collection & Disposal',       field: 'waste'             as keyof FormData, icon: '♻️', required: false },
-                    { label: 'Insurance Premiums',                field: 'insurance'         as keyof FormData, icon: '🛡️', required: false },
-                    { label: 'Fleet (fuel, leasing, maintenance)',field: 'fleet'             as keyof FormData, icon: '🚗', required: false },
-                    { label: 'Banking Charges & Finance Fees',    field: 'banking'           as keyof FormData, icon: '💳', required: false },
+                    { label: 'Electricity',                        field: 'electricitySpend' as keyof FormData, icon: '⚡', required: true  },
+                    { label: 'Gas',                                field: 'gasSpend'          as keyof FormData, icon: '🔥', required: false },
+                    { label: 'Water',                              field: 'water'             as keyof FormData, icon: '💧', required: false },
+                    { label: 'Waste Collection & Disposal',        field: 'waste'             as keyof FormData, icon: '♻️', required: false },
+                    { label: 'Telecoms (mobile, broadband, lines)',field: 'telecoms'          as keyof FormData, icon: '📡', required: false },
+                    { label: 'Insurance Premiums',                 field: 'insurance'         as keyof FormData, icon: '🛡️', required: false },
+                    { label: 'Merchant Services (card processing)',field: 'merchantServices'  as keyof FormData, icon: '💳', required: false },
+                    { label: 'Business Rates',                     field: 'businessRates'     as keyof FormData, icon: '🏛️', required: false },
                   ] as const).map(({ label, field, icon, required }) => (
                     <div key={field as string}>
                       <label className="block text-[0.75rem] font-bold uppercase tracking-[0.12em] text-[rgba(196,164,78,0.8)] mb-1.5">
