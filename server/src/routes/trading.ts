@@ -160,6 +160,73 @@ router.post('/signal', async (req: Request, res: Response) => {
     (signal as any).calibrated_pct         = calibration.calibrated_pct;
     (signal as any).calibration_tier       = calibration.tier;
 
+    // ── Phase 4d: Oracle 12-Pillar Score (Wiring Gap 1 CLOSED) ──────────────
+    // Computes a composite oracle_score from all available signal layers.
+    // Replaces the previous undefined pass-through with a real calculated value.
+    //
+    // 12 pillars mapped to available signal data (weights sum to 100):
+    //   P1  Technical confluence       (45% of signal score)  → weight 20
+    //   P2  Volume confirmation        (20% of signal score)  → weight 10
+    //   P3  Momentum alignment         (20% of signal score)  → weight 10
+    //   P4  Asset-specific context     (15% of signal score)  → weight  8
+    //   P5  Pattern confirmation       (fractal layer)        → weight 10
+    //   P6  Calibrated confidence      (PAV model)            → weight  8
+    //   P7  CB NLP divergence          (central bank stance)  → weight  8
+    //   P8  Smart money flow           (COT/institutional)    → weight  6
+    //   P9  Risk/reward quality        (TP1/SL ratio ≥ 1.5)   → weight  8
+    //   P10 Signal strength            (STRONG/MODERATE/WEAK) → weight  6
+    //   P11 HITL pre-check             (always 50 until human)→ weight  3
+    //   P12 Data quality               (candles ≥ 100)        → weight  3
+    const layers = (signal as any).layers || {};
+    const techScore   = layers.technical?.score      ?? signal.signal_score;
+    const volScore    = layers.volume?.score         ?? 50;
+    const momScore    = layers.momentum?.score       ?? 50;
+    const assetScore2 = layers.asset_specific?.score ?? 50;
+    const patLayer    = layers.pattern_layer         ?? { confidence: 0, trade_bias: 'WAIT', adjustment: 0 };
+    const p5_pattern  = patLayer.trade_bias === 'WAIT' ? 50
+                      : patLayer.trade_bias === 'BUY'  && signal.action === 'BUY'  ? Math.min(100, 50 + patLayer.confidence * 0.5)
+                      : patLayer.trade_bias === 'SELL' && signal.action === 'SELL' ? Math.min(100, 50 + patLayer.confidence * 0.5)
+                      : Math.max(0, 50 - patLayer.confidence * 0.3);
+
+    // CB NLP: get latest divergence score for symbol if available
+    const cbDivergence = centralBankNLP.getDivergenceSignals();
+    const symbolBase   = signal.symbol.slice(0, 3).toUpperCase();
+    const cbEntry      = cbDivergence.find((d: any) => d.pair?.includes(symbolBase));
+    const p7_cb        = cbEntry ? Math.min(100, Math.max(0, 50 + ((cbEntry as any).bias_score ?? (cbEntry as any).strength ?? 0) * 0.5)) : 50;
+
+    // Smart money: get signal for symbol
+    const smSignal = smartMoneyFlow.getSignal(signal.symbol);
+    const p8_sm    = smSignal ? Math.min(100, Math.max(0, 50 + ((smSignal as any).composite_sentiment ?? smSignal.institutional_sentiment ?? 0) * 0.5)) : 50;
+
+    const rr       = signal.risk_reward ?? 1;
+    const p9_rr    = Math.min(100, Math.max(0, (rr / 3) * 100));   // 3:1 R:R = 100%
+    const p10_str  = signal.strength === 'STRONG' ? 95 : signal.strength === 'MODERATE' ? 70 : 40;
+    const p12_data = signal.candles_used >= 100 ? 100 : (signal.candles_used / 100) * 100;
+
+    const oracleScore = Math.round(
+      techScore   * 0.20 +
+      volScore    * 0.10 +
+      momScore    * 0.10 +
+      assetScore2 * 0.08 +
+      p5_pattern  * 0.10 +
+      calibration.calibrated_pct * 0.08 +
+      p7_cb       * 0.08 +
+      p8_sm       * 0.06 +
+      p9_rr       * 0.08 +
+      p10_str     * 0.06 +
+      50          * 0.03 +   // P11 HITL always 50 (pending human)
+      p12_data    * 0.03
+    );
+    (signal as any).oracle_score = oracleScore;
+    (signal as any).oracle_pillars = {
+      p1_technical: techScore, p2_volume: volScore, p3_momentum: momScore,
+      p4_asset_specific: assetScore2, p5_pattern: p5_pattern,
+      p6_calibrated_confidence: calibration.calibrated_pct,
+      p7_cb_nlp: p7_cb, p8_smart_money: p8_sm, p9_risk_reward: p9_rr,
+      p10_strength: p10_str, p11_hitl: 50, p12_data_quality: p12_data,
+    };
+    console.log(`[Oracle] ${signal.symbol} oracle_score=${oracleScore} (12-pillar composite)`);
+
     // 3. Register for outcome tracking (also syncs to Supabase)
     const outcomeRecord = outcomeTracker.register(signal);
 
@@ -239,6 +306,12 @@ router.post('/signal', async (req: Request, res: Response) => {
     res.json({
       success:  true,
       signal,
+      oracle: {
+        score:    oracleScore,
+        pillars:  (signal as any).oracle_pillars,
+        tier:     oracleScore >= 80 ? 'STRONG' : oracleScore >= 65 ? 'MODERATE' : 'WEAK',
+        label:    `Oracle: ${oracleScore}/100 (12-pillar composite)`,
+      },
       calibration: {
         raw_confidence_pct:     signal.confidence_pct,
         calibrated_probability: calibration.calibrated_probability,
@@ -397,13 +470,35 @@ router.get('/scan', async (_req: Request, res: Response) => {
 // ─────────────────────────────────────────────────────────────────────────────
 router.post('/outcome', (req: Request, res: Response) => {
   try {
-    const { signal_id, exit_price, recorded_by, notes } = req.body;
+    const { signal_id, exit_price, recorded_by, notes, registration } = req.body;
 
     if (!signal_id || exit_price === undefined) {
       return res.status(400).json({ error: 'signal_id and exit_price required' });
     }
     if (typeof exit_price !== 'number' || exit_price <= 0) {
       return res.status(400).json({ error: 'exit_price must be a positive number' });
+    }
+
+    // Phase 5: Auto-register signal if registration payload provided and signal not yet tracked
+    if (registration) {
+      const existing = outcomeTracker.getAll(100000).find((o: any) => o.signal_id === signal_id);
+      if (!existing) {
+        const autoSig: any = {
+          signal_id:      registration.signal_id      ?? signal_id,
+          symbol:         registration.symbol         ?? 'UNKNOWN',
+          asset_class:    registration.asset_class    ?? 'forex',
+          action:         registration.action         ?? 'BUY',
+          signal_score:   registration.signal_score   ?? 70,
+          confidence_pct: registration.confidence_pct ?? 70,
+          entry_price:    registration.entry_price    ?? exit_price,
+          stop_loss:      registration.stop_loss      ?? +(exit_price * 0.99).toFixed(5),
+          take_profit_1:  registration.take_profit_1  ?? +(exit_price * 1.01).toFixed(5),
+          take_profit_2:  registration.take_profit_2  ?? +(exit_price * 1.02).toFixed(5),
+          timeframe:      registration.timeframe      ?? '1H',
+          registered_at:  registration.registered_at ?? new Date().toISOString(),
+        };
+        outcomeTracker.register(autoSig);
+      }
     }
 
     // Also check phantom trades for auto-close
@@ -941,7 +1036,7 @@ router.post('/smart-money/cot', async (req: Request, res: Response) => {
 // ─────────────────────────────────────────────────────────────────────────────
 router.get('/smart-money/:symbol', (req: Request, res: Response) => {
   try {
-    const symbol = req.params.symbol.toUpperCase();
+    const symbol = String(req.params.symbol).toUpperCase();
     const signal = smartMoneyFlow.getSignal(symbol);
 
     if (!signal) {

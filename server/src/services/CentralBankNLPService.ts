@@ -34,6 +34,8 @@
  */
 
 import supabaseService, { isSupabaseEnabled } from './SupabaseService.js';
+import https from 'https';
+import http  from 'http';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // KEYWORD DICTIONARIES
@@ -460,3 +462,121 @@ export class CentralBankNLPService {
 // ── Singleton ─────────────────────────────────────────────────────────────────
 export const centralBankNLP = new CentralBankNLPService();
 export default centralBankNLP;
+
+// ── Phase 4c: RSS Auto-Fetch Polling Timer (Wiring Gap 3 CLOSED) ─────────────
+// Fetches RSS/Atom feeds from FED, ECB, BOE, BOJ, BIS every 15 minutes.
+// On each fetch, raw XML is stripped to text and scored through scoreText().
+// Non-fatal: any feed failure logs a warning and continues.
+
+type RSSFeedConfig = { bank: string; label: string; url: string };
+
+const RSS_FEEDS: RSSFeedConfig[] = [
+  { bank: 'FED', label: 'Federal Reserve Press Releases',       url: 'https://www.federalreserve.gov/feeds/press_all.xml' },
+  { bank: 'ECB', label: 'ECB Press Releases',                   url: 'https://www.ecb.europa.eu/rss/press.html' },
+  { bank: 'BOE', label: 'Bank of England News',                  url: 'https://www.bankofengland.co.uk/rss/news' },
+  { bank: 'BOJ', label: 'Bank of Japan Press Releases',          url: 'https://www.boj.or.jp/en/rss/release_rss.xml' },
+  { bank: 'BIS', label: 'BIS Speeches & Research',               url: 'https://www.bis.org/doclist/bis_rss.xml' },
+];
+
+/** Strip XML/HTML tags and decode common entities to plain text */
+function stripXML(raw: string): string {
+  return raw
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
+    .replace(/<[^>]+>/g,  ' ')
+    .replace(/&amp;/g,   '&')
+    .replace(/&lt;/g,    '<')
+    .replace(/&gt;/g,    '>')
+    .replace(/&quot;/g,  '"')
+    .replace(/&#\d+;/g,  ' ')
+    .replace(/\s+/g,     ' ')
+    .trim();
+}
+
+/** Fetch a URL and return raw text (follows https/http) */
+function fetchRSSText(url: string, timeoutMs = 10_000): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const mod = url.startsWith('https') ? https : http;
+    const req = mod.get(url, { headers: { 'User-Agent': 'OrbAI-CB-NLP-RSS/1.0' } }, (res) => {
+      // follow 1 redirect
+      if ((res.statusCode === 301 || res.statusCode === 302) && res.headers.location) {
+        fetchRSSText(res.headers.location, timeoutMs).then(resolve).catch(reject);
+        return;
+      }
+      if (res.statusCode && res.statusCode >= 400) {
+        reject(new Error(`HTTP ${res.statusCode}`));
+        return;
+      }
+      let data = '';
+      res.on('data', (chunk: Buffer) => { data += chunk.toString(); });
+      res.on('end', () => resolve(data));
+    });
+    req.setTimeout(timeoutMs, () => { req.destroy(); reject(new Error('Timeout')); });
+    req.on('error', reject);
+  });
+}
+
+/** Poll one RSS feed, score any new items found */
+async function pollFeed(feed: RSSFeedConfig): Promise<void> {
+  try {
+    const raw  = await fetchRSSText(feed.url);
+    const text = stripXML(raw);
+    if (text.length < 50) return;          // nothing useful
+
+    // Extract <title> and <description> blocks individually if possible,
+    // otherwise score the entire stripped text once
+    const items = raw.match(/<item[\s\S]*?<\/item>/gi) ?? [];
+    if (items.length > 0) {
+      // Score the first 3 items (most recent) to avoid API spam
+      for (const item of items.slice(0, 3)) {
+        const itemText = stripXML(item);
+        if (itemText.length > 40) {
+          centralBankNLP.scoreText(
+            itemText,
+            feed.bank,
+            `${feed.label} (RSS auto-fetch ${new Date().toISOString()})`,
+            new Date().toISOString().split('T')[0],
+          );
+        }
+      }
+    } else {
+      // Atom or non-standard — score whole body
+      centralBankNLP.scoreText(
+        text.slice(0, 2000),
+        feed.bank,
+        `${feed.label} (RSS auto-fetch ${new Date().toISOString()})`,
+        new Date().toISOString().split('T')[0],
+      );
+    }
+    console.log(`[CB-NLP RSS] ✓ Polled ${feed.bank} — ${feed.label}`);
+  } catch (err: any) {
+    // Non-fatal: network unavailable in dev/sandbox is expected
+    console.warn(`[CB-NLP RSS] ⚠ ${feed.bank} feed unavailable: ${err.message}`);
+  }
+}
+
+/** Poll all 5 feeds once */
+async function pollAllFeeds(): Promise<void> {
+  await Promise.allSettled(RSS_FEEDS.map(pollFeed));
+}
+
+// Start polling: immediate first run + every 15 minutes
+// POLL_INTERVAL_MS env var allows override (e.g. set to 60000 for 1-min in tests)
+const RSS_POLL_INTERVAL_MS = parseInt(process.env.CB_NLP_POLL_INTERVAL_MS ?? '900000', 10);
+
+// Initial poll after 5s server warmup (non-blocking)
+setTimeout(() => {
+  console.log('[CB-NLP RSS] Starting initial feed poll (5 feeds)...');
+  pollAllFeeds().catch(() => {/* ignore */});
+}, 5_000);
+
+// Recurring poll
+const rssPollingTimer = setInterval(() => {
+  console.log(`[CB-NLP RSS] Scheduled poll — ${new Date().toISOString()}`);
+  pollAllFeeds().catch(() => {/* ignore */});
+}, RSS_POLL_INTERVAL_MS);
+
+// Allow Node.js to exit cleanly even with interval running
+if (rssPollingTimer.unref) rssPollingTimer.unref();
+
+export { rssPollingTimer, pollAllFeeds };
+

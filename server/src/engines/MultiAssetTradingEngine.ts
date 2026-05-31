@@ -26,6 +26,7 @@
 import crypto from 'crypto';
 import { ForexAnalysisEngine, ForexPrice, ForexAnalysisResult } from '../engines/ForexAnalysisEngine.js';
 import { marketDataService, AssetClass, MarketDataResult } from '../services/MarketDataService.js';
+import { fractalMatcher, PatternMatch } from './FractalPatternMatcher.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPES
@@ -59,6 +60,10 @@ export interface TradingSignal {
     volume:       { score: number; signal: string };
     momentum:     { score: number; signal: string };
     asset_specific: { score: number; notes: string[] };
+    pattern_layer?: {
+      pattern: string; direction: string; trade_bias: string;
+      confidence: number; dtw_distance: number; adjustment: number;
+    };
   };
 
   // Analysis detail
@@ -163,13 +168,33 @@ export class MultiAssetTradingEngine {
     const momentumScore   = this.scoreMomentum(analysis);
     const assetScore      = this.scoreAssetSpecific(symbol, assetClass, analysis, marketData);
 
-    // 4. Composite signal score
-    const signalScore = Math.round(
+    // 4. Composite signal score (pre-pattern)
+    const rawScore = (
       technicalScore.score * 0.45 +
       volumeScore.score    * 0.20 +
       momentumScore.score  * 0.20 +
       assetScore.score     * 0.15
     );
+
+    // ── Phase 4b: Layer-5 Fractal Pattern Confirmation (Wiring Gap 4 CLOSED) ──
+    // FractalPatternMatcher.bestMatch() overlays DTW pattern recognition on the
+    // last 60 candles. A confirming pattern adds +3 to score; a conflicting
+    // pattern subtracts -3 (net ±3 — pattern is advisory, not dominant).
+    let patternLayer: PatternMatch | null = null;
+    let patternAdjustment = 0;
+    try {
+      const recentCandles = marketData.candles.slice(-60);
+      patternLayer = fractalMatcher.bestMatch(recentCandles as any, { min_confidence: 55, topN: 1 });
+      if (patternLayer) {
+        const confirming =
+          (patternLayer.trade_bias === 'BUY'  && rawScore > 50) ||
+          (patternLayer.trade_bias === 'SELL' && rawScore < 50) ||
+          (patternLayer.trade_bias === 'WAIT');
+        patternAdjustment = confirming ? +3 : -3;
+      }
+    } catch { /* pattern match non-fatal — proceed without adjustment */ }
+
+    const signalScore = Math.min(100, Math.max(0, Math.round(rawScore + patternAdjustment)));
 
     // 5. Determine action
     const bullish  = analysis.risk_assessment.bullish_probability;
@@ -232,10 +257,16 @@ export class MultiAssetTradingEngine {
       timeframe:           assetClass === 'stock' ? 'Daily' : '1H + 4H',
       market_session:      session,
       layers: {
-        technical:     technicalScore,
-        volume:        volumeScore,
-        momentum:      momentumScore,
+        technical:      technicalScore,
+        volume:         volumeScore,
+        momentum:       momentumScore,
         asset_specific: assetScore,
+        pattern_layer:  patternLayer
+          ? { pattern: patternLayer.pattern, direction: patternLayer.direction,
+              trade_bias: patternLayer.trade_bias, confidence: patternLayer.confidence,
+              dtw_distance: patternLayer.dtw_distance, adjustment: patternAdjustment }
+          : { pattern: 'NONE', direction: 'NEUTRAL', trade_bias: 'WAIT', confidence: 0,
+              dtw_distance: 999, adjustment: 0 },
       },
       technical_analysis:  analysis,
       data_source:         marketData.source,

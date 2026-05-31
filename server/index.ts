@@ -150,16 +150,16 @@ async function startServer() {
     foxliteRoutes,
     nocompareRoutes,
   ] = await Promise.all([
-    loadRouter('./routes/trading.js',    'trading'),
-    loadRouter('./routes/forex.js',      'forex'),
-    loadRouter('./routes/orb.js',        'orb'),
-    loadRouter('./routes/kavan.js',      'kavan'),
-    loadRouter('./routes/forensic.js',   'forensic'),
-    loadRouter('./routes/platform.js',   'platform'),
-    loadRouter('./routes/veritech.js',   'veritech'),
-    loadRouter('./routes/neural.js',     'neural'),
-    loadRouter('./routes/foxlite.js',    'foxlite'),
-    loadRouter('./routes/nocompare.js',  'nocompare'),
+    loadRouter('./src/routes/trading.ts',    'trading'),
+    loadRouter('./src/routes/forex.ts',      'forex'),
+    loadRouter('./src/routes/orb.ts',        'orb'),
+    loadRouter('./src/routes/kavan.ts',      'kavan'),
+    loadRouter('./src/routes/forensic.ts',   'forensic'),
+    loadRouter('./src/routes/platform.ts',   'platform'),
+    loadRouter('./src/routes/veritech.ts',   'veritech'),
+    loadRouter('./src/routes/neural.ts',     'neural'),
+    loadRouter('./src/routes/foxlite.ts',    'foxlite'),
+    loadRouter('./src/routes/nocompare.ts',  'nocompare'),
   ]);
 
   // ── Mount API routes ───────────────────────────────────────────────────────
@@ -177,7 +177,7 @@ async function startServer() {
   // ── Supabase admin route (run migration once) ──────────────────────────────
   app.post('/api/trading/admin/migrate', async (_req: Request, res: Response) => {
     try {
-      const { supabaseService } = await import('./services/SupabaseService.js');
+      const { supabaseService } = await import('./src/services/SupabaseService.js');
       const result = await supabaseService.runMigration();
       res.json(result);
     } catch (err: any) {
@@ -188,7 +188,7 @@ async function startServer() {
   // ── Supabase health endpoint ───────────────────────────────────────────────
   app.get('/api/trading/admin/supabase-health', async (_req: Request, res: Response) => {
     try {
-      const { supabaseService, isSupabaseEnabled } = await import('./services/SupabaseService.js');
+      const { supabaseService, isSupabaseEnabled } = await import('./src/services/SupabaseService.js');
       const health = await supabaseService.healthCheck();
       res.json({ supabase_enabled: isSupabaseEnabled(), ...health });
     } catch (err: any) {
@@ -209,7 +209,7 @@ async function startServer() {
 
   app.get('/api/v10/report', async (_req: Request, res: Response) => {
     try {
-      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
+      const { v10Gate }  = await import('./src/services/V10ComplianceGate.js');
       const report       = v10Gate.generateReport();
       res.json({ success: true, report });
     } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
@@ -217,7 +217,7 @@ async function startServer() {
 
   app.get('/api/v10/features', async (_req: Request, res: Response) => {
     try {
-      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
+      const { v10Gate }  = await import('./src/services/V10ComplianceGate.js');
       const all          = v10Gate.evaluateAll();
       const certified    = all.filter((f: any) => f.status === 'CERTIFIED');
       const pending      = all.filter((f: any) => f.status === 'PENDING');
@@ -237,21 +237,22 @@ async function startServer() {
 
   app.get('/api/v10/features/:id', async (req: Request, res: Response) => {
     try {
-      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
-      const feature      = v10Gate.getFeature(req.params.id);
-      if (!feature) return res.status(404).json({ error: `Feature ${req.params.id} not found` });
+      const { v10Gate }  = await import('./src/services/V10ComplianceGate.js');
+      const featureId   = String(req.params.id);
+      const feature      = v10Gate.getFeature(featureId);
+      if (!feature) return res.status(404).json({ error: `Feature ${featureId} not found` });
       res.json({ success: true, feature });
     } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
   });
 
   app.post('/api/v10/features/:id/evidence', async (req: Request, res: Response) => {
     try {
-      const { v10Gate }  = await import('./services/V10ComplianceGate.js');
+      const { v10Gate }  = await import('./src/services/V10ComplianceGate.js');
       const { type, score, description, passed, tested_at } = req.body;
       if (!type || score === undefined || !description) {
         return res.status(400).json({ error: 'Required: type, score, description' });
       }
-      const result = v10Gate.submitEvidence(req.params.id, {
+      const result = v10Gate.submitEvidence(String(req.params.id), {
         type, score: Number(score),
         description,
         passed:     passed !== false,
@@ -265,34 +266,34 @@ async function startServer() {
 
   app.get('/api/v10/updates', async (_req: Request, res: Response) => {
     try {
-      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const { selfUpdate } = await import('./src/services/PlatformSelfUpdateService.js');
       res.json({
         success:  true,
         summary:  selfUpdate.getSummary(),
         updates:  selfUpdate.getAll(),
-        note:     `Only '${(await import('./services/V10ComplianceGate.js')).AUTHORIZED_APPROVER}' can authorize or reject updates.`,
+        note:     `Only '${(await import('./src/services/V10ComplianceGate.js')).AUTHORIZED_APPROVER}' can authorize or reject updates.`,
       });
     } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
   });
 
   app.post('/api/v10/updates', async (req: Request, res: Response) => {
     try {
-      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const { selfUpdate } = await import('./src/services/PlatformSelfUpdateService.js');
       const { title, description, category, impact, target_feature, proposed_change, expected_benefit, risk_assessment, proposer } = req.body;
       if (!title || !description || !category || !impact || !target_feature || !proposed_change) {
         return res.status(400).json({ error: 'Required: title, description, category, impact, target_feature, proposed_change' });
       }
       const update = selfUpdate.propose({ title, description, category, impact, target_feature, proposed_change, expected_benefit: expected_benefit || 'Not specified', risk_assessment: risk_assessment || 'Not assessed', proposer });
-      res.json({ success: true, update, message: `Update queued. Awaiting authorization from ${(await import('./services/V10ComplianceGate.js')).AUTHORIZED_APPROVER}.` });
+      res.json({ success: true, update, message: `Update queued. Awaiting authorization from ${(await import('./src/services/V10ComplianceGate.js')).AUTHORIZED_APPROVER}.` });
     } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
   });
 
   app.post('/api/v10/updates/:id/authorize', async (req: Request, res: Response) => {
     try {
-      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const { selfUpdate } = await import('./src/services/PlatformSelfUpdateService.js');
       const approver = String(req.query.approver || req.body.approver || '');
       const notes    = String(req.query.notes    || req.body.notes    || '');
-      const result   = selfUpdate.authorize(req.params.id, approver, notes);
+      const result   = selfUpdate.authorize(String(req.params.id), approver, notes);
       const status   = result.success ? 200 : 403;
       res.status(status).json(result);
     } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
@@ -300,10 +301,10 @@ async function startServer() {
 
   app.post('/api/v10/updates/:id/reject', async (req: Request, res: Response) => {
     try {
-      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const { selfUpdate } = await import('./src/services/PlatformSelfUpdateService.js');
       const approver = String(req.query.approver || req.body.approver || '');
       const reason   = String(req.query.reason   || req.body.reason   || 'No reason provided');
-      const result   = selfUpdate.reject(req.params.id, approver, reason);
+      const result   = selfUpdate.reject(String(req.params.id), approver, reason);
       const status   = result.success ? 200 : 403;
       res.status(status).json(result);
     } catch (err: any) { res.status(500).json({ success: false, error: err.message }); }
@@ -311,8 +312,8 @@ async function startServer() {
 
   app.post('/api/v10/propose-improvements', async (_req: Request, res: Response) => {
     try {
-      const { v10Gate }    = await import('./services/V10ComplianceGate.js');
-      const { selfUpdate } = await import('./services/PlatformSelfUpdateService.js');
+      const { v10Gate }    = await import('./src/services/V10ComplianceGate.js');
+      const { selfUpdate } = await import('./src/services/PlatformSelfUpdateService.js');
       const features = v10Gate.evaluateAll().map((f: any) => ({
         id:     f.id,
         name:   f.name,
@@ -359,7 +360,7 @@ async function startServer() {
   app.use(express.static(staticPath));
 
   // ── SPA fallback — all non-API routes serve index.html ────────────────────
-  app.get('*', (req: Request, res: Response) => {
+  app.get('/{*path}', (req: Request, res: Response) => {
     if (req.path.startsWith('/api/') || req.path.startsWith('/ws')) {
       return res.status(404).json({ error: `API route not found: ${req.path}` });
     }

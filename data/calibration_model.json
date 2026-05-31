@@ -1,0 +1,184 @@
+{
+  "model": {
+    "x": [
+      0.625,
+      0.675,
+      0.725,
+      0.775,
+      0.825,
+      0.875,
+      0.925
+    ],
+    "y": [
+      0.05,
+      0.05,
+      0.5,
+      0.95,
+      0.95,
+      0.95,
+      0.95
+    ],
+    "trained_at": "2026-05-31T06:17:15.316Z",
+    "sample_count": 60
+  },
+  "modelByAsset": {
+    "forex": {
+      "x": [
+        0.675,
+        0.725,
+        0.775,
+        0.825,
+        0.875,
+        0.925
+      ],
+      "y": [
+        0.05,
+        0.3333333333333333,
+        0.95,
+        0.95,
+        0.95,
+        0.95
+      ],
+      "trained_at": "2026-05-31T06:17:15.316Z",
+      "sample_count": 46
+    },
+    "crypto": {
+      "x": [
+        0.775
+      ],
+      "y": [
+        0.95
+      ],
+      "trained_at": "2026-05-31T06:17:15.316Z",
+      "sample_count": 10
+    },
+    "stock": null
+  },
+  "metrics": {
+    "total_resolved_signals": 60,
+    "calibration_status": "TRAINED",
+    "expected_calibration_error": 0.0433,
+    "max_calibration_error": 0.05,
+    "brier_score": 0.0022,
+    "reliability_score": 95.7,
+    "bins": [
+      {
+        "bin_label": "50–55%",
+        "confidence_min": 0.5,
+        "confidence_max": 0.55,
+        "midpoint": 0.525,
+        "sample_count": 0,
+        "win_count": 0,
+        "empirical_win_rate": 0,
+        "calibrated_prob": 0
+      },
+      {
+        "bin_label": "55–60%",
+        "confidence_min": 0.55,
+        "confidence_max": 0.6,
+        "midpoint": 0.575,
+        "sample_count": 1,
+        "win_count": 0,
+        "empirical_win_rate": 0,
+        "calibrated_prob": 0.05
+      },
+      {
+        "bin_label": "60–65%",
+        "confidence_min": 0.6,
+        "confidence_max": 0.65,
+        "midpoint": 0.625,
+        "sample_count": 4,
+        "win_count": 0,
+        "empirical_win_rate": 0,
+        "calibrated_prob": 0.05
+      },
+      {
+        "bin_label": "65–70%",
+        "confidence_min": 0.65,
+        "confidence_max": 0.7,
+        "midpoint": 0.675,
+        "sample_count": 3,
+        "win_count": 0,
+        "empirical_win_rate": 0,
+        "calibrated_prob": 0.05
+      },
+      {
+        "bin_label": "70–75%",
+        "confidence_min": 0.7,
+        "confidence_max": 0.75,
+        "midpoint": 0.725,
+        "sample_count": 8,
+        "win_count": 4,
+        "empirical_win_rate": 0.5,
+        "calibrated_prob": 0.5
+      },
+      {
+        "bin_label": "75–80%",
+        "confidence_min": 0.75,
+        "confidence_max": 0.8,
+        "midpoint": 0.775,
+        "sample_count": 13,
+        "win_count": 13,
+        "empirical_win_rate": 1,
+        "calibrated_prob": 0.95
+      },
+      {
+        "bin_label": "80–85%",
+        "confidence_min": 0.8,
+        "confidence_max": 0.85,
+        "midpoint": 0.825,
+        "sample_count": 14,
+        "win_count": 14,
+        "empirical_win_rate": 1,
+        "calibrated_prob": 0.95
+      },
+      {
+        "bin_label": "85–90%",
+        "confidence_min": 0.85,
+        "confidence_max": 0.9,
+        "midpoint": 0.875,
+        "sample_count": 11,
+        "win_count": 11,
+        "empirical_win_rate": 1,
+        "calibrated_prob": 0.95
+      },
+      {
+        "bin_label": "90–95%",
+        "confidence_min": 0.9,
+        "confidence_max": 0.95,
+        "midpoint": 0.925,
+        "sample_count": 6,
+        "win_count": 6,
+        "empirical_win_rate": 1,
+        "calibrated_prob": 0.95
+      },
+      {
+        "bin_label": "95–98.5%",
+        "confidence_min": 0.95,
+        "confidence_max": 1,
+        "midpoint": 0.975,
+        "sample_count": 0,
+        "win_count": 0,
+        "empirical_win_rate": 0,
+        "calibrated_prob": 0
+      }
+    ],
+    "by_asset_class": {
+      "forex": {
+        "ece": 0.0435,
+        "samples": 46
+      },
+      "crypto": {
+        "ece": 0.14,
+        "samples": 10
+      },
+      "stock": {
+        "ece": 0.05,
+        "samples": 4
+      }
+    },
+    "last_trained": "2026-05-31T06:17:14.940Z",
+    "next_recommended_retrain": "2026-06-01T06:17:15.317Z"
+  },
+  "lastTrainedAt": "2026-05-31T06:17:15.317Z"
+}

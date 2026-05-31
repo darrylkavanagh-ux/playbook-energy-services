@@ -33,6 +33,7 @@
 import https from 'https';
 import http from 'http';
 import { ForexPrice } from '../engines/ForexAnalysisEngine.js';
+import { redisCache } from './RedisCache.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPES
@@ -525,6 +526,16 @@ export class MarketDataService {
 
   /** Fetch full OHLCV dataset + live quote for any symbol */
   async fetch(symbol: string, assetClass: AssetClass): Promise<MarketDataResult> {
+
+    // ── Phase 4a: Redis L1/L2 cache lookup (60s TTL) ─────────────────────────
+    // WIRING GAP CLOSED: redisCache.getMarketData() / setMarketData() wired here
+    // Prevents redundant external API calls for same symbol within 60s window
+    const cached = await redisCache.getMarketData<MarketDataResult>(symbol, assetClass);
+    if (cached) {
+      console.log(`[MarketData] Cache HIT — ${symbol} (${assetClass}) served from Redis/L1`);
+      return cached;
+    }
+
     let candles: OHLCVCandle[];
     let quote:   LiveQuote;
     let source:  string;
@@ -561,7 +572,7 @@ export class MarketDataService {
       if (quote.ask) candles[candles.length - 1].ask = quote.ask;
     }
 
-    return {
+    const result: MarketDataResult = {
       symbol,
       assetClass,
       candles,
@@ -570,6 +581,12 @@ export class MarketDataService {
       fetchedAt:  new Date(),
       dataPoints: candles.length,
     };
+
+    // ── Phase 4a: Write result to Redis/L1 cache (60s TTL) ───────────────────
+    await redisCache.setMarketData(symbol, assetClass, result);
+    console.log(`[MarketData] Cache SET — ${symbol} (${assetClass}) via ${source}`);
+
+    return result;
   }
 
   /** Convenience: fetch multiple symbols in parallel */

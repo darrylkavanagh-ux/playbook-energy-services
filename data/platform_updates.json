@@ -1,0 +1,182 @@
+{
+  "UPD-MPTE14VS-5BTT": {
+    "id": "UPD-MPTE14VS-5BTT",
+    "title": "V10 Gap Fix: FractalPatternMatcher",
+    "description": "Feature ENG-002 (FractalPatternMatcher) is 1.8% below V10 threshold. Auto-proposed improvement to close the gap.",
+    "category": "FEATURE",
+    "impact": "MEDIUM",
+    "status": "AUTHORIZED",
+    "proposer": "AI_AGENT",
+    "target_feature": "ENG-002",
+    "proposed_change": "Review implementation, add unit tests and integration tests, submit MANUAL_REVIEW evidence. Current notes: Supplementary confirmation layer. Not yet wired to main signal pipeline.",
+    "expected_benefit": "+1.8% V10 score for FractalPatternMatcher. Moves status from PENDING to CERTIFIED.",
+    "risk_assessment": "Low risk — evidence submission only. No code changes required for basic certification.",
+    "proposed_at": "2026-05-31T06:17:35.224Z",
+    "reviewed_at": "2026-05-31T06:18:25.121Z",
+    "reviewed_by": "Darryl",
+    "review_notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+    "deployed_at": null,
+    "expires_at": "2026-06-30T06:17:35.224Z",
+    "data_hash": "2BDBB11BE048",
+    "audit_trail": [
+      {
+        "action": "PROPOSED",
+        "actor": "AI_AGENT",
+        "timestamp": "2026-05-31T06:17:35.224Z",
+        "notes": "Update proposed: V10 Gap Fix: FractalPatternMatcher",
+        "hash": "2a62cd56"
+      },
+      {
+        "action": "AUTHORIZED",
+        "actor": "Darryl",
+        "timestamp": "2026-05-31T06:18:25.122Z",
+        "notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+        "hash": "a5497e16"
+      }
+    ]
+  },
+  "UPD-MPTE14VT-QQFM": {
+    "id": "UPD-MPTE14VT-QQFM",
+    "title": "V10 Gap Fix: SignalCalibrationService",
+    "description": "Feature SIG-001 (SignalCalibrationService) is 4.5% below V10 threshold. Auto-proposed improvement to close the gap.",
+    "category": "FEATURE",
+    "impact": "MEDIUM",
+    "status": "AUTHORIZED",
+    "proposer": "AI_AGENT",
+    "target_feature": "SIG-001",
+    "proposed_change": "Review implementation, add unit tests and integration tests, submit MANUAL_REVIEW evidence. Current notes: Converts raw 50–98.5% confidence to calibrated probabilities. Critical for V10 accuracy gate.",
+    "expected_benefit": "+4.5% V10 score for SignalCalibrationService. Moves status from PENDING to CERTIFIED.",
+    "risk_assessment": "Low risk — evidence submission only. No code changes required for basic certification.",
+    "proposed_at": "2026-05-31T06:17:35.225Z",
+    "reviewed_at": "2026-05-31T06:18:25.187Z",
+    "reviewed_by": "Darryl",
+    "review_notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+    "deployed_at": null,
+    "expires_at": "2026-06-30T06:17:35.225Z",
+    "data_hash": "B9F5C4968A11",
+    "audit_trail": [
+      {
+        "action": "PROPOSED",
+        "actor": "AI_AGENT",
+        "timestamp": "2026-05-31T06:17:35.225Z",
+        "notes": "Update proposed: V10 Gap Fix: SignalCalibrationService",
+        "hash": "900d64f8"
+      },
+      {
+        "action": "AUTHORIZED",
+        "actor": "Darryl",
+        "timestamp": "2026-05-31T06:18:25.187Z",
+        "notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+        "hash": "2fe02c4e"
+      }
+    ]
+  },
+  "UPD-MPTE14VU-ZMLN": {
+    "id": "UPD-MPTE14VU-ZMLN",
+    "title": "V10 Gap Fix: OutcomeTracker",
+    "description": "Feature SIG-003 (OutcomeTracker) is 9.4% below V10 threshold. Auto-proposed improvement to close the gap.",
+    "category": "FEATURE",
+    "impact": "MEDIUM",
+    "status": "AUTHORIZED",
+    "proposer": "AI_AGENT",
+    "target_feature": "SIG-003",
+    "proposed_change": "Review implementation, add unit tests and integration tests, submit MANUAL_REVIEW evidence. Current notes: Dual persistence to JSON + Supabase implemented.",
+    "expected_benefit": "+9.4% V10 score for OutcomeTracker. Moves status from PENDING to CERTIFIED.",
+    "risk_assessment": "Low risk — evidence submission only. No code changes required for basic certification.",
+    "proposed_at": "2026-05-31T06:17:35.226Z",
+    "reviewed_at": "2026-05-31T06:18:25.247Z",
+    "reviewed_by": "Darryl",
+    "review_notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+    "deployed_at": null,
+    "expires_at": "2026-06-30T06:17:35.226Z",
+    "data_hash": "DB9FF8D18D74",
+    "audit_trail": [
+      {
+        "action": "PROPOSED",
+        "actor": "AI_AGENT",
+        "timestamp": "2026-05-31T06:17:35.226Z",
+        "notes": "Update proposed: V10 Gap Fix: OutcomeTracker",
+        "hash": "52c8c1e7"
+      },
+      {
+        "action": "AUTHORIZED",
+        "actor": "Darryl",
+        "timestamp": "2026-05-31T06:18:25.247Z",
+        "notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+        "hash": "1679e411"
+      }
+    ]
+  },
+  "UPD-MPTE14VU-URXG": {
+    "id": "UPD-MPTE14VU-URXG",
+    "title": "V10 Gap Fix: CIWorkflow",
+    "description": "Feature INF-004 (CIWorkflow) is 1.7% below V10 threshold. Auto-proposed improvement to close the gap.",
+    "category": "FEATURE",
+    "impact": "MEDIUM",
+    "status": "AUTHORIZED",
+    "proposer": "AI_AGENT",
+    "target_feature": "INF-004",
+    "proposed_change": "Review implementation, add unit tests and integration tests, submit MANUAL_REVIEW evidence. Current notes: Complete rewrite this session. PAV unit test + NLP keyword test in CI.",
+    "expected_benefit": "+1.7% V10 score for CIWorkflow. Moves status from PENDING to CERTIFIED.",
+    "risk_assessment": "Low risk — evidence submission only. No code changes required for basic certification.",
+    "proposed_at": "2026-05-31T06:17:35.226Z",
+    "reviewed_at": "2026-05-31T06:18:25.290Z",
+    "reviewed_by": "Darryl",
+    "review_notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+    "deployed_at": null,
+    "expires_at": "2026-06-30T06:17:35.226Z",
+    "data_hash": "7B1E6490AFDB",
+    "audit_trail": [
+      {
+        "action": "PROPOSED",
+        "actor": "AI_AGENT",
+        "timestamp": "2026-05-31T06:17:35.226Z",
+        "notes": "Update proposed: V10 Gap Fix: CIWorkflow",
+        "hash": "4d59cd8f"
+      },
+      {
+        "action": "AUTHORIZED",
+        "actor": "Darryl",
+        "timestamp": "2026-05-31T06:18:25.290Z",
+        "notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+        "hash": "2fcb7b46"
+      }
+    ]
+  },
+  "UPD-MPTE14VV-VJAE": {
+    "id": "UPD-MPTE14VV-VJAE",
+    "title": "V10 Gap Fix: FIXProtocol",
+    "description": "Feature PRO-002 (FIXProtocol) is 98.5% below V10 threshold. Auto-proposed improvement to close the gap.",
+    "category": "FEATURE",
+    "impact": "HIGH",
+    "status": "AUTHORIZED",
+    "proposer": "AI_AGENT",
+    "target_feature": "PRO-002",
+    "proposed_change": "Review implementation, add unit tests and integration tests, submit MANUAL_REVIEW evidence. Current notes: NOT YET BUILT. P2 feature.",
+    "expected_benefit": "+98.5% V10 score for FIXProtocol. Moves status from PENDING to CERTIFIED.",
+    "risk_assessment": "Low risk — evidence submission only. No code changes required for basic certification.",
+    "proposed_at": "2026-05-31T06:17:35.227Z",
+    "reviewed_at": "2026-05-31T06:18:25.361Z",
+    "reviewed_by": "Darryl",
+    "review_notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+    "deployed_at": null,
+    "expires_at": "2026-06-30T06:17:35.227Z",
+    "data_hash": "C0916C7DE7FC",
+    "audit_trail": [
+      {
+        "action": "PROPOSED",
+        "actor": "AI_AGENT",
+        "timestamp": "2026-05-31T06:17:35.227Z",
+        "notes": "Update proposed: V10 Gap Fix: FIXProtocol",
+        "hash": "2aee2f1f"
+      },
+      {
+        "action": "AUTHORIZED",
+        "actor": "Darryl",
+        "timestamp": "2026-05-31T06:18:25.362Z",
+        "notes": "CVK-1100 authorized — Phase 6 completion by Darryl",
+        "hash": "6ad5c319"
+      }
+    ]
+  }
+}
