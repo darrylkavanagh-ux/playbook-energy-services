@@ -33,6 +33,9 @@
 
 import express, { Request, Response } from 'express';
 import crypto from 'crypto';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { multiAssetEngine }  from '../engines/MultiAssetTradingEngine.js';
 import { marketDataService } from '../services/MarketDataService.js';
 import { outcomeTracker }    from '../services/OutcomeTracker.js';
@@ -43,6 +46,9 @@ import { signalCalibrator }  from '../services/SignalCalibrationService.js';
 import { centralBankNLP }    from '../services/CentralBankNLPService.js';
 import { smartMoneyFlow }    from '../services/SmartMoneyFlowService.js';
 import type { AssetClass }   from '../services/MarketDataService.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
 
 const router = express.Router();
 
@@ -66,12 +72,57 @@ function requireTraderAuth(req: Request, res: Response): string | null {
   return auth.replace('Bearer TRADER-', '').trim();
 }
 
-// In-memory HITL verification queue (pending human approvals)
-const hitlQueue = new Map<string, {
+// ─────────────────────────────────────────────────────────────────────────────
+// DISK-PERSISTED HITL QUEUE (Gap 7 CLOSED)
+// Previously: in-memory Map — lost on server restart, queue items unrecoverable.
+// Now: write-through to data/hitl_queue.json on every mutation (set/delete).
+// On startup: rehydrates from disk so pending approvals survive restarts.
+// ─────────────────────────────────────────────────────────────────────────────
+
+type HitlQueueItem = {
   signal_id: string; symbol: string; asset_class: string;
   action: string; confidence_pct: number; entry_price: number;
   generated_at: string; veritech_cert_id: string; signal: unknown;
-}>();
+};
+
+const HITL_QUEUE_PATH = path.resolve(__dirname, '../../../data/hitl_queue.json');
+
+class PersistentHitlQueue {
+  private map = new Map<string, HitlQueueItem>();
+
+  constructor() {
+    // Rehydrate from disk on startup
+    try {
+      if (fs.existsSync(HITL_QUEUE_PATH)) {
+        const raw = fs.readFileSync(HITL_QUEUE_PATH, 'utf8');
+        const entries: [string, HitlQueueItem][] = JSON.parse(raw);
+        for (const [k, v] of entries) this.map.set(k, v);
+        console.log(`[HITL] Rehydrated ${this.map.size} pending items from disk`);
+      }
+    } catch (e) {
+      console.warn(`[HITL] Could not rehydrate queue from disk: ${e}`);
+    }
+  }
+
+  private persist(): void {
+    try {
+      const dir = path.dirname(HITL_QUEUE_PATH);
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(HITL_QUEUE_PATH, JSON.stringify(Array.from(this.map.entries()), null, 2), 'utf8');
+    } catch (e) {
+      console.warn(`[HITL] Queue persist failed: ${e}`);
+    }
+  }
+
+  get size(): number { return this.map.size; }
+  get(key: string): HitlQueueItem | undefined { return this.map.get(key); }
+  has(key: string): boolean { return this.map.has(key); }
+  set(key: string, value: HitlQueueItem): void { this.map.set(key, value); this.persist(); }
+  delete(key: string): void { this.map.delete(key); this.persist(); }
+  values(): IterableIterator<HitlQueueItem> { return this.map.values(); }
+}
+
+const hitlQueue = new PersistentHitlQueue();
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GET /api/trading/health
@@ -613,6 +664,37 @@ router.post('/verify', (req: Request, res: Response) => {
       return res.status(400).json({ error: 'decision must be APPROVE | REJECT | MODIFY' });
     }
 
+    // ── Gap 8 CLOSED: Credential verification gate ──────────────────────────
+    // Previously accepted 'UNSPECIFIED' credential — any trader could approve
+    // without providing a verifiable credential. Now: credential_type is REQUIRED
+    // for APPROVE/MODIFY decisions. REJECT is permitted without credential
+    // (rejecting a bad signal is always safe).
+    const VALID_CREDENTIALS = [
+      'FCA_CISI_LEVEL_3', 'FCA_CISI_CHARTERED', 'FCA_CISI_LEVEL_4',
+      'FINRA_SERIES_65', 'FINRA_SERIES_7', 'FINRA_SERIES_3',
+      'CFA_LEVEL_1', 'CFA_LEVEL_2', 'CFA_CHARTERHOLDER',
+      'CMT_LEVEL_1', 'CMT_LEVEL_2', 'CMT_CHARTERHOLDER',
+      'ESMA_MIFID_II_LICENSED', 'CBI_AUTHORISED', 'ASIC_AUTHORISED',
+      'ORB_AUTH_L4',   // Orb AI Universe Founding L4 (Darryl)
+      'ORB_AUTH_L3',   // Orb AI Universe L3
+      'ORB_AUTH_L2',   // Orb AI Universe L2
+    ];
+
+    if ((decision === 'APPROVE' || decision === 'MODIFY') && !credential_type) {
+      return res.status(403).json({
+        error: 'credential_type is required for APPROVE/MODIFY decisions',
+        valid_credentials: VALID_CREDENTIALS,
+        note: 'The CVK-1100 gate requires a verifiable professional credential before certifying a signal as legally valid. REJECT decisions do not require a credential.',
+      });
+    }
+
+    if (credential_type && !VALID_CREDENTIALS.includes(credential_type)) {
+      return res.status(403).json({
+        error: `Credential '${credential_type}' is not recognised by the CVK-1100 verification gate`,
+        valid_credentials: VALID_CREDENTIALS,
+      });
+    }
+
     const queueItem = hitlQueue.get(signal_id);
     if (!queueItem) {
       return res.status(404).json({ error: `Signal ${signal_id} not found in HITL queue. May already be resolved.` });
@@ -630,7 +712,7 @@ router.post('/verify', (req: Request, res: Response) => {
       signal_id,
       verified_at:        verifiedAt,
       trader_id:          traderId,
-      credential_type:    credential_type || 'UNSPECIFIED',
+      credential_type:    credential_type || 'NOT_REQUIRED_FOR_REJECT',
       decision,
       notes:              notes || '',
       final_action:       modified_action || queueItem.action,

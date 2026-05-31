@@ -27,6 +27,7 @@ import crypto from 'crypto';
 import { ForexAnalysisEngine, ForexPrice, ForexAnalysisResult } from '../engines/ForexAnalysisEngine.js';
 import { marketDataService, AssetClass, MarketDataResult } from '../services/MarketDataService.js';
 import { fractalMatcher, PatternMatch } from './FractalPatternMatcher.js';
+import { centralBankNLP } from '../services/CentralBankNLPService.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TYPES
@@ -398,10 +399,44 @@ export class MultiAssetTradingEngine {
     let score = 50;
 
     if (assetClass === 'forex') {
-      // Central bank stance boost (ECB/Fed — hardcoded until live CB feed)
-      notes.push('ECB: Data-dependent hold stance');
-      notes.push('Fed: Dovish pivot expected — USD softening bias');
-      score += 8;
+      // ── Phase 8: Live Central Bank NLP stance (Gap 5 CLOSED) ────────────────
+      // Replaces hardcoded ECB/Fed strings with live RSS-polled scores from
+      // CentralBankNLPService (5 feeds: FED/ECB/BOE/BOJ/BIS, 15-min interval).
+      // Divergence signals drive score adjustment; stale/missing data falls back
+      // to a neutral ±0 adjustment so the engine always produces a result.
+      const cbSummary = centralBankNLP.getSummary();
+
+      // Determine relevant CB pair from symbol (e.g. EUR/USD → ECB vs FED)
+      const base  = symbol.split('/')[0]?.toUpperCase();
+      const quote = symbol.split('/')[1]?.toUpperCase();
+
+      const baseCB  = base  === 'EUR' ? 'ECB' : base  === 'GBP' ? 'BOE' : base  === 'JPY' ? 'BOJ' : 'FED';
+      const quoteCB = quote === 'EUR' ? 'ECB' : quote === 'GBP' ? 'BOE' : quote === 'JPY' ? 'BOJ' : 'FED';
+
+      const baseScore  = centralBankNLP.getLatest(baseCB);
+      const quoteScore = centralBankNLP.getLatest(quoteCB);
+
+      if (baseScore && quoteScore) {
+        // Divergence: positive = base CB more hawkish than quote CB → base currency strong
+        const divergence = baseScore.net_stance - quoteScore.net_stance;
+        const cbAdjust   = Math.round(Math.min(12, Math.max(-12, divergence * 0.12)));
+        score += cbAdjust;
+        notes.push(`${baseCB} ${baseScore.stance_label} (${baseScore.net_stance.toFixed(0)}) vs ${quoteCB} ${quoteScore.stance_label} (${quoteScore.net_stance.toFixed(0)}) — divergence ${divergence > 0 ? '+' : ''}${divergence.toFixed(0)} → adj ${cbAdjust > 0 ? '+' : ''}${cbAdjust}`);
+      } else if (baseScore) {
+        // Only one CB available — use its stance as directional signal
+        const cbAdjust = baseScore.net_stance > 0 ? +4 : baseScore.net_stance < 0 ? -4 : 0;
+        score += cbAdjust;
+        notes.push(`${baseCB} ${baseScore.stance_label} — partial CB data`);
+      } else {
+        // No live CB data yet (RSS not warmed up) — neutral
+        notes.push('CB stance: no live data yet (RSS warming up — neutral)');
+      }
+
+      // Augment with divergence pair signals for this symbol
+      const divSignal = cbSummary.divergence_pairs.find(d => d.pair === symbol);
+      if (divSignal) {
+        notes.push(`CB divergence: ${divSignal.direction} ${symbol} — ${divSignal.reason}`);
+      }
 
       // Session bonus (London + NY overlap = highest liquidity)
       const hour = new Date().getUTCHours();

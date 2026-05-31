@@ -190,29 +190,34 @@ async function fetchForexCandles(fromCurrency: string, toCurrency: string): Prom
   } catch (e) { console.warn(`[MarketData] Frankfurter failed: ${e}`); }
 
   // ── SOURCE 3: ExchangeRate-API spot (free, no key) ────────────────────────
+  // NOTE (Gap 6 CLOSED): Previous implementation used Math.random() to generate
+  // synthetic OHLC candles from a single spot price. This is a data integrity
+  // risk — random noise produces artificial technical patterns that corrupt
+  // RSI, MACD, BB and fractal pattern calculations. Replaced with deterministic
+  // flat candles stamped with SYNTHETIC_SPOT_ONLY source flag so downstream
+  // consumers can identify and weight accordingly. Fractal pattern matcher and
+  // Oracle scoring both check candle count AND source quality.
   try {
     const url = `https://api.exchangerate-api.com/v4/latest/${fromCurrency}`;
     const raw = await fetchJSON(url);
     const spot = raw.rates?.[toCurrency];
     if (spot) {
-      // Build synthetic candles from spot using ±0.03% noise for OHLC
-      const candles: OHLCVCandle[] = Array.from({ length: 100 }, (_, i) => {
-        const noise = (Math.random() - 0.5) * 0.0006;
-        const c = spot + noise;
-        return {
-          timestamp: new Date(Date.now() - (99 - i) * 3600 * 1000),
-          open:  c + (Math.random() - 0.5) * 0.0003,
-          high:  c + Math.random() * 0.0004,
-          low:   c - Math.random() * 0.0004,
-          close: c,
-          volume: 0,
-          bid:   c - 0.0002,
-          ask:   c + 0.0002,
-          spread: 0.0004,
-        };
-      });
+      // Build deterministic candles: all OHLC = spot, volume = 0.
+      // No random noise — honest flat series. Score engine will see
+      // zero volatility and apply appropriate confidence discount.
+      const candles: OHLCVCandle[] = Array.from({ length: 100 }, (_, i) => ({
+        timestamp: new Date(Date.now() - (99 - i) * 3600 * 1000),
+        open:   spot,
+        high:   spot,
+        low:    spot,
+        close:  spot,
+        volume: 0,
+        bid:    spot - 0.0002,
+        ask:    spot + 0.0002,
+        spread: 0.0004,
+      }));
       toCache(key, candles);
-      console.log(`✅ [MarketData] ExchangeRate-API: ${fromCurrency}/${toCurrency} spot ${spot}`);
+      console.warn(`⚠️ [MarketData] ExchangeRate-API fallback (SPOT_ONLY): ${fromCurrency}/${toCurrency} = ${spot} — flat candles, reduced accuracy`);
       return candles;
     }
   } catch (e) { console.warn(`[MarketData] ExchangeRate-API failed: ${e}`); }

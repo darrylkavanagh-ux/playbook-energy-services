@@ -14,6 +14,7 @@ import Trading from "@/pages/Trading";
 import TradingLegends from "@/pages/TradingLegends";
 import OracleEngine from "@/pages/OracleEngine";
 import V10Dashboard from "@/pages/V10Dashboard";
+import TradingTips from "@/pages/TradingTips";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/status" component={SystemStatus} />
       <Route path="/foxlite" component={Foxlite} />
       <Route path="/trading" component={Trading} />
+      <Route path="/trading-tips" component={TradingTips} />
       <Route path="/legends" component={TradingLegends} />
       <Route path="/oracle" component={OracleEngine} />
       <Route path="/v10" component={V10Dashboard} />
