@@ -601,7 +601,7 @@ function PricingTab() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-sm">
           <div>
             <h4 className="font-black uppercase text-sm mb-3 border-b-2 border-black pb-1">
-              Why NOT per-signal/per-use (like Skywork/Manus)
+              Why NOT per-signal/per-use (credit-based pricing model)
             </h4>
             <ul className="space-y-2 text-gray-600">
               <li className="flex items-start gap-2"><span className="text-red-500">✗</span> Trading decisions can't be interrupted by credit limits</li>

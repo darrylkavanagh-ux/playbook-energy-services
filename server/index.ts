@@ -150,18 +150,22 @@ async function startServer() {
     foxliteRoutes,
     nocompareRoutes,
     forecastRoutes,
+    certificationRoutes,
+    contentRoutes,
   ] = await Promise.all([
-    loadRouter('./src/routes/trading.ts',        'trading'),
-    loadRouter('./src/routes/forex.ts',          'forex'),
-    loadRouter('./src/routes/orb.ts',            'orb'),
-    loadRouter('./src/routes/kavan.ts',          'kavan'),
-    loadRouter('./src/routes/forensic.ts',       'forensic'),
-    loadRouter('./src/routes/platform.ts',       'platform'),
-    loadRouter('./src/routes/veritech.ts',       'veritech'),
-    loadRouter('./src/routes/neural.ts',         'neural'),
-    loadRouter('./src/routes/foxlite.ts',        'foxlite'),
-    loadRouter('./src/routes/nocompare.ts',      'nocompare'),
-    loadRouter('./src/routes/forecastRoutes.ts', 'forecast'),
+    loadRouter('./src/routes/trading.ts',             'trading'),
+    loadRouter('./src/routes/forex.ts',               'forex'),
+    loadRouter('./src/routes/orb.ts',                 'orb'),
+    loadRouter('./src/routes/kavan.ts',               'kavan'),
+    loadRouter('./src/routes/forensic.ts',            'forensic'),
+    loadRouter('./src/routes/platform.ts',            'platform'),
+    loadRouter('./src/routes/veritech.ts',            'veritech'),
+    loadRouter('./src/routes/neural.ts',              'neural'),
+    loadRouter('./src/routes/foxlite.ts',             'foxlite'),
+    loadRouter('./src/routes/nocompare.ts',           'nocompare'),
+    loadRouter('./src/routes/forecastRoutes.ts',      'forecast'),
+    loadRouter('./src/routes/certificationRoutes.ts', 'certification'),
+    loadRouter('./src/routes/contentRoutes.ts',       'content'),
   ]);
 
   // ── Mount API routes ───────────────────────────────────────────────────────
@@ -175,7 +179,9 @@ async function startServer() {
   app.use('/api/neural',     neuralRoutes);
   app.use('/api/foxlite',    foxliteRoutes);
   app.use('/api/nocompare',  nocompareRoutes);
-  app.use('/api/trading',    forecastRoutes);   // forecast + professional registry routes
+  app.use('/api/trading',         forecastRoutes);   // forecast + professional registry routes
+  app.use('/api/certification',   certificationRoutes); // 3-route certification (Judge Victoria Sharpe)
+  app.use('/api/content',         contentRoutes);      // CVK-1100 content engine + language calibration
 
   // ── Supabase admin route (run migration once) ──────────────────────────────
   app.post('/api/trading/admin/migrate', async (_req: Request, res: Response) => {

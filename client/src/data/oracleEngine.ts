@@ -11,7 +11,7 @@
  *   3. ACCURACY_MODEL          — Honest accuracy forecasting by layer
  *   4. DATASETS_EXTENDED[32]   — Full dataset registry (beyond the 15 basics)
  *   5. PRICING_TIERS[4]        — SaaS pricing strategy with justification
- *   6. COMPETITIVE_BENCHMARKS  — vs Skywork, Manus, Claude, GPT-4 for trading
+ *   6. COMPETITIVE_BENCHMARKS  — vs General LLM Platforms, Autonomous Agents, Trading Signal Platforms
  *   7. ENTERPRISE_GRADE_CHECKLIST — 100-point checklist to reach 100+/100
  */
 
@@ -694,15 +694,15 @@ export interface CompetitorProfile {
 
 export const COMPETITORS: CompetitorProfile[] = [
   {
-    name:     'Skywork AI',
+    name:     'General LLM Platform (e.g. large-scale language AI)',
     category: 'General AI / LLM Platform',
-    pricing:  '$0–$19.99/month (model API)',
+    pricing:  '$0–$20/month (model API)',
     price_usd: 20,
     strengths: [
       'General-purpose language model capability',
       'Large context window',
       'Low cost per token',
-      'Chinese tech giant backing (Kunlun Tech)',
+      'Significant technology backing',
     ],
     weaknesses: [
       'Zero trading-specific data integration',
@@ -718,10 +718,10 @@ export const COMPETITORS: CompetitorProfile[] = [
       'We have VeriTech-10 regulated certification',
       'We have 150 years of market event context in the system',
     ],
-    our_moat: 'Skywork is a general language model. We are a purpose-built trading intelligence platform. They cannot generate a VeriTech-10 certified signal — we can.',
+    our_moat: 'General language models are horizontal tools. We are a purpose-built trading intelligence platform. They cannot generate a VeriTech-10 certified signal with a verifiable audit trail — we can.',
   },
   {
-    name:     'Manus AI',
+    name:     'Autonomous AI Agent Platform',
     category: 'Autonomous AI Agent Platform',
     pricing:  '$39/month (Pro), custom enterprise',
     price_usd: 39,
@@ -745,10 +745,10 @@ export const COMPETITORS: CompetitorProfile[] = [
       'Measurable, auditable signal accuracy (OutcomeTracker)',
       'Oracle Score calibrated on financial market data',
     ],
-    our_moat: 'Manus can research anything but cannot generate a legally defensible, back-tested, HITL-certified FX signal with an audit trail. We can.',
+    our_moat: 'Autonomous agent platforms can research anything but cannot generate a legally defensible, back-tested, HITL-certified FX signal with a full audit trail. We can.',
   },
   {
-    name:     'Claude (Anthropic)',
+    name:     'General-Purpose LLM Assistant',
     category: 'General LLM / AI Assistant',
     pricing:  '$0–$20/month consumer, $25/user enterprise',
     price_usd: 20,
@@ -756,7 +756,7 @@ export const COMPETITORS: CompetitorProfile[] = [
       'Superior reasoning and analysis',
       'Excellent at research synthesis',
       'Safety-focused design',
-      'Very good at code generation',
+      'Strong code generation capabilities',
     ],
     weaknesses: [
       'Knowledge cutoff — no live market data',
@@ -771,7 +771,7 @@ export const COMPETITORS: CompetitorProfile[] = [
       'We are purpose-built for financial market decision support',
       'We have HITL and VeriTech-10 legal framework',
     ],
-    our_moat: 'We use Claude-class LLMs as ONE component of our stack. We are what Claude would be if it were embedded inside a live Bloomberg terminal with a compliance layer and a licensed trader.',
+    our_moat: 'General LLM capabilities form one component of our stack. We are what a general LLM would be if embedded inside a live Bloomberg terminal with a full compliance layer and a licensed trader in the loop.',
   },
   {
     name:     'Trade Ideas',

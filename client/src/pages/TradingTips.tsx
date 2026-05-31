@@ -73,7 +73,7 @@ interface ProfessionalForecast {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const DISCLAIMER_POINTS = [
-  'I understand this is AI-generated information, NOT financial advice',
+  'I understand this is platform-generated analysis, NOT financial advice',
   'I accept full personal responsibility for any trading decisions I make',
   'I understand no guarantee of profit is made or implied',
   'I confirm I am not relying on this as a licensed professional recommendation',
@@ -775,7 +775,7 @@ export default function TradingTips() {
 
           {/* Legal notice banner */}
           <div className="mt-4 bg-amber-950/40 border border-amber-500/30 rounded-lg px-4 py-2.5 text-xs text-amber-300">
-            <strong>⚠️ IMPORTANT:</strong> All forecasts are AI-generated DRAFT information only. They are NOT financial advice
+            <strong>⚠️ IMPORTANT:</strong> All forecasts are platform-generated DRAFT analysis only. They are NOT financial advice
             and are NOT legally binding until (1) you acknowledge the full disclaimer, AND (2) a qualified professional
             with a verified credential signs the certificate. You assume full responsibility for any trading decisions.
             Past performance is not indicative of future results. Trading involves risk of total capital loss.
@@ -865,7 +865,7 @@ export default function TradingTips() {
             ORB-DISCLAIMER-v2.1 | MiFID II Article 24 | FCA COBS 12 | Consumer Duty PS22/9 | GDPR Article 22.
             This platform operates under the CVK-1100 verification standard. All forecasts require completion
             of the 3-step responsibility chain (AI_PLATFORM → END_USER → QUALIFIED_PROFESSIONAL) before
-            becoming legally valid. The Orb AI Universe verification gate removes AI-generated content from
+            becoming legally valid. The Orb AI Universe verification gate holds all platform-generated content outside of
             legal standing until human professional certification is complete. Orb AI Universe™ and its
             operators are NOT authorised by the FCA to provide investment advice.
           </p>

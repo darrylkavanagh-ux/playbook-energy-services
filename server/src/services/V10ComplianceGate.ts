@@ -443,7 +443,75 @@ const FEATURE_REGISTRY: Omit<V10Feature, 'status' | 'score' | 'cert_id' | 'cert_
     evidence:            [],
     dependencies:        ['SVC-008', 'SVC-009', 'UI-001'],
     threshold:           V10_THRESHOLD,
-    notes:               'Phase 7 — Trading tips UI. To be built.',
+    notes:               'Phase 7 — Trading tips UI. Built and wired at /trading-tips.',
+  },
+  {
+    id:                  'CIE-001',
+    name:                'ContentIntelligenceEngine',
+    class:               'ENGINE',
+    description:         'CVK-1100 Writing/Dialogue/Content Engine. Produces human-indistinguishable text across ' +
+                         '6 writing modes (TRADING_ANALYST, LEGAL_COUNSEL, FORENSIC_EXAMINER, RISK_OFFICER, ' +
+                         'MARKET_COMMENTATOR, COMPLIANCE_OFFICER) and 11 languages. ' +
+                         'AI-tell detection: 29 prohibited phrases. Quality gate: score ≥ 85/100, ' +
+                         'sentence variety ≥ 0.3, zero AI-tells. Domain vocabulary banks per mode. ' +
+                         'ORB-DISCLAIMER-v2.1 compliant. FCA COBS 12 / MiFID II Art 24.',
+    implementation_file: 'server/src/engines/ContentIntelligenceEngine.ts',
+    evidence:            [],
+    dependencies:        ['ENG-001'],
+    threshold:           V10_THRESHOLD,
+    notes:               'Phase 8 — Content intelligence engine. CVK-1100 standard. Zero AI-tells mandatory.',
+  },
+  {
+    id:                  'LCS-001',
+    name:                'LanguageCalibrationService',
+    class:               'SERVICE',
+    description:         'Multilingual NLP calibration service. 11 language profiles (EN, FR, DE, ES, IT, PT, ' +
+                         'ZH, JA, KO, AR, HI) with Heylighen formality baselines, passive voice ratios, ' +
+                         'politeness levels, and script direction (Latin, CJK, Arabic, Devanagari). ' +
+                         'Feedback loop: ingest() → rebuild calibration model every 100 passing samples. ' +
+                         'Write-through disk persistence to data/language_calibration.json.',
+    implementation_file: 'server/src/services/LanguageCalibrationService.ts',
+    evidence:            [],
+    dependencies:        ['CIE-001'],
+    threshold:           V10_THRESHOLD,
+    notes:               'Phase 8 — Language calibration. All 11 language profiles active. Feedback loop operational.',
+  },
+  {
+    id:                  'CERT-001',
+    name:                'CertificationGateway',
+    class:               'SERVICE',
+    description:         'Three-route certification system implementing the Judge Victoria Sharpe ruling (June 2025). ' +
+                         'Route A — Platform Certification (fee-based, £25–£250 per domain). ' +
+                         'Route B — Self-Certification (irrevocable rights waiver, Fraud Act 2006 warning, IP-logged). ' +
+                         'Route C — User-Nominated Professional (5-stage verification: identity → credential → ' +
+                         'sanctions → indemnity → Darryl L4 final approval). ' +
+                         '9 certification domains. Disk persistence: data/certifications.json + ' +
+                         'data/nominated_professionals.json.',
+    implementation_file: 'server/src/services/CertificationGateway.ts',
+    evidence:            [],
+    dependencies:        ['SVC-009'],
+    threshold:           V10_THRESHOLD,
+    notes:               'Phase 8 — Certification gateway. Judge Victoria Sharpe ruling compliant. Darryl L4 gate enforced.',
+  },
+  {
+    id:                  'FTB-001',
+    name:                'ForensicTradingBridge',
+    class:               'SERVICE',
+    description:         'Daisy-chain architecture connecting the Forensic Investigation section to the Trading Platform. ' +
+                         '5 bridge channels: (1) TransactionPatternDetector → MultiAssetTradingEngine — ML risk ' +
+                         'reduces signal strength up to −15; (2) ForensicAccountingEngine → SmartMoneyFlow — ' +
+                         'financial anomaly downweights institutional signals (×0.25–1.0); ' +
+                         '(3) ChainOfCustodyEngine → ProfessionalForecastService — custody manifest required for sign-off; ' +
+                         '(4) EvidenceAuthenticationEngine → V10ComplianceGate — forged/altered docs blocked; ' +
+                         '(5) ConspiracyDetectionEngine → MultiAssetTradingEngine — confirmed conspiracy forces HOLD + HITL. ' +
+                         'Read-only intelligence packages. SHA-256 integrity hashing on every package. ' +
+                         'Disk persistence: data/forensic_trading_bridge.json. ' +
+                         'FCA MAR 1, ESMA MAD2, MiFID II Art 16, PACE 1984, Daubert Standard.',
+    implementation_file: 'server/src/services/ForensicTradingBridge.ts',
+    evidence:            [],
+    dependencies:        ['ENG-001', 'SVC-008', 'CERT-001'],
+    threshold:           V10_THRESHOLD,
+    notes:               'Phase 8 — Forensic ↔ Trading daisy-chain. Architecture recommendation: daisy-chain NOT full marriage. Read-only intelligence packages preserve legal domain independence.',
   },
 ];
 

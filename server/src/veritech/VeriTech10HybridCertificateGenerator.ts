@@ -428,8 +428,8 @@ export class VeriTech10HybridCertificateGenerator {
   private readonly HUMAN_PERCENTAGE = 1.5;
   
   // Branding assets URLs
-  private readonly VERITECH_SEAL_URL = 'https://www.genspark.ai/api/files/s/MDcUXlpK';
-  private readonly FOXLITE_LOGO_URL = 'https://www.genspark.ai/api/files/s/Jun5RjEW';
+  private readonly VERITECH_SEAL_URL = '/assets/veritech-seal.png';
+  private readonly FOXLITE_LOGO_URL = '/assets/foxlite-logo.png';
 
   /**
    * Generate a complete VeriTech-10 Hybrid AI-Human certificate

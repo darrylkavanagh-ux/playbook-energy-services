@@ -245,7 +245,7 @@ function buildDisclaimer(forecastType: ForecastType): ForecastDisclaimer {
       'human review at any time via the sign-off process. Contact: compliance@playbook.ai',
 
     user_must_acknowledge: [
-      'I understand this is AI-generated information, NOT financial advice',
+      'I understand this is platform-generated analysis, NOT financial advice',
       'I accept full personal responsibility for any trading decisions I make',
       'I understand no guarantee of profit is made or implied',
       'I confirm I am not relying on this as a licensed professional recommendation',

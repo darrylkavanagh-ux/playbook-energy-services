@@ -9,7 +9,7 @@
  *   Every approval/rejection is permanently logged with full audit trail.
  *
  * WORKFLOW:
- *   1. Platform (or AI agent) proposes an update → queued as PENDING
+ *   1. Platform (or authorised process) proposes an update → queued as PENDING
  *   2. Notification sent (webhook/log) → Darryl reviews
  *   3. Darryl approves (POST /api/v10/updates/:id/approve?approver=Darryl)
  *      OR rejects  (POST /api/v10/updates/:id/reject?approver=Darryl&reason=...)

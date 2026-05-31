@@ -12,7 +12,7 @@
  *   POST /api/forex/news-sentiment   - News sentiment analysis feed
  *   GET  /api/forex/history          - Historical predictions and outcomes
  *   POST /api/forex/multi-currency   - Multi-currency prediction
- *   GET  /api/forex/health           - LLM health check (fixes Skywork connectivity)
+ *   GET  /api/forex/health           - Platform health check
  */
 
 import express, { Request, Response } from 'express';
@@ -131,7 +131,7 @@ let lastPrediction: Record<string, unknown> | null = null;
 const predictionHistory: Record<string, unknown>[] = [];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GET /api/forex/health   ← THIS IS THE LLM HEALTH CHECK SKYWORK NEEDS
+// GET /api/forex/health — platform health endpoint
 // ─────────────────────────────────────────────────────────────────────────────
 router.get('/health', (_req: Request, res: Response) => {
   res.json({
@@ -145,7 +145,7 @@ router.get('/health', (_req: Request, res: Response) => {
       blockchain_certification: 'ONLINE',
       veritech10: 'ONLINE',
     },
-    llm_status: 'HEALTHY',
+    analysis_engine_status: 'HEALTHY',
     uptime_seconds: process.uptime(),
     timestamp: new Date().toISOString(),
     message: 'All systems operational. LICENSED FOREX TRADER — VERIFICATION REQUIRED human-in-the-loop active.',

@@ -184,7 +184,7 @@ router.post('/forecast/:id/signoff', (req: Request, res: Response) => {
       return res.status(400).json({
         error: 'user_acknowledgement must be true. You must explicitly accept all disclaimer points.',
         disclaimer_points: [
-          'I understand this is AI-generated information, NOT financial advice',
+          'I understand this is platform-generated analysis, NOT financial advice',
           'I accept full personal responsibility for any trading decisions I make',
           'I understand no guarantee of profit is made or implied',
           'I confirm I am not relying on this as a licensed professional recommendation',
