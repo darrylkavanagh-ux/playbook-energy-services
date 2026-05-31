@@ -5,10 +5,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
 
   const navItems = [
-    { name: "No Compare", path: "/", color: "bg-[#FFD700]" },
-    { name: "Orb AI", path: "/orb", color: "bg-[#00FFFF]" },
-    { name: "Kavan AI", path: "/kavan", color: "bg-[#FF3333]" },
-    { name: "Forensic", path: "/forensic", color: "bg-[#FF0000]" },
+    { name: "No Compare",  path: "/",        color: "bg-[#FFD700]" },
+    { name: "Orb AI",      path: "/orb",     color: "bg-[#00FFFF]" },
+    { name: "Kavan AI",    path: "/kavan",   color: "bg-[#FF3333]" },
+    { name: "Forensic",    path: "/forensic",color: "bg-[#FF0000]" },
+    { name: "Trading",     path: "/trading", color: "bg-emerald-400" },
+    { name: "Legends",     path: "/legends", color: "bg-[#FFD700]" },
+    { name: "Oracle",      path: "/oracle",  color: "bg-[#00FFFF]" },
+    { name: "V10",         path: "/v10",     color: "bg-amber-400" },
   ];
 
   return (

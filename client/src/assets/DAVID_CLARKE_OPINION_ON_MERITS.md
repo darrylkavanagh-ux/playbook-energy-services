@@ -5,7 +5,7 @@
 **Date:** 02 February 2026
 **Reference:** OPINION/SC/2026/001
 
-**DISCLAIMER:** *This document is an AI-generated strategic assessment produced by the Kavan AI Legal Intelligence Unit. It simulates the analysis of Senior Counsel for the purpose of case strategy and risk assessment. It does not constitute formal legal advice or a guarantee of litigation outcome.*
+**DISCLAIMER:** *This document is a strategic assessment produced by the Kavan AI Legal Intelligence Unit. It simulates the analysis of Senior Counsel for the purpose of case strategy and risk assessment. It does not constitute formal legal advice or a guarantee of litigation outcome.*
 
 ---
 

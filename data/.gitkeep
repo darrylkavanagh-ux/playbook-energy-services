@@ -1,0 +1,4 @@
+# This file ensures the data/ directory is tracked by git.
+# The data/ directory is used by PhantomAccountService and OutcomeTracker
+# as a file-fallback when Supabase is not configured.
+# In production, Supabase replaces all JSON file persistence.

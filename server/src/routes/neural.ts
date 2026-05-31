@@ -7,7 +7,7 @@
  * ENDPOINTS:
  *   GET  /api/neural/status       — orchestrator + team status
  *   POST /api/neural/run          — trigger full pipeline (returns all thoughts)
- *   GET  /api/neural/stream       — SSE live stream (for browser / Skywork feed)
+ *   GET  /api/neural/stream       — SSE live stream (for browser client feed)
  *   GET  /api/neural/team         — full investigation team roster
  *   GET  /api/neural/engines      — all 24 engine registry
  */
@@ -128,7 +128,7 @@ router.post('/run', async (req: Request, res: Response) => {
 });
 
 // ── GET /api/neural/stream ─────────────────────────────────────────────────────
-// Server-Sent Events — sends live thought stream to browser or Skywork agent
+// Server-Sent Events — sends live thought stream to connected browser clients
 router.get('/stream', (req: Request, res: Response) => {
   res.writeHead(200, {
     'Content-Type':                'text/event-stream',

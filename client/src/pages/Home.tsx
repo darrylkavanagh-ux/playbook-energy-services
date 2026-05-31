@@ -17,7 +17,7 @@ export default function Home() {
             For Energy
           </h1>
           <p className="text-xl md:text-2xl font-mono mb-10 max-w-2xl border-l-8 border-[#FFD700] pl-6 py-2">
-            The energy market is designed to confuse you. We use 12 AI engines to dismantle your bill and find the truth.
+            The energy market is designed to confuse you. We use 12 precision engines to dismantle your bill and find the truth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/analyze">
@@ -34,12 +34,20 @@ export default function Home() {
         </div>
         
         <div className="lg:col-span-5 relative">
-          <div className="aspect-square bg-black border-4 border-black relative overflow-hidden neo-shadow">
-             <img 
-              src="https://private-us-east-1.manuscdn.com/sessionFile/4dyvAKY9YMqYpb9KX1sjyk/sandbox/GeIwI8JWRGz3rUZ0xjFhoc-img-1_1770035180000_na1fn_aGVyby1pbmR1c3RyaWFs.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNGR5dkFLWTlZTXFZcGI5S1gxc2p5ay9zYW5kYm94L0dlSXdJOEpXUkd6M3JVWjB4akZob2MtaW1nLTFfMTc3MDAzNTE4MDAwMF9uYTFmbl9hR1Z5YnkxcGJtUjFjM1J5YVdGcy5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=ZvL5qPPCjdXTrheq44KIJDb1WX7e5-R44dVppbJKa530NjsLX1bASpu~FVtcg9HdsICcdhBtu9wpqzsL-vOaYj45QvUxsySZvx2i~r8yyuiJo55eGTLajGsk8uEaLw3hpcXapu~~V7DySyuu~1xHvrch5XFCF10NkVAKmMNihrtesyk389poqGRZL0VUTuIBgPKOBB59CEG9UMgsCSY3Ahlf5nbJyZh6q28CPZHLvWqlZWEu~VNPpJdYNGbea4JrXxPFSkC8CzzyoW2GpOlfi9fZTliEcpoBTORbNR6TDkCqS7IExF-0iwN6kukcG8AYbkT6kHdNkOSuuoyxz5an6A__" 
-              alt="Industrial Energy Meter" 
-              className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-500"
-            />
+          <div className="aspect-square bg-black border-4 border-black relative overflow-hidden neo-shadow flex items-center justify-center">
+            {/* Platform hero graphic — energy meter visualization */}
+            <svg viewBox="0 0 400 400" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="400" fill="#111"/>
+              <circle cx="200" cy="200" r="150" stroke="#FFD700" strokeWidth="4" strokeDasharray="8 4"/>
+              <circle cx="200" cy="200" r="100" stroke="#FFD700" strokeWidth="2"/>
+              <text x="200" y="190" textAnchor="middle" fill="#FFD700" fontSize="48" fontFamily="monospace" fontWeight="bold">⚡</text>
+              <text x="200" y="240" textAnchor="middle" fill="#FFD700" fontSize="14" fontFamily="monospace">ENERGY AUDIT</text>
+              <text x="200" y="262" textAnchor="middle" fill="#999" fontSize="11" fontFamily="monospace">12 ENGINES ACTIVE</text>
+              <line x1="60" y1="340" x2="340" y2="340" stroke="#FFD700" strokeWidth="1" strokeOpacity="0.3"/>
+              {[0,1,2,3,4,5,6,7].map(i => (
+                <rect key={i} x={70 + i * 35} y={300 - Math.random() * 40} width="20" height={40 + Math.random() * 40} fill="#FFD700" fillOpacity={0.3 + Math.random() * 0.5}/>
+              ))}
+            </svg>
             <div className="absolute bottom-0 left-0 right-0 bg-[#FFD700] border-t-4 border-black p-4 font-mono font-bold text-xs">
               <div className="flex justify-between items-center">
                 <span>SYSTEM STATUS:</span>
@@ -66,7 +74,13 @@ export default function Home() {
           {/* Card 1 */}
           <div className="neo-card group hover:bg-black hover:text-[#FFD700] transition-colors duration-300">
             <div className="w-16 h-16 mb-6 border-4 border-black bg-[#FFD700] flex items-center justify-center group-hover:bg-white group-hover:border-[#FFD700]">
-              <img src="https://private-us-east-1.manuscdn.com/sessionFile/4dyvAKY9YMqYpb9KX1sjyk/sandbox/GeIwI8JWRGz3rUZ0xjFhoc-img-4_1770035171000_na1fn_aWNvbi1iaWxs.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNGR5dkFLWTlZTXFZcGI5S1gxc2p5ay9zYW5kYm94L0dlSXdJOEpXUkd6M3JVWjB4akZob2MtaW1nLTRfMTc3MDAzNTE3MTAwMF9uYTFmbl9hV052YmkxaWFXeHMucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Ewi4FHc5qRcJjdJcbgJs2aMcnLJGGkE4X6DSY7alkfAimZvaZJYtwDlZed-Yk0PgO74-CtbsBXPF9ZSNzwG96QR0lSNPfL1d68tjObiGxhMKHkMdNXCYYdq2IaN~M2pehe5Wq-kOKWGW6JGb-VKFrSyFyT68zRLOaGTG2A9tKmPBSsiSjk11uIP2b2EEuBYaOfxAibHTfDdXtlBmp7FrCu6tbylzgQlImLP94qjL0Pu1wR6AVVt2npKXYzsxTq39kKYXhfJiIYzJuCLZEA8xH-vin5xFGs57bDgyk-D02KgjmTiHu3aiKsUUVOwwnJxZpchSZjJ4OTHHJwadC2lqlw__" className="w-10 h-10" alt="Upload Icon"/>
+              <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="24" height="28" rx="2" stroke="currentColor" strokeWidth="2.5" fill="none"/>
+                <line x1="10" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="2"/>
+                <line x1="10" y1="17" x2="22" y2="17" stroke="currentColor" strokeWidth="2"/>
+                <line x1="10" y1="22" x2="18" y2="22" stroke="currentColor" strokeWidth="2"/>
+                <path d="M20 26 L26 20 L28 22 L22 28 L20 26Z" fill="currentColor"/>
+              </svg>
             </div>
             <h3 className="text-2xl font-bold uppercase mb-4">1. Upload Bill</h3>
             <p className="font-mono text-sm leading-relaxed">
@@ -77,20 +91,29 @@ export default function Home() {
           {/* Card 2 */}
           <div className="neo-card group hover:bg-black hover:text-[#FFD700] transition-colors duration-300">
             <div className="w-16 h-16 mb-6 border-4 border-black bg-[#FFD700] flex items-center justify-center group-hover:bg-white group-hover:border-[#FFD700]">
-               <img src="https://private-us-east-1.manuscdn.com/sessionFile/4dyvAKY9YMqYpb9KX1sjyk/sandbox/GeIwI8JWRGz3rUZ0xjFhoc-img-3_1770035174000_na1fn_aWNvbi1saWdodG5pbmc.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNGR5dkFLWTlZTXFZcGI5S1gxc2p5ay9zYW5kYm94L0dlSXdJOEpXUkd6M3JVWjB4akZob2MtaW1nLTNfMTc3MDAzNTE3NDAwMF9uYTFmbl9hV052Ymkxc2FXZG9kRzVwYm1jLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=CZIGU3BoKqugjiBZCa5DfyN3iaK54~bJe9l12oM9GAnMh8rUcgEM5qIeUddiUHoA5V07MmXv-ouhuvyr7~eNk~68aSTgDqKwmdXjqDrMT~h5HsLjIzaXbSkROS23iN-nqxy~5x8Sinq~wlJB2G2VRfDbhfME7RmksnlOCl6l6GkV05iSaXB7eccixihw4ba2Xwl662WokSn0suZusd-GhS~Abpq3hQewcUlTWG2TJxMXsYQCvjqkKlV0rqr4GyJtO4eqeuyRZHic9LRbm811wWHLHUSGaFgdRjSnbzhbr7OIVP1CC6cscj-G3HBKWQuuYXNwNefZYdfT1qG3-cGl2g__" className="w-10 h-10" alt="Analyze Icon"/>
+              <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="11" stroke="currentColor" strokeWidth="2.5"/>
+                <path d="M16 8 L16 16 L22 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                <circle cx="16" cy="16" r="2" fill="currentColor"/>
+                <path d="M8 4 L4 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <path d="M24 4 L28 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
             </div>
-            <h3 className="text-2xl font-bold uppercase mb-4">2. AI Analysis</h3>
+            <h3 className="text-2xl font-bold uppercase mb-4">2. Deep Analysis</h3>
             <p className="font-mono text-sm leading-relaxed">
-              Our 12-engine stack cross-references your usage against thousands of tariffs to find where you're being ripped off.
+              Our 12-engine stack cross-references your usage against thousands of tariffs to find where you're being overcharged.
             </p>
           </div>
 
           {/* Card 3 */}
           <div className="neo-card group hover:bg-black hover:text-[#FFD700] transition-colors duration-300">
             <div className="w-16 h-16 mb-6 border-4 border-black bg-[#FFD700] flex items-center justify-center group-hover:bg-white group-hover:border-[#FFD700]">
-               <img src="https://private-us-east-1.manuscdn.com/sessionFile/4dyvAKY9YMqYpb9KX1sjyk/sandbox/GeIwI8JWRGz3rUZ0xjFhoc-img-5_1770035175000_na1fn_aWNvbi1oYXphcmQ.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNGR5dkFLWTlZTXFZcGI5S1gxc2p5ay9zYW5kYm94L0dlSXdJOEpXUkd6M3JVWjB4akZob2MtaW1nLTVfMTc3MDAzNTE3NTAwMF9uYTFmbl9hV052Ymkxb1lYcGhjbVEucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=hfWMEmp4pw-A~GjPi~E42iUrKrXqgNveU21xAB8-EkDP0uzDhBeIsaTN8Nl5ccvln9kh-5ZXXd~u02uI4-swNKnXksTMujVO95eObmViW4bxdai5HG06GELRWyjJySr3q5~4469Pn75GZvMNETaCtxZUCwbeNq452TPhFwmEwzG8YiiAw0~jr7zceJPzBvFzC-MO7wdTR7x1TLYyWUJYBj-1Svk5UsSy9O~fkJNmo3~UROZygaAloL7l6gFkMq0g~7JjIYItO8f2-QVMi-0ZqLzhl4sqIlMYka9ky8A3mMpE80iPuJPcfo0J77KrCJvOLP3G4~KVlispRX4YKfN~pQ__" className="w-10 h-10" alt="Switch Icon"/>
+              <svg className="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 16 L12 22 L26 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="16" cy="16" r="13" stroke="currentColor" strokeWidth="2"/>
+              </svg>
             </div>
-            <h3 className="text-2xl font-bold uppercase mb-4">3. Switch & Save</h3>
+            <h3 className="text-2xl font-bold uppercase mb-4">3. Switch &amp; Save</h3>
             <p className="font-mono text-sm leading-relaxed">
               We present the cheapest option. No sponsored results. No bias. Just the math. Switch in 2 clicks.
             </p>
@@ -100,7 +123,9 @@ export default function Home() {
 
       {/* Stats Section */}
       <section className="bg-black text-[#FFD700] border-4 border-black p-8 md:p-12 mb-20 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: 'url(https://private-us-east-1.manuscdn.com/sessionFile/4dyvAKY9YMqYpb9KX1sjyk/sandbox/GeIwI8JWRGz3rUZ0xjFhoc-img-2_1770035173000_na1fn_dGV4dHVyZS1jb25jcmV0ZQ.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvNGR5dkFLWTlZTXFZcGI5S1gxc2p5ay9zYW5kYm94L0dlSXdJOEpXUkd6M3JVWjB4akZob2MtaW1nLTJfMTc3MDAzNTE3MzAwMF9uYTFmbl9kR1Y0ZEhWeVpTMWpiMjVqY21WMFpRLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=MYY10ZTy-ORz7hy0QUNg-f~lNhO3EIKjO3mup7z13KuelWVJSzX8xZrzL4fgOTVfi0z7Nr4aatDl0qOUL1ltFjuzNLFcDNJmOSo3UolPrxFt1wt7HW~XBG8Obp5Ads9EemjUM8IyakKmifOTEgu4AwZ3ZapMpUE5cDa-u4OoqFJBKVLIIzauojC1plVH5n~oq1x9vtYK999aNt0BP1FwrcWKPLsplee40znGxItZTuNFAosmupQ0SBNW~1L6b4R~4c9YibTkK-eVyIK8Y5nMnYqmvkssR~wRHq3BSA07kWZF7u0FWR4O3wRMGdWzf-m61U847MWXC32SGYmodPhwTw__)' }}></div>
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(255,215,0,0.1) 30px, rgba(255,215,0,0.1) 31px), repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(255,215,0,0.1) 30px, rgba(255,215,0,0.1) 31px)'
+        }}></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10 text-center">
           <div className="border-r-0 md:border-r-4 border-white/20 last:border-r-0">
             <div className="text-5xl font-black mb-2">€2M+</div>

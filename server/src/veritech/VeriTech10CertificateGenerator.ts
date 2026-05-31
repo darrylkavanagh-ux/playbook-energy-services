@@ -250,9 +250,9 @@ export class VeriTech10CertificateGenerator {
   private readonly CERTIFICATION_SYSTEM = 'VeriTech-10 Blockchain Verified®';
   private readonly CLASSIFICATION = 'ATTORNEY-CLIENT PRIVILEGED - STRICTLY CONFIDENTIAL';
   
-  // Branding assets URLs (from provided images)
-  private readonly VERITECH_SEAL_URL = 'https://www.genspark.ai/api/files/s/MDcUXlpK';
-  private readonly FOXLITE_LOGO_URL = 'https://www.genspark.ai/api/files/s/Jun5RjEW';
+  // Branding assets — served from platform static assets
+  private readonly VERITECH_SEAL_URL = '/assets/veritech-seal.png';
+  private readonly FOXLITE_LOGO_URL  = '/assets/foxlite-logo.png';
 
   /**
    * Generate a complete VeriTech-10 certificate for evidence package

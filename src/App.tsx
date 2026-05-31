@@ -15,6 +15,7 @@ function Nav() {
     { label: 'How It Works', href: '#how-it-works' },
     { label: 'Sectors',      href: '#sectors'      },
     { label: 'Pricing',      href: '#pricing'      },
+    { label: 'Calculator',   href: '#calculator'   },
     { label: 'Team',         href: '#team'         },
     { label: 'Contact',      href: '#contact'      },
   ];
@@ -410,6 +411,334 @@ function Pricing() {
   );
 }
 
+/* ─── SAVINGS CALCULATOR ──────────────────────────────────────────────────── */
+const SECTOR_RATES: Record<string, number> = {
+  'Hospitality & Hotels':           0.22,
+  'Retail':                         0.18,
+  'Office / Professional Services': 0.15,
+  'Manufacturing':                  0.20,
+  'Healthcare':                     0.17,
+  'Property Management':            0.21,
+  'Education':                      0.16,
+  'Construction':                   0.19,
+  'Agriculture & Food':             0.18,
+  'Other':                          0.16,
+};
+
+function SavingsCalculator() {
+  const [step, setStep]       = useState<1|2|3|4>(1);
+  const [sector, setSector]   = useState('');
+  const [years, setYears]     = useState(3);
+  const [costs, setCosts]     = useState({
+    electricity: '', gas: '', telecoms: '', waste: '', insurance: '', banking: '',
+  });
+  const [result, setResult]   = useState<null | {
+    total: number; overcharge: number; fee: number; net: number;
+    breakdown: { label: string; spend: number; overcharge: number }[];
+  }>(null);
+
+  const n = (v: string) => parseFloat(v) || 0;
+
+  const CATEGORIES = [
+    { key: 'electricity' as const, label: 'Electricity',              rate: 0.19 },
+    { key: 'gas'         as const, label: 'Gas / Heating',            rate: 0.17 },
+    { key: 'telecoms'    as const, label: 'Telecoms',                 rate: 0.15 },
+    { key: 'waste'       as const, label: 'Waste Management',         rate: 0.18 },
+    { key: 'insurance'   as const, label: 'Insurance',                rate: 0.12 },
+    { key: 'banking'     as const, label: 'Banking & Finance',        rate: 0.14 },
+  ];
+
+  function calculate() {
+    const sectorRate = SECTOR_RATES[sector] ?? 0.16;
+    const breakdown = CATEGORIES
+      .map(c => ({
+        label:      c.label,
+        spend:      n(costs[c.key]) * 12 * years,
+        overcharge: n(costs[c.key]) * 12 * years * (c.key === 'electricity' || c.key === 'gas' ? c.rate : Math.max(c.rate, sectorRate * 0.8)),
+      }))
+      .filter(c => c.spend > 0);
+
+    const total      = breakdown.reduce((a, b) => a + b.spend,      0);
+    const overcharge = breakdown.reduce((a, b) => a + b.overcharge, 0);
+    const fee        = overcharge * 0.25;
+    const net        = overcharge - fee;
+    setResult({ total, overcharge, fee, net, breakdown });
+    setStep(4);
+  }
+
+  const fmt = (v: number) =>
+    new Intl.NumberFormat('en-IE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v);
+
+  const hasAnyCost = Object.values(costs).some(v => n(v) > 0);
+
+  return (
+    <section id="calculator" className="bg-[#1a2332] py-24">
+      <div className="max-w-7xl mx-auto px-6">
+
+        {/* Section header */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <span className="h-px w-8 bg-[#c9a84c]"/>
+            <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium">Free Tool</span>
+            <span className="h-px w-8 bg-[#c9a84c]"/>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
+            Savings Calculator
+          </h2>
+          <p className="text-white/55 text-lg max-w-2xl mx-auto">
+            Enter your monthly business costs below. Our model estimates potential overcharges
+            based on sector benchmarks and live Irish market data.
+          </p>
+          <p className="text-white/30 text-xs mt-3">
+            Results are indicative estimates only. A full Foxlite forensic audit identifies the precise recoverable amount.
+          </p>
+        </div>
+
+        <div className="max-w-2xl mx-auto">
+
+          {/* Step progress */}
+          {step < 4 && (
+            <div className="flex items-center mb-10">
+              {(['Business Profile','Monthly Costs','Audit Period','Results'] as const).map((label, i) => {
+                const num = i + 1;
+                const done   = step > num;
+                const active = step === num;
+                return (
+                  <div key={label} className="flex items-center flex-1 last:flex-none">
+                    <div className="flex flex-col items-center gap-1">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all ${
+                        done   ? 'bg-[#c9a84c] border-[#c9a84c] text-[#1a2332]' :
+                        active ? 'border-[#c9a84c] text-[#c9a84c]' :
+                                 'border-white/15 text-white/25'
+                      }`}>
+                        {done
+                          ? <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>
+                          : num}
+                      </div>
+                      <span className={`text-[0.6rem] font-semibold uppercase tracking-wide hidden sm:block ${active ? 'text-[#c9a84c]' : done ? 'text-[#c9a84c]/50' : 'text-white/20'}`}>
+                        {label}
+                      </span>
+                    </div>
+                    {i < 3 && <div className={`flex-1 h-px mx-2 transition-all ${done ? 'bg-[#c9a84c]' : 'bg-white/10'}`}/>}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* ── STEP 1: Business Profile ── */}
+          {step === 1 && (
+            <div className="border border-white/10 p-8 md:p-10">
+              <h3 className="font-serif font-bold text-white text-2xl mb-2">Business Profile</h3>
+              <p className="text-white/45 text-sm mb-8">Select your sector to calibrate the overcharge estimate.</p>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-[0.15em] text-[#c9a84c]/80 mb-2">
+                  Business Sector <span className="text-[#c9a84c]">*</span>
+                </label>
+                <select
+                  value={sector}
+                  onChange={e => setSector(e.target.value)}
+                  className="w-full bg-[#1a2332] border border-white/15 px-4 py-3.5 text-white text-sm focus:outline-none focus:border-[#c9a84c] transition-colors appearance-none">
+                  <option value="">— Select your sector —</option>
+                  {Object.keys(SECTOR_RATES).map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+
+              <div className="mt-8 flex justify-end">
+                <button
+                  onClick={() => setStep(2)}
+                  disabled={!sector}
+                  className="bg-[#c9a84c] text-[#1a2332] px-8 py-3 text-sm font-semibold tracking-wider uppercase hover:bg-[#d4b65e] transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                  Continue →
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ── STEP 2: Monthly Costs ── */}
+          {step === 2 && (
+            <div className="border border-white/10 p-8 md:p-10">
+              <h3 className="font-serif font-bold text-white text-2xl mb-2">Monthly Business Costs</h3>
+              <p className="text-white/45 text-sm mb-8">Enter your average monthly spend in euro. Leave blank any category that doesn't apply.</p>
+
+              <div className="space-y-5">
+                {CATEGORIES.map(c => (
+                  <div key={c.key}>
+                    <label className="block text-xs font-semibold uppercase tracking-[0.12em] text-[#c9a84c]/80 mb-1.5">
+                      {c.label} <span className="text-white/30 font-normal normal-case tracking-normal">€ / month</span>
+                      {c.key === 'electricity' && <span className="text-[#c9a84c] ml-1">*</span>}
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9a84c]/60 font-bold text-sm">€</span>
+                      <input
+                        type="number" min="0" step="100"
+                        value={costs[c.key]}
+                        onChange={e => setCosts(prev => ({ ...prev, [c.key]: e.target.value }))}
+                        placeholder="0"
+                        className="w-full bg-[#1a2332] border border-white/15 pl-8 pr-4 py-3.5 text-white text-sm focus:outline-none focus:border-[#c9a84c] transition-colors"/>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {!hasAnyCost && (
+                <div className="mt-5 flex items-center gap-2 border border-[#c9a84c]/20 bg-[#c9a84c]/5 px-4 py-3">
+                  <span className="text-[#c9a84c] text-xs">Please enter at least one monthly cost to continue.</span>
+                </div>
+              )}
+
+              <div className="mt-8 flex justify-between">
+                <button onClick={() => setStep(1)} className="border border-white/20 text-white/60 px-6 py-3 text-sm hover:border-white/40 hover:text-white transition-colors">
+                  ← Back
+                </button>
+                <button
+                  onClick={() => setStep(3)}
+                  disabled={!hasAnyCost}
+                  className="bg-[#c9a84c] text-[#1a2332] px-8 py-3 text-sm font-semibold tracking-wider uppercase hover:bg-[#d4b65e] transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+                  Continue →
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ── STEP 3: Audit Period ── */}
+          {step === 3 && (
+            <div className="border border-white/10 p-8 md:p-10">
+              <h3 className="font-serif font-bold text-white text-2xl mb-2">Audit Lookback Period</h3>
+              <p className="text-white/45 text-sm mb-8">
+                Foxlite can recover overcharges going back up to 6 years. Select how many years of billing history to review.
+              </p>
+
+              <div>
+                <label className="block text-xs font-semibold uppercase tracking-[0.15em] text-[#c9a84c]/80 mb-4">
+                  Years of unaudited billing history
+                </label>
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+                  {[1,2,3,4,5,6].map(y => (
+                    <button
+                      key={y}
+                      onClick={() => setYears(y)}
+                      className={`py-3.5 text-center font-bold text-sm border-2 transition-all ${
+                        years === y
+                          ? 'border-[#c9a84c] bg-[#c9a84c]/10 text-[#c9a84c]'
+                          : 'border-white/15 text-white/40 hover:border-[#c9a84c]/40 hover:text-white/70'
+                      }`}>
+                      {y} {y === 1 ? 'Year' : 'Yrs'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-8 border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-5">
+                <p className="text-white/60 text-sm leading-relaxed">
+                  Most Irish businesses have <strong className="text-white">never had a formal forensic cost audit</strong>.
+                  Foxlite typically identifies overcharges of <strong className="text-[#c9a84c]">14–22%</strong> of total
+                  spend across energy, telecoms, waste and insurance.
+                </p>
+              </div>
+
+              <div className="mt-8 flex justify-between">
+                <button onClick={() => setStep(2)} className="border border-white/20 text-white/60 px-6 py-3 text-sm hover:border-white/40 hover:text-white transition-colors">
+                  ← Back
+                </button>
+                <button
+                  onClick={calculate}
+                  className="bg-[#c9a84c] text-[#1a2332] px-8 py-3 text-sm font-semibold tracking-wider uppercase hover:bg-[#d4b65e] transition-colors">
+                  Calculate My Savings →
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* ── STEP 4: Results ── */}
+          {step === 4 && result && (
+            <div>
+              {/* Hero result */}
+              <div className="border border-[#c9a84c]/30 mb-5">
+                <div className="bg-[#c9a84c] p-px">
+                  <div className="bg-[#1a2332] p-10 text-center">
+                    <p className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium mb-3">Your Savings Estimate</p>
+                    <div className="text-5xl md:text-6xl font-serif font-bold text-[#c9a84c] mb-2">
+                      {fmt(result.overcharge)}
+                    </div>
+                    <p className="text-white/50 text-sm">
+                      Estimated recoverable overcharges over {years} year{years > 1 ? 's' : ''}
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 divide-x divide-white/10">
+                  {[
+                    { label: 'Total Spend Reviewed', value: fmt(result.total),      color: 'text-white/70' },
+                    { label: 'Foxlite Fee (25%)',    value: fmt(result.fee),        color: 'text-white'    },
+                    { label: 'Net to Your Business', value: fmt(result.net),        color: 'text-[#c9a84c]'},
+                  ].map(chip => (
+                    <div key={chip.label} className="py-5 px-3 text-center">
+                      <div className={`font-serif text-xl font-bold ${chip.color} mb-1`}>{chip.value}</div>
+                      <div className="text-[0.6rem] font-semibold uppercase tracking-wide text-white/30">{chip.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Category breakdown */}
+              <div className="border border-white/10 p-7 mb-5">
+                <h4 className="font-serif font-bold text-white text-lg mb-6">Breakdown by Category</h4>
+                <div className="space-y-5">
+                  {result.breakdown.map(cat => {
+                    const pct = result.total > 0 ? (cat.overcharge / result.total) * 100 : 0;
+                    return (
+                      <div key={cat.label}>
+                        <div className="flex justify-between items-center mb-1.5">
+                          <span className="text-sm text-white/70">{cat.label}</span>
+                          <span className="text-sm font-semibold text-[#c9a84c]">{fmt(cat.overcharge)}</span>
+                        </div>
+                        <div className="h-1.5 bg-white/8 w-full">
+                          <div
+                            className="h-full bg-[#c9a84c] transition-all duration-700"
+                            style={{ width: `${Math.min(pct * 4, 100)}%` }}/>
+                        </div>
+                        <div className="flex justify-between mt-1">
+                          <span className="text-white/30 text-xs">Spend: {fmt(cat.spend)}</span>
+                          <span className="text-white/30 text-xs">{(cat.overcharge / cat.spend * 100).toFixed(1)}% overcharge rate</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-8 text-center">
+                <p className="text-white/60 text-sm leading-relaxed mb-6">
+                  This is an indicative estimate. A full Foxlite forensic audit will identify the precise
+                  recoverable amount — at zero upfront cost.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <a href="#contact"
+                    className="inline-flex items-center justify-center bg-[#c9a84c] text-[#1a2332] px-8 py-3.5 text-sm font-semibold tracking-wider uppercase hover:bg-[#d4b65e] transition-colors">
+                    Start Your Free Audit
+                  </a>
+                  <button
+                    onClick={() => { setStep(1); setSector(''); setYears(3); setCosts({ electricity:'',gas:'',telecoms:'',waste:'',insurance:'',banking:'' }); setResult(null); }}
+                    className="inline-flex items-center justify-center border border-white/20 text-white/60 px-8 py-3.5 text-sm hover:border-white/40 hover:text-white transition-colors">
+                    Recalculate
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-white/20 text-xs text-center mt-4 leading-relaxed">
+                Disclaimer: Results are illustrative estimates based on sector-average overcharge rates observed in Foxlite's audit portfolio.
+                Actual recoverable amounts depend on your specific contracts, tariffs, and billing history.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── TEAM ────────────────────────────────────────────────────────────────── */
 function Team() {
   return (
@@ -655,6 +984,7 @@ export default function App() {
       <HowItWorks/>
       <Sectors/>
       <Pricing/>
+      <SavingsCalculator/>
       <Team/>
       <Contact/>
       <Footer/>
