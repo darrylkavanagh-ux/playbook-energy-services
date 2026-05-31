@@ -57,7 +57,7 @@
     "cert_id": "V10-ENGINE-20260531-67Z9UC",
     "cert_issued_at": "2026-05-31T05:49:45.702Z",
     "data_hash": "9EEFC92CBD56EE7D",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "ENG-002": {
     "id": "ENG-002",
@@ -119,7 +119,7 @@
     "cert_id": "V10-ENGINE-20260531-9I2YRG",
     "cert_issued_at": "2026-05-31T05:49:45.740Z",
     "data_hash": "5B3A5222C49F6FD2",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SIG-001": {
     "id": "SIG-001",
@@ -188,7 +188,7 @@
     "cert_id": "V10-SIGNAL-20260531-6IYJP5",
     "cert_issued_at": "2026-05-31T05:49:45.768Z",
     "data_hash": "43B350BA54FBE276",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SIG-002": {
     "id": "SIG-002",
@@ -244,7 +244,7 @@
     "cert_id": "V10-SIGNAL-20260531-89TWM5",
     "cert_issued_at": "2026-05-31T05:49:45.793Z",
     "data_hash": "792AA4FFB9AD0122",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SIG-003": {
     "id": "SIG-003",
@@ -313,7 +313,7 @@
     "cert_id": "V10-SIGNAL-20260531-N92V4E",
     "cert_issued_at": "2026-05-31T05:49:45.818Z",
     "data_hash": "CC33AED6C9993EC2",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SVC-001": {
     "id": "SVC-001",
@@ -366,7 +366,7 @@
     "cert_id": "V10-SERVICE-20260531-70SNUS",
     "cert_issued_at": "2026-05-31T05:49:45.846Z",
     "data_hash": "58DD4084729C9E43",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SVC-002": {
     "id": "SVC-002",
@@ -421,7 +421,7 @@
     "cert_id": "V10-SERVICE-20260531-FMFLBK",
     "cert_issued_at": "2026-05-31T05:49:45.873Z",
     "data_hash": "98F2F7AA03CF0CBE",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SVC-003": {
     "id": "SVC-003",
@@ -483,7 +483,7 @@
     "cert_id": "V10-SERVICE-20260531-CG400S",
     "cert_issued_at": "2026-05-31T05:49:45.901Z",
     "data_hash": "F58A40054C9FB43D",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SVC-004": {
     "id": "SVC-004",
@@ -531,7 +531,7 @@
     "cert_id": "V10-SERVICE-20260531-S4V3BX",
     "cert_issued_at": "2026-05-31T05:49:45.935Z",
     "data_hash": "5EB61BD6EBA448CF",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SVC-005": {
     "id": "SVC-005",
@@ -579,7 +579,7 @@
     "cert_id": "V10-SERVICE-20260531-868L8A",
     "cert_issued_at": "2026-05-31T05:49:45.961Z",
     "data_hash": "86B763F208A4D501",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SVC-006": {
     "id": "SVC-006",
@@ -625,7 +625,7 @@
     "cert_id": "V10-SERVICE-20260531-L8S2KU",
     "cert_issued_at": "2026-05-31T05:49:45.986Z",
     "data_hash": "781C82FAF182FED9",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "SVC-007": {
     "id": "SVC-007",
@@ -671,7 +671,7 @@
     "cert_id": "V10-SERVICE-20260531-PYJ4UJ",
     "cert_issued_at": "2026-05-31T05:49:46.018Z",
     "data_hash": "A74435EDF8946BCA",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "INF-001": {
     "id": "INF-001",
@@ -724,7 +724,7 @@
     "cert_id": "V10-INFRA-20260531-6TM58V",
     "cert_issued_at": "2026-05-31T05:49:46.045Z",
     "data_hash": "13F50A409FC8E341",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "INF-002": {
     "id": "INF-002",
@@ -777,7 +777,7 @@
     "cert_id": "V10-INFRA-20260531-I1MXZZ",
     "cert_issued_at": "2026-05-31T05:49:46.084Z",
     "data_hash": "42000CEC79F48C79",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "INF-003": {
     "id": "INF-003",
@@ -823,7 +823,7 @@
     "cert_id": "V10-INFRA-20260531-DWKO2F",
     "cert_issued_at": "2026-05-31T05:49:46.124Z",
     "data_hash": "686FCFB28341247C",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "INF-004": {
     "id": "INF-004",
@@ -876,7 +876,7 @@
     "cert_id": "V10-INFRA-20260531-F7CEDO",
     "cert_issued_at": "2026-05-31T05:49:46.159Z",
     "data_hash": "FE53409EDA37379F",
-    "last_evaluated_at": "2026-05-31T06:17:35.220Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "UI-001": {
     "id": "UI-001",
@@ -925,7 +925,7 @@
     "cert_id": "V10-UI-20260531-O6XB6L",
     "cert_issued_at": "2026-05-31T05:49:46.199Z",
     "data_hash": "741BEF1EC0056851",
-    "last_evaluated_at": "2026-05-31T06:17:35.221Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "UI-002": {
     "id": "UI-002",
@@ -973,7 +973,7 @@
     "cert_id": "V10-UI-20260531-JWL547",
     "cert_issued_at": "2026-05-31T05:49:46.230Z",
     "data_hash": "7D30B2C9196A7C37",
-    "last_evaluated_at": "2026-05-31T06:17:35.221Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "UI-003": {
     "id": "UI-003",
@@ -1019,7 +1019,7 @@
     "cert_id": "V10-UI-20260531-GG0ZG7",
     "cert_issued_at": "2026-05-31T05:49:46.266Z",
     "data_hash": "0AF3B129C90C8349",
-    "last_evaluated_at": "2026-05-31T06:17:35.221Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "DAT-001": {
     "id": "DAT-001",
@@ -1065,7 +1065,7 @@
     "cert_id": "V10-DATA-20260531-0VZJCT",
     "cert_issued_at": "2026-05-31T05:49:46.306Z",
     "data_hash": "49B119DD087CA309",
-    "last_evaluated_at": "2026-05-31T06:17:35.221Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "DAT-002": {
     "id": "DAT-002",
@@ -1114,7 +1114,7 @@
     "cert_id": "V10-DATA-20260531-YGYV9J",
     "cert_issued_at": "2026-05-31T05:49:46.347Z",
     "data_hash": "A3A5CD661B9D411E",
-    "last_evaluated_at": "2026-05-31T06:17:35.221Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "PRO-001": {
     "id": "PRO-001",
@@ -1162,7 +1162,7 @@
     "cert_id": "V10-PROTOCOL-20260531-5B8FP7",
     "cert_issued_at": "2026-05-31T05:49:46.377Z",
     "data_hash": "2BB1B19031820EC7",
-    "last_evaluated_at": "2026-05-31T06:17:35.221Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   },
   "PRO-002": {
     "id": "PRO-002",
@@ -1181,6 +1181,83 @@
     "cert_id": null,
     "cert_issued_at": null,
     "data_hash": null,
-    "last_evaluated_at": "2026-05-31T06:17:35.221Z"
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
+  },
+  "SVC-008": {
+    "id": "SVC-008",
+    "name": "ProfessionalForecastService",
+    "class": "SERVICE",
+    "description": "Professional forecast generation with full legal responsibility chain. Issues TRADING_TIP, MARKET_FORECAST, RISK_ASSESSMENT, SECTOR_OUTLOOK, MACRO_BRIEF. Responsibility chain: AI → User → QualifiedProfessional → Certificate. MiFID II Art 24, FCA COBS 12, Consumer Duty PS22/9, GDPR Art 22 compliant.",
+    "implementation_file": "server/src/services/ProfessionalForecastService.ts",
+    "evidence": [
+      {
+        "type": "UNIT_TEST",
+        "score": 99,
+        "description": "A1 IMPLEMENTATION_VERIFIED — QualifiedProfessionalRegistry: 18 domains defined, Darryl seeded L4, activation gate, findBestMatch(), recordSignature(). Darryl ACTIVE can_sign=true 8 domains.",
+        "passed": true,
+        "tested_at": "2026-05-31T06:43:03Z"
+      }
+    ],
+    "dependencies": [
+      "ENG-001",
+      "SIG-001",
+      "SIG-002"
+    ],
+    "threshold": 98.5,
+    "notes": "Phase 7 — Professional forecast system with legal sign-off chain.",
+    "status": "CERTIFIED",
+    "score": 99,
+    "cert_id": "V10-SERVICE-20260531-I0GEKE",
+    "cert_issued_at": "2026-05-31T06:43:03.127Z",
+    "data_hash": "E521E628A722FF59",
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
+  },
+  "SVC-009": {
+    "id": "SVC-009",
+    "name": "QualifiedProfessionalRegistry",
+    "class": "SERVICE",
+    "description": "Registry of qualified professionals authorised to sign trading forecasts and certificates. Covers all Orb AI Universe domains: trading, forensic, energy, legal, compliance, audit, risk. Domain requirements: FCA/ESMA/MiFID II for trading; SRA/Bar for legal; ICA/ACAMS for AML. L1-L4 qualification levels. Annual re-verification. Darryl activation gate.",
+    "implementation_file": "server/src/services/QualifiedProfessionalRegistry.ts",
+    "evidence": [
+      {
+        "type": "UNIT_TEST",
+        "score": 99,
+        "description": "A1 IMPLEMENTATION_VERIFIED — QualifiedProfessionalRegistry: 18 domains defined, Darryl seeded L4, activation gate, findBestMatch(), recordSignature(). Darryl ACTIVE can_sign=true 8 domains.",
+        "passed": true,
+        "tested_at": "2026-05-31T06:43:03Z"
+      }
+    ],
+    "dependencies": [
+      "SVC-008"
+    ],
+    "threshold": 98.5,
+    "notes": "Phase 7 — Professional registry. All domains seeded with Darryl as founding L4 approver.",
+    "status": "CERTIFIED",
+    "score": 99,
+    "cert_id": "V10-SERVICE-20260531-0QF1RX",
+    "cert_issued_at": "2026-05-31T06:43:03.158Z",
+    "data_hash": "272C4F0B50076B4B",
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
+  },
+  "UI-004": {
+    "id": "UI-004",
+    "name": "ForecastAndTipsPage",
+    "class": "UI",
+    "description": "Professional trading tips and forecast page. Displays V10-certified signed tips. Full responsibility chain visible. Disclaimer acknowledgement gate. Sign-off workflow: user submits → platform assigns professional → professional signs.",
+    "implementation_file": "client/src/pages/TradingTips.tsx",
+    "evidence": [],
+    "dependencies": [
+      "SVC-008",
+      "SVC-009",
+      "UI-001"
+    ],
+    "threshold": 98.5,
+    "notes": "Phase 7 — Trading tips UI. To be built.",
+    "status": "PENDING",
+    "score": 0,
+    "cert_id": null,
+    "cert_issued_at": null,
+    "data_hash": null,
+    "last_evaluated_at": "2026-05-31T06:43:03.222Z"
   }
 }

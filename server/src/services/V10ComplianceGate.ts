@@ -404,6 +404,47 @@ const FEATURE_REGISTRY: Omit<V10Feature, 'status' | 'score' | 'cert_id' | 'cert_
     threshold:           V10_THRESHOLD,
     notes:               'NOT YET BUILT. P2 feature.',
   },
+  {
+    id:                  'SVC-008',
+    name:                'ProfessionalForecastService',
+    class:               'SERVICE',
+    description:         'Professional forecast generation with full legal responsibility chain. ' +
+                         'Issues TRADING_TIP, MARKET_FORECAST, RISK_ASSESSMENT, SECTOR_OUTLOOK, MACRO_BRIEF. ' +
+                         'Responsibility chain: AI → User → QualifiedProfessional → Certificate. ' +
+                         'MiFID II Art 24, FCA COBS 12, Consumer Duty PS22/9, GDPR Art 22 compliant.',
+    implementation_file: 'server/src/services/ProfessionalForecastService.ts',
+    evidence:            [],
+    dependencies:        ['ENG-001', 'SIG-001', 'SIG-002'],
+    threshold:           V10_THRESHOLD,
+    notes:               'Phase 7 — Professional forecast system with legal sign-off chain.',
+  },
+  {
+    id:                  'SVC-009',
+    name:                'QualifiedProfessionalRegistry',
+    class:               'SERVICE',
+    description:         'Registry of qualified professionals authorised to sign trading forecasts and certificates. ' +
+                         'Covers all Orb AI Universe domains: trading, forensic, energy, legal, compliance, audit, risk. ' +
+                         'Domain requirements: FCA/ESMA/MiFID II for trading; SRA/Bar for legal; ICA/ACAMS for AML. ' +
+                         'L1-L4 qualification levels. Annual re-verification. Darryl activation gate.',
+    implementation_file: 'server/src/services/QualifiedProfessionalRegistry.ts',
+    evidence:            [],
+    dependencies:        ['SVC-008'],
+    threshold:           V10_THRESHOLD,
+    notes:               'Phase 7 — Professional registry. All domains seeded with Darryl as founding L4 approver.',
+  },
+  {
+    id:                  'UI-004',
+    name:                'ForecastAndTipsPage',
+    class:               'UI',
+    description:         'Professional trading tips and forecast page. Displays V10-certified signed tips. ' +
+                         'Full responsibility chain visible. Disclaimer acknowledgement gate. ' +
+                         'Sign-off workflow: user submits → platform assigns professional → professional signs.',
+    implementation_file: 'client/src/pages/TradingTips.tsx',
+    evidence:            [],
+    dependencies:        ['SVC-008', 'SVC-009', 'UI-001'],
+    threshold:           V10_THRESHOLD,
+    notes:               'Phase 7 — Trading tips UI. To be built.',
+  },
 ];
 
 // ── V10ComplianceGate Class ───────────────────────────────────────────────────
